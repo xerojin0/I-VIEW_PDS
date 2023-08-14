@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>I&VIEW Design System</title>
+    <link rel="stylesheet" href="../resource/windowContainer/css/jquery.scrollbar.min.css">
+    <link rel="stylesheet" href="../resource/windowContainer/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../resource/windowContainer/css/nth-icons.css">
+    <link rel="stylesheet" href="../resource/windowContainer/css/nth-tabs.css">
+    <!-- custom css -->
+    <link rel="stylesheet" href="../css/main.css">
+
+    <script src="../resource/jquery.min.js"></script>
+    <script src="../resource/windowContainer/js/jquery.scrollbar.min.js"></script>
+    <script src="../resource/windowContainer/js/bootstrap.min.js"></script>
+    <script src="../resource/windowContainer/js/nth-tabs.js"></script>
+    <script src="../resource/ax5ui/js/ax5ui.all.min.js"></script>
+    <!-- custom script -->
+    <script src="../js/script.js"></script>
+    <script type="text/javascript">
+      var nthTabs;
+      $(function () {
+        $('.scrollbar-inner').scrollbar(); // menu scroll
+
+        nthTabs = $("#main-tabs").nthTabs();
+        nthTabs.addTab({
+            id: 'basic',
+            title: '기본정보',
+            url: "basic.html",
+            active:true,
+            allowClose: false
+        });
+        /* 메뉴 페이지 연동 */
+        $('.documents a').off("click").on('click',function(e) {
+            e.preventDefault();
+            var val =  $(this).text();
+            var href =  $(this).attr('href').split('.');
+            var fileName = href[0].substring(2);
+
+            ////////// 탭 생성시 중복확인 안함(default 태그) //////////
+ //                nthTabs.addTab({
+ //                    id: "p"+anum,
+ //                    title:val,
+ //                    url: 'p_'+anum+'.html',
+ //                    active: true,
+ //                    allowClose: true
+ //                })
+
+            ////////// 탭 중복시 존재하는 지 확인후 생성 //////////
+            if(nthTabs.isExistsTab('#p'+fileName)) {
+                nthTabs.toggleTab('#p'+fileName);
+            } else {
+              nthTabs.addTab({
+                  id: "p"+fileName,
+                  title:val,
+                  url: this.href,
+                  active: true,
+                  allowClose: true
+              });
+          }
+          /* gnb control */
+          var parentClass = $(this).parent('li');
+          if (!$(this).hasClass('on')) {
+            $('.documents a').removeClass('on');
+            $(this).addClass('on');
+          }
+          if (parentClass.attr('class') == 'documents') {
+             $('.gnb li').removeClass('open');
+             $('.gnb li > ul').slideUp(100);
+          }
+        });
+      });
+    </script>
+  </head>
+  <body>
+    <div class="wrap">
+      <header class="header">
+        <div class="hd_cont">
+          <div class="logo">
+            <h1>I&VIEW PDS</h1>
+          </div>
+          <div class="left_align">
+            <button type="button" class="open_menu"></button>
+          </div>
+        </div>
+        <div class="manu_wrap">
+          <nav class="menu">
+            <h2 class="txt_hidden">메뉴</h2>
+            <ul>
+              <li class="has-sub">
+                <a href="#"><i class="fas fa-code"></i><span>퍼블리싱</span></a>
+                <ul class="documents">
+                  <li><a href="#">공통 컴포넌트</a></li>
+                  <li><a href="#">PC</a></li>
+                  <li><a href="#">MO</a></li>
+                  <li><a href="#">CSS 애니메이션 01</a></li>
+                  <li><a href="#">js 애니메이션 01</a></li>
+                  <li><a href="#">페이지 요소 01</a></li>
+                </ul>
+              </li>
+              <li class="has-sub"><a href="#"><i class="fas fa-info"></i> 참고소스</a></li>
+            </ul>
+          </nav>
+        </div>
+      </header>
+      <div class="cont_area">
+        <h2 class="txt_hidden">본문</h2>
+        <main class="content">
+          <div class="nth-tabs" id="main-tabs"></div>
+        </main>
+        <footer class="footer">
+          <span>Copyright ⓒ I&VIEW COMMUNICATION. All Rights Reserved.</span>
+        </footer>
+      </div>
+    </div>
+  </body>
+</html>

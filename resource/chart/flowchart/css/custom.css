@@ -1,0 +1,89 @@
+@charset "UTF-8";
+
+* {-webkit-tap-highlight-color:rgba(0,0,0,0); -webkit-text-size-adjust:none; -webkit-box-sizing: border-box;-moz-box-sizing: border-box;box-sizing: border-box;}
+html,body {padding:0; margin:0;height:100%;font-size:13px;color: #3a3a3d;font-weight: 400;line-height:1;font-family:'맑은 고딕','Malgun Gothic', Arial, sans-serif;}
+dl, dt, dd, ul, ol, li {list-style: none;margin:0; padding:0; border:0;}
+.txt_hidden {font-size:0; line-height:0; color:transparent; overflow:hidden; text-indent:-999999px;}
+.left_align {float:left;}
+.right_align {float:right;}
+
+.content_wrap {width:100%; min-width:950px;padding:15px 15px; font-size: 13px}
+
+/* select */
+.select_box {position: relative;display: inline-block;vertical-align: top;}
+.select_box:after {content: '';position: absolute;top: 12px;right: 12px;width: 11px;height: 6px;background: url('../img/select_icon.png') no-repeat;}
+.select_box.disabled {border: 0}
+.select_box.disabled:after {background-image: url('../img/select_off_icon.png');}
+select {margin-top: 0;padding: 0 32px 0 11px;min-width: 134px;height: 26px;font-size: 13px;cursor:pointer;border:1px solid #d0d8dd;color:#000;-moz-appearance: none;-webkit-appearance: none;}
+/* For IE10 */
+select::-ms-expand {display: none;}
+select#casecnt {padding: 0 10px 0 12px;font-size: 12px;border: 0;box-sizing: border-box;margin-right: 5px;background: #eee;margin-top: 1px;}
+
+/* title_box */
+.title_box {width: 100%;position: relative;overflow: hidden;vertical-align: middle;}
+.tit01 {margin: 0 5px 0 0;height: 40px;font-size: 18px;line-height: 2;letter-spacing: -1px; font-weight:600; color:#555;}
+/* 버튼 */
+.button_box {padding-top: 3px;}
+.btn {display: inline-block; cursor: pointer;border-radius: 3px;padding: 7px 16px 5px 16px;line-height: 1.5;}
+.btn.get_data {background: #e8ebfa; border: 1px solid #e8ebfa; color: #214faf;}
+.btn.delete_selected_button {font-weight: 500;background: #3d70fe;border: 1px solid #3d70fe;color: #fff;}
+.btn.zoom_refresh {color: #333;border: 0;background: none}
+.btn.zoom_refresh:hover {color: #3d70fe}
+
+/* 네비게이션 */
+.navi ul {float: right; overflow: hidden;}
+.navi ul li {height: 40px;line-height: 40px;float: left; font-weight: bold; font-size: 11px; color: #b0b1b6}
+.navi ul li.curr {color: #525252}
+.navi ul li i {padding:0 10px;display:inline-block;color: #b0b1b6}
+.navi ul li:first-child i {padding: 0}
+
+.flow_wrap {border-radius: 0; padding: 0; border:1px solid #cad5de}
+.flow_wrap pre {display: none;}
+.flowchart-link {cursor: pointer;}
+.draggable_operators {overflow: hidden;padding: 10px 20px;border-bottom: 3px solid #217CE8;background: #fff;}
+.flow_body {width: 100%;height: calc(100vh - 150px);overflow: hidden;border: 1px solid #E8E8EF;border-top: 0;background: #f2f3f7;}
+.flowchart {width: 5000px;height: 2000px;margin-bottom: 10px;background: #fbfbfb url(../././img/tile.png) repeat;background-size: 30px 30px;}
+.flowchart-links-layer, .flowchart-operators-layer, .flowchart-temporary-link-layer {background: url(../././img/tile.png) repeat;background-size: 30px 30px;}
+/* 차트 아이템 메뉴 */
+.draggable_operator {display: inline-block;-webkit-touch-callout: none; -webkit-user-select: none; -khtml-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none; font-size: 14px;margin-right: 10px;}
+.draggable_operator.node_start.ui-draggable.ui-draggable-handle {padding: 10px 20px 12px 40px;background: #fff url('../img/log.svg') no-repeat 10px;border: 1px solid #e9e9ef;box-shadow: 0 4px 30px rgba(22, 33, 74, 0.08);border-radius: 5px;cursor: pointer;}
+.draggable_operator.node_comment.ui-draggable.ui-draggable-handle {padding: 10px 20px 12px 40px;background: #fff url('../img/database.svg') no-repeat 10px;border: 1px solid #e9e9ef;box-shadow: 0 4px 30px rgba(22, 33, 74, 0.08);border-radius: 5px;cursor: pointer;}
+.node_comment_group {padding: 4px 5px 5px 45px;background: #fff url(../img/action.svg) no-repeat 10px;display: inline-block;margin-right: 10px;border: 1px solid #e9e9ef;box-shadow: 0 4px 30px rgba(22, 33, 74, 0.08);border-radius: 5px;cursor: pointer;vertical-align: top;}
+.draggable_operator.node_condition.ui-draggable.ui-draggable-handle {border: 0;padding-top: 6px;}
+.draggable_operator.node_end.ui-draggable.ui-draggable-handle {padding: 10px 20px 12px 40px;background: #fff url('../img/eye.svg') no-repeat 10px;border: 1px solid #e9e9ef;box-shadow: 0 4px 30px rgba(22, 33, 74, 0.08);border-radius: 5px;cursor: pointer;}
+.draggable_operator.ui-draggable.ui-draggable-handle:hover {border: 1px dashed #000;}
+.draggable_operator.node_condition.ui-draggable.ui-draggable-handle:hover {border:0}
+.node_comment_group:hover {border: 1px dashed #000;}
+/* 차트 아이템 */
+.flowchart-operator {min-width: 250px;min-height: 100px;border: 0; max-width: 400px;}
+.flowchart-operator.flowchart-default-operator.ui-draggable {background: #fff;border-radius: 5px;box-shadow: 0 0 6px rgba(0, 0, 0, 0.15);}
+.flowchart-operator.flowchart-default-operator.ui-draggable.selected {border: 1px solid #217CE8;border-radius: 5px;}
+.flowchart-operator .flowchart-operator-title {font-weight: 500;color: #000;display: inline-block;font-size: 15px;padding: 12px 10px 10px 55px;border-radius: 5px 5px 0 0;background: #fff;border-bottom: 1px solid #e9e9ef;text-align: left;cursor: pointer;}
+.flowchart-operator-title.node_start.ui-draggable-handle {background: url('../img/logblue.svg') no-repeat 15px 11px;}
+.flowchart-operator-title.node_comment.ui-draggable-handle {color: #e0301e;background: url('../img/databasered.svg') no-repeat 15px 10px;}
+.flowchart-operator-title.node_condition.ui-draggable-handle {color: #81109c; background: url('../img/actionpurple.svg') no-repeat 15px 6px;}
+.flowchart-operator-title.node_end.ui-draggable-handle {background: url('../img/eyeblue.svg') no-repeat 15px 8px;}
+.flowchart-operator-inputs {width: 20px !important;}
+.flowchart-operator-inputs .flowchart-operator-connector-label {display: none;}
+.flowchart-operator-inputs .flowchart-operator-connector-arrow {top: 5px;left: -10px;opacity: 0.2;width: 10px;border-radius: 50%;border-color: transparent;}
+.flowchart-operator-inputs .flowchart-operator-connector-small-arrow {left: -9px;top: 8px;width: 0;height: 0;border-top: 7px solid transparent;border-bottom: 7px solid transparent;border-left: 7px solid #217CE8;}
+.flowchart-operator-outputs {width: calc(100% - 20px) !important;text-align:left;margin-left: 0;padding-right: 15px;}
+.flowchart-operator-outputs .flowchart-operator-connector-arrow {top: 1px;right: -25px;border-color: #c1c8cd;opacity: 0.2;width: 20px;border-radius: 50%;vertical-align: top}
+.flowchart-operator-outputs .flowchart-operator-connector-small-arrow {right: -20px;border-color: #217CE8;top: 6px;width: 10px;border-radius: 50%;}
+.selectedlabel {padding: 5px;background: #fff;margin-left: -5px;border-radius: 5px;border: 1px solid #E8E8EF;box-shadow: 0 2px 8px rgba(34, 34, 87, 0.05);}
+.node_start + .flowchart-operator-inputs-outputs .flowchart-operator-connector-label.selectedlabel,
+.node_end + .flowchart-operator-inputs-outputs .flowchart-operator-connector-label.selectedlabel {border: 0;box-shadow: none;}
+/* 종료노드 */
+.flowchart-operator-title.node_end.ui-draggable-handle + .flowchart-operator-inputs-outputs .flowchart-operator-inputs {width: 200px !important;}
+.flowchart-operator-title.node_end.ui-draggable-handle + .flowchart-operator-inputs-outputs .flowchart-operator-inputs .flowchart-operator-connector-label {display: block;}
+/* 노드 아이템 내용 */
+.flowchart-operator-connector {padding-top:0; padding-bottom:0;min-height: 30px;}
+.flowchart-operator-connector-label {font-size: 14px;color: #808292;margin-top: 6px;text-indent: 0;margin-bottom: 8px;text-align: left !important;padding-right: 15px;padding-top: 6px;}
+.flowchart-operator-connector-arrow {top: 4px;}
+.flowchart-operator-connector-small-arrow {top: 9px;}
+/* 노드 아이템 내용 변경 */
+.drag_ele_prop {position: absolute;top: 15px;right: 25px;margin: 15px 0;padding: 20px;width:450px;height: 250px;font-weight: bold;z-index: 6001;-webkit-box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);-moz-box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);-ms-box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);-o-box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);background-color: #f2f3f7;border: 1px solid #cad5de;cursor: grab;}
+.drag_ele_prop label {font-size: 14px;font-weight: bold;float:left;height: 30px;line-height: 1;}
+.drag_ele_prop .drag_ele_txt{padding: 16px 12px;margin-top: 5px;width: 100%;height: 168px;font-size: 14px;resize: none;border: 1px solid #cad5de;border-radius: 0;color: #808292;clear: both;font-family: '맑은고딕','Malgun Gothic',sans-serif;background-color: #fff}
+.help {float: right;color: #3d70fe;font-size: 15px;margin-left:5px;cursor:pointer;}
+.set_label_data {float: right;padding: 7px 16px 5px 16px;font-size: 13px;font-weight: 500;background: #3d70fe;border: 1px solid #3d70fe;color: #fff;line-height: 1;margin-top: -5px;}

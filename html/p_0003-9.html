@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>I&VIEW Design System</title>
+    <link rel="stylesheet" href="../resource/chart/apexchart/apexcharts.css">
+    <link rel="stylesheet" href="../css/contents.css">
+
+    <script src="../resource/jquery.min.js"></script>
+    <!-- apexcharts IE 지원 -->
+    <script type="text/javascript">
+      window.Promise ||
+      document.write('<script src="../resource/polyfill.min.js"><\/script>')
+      window.Promise ||
+      document.write('<script src="../resource/classlist.js"><\/script>')
+      window.Promise ||
+      document.write('<script src="../resource/findIndex.js"><\/script>')
+      window.Promise ||
+      document.write('<script src="../resource/canvg.js"><\/script>')
+    </script>
+    <script src="../resource/chart/apexchart/apexcharts.min.js"></script>
+
+    <script src="../js/script.js"></script>
+    <script>
+      $(function(){
+      // 차트 옵션
+var options = {
+  series: [{
+  data: [{
+      x: new Date(1538778600000),
+      y: [6629.81, 6650.5, 6623.04, 6633.33]
+    },
+    {
+      x: new Date(1538780400000),
+      y: [6632.01, 6643.59, 6620, 6630.11]
+    },
+    {
+      x: new Date(1538782200000),
+      y: [6630.71, 6648.95, 6623.34, 6635.65]
+    },
+    {
+      x: new Date(1538784000000),
+      y: [6635.65, 6651, 6629.67, 6638.24]
+    },
+    {
+      x: new Date(1538785800000),
+      y: [6638.24, 6640, 6620, 6624.47]
+    },
+    {
+      x: new Date(1538787600000),
+      y: [6624.53, 6636.03, 6621.68, 6624.31]
+    },
+    {
+      x: new Date(1538789400000),
+      y: [6624.61, 6632.2, 6617, 6626.02]
+    },
+    {
+      x: new Date(1538791200000),
+      y: [6627, 6627.62, 6584.22, 6603.02]
+    },
+    {
+      x: new Date(1538793000000),
+      y: [6605, 6608.03, 6598.95, 6604.01]
+    },
+    {
+      x: new Date(1538794800000),
+      y: [6604.5, 6614.4, 6602.26, 6608.02]
+    },
+    {
+      x: new Date(1538796600000),
+      y: [6608.02, 6610.68, 6601.99, 6608.91]
+    },
+    {
+      x: new Date(1538798400000),
+      y: [6608.91, 6618.99, 6608.01, 6612]
+    },
+    {
+      x: new Date(1538800200000),
+      y: [6612, 6615.13, 6605.09, 6612]
+    },
+    {
+      x: new Date(1538802000000),
+      y: [6612, 6624.12, 6608.43, 6622.95]
+    },
+    {
+      x: new Date(1538803800000),
+      y: [6623.91, 6623.91, 6615, 6615.67]
+    },
+    {
+      x: new Date(1538805600000),
+      y: [6618.69, 6618.74, 6610, 6610.4]
+    },
+    {
+      x: new Date(1538807400000),
+      y: [6611, 6622.78, 6610.4, 6614.9]
+    },
+    {
+      x: new Date(1538809200000),
+      y: [6614.9, 6626.2, 6613.33, 6623.45]
+    },
+    {
+      x: new Date(1538811000000),
+      y: [6623.48, 6627, 6618.38, 6620.35]
+    },
+    {
+      x: new Date(1538812800000),
+      y: [6619.43, 6620.35, 6610.05, 6615.53]
+    },
+    {
+      x: new Date(1538814600000),
+      y: [6615.53, 6617.93, 6610, 6615.19]
+    },
+    {
+      x: new Date(1538816400000),
+      y: [6615.19, 6621.6, 6608.2, 6620]
+    },
+    {
+      x: new Date(1538818200000),
+      y: [6619.54, 6625.17, 6614.15, 6620]
+    },
+    {
+      x: new Date(1538820000000),
+      y: [6620.33, 6634.15, 6617.24, 6624.61]
+    },
+    {
+      x: new Date(1538821800000),
+      y: [6625.95, 6626, 6611.66, 6617.58]
+    },
+    {
+      x: new Date(1538823600000),
+      y: [6619, 6625.97, 6595.27, 6598.86]
+    },
+    {
+      x: new Date(1538825400000),
+      y: [6598.86, 6598.88, 6570, 6587.16]
+    },
+    {
+      x: new Date(1538827200000),
+      y: [6588.86, 6600, 6580, 6593.4]
+    },
+    {
+      x: new Date(1538829000000),
+      y: [6593.99, 6598.89, 6585, 6587.81]
+    },
+    {
+      x: new Date(1538830800000),
+      y: [6587.81, 6592.73, 6567.14, 6578]
+    },
+    {
+      x: new Date(1538832600000),
+      y: [6578.35, 6581.72, 6567.39, 6579]
+    },
+    {
+      x: new Date(1538834400000),
+      y: [6579.38, 6580.92, 6566.77, 6575.96]
+    },
+    {
+      x: new Date(1538836200000),
+      y: [6575.96, 6589, 6571.77, 6588.92]
+    },
+    {
+      x: new Date(1538838000000),
+      y: [6588.92, 6594, 6577.55, 6589.22]
+    },
+    {
+      x: new Date(1538839800000),
+      y: [6589.3, 6598.89, 6589.1, 6596.08]
+    },
+    {
+      x: new Date(1538841600000),
+      y: [6597.5, 6600, 6588.39, 6596.25]
+    },
+    {
+      x: new Date(1538843400000),
+      y: [6598.03, 6600, 6588.73, 6595.97]
+    },
+    {
+      x: new Date(1538845200000),
+      y: [6595.97, 6602.01, 6588.17, 6602]
+    },
+    {
+      x: new Date(1538847000000),
+      y: [6602, 6607, 6596.51, 6599.95]
+    },
+    {
+      x: new Date(1538848800000),
+      y: [6600.63, 6601.21, 6590.39, 6591.02]
+    },
+    {
+      x: new Date(1538850600000),
+      y: [6591.02, 6603.08, 6591, 6591]
+    },
+    {
+      x: new Date(1538852400000),
+      y: [6591, 6601.32, 6585, 6592]
+    },
+    {
+      x: new Date(1538854200000),
+      y: [6593.13, 6596.01, 6590, 6593.34]
+    },
+    {
+      x: new Date(1538856000000),
+      y: [6593.34, 6604.76, 6582.63, 6593.86]
+    },
+    {
+      x: new Date(1538857800000),
+      y: [6593.86, 6604.28, 6586.57, 6600.01]
+    },
+    {
+      x: new Date(1538859600000),
+      y: [6601.81, 6603.21, 6592.78, 6596.25]
+    },
+    {
+      x: new Date(1538861400000),
+      y: [6596.25, 6604.2, 6590, 6602.99]
+    },
+    {
+      x: new Date(1538863200000),
+      y: [6602.99, 6606, 6584.99, 6587.81]
+    },
+    {
+      x: new Date(1538865000000),
+      y: [6587.81, 6595, 6583.27, 6591.96]
+    },
+    {
+      x: new Date(1538866800000),
+      y: [6591.97, 6596.07, 6585, 6588.39]
+    },
+    {
+      x: new Date(1538868600000),
+      y: [6587.6, 6598.21, 6587.6, 6594.27]
+    },
+    {
+      x: new Date(1538870400000),
+      y: [6596.44, 6601, 6590, 6596.55]
+    },
+    {
+      x: new Date(1538872200000),
+      y: [6598.91, 6605, 6596.61, 6600.02]
+    },
+    {
+      x: new Date(1538874000000),
+      y: [6600.55, 6605, 6589.14, 6593.01]
+    },
+    {
+      x: new Date(1538875800000),
+      y: [6593.15, 6605, 6592, 6603.06]
+    },
+    {
+      x: new Date(1538877600000),
+      y: [6603.07, 6604.5, 6599.09, 6603.89]
+    },
+    {
+      x: new Date(1538879400000),
+      y: [6604.44, 6604.44, 6600, 6603.5]
+    },
+    {
+      x: new Date(1538881200000),
+      y: [6603.5, 6603.99, 6597.5, 6603.86]
+    },
+    {
+      x: new Date(1538883000000),
+      y: [6603.85, 6605, 6600, 6604.07]
+    },
+    {
+      x: new Date(1538884800000),
+      y: [6604.98, 6606, 6604.07, 6606]
+    },
+  ]
+}],
+  chart: {
+  type: 'candlestick',
+  height: 350
+},
+title: {
+  text: 'CandleStick Chart',
+  align: 'left'
+},
+xaxis: {
+  type: 'datetime'
+},
+yaxis: {
+  tooltip: {
+    enabled: true
+  }
+}
+};
+
+var chart = new ApexCharts(document.querySelector("#candleChart"), options);
+chart.render();
+      });
+    </script>
+  <body>
+    <div class="content_wrap">
+      <div class="row">
+        <div class="layout col_12">
+          <div class="title_box">
+            <h2 class="tit00">apexcharts</h2>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="layout col_12">
+          <p class="homepage"><a href="https://apexcharts.com/" target="_blank" title="새창">apexcharts 홈페이지 링크</a></p>
+          <div class="p_menu">
+            <ul id="pMenu"></ul>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="layout col_12">
+         <div class="title_box item_tit">
+           <h3 class="tit01">Line chart</h3>
+         </div>
+         <div class="item_exam">
+           <div class="title_box">
+             <h4 class="tit02">결과화면</h4>
+           </div>
+           <div class="chart_box">
+             <div id="candleChart"></div>
+           </div>
+           <div class="title_box">
+             <h4 class="tit02">HTML</h4>
+           </div>
+           <div class="code_box">
+<div class="colorscripter-code" style="color:#f0f0f0;font-family:Consolas, 'Liberation Mono', Menlo, Courier, monospace !important; position:relative !important;overflow:auto"><table class="colorscripter-code-table" style="margin:0;padding:0;border:none;background-color:#272727;border-radius:4px;" cellspacing="0" cellpadding="0"><tr><td style="padding:6px 0;text-align:left"><pre style="margin:0;padding:0;color:#f0f0f0;font-family:Consolas, 'Liberation Mono', Menlo, Courier, monospace !important;line-height:130%"><div style="padding:0 6px; white-space:pre; line-height:130%"><span style="color:#f0f0f0">&lt;</span><span style="color:#ff3399">link</span>&nbsp;<span style="color:#a8ff58">rel</span>=<span style="color:#ffd500">"stylesheet"</span>&nbsp;<span style="color:#a8ff58">href</span>=<span style="color:#ffd500">"../resource/chart/apexchart/apexcharts.css"</span><span style="color:#f0f0f0">&gt;</span></div><div style="padding:0 6px; white-space:pre; line-height:130%"><span style="color:#999999">&lt;!--&nbsp;apexcharts&nbsp;IE&nbsp;지원&nbsp;--&gt;</span></div><div style="padding:0 6px; white-space:pre; line-height:130%"><span style="color:#f0f0f0">&lt;</span><span style="color:#ff3399">script</span>&nbsp;<span style="color:#a8ff58">type</span>=<span style="color:#ffd500">"text/javascript"</span><span style="color:#ff3399"></span><span style="color:#f0f0f0">&gt;</span></div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;<span style="color:#4be6fa">window</span>.Promise&nbsp;<span style="color:#0086b3"></span><span style="color:#ff3399">|</span><span style="color:#0086b3"></span><span style="color:#ff3399">|</span></div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;<span style="color:#4be6fa">document</span>.write(<span style="color:#ffd500">'&lt;script&nbsp;src="../resource/polyfill.min.js"&gt;&lt;\/script&gt;'</span>)</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;<span style="color:#4be6fa">window</span>.Promise&nbsp;<span style="color:#0086b3"></span><span style="color:#ff3399">|</span><span style="color:#0086b3"></span><span style="color:#ff3399">|</span></div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;<span style="color:#4be6fa">document</span>.write(<span style="color:#ffd500">'&lt;script&nbsp;src="../resource/classlist.js"&gt;&lt;\/script&gt;'</span>)</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;<span style="color:#4be6fa">window</span>.Promise&nbsp;<span style="color:#0086b3"></span><span style="color:#ff3399">|</span><span style="color:#0086b3"></span><span style="color:#ff3399">|</span></div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;<span style="color:#4be6fa">document</span>.write(<span style="color:#ffd500">'&lt;script&nbsp;src="../resource/findIndex.js"&gt;&lt;\/script&gt;'</span>)</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;<span style="color:#4be6fa">window</span>.Promise&nbsp;<span style="color:#0086b3"></span><span style="color:#ff3399">|</span><span style="color:#0086b3"></span><span style="color:#ff3399">|</span></div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;<span style="color:#4be6fa">document</span>.write(<span style="color:#ffd500">'&lt;script&nbsp;src="../resource/canvg.js"&gt;&lt;\/script&gt;'</span>)</div><div style="padding:0 6px; white-space:pre; line-height:130%"><span style="color:#f0f0f0">&lt;</span><span style="color:#f0f0f0">/</span><span style="color:#ff3399">script</span><span style="color:#f0f0f0">&gt;</span></div><div style="padding:0 6px; white-space:pre; line-height:130%"><span style="color:#f0f0f0">&lt;</span><span style="color:#ff3399">script</span>&nbsp;<span style="color:#a8ff58">src</span>=<span style="color:#ffd500">"../resource/chart/apexchart/apexcharts.min.js"</span><span style="color:#ff3399"></span><span style="color:#f0f0f0">&gt;</span><span style="color:#f0f0f0">&lt;</span><span style="color:#f0f0f0">/</span><span style="color:#ff3399">script</span><span style="color:#f0f0f0">&gt;</span></div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;</div><div style="padding:0 6px; white-space:pre; line-height:130%"><span style="color:#f0f0f0">&lt;</span><span style="color:#ff3399">div</span>&nbsp;<span style="color:#a8ff58">id</span>=<span style="color:#ffd500">"candleChart"</span><span style="color:#a8ff58"></span><span style="color:#f0f0f0">&gt;</span><span style="color:#f0f0f0">&lt;</span><span style="color:#f0f0f0">/</span><span style="color:#ff3399">div</span><span style="color:#f0f0f0">&gt;</span></div></pre><div style="text-align:right;margin-top:-13px;margin-right:5px;font-size:9px;font-style:italic"><a href="http://colorscripter.com/info#e" target="_blank" style="color:#4f4f4ftext-decoration:none">Colored by Color Scripter</a></div></td><td style="vertical-align:bottom;padding:0 2px 4px 0"><a href="http://colorscripter.com/info#e" target="_blank" style="text-decoration:none;color:white"><span style="font-size:9px;word-break:normal;background-color:#4f4f4f;color:white;border-radius:10px;padding:1px">cs</span></a></td></tr></table></div>
+           </div>
+           <div class="title_box">
+             <h4 class="tit02">JS</h4>
+           </div>
+           <div class="code_box">
+<div class="colorscripter-code" style="color:#f0f0f0;font-family:Consolas, 'Liberation Mono', Menlo, Courier, monospace !important; position:relative !important;overflow:auto"><table class="colorscripter-code-table" style="margin:0;padding:0;border:none;background-color:#272727;border-radius:4px;" cellspacing="0" cellpadding="0"><tr><td style="padding:6px 0;text-align:left"><pre style="margin:0;padding:0;color:#f0f0f0;font-family:Consolas, 'Liberation Mono', Menlo, Courier, monospace !important;line-height:130%"><div style="padding:0 6px; white-space:pre; line-height:130%"><span style="color:#ff3399">var</span>&nbsp;options&nbsp;<span style="color:#aaffaa"></span><span style="color:#ff3399">=</span>&nbsp;{</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;series:&nbsp;[{</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;data:&nbsp;[{</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;x:&nbsp;<span style="color:#ff3399">new</span>&nbsp;<span style="color:#4be6fa">Date</span>(<span style="color:#c10aff">1538778600000</span>),</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;y:&nbsp;[<span style="color:#c10aff">6629.</span><span style="color:#c10aff">81</span>,&nbsp;<span style="color:#c10aff">6650.</span><span style="color:#c10aff">5</span>,&nbsp;<span style="color:#c10aff">6623.</span><span style="color:#c10aff">04</span>,&nbsp;<span style="color:#c10aff">6633.</span><span style="color:#c10aff">33</span>]</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;},</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;{</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;x:&nbsp;<span style="color:#ff3399">new</span>&nbsp;<span style="color:#4be6fa">Date</span>(<span style="color:#c10aff">1538780400000</span>),</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;y:&nbsp;[<span style="color:#c10aff">6632.</span><span style="color:#c10aff">01</span>,&nbsp;<span style="color:#c10aff">6643.</span><span style="color:#c10aff">59</span>,&nbsp;<span style="color:#c10aff">6620</span>,&nbsp;<span style="color:#c10aff">6630.</span><span style="color:#c10aff">11</span>]</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;},</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;{</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;x:&nbsp;<span style="color:#ff3399">new</span>&nbsp;<span style="color:#4be6fa">Date</span>(<span style="color:#c10aff">1538782200000</span>),</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;y:&nbsp;[<span style="color:#c10aff">6630.</span><span style="color:#c10aff">71</span>,&nbsp;<span style="color:#c10aff">6648.</span><span style="color:#c10aff">95</span>,&nbsp;<span style="color:#c10aff">6623.</span><span style="color:#c10aff">34</span>,&nbsp;<span style="color:#c10aff">6635.</span><span style="color:#c10aff">65</span>]</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;},</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;{</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;x:&nbsp;<span style="color:#ff3399">new</span>&nbsp;<span style="color:#4be6fa">Date</span>(<span style="color:#c10aff">1538784000000</span>),</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;y:&nbsp;[<span style="color:#c10aff">6635.</span><span style="color:#c10aff">65</span>,&nbsp;<span style="color:#c10aff">6651</span>,&nbsp;<span style="color:#c10aff">6629.</span><span style="color:#c10aff">67</span>,&nbsp;<span style="color:#c10aff">6638.</span><span style="color:#c10aff">24</span>]</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;},</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;{</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;x:&nbsp;<span style="color:#ff3399">new</span>&nbsp;<span style="color:#4be6fa">Date</span>(<span style="color:#c10aff">1538785800000</span>),</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;y:&nbsp;[<span style="color:#c10aff">6638.</span><span style="color:#c10aff">24</span>,&nbsp;<span style="color:#c10aff">6640</span>,&nbsp;<span style="color:#c10aff">6620</span>,&nbsp;<span style="color:#c10aff">6624.</span><span style="color:#c10aff">47</span>]</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;},</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;{</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;x:&nbsp;<span style="color:#ff3399">new</span>&nbsp;<span style="color:#4be6fa">Date</span>(<span style="color:#c10aff">1538787600000</span>),</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;y:&nbsp;[<span style="color:#c10aff">6624.</span><span style="color:#c10aff">53</span>,&nbsp;<span style="color:#c10aff">6636.</span><span style="color:#c10aff">03</span>,&nbsp;<span style="color:#c10aff">6621.</span><span style="color:#c10aff">68</span>,&nbsp;<span style="color:#c10aff">6624.</span><span style="color:#c10aff">31</span>]</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;},</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;{</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;x:&nbsp;<span style="color:#ff3399">new</span>&nbsp;<span style="color:#4be6fa">Date</span>(<span style="color:#c10aff">1538789400000</span>),</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;y:&nbsp;[<span style="color:#c10aff">6624.</span><span style="color:#c10aff">61</span>,&nbsp;<span style="color:#c10aff">6632.</span><span style="color:#c10aff">2</span>,&nbsp;<span style="color:#c10aff">6617</span>,&nbsp;<span style="color:#c10aff">6626.</span><span style="color:#c10aff">02</span>]</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;},</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;{</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;x:&nbsp;<span style="color:#ff3399">new</span>&nbsp;<span style="color:#4be6fa">Date</span>(<span style="color:#c10aff">1538791200000</span>),</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;y:&nbsp;[<span style="color:#c10aff">6627</span>,&nbsp;<span style="color:#c10aff">6627.</span><span style="color:#c10aff">62</span>,&nbsp;<span style="color:#c10aff">6584.</span><span style="color:#c10aff">22</span>,&nbsp;<span style="color:#c10aff">6603.</span><span style="color:#c10aff">02</span>]</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;},</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;{</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;x:&nbsp;<span style="color:#ff3399">new</span>&nbsp;<span style="color:#4be6fa">Date</span>(<span style="color:#c10aff">1538793000000</span>),</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;y:&nbsp;[<span style="color:#c10aff">6605</span>,&nbsp;<span style="color:#c10aff">6608.</span><span style="color:#c10aff">03</span>,&nbsp;<span style="color:#c10aff">6598.</span><span style="color:#c10aff">95</span>,&nbsp;<span style="color:#c10aff">6604.</span><span style="color:#c10aff">01</span>]</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;},</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;{</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;x:&nbsp;<span style="color:#ff3399">new</span>&nbsp;<span style="color:#4be6fa">Date</span>(<span style="color:#c10aff">1538794800000</span>),</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;y:&nbsp;[<span style="color:#c10aff">6604.</span><span style="color:#c10aff">5</span>,&nbsp;<span style="color:#c10aff">6614.</span><span style="color:#c10aff">4</span>,&nbsp;<span style="color:#c10aff">6602.</span><span style="color:#c10aff">26</span>,&nbsp;<span style="color:#c10aff">6608.</span><span style="color:#c10aff">02</span>]</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;},</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;{</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;x:&nbsp;<span style="color:#ff3399">new</span>&nbsp;<span style="color:#4be6fa">Date</span>(<span style="color:#c10aff">1538796600000</span>),</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;y:&nbsp;[<span style="color:#c10aff">6608.</span><span style="color:#c10aff">02</span>,&nbsp;<span style="color:#c10aff">6610.</span><span style="color:#c10aff">68</span>,&nbsp;<span style="color:#c10aff">6601.</span><span style="color:#c10aff">99</span>,&nbsp;<span style="color:#c10aff">6608.</span><span style="color:#c10aff">91</span>]</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;},</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;{</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;x:&nbsp;<span style="color:#ff3399">new</span>&nbsp;<span style="color:#4be6fa">Date</span>(<span style="color:#c10aff">1538798400000</span>),</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;y:&nbsp;[<span style="color:#c10aff">6608.</span><span style="color:#c10aff">91</span>,&nbsp;<span style="color:#c10aff">6618.</span><span style="color:#c10aff">99</span>,&nbsp;<span style="color:#c10aff">6608.</span><span style="color:#c10aff">01</span>,&nbsp;<span style="color:#c10aff">6612</span>]</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;},</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;{</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;x:&nbsp;<span style="color:#ff3399">new</span>&nbsp;<span style="color:#4be6fa">Date</span>(<span style="color:#c10aff">1538800200000</span>),</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;y:&nbsp;[<span style="color:#c10aff">6612</span>,&nbsp;<span style="color:#c10aff">6615.</span><span style="color:#c10aff">13</span>,&nbsp;<span style="color:#c10aff">6605.</span><span style="color:#c10aff">09</span>,&nbsp;<span style="color:#c10aff">6612</span>]</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;},</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;{</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;x:&nbsp;<span style="color:#ff3399">new</span>&nbsp;<span style="color:#4be6fa">Date</span>(<span style="color:#c10aff">1538802000000</span>),</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;y:&nbsp;[<span style="color:#c10aff">6612</span>,&nbsp;<span style="color:#c10aff">6624.</span><span style="color:#c10aff">12</span>,&nbsp;<span style="color:#c10aff">6608.</span><span style="color:#c10aff">43</span>,&nbsp;<span style="color:#c10aff">6622.</span><span style="color:#c10aff">95</span>]</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;},</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;{</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;x:&nbsp;<span style="color:#ff3399">new</span>&nbsp;<span style="color:#4be6fa">Date</span>(<span style="color:#c10aff">1538803800000</span>),</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;y:&nbsp;[<span style="color:#c10aff">6623.</span><span style="color:#c10aff">91</span>,&nbsp;<span style="color:#c10aff">6623.</span><span style="color:#c10aff">91</span>,&nbsp;<span style="color:#c10aff">6615</span>,&nbsp;<span style="color:#c10aff">6615.</span><span style="color:#c10aff">67</span>]</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;},</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;{</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;x:&nbsp;<span style="color:#ff3399">new</span>&nbsp;<span style="color:#4be6fa">Date</span>(<span style="color:#c10aff">1538805600000</span>),</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;y:&nbsp;[<span style="color:#c10aff">6618.</span><span style="color:#c10aff">69</span>,&nbsp;<span style="color:#c10aff">6618.</span><span style="color:#c10aff">74</span>,&nbsp;<span style="color:#c10aff">6610</span>,&nbsp;<span style="color:#c10aff">6610.</span><span style="color:#c10aff">4</span>]</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;},</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;{</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;x:&nbsp;<span style="color:#ff3399">new</span>&nbsp;<span style="color:#4be6fa">Date</span>(<span style="color:#c10aff">1538807400000</span>),</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;y:&nbsp;[<span style="color:#c10aff">6611</span>,&nbsp;<span style="color:#c10aff">6622.</span><span style="color:#c10aff">78</span>,&nbsp;<span style="color:#c10aff">6610.</span><span style="color:#c10aff">4</span>,&nbsp;<span style="color:#c10aff">6614.</span><span style="color:#c10aff">9</span>]</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;},</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;{</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;x:&nbsp;<span style="color:#ff3399">new</span>&nbsp;<span style="color:#4be6fa">Date</span>(<span style="color:#c10aff">1538809200000</span>),</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;y:&nbsp;[<span style="color:#c10aff">6614.</span><span style="color:#c10aff">9</span>,&nbsp;<span style="color:#c10aff">6626.</span><span style="color:#c10aff">2</span>,&nbsp;<span style="color:#c10aff">6613.</span><span style="color:#c10aff">33</span>,&nbsp;<span style="color:#c10aff">6623.</span><span style="color:#c10aff">45</span>]</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;},</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;{</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;x:&nbsp;<span style="color:#ff3399">new</span>&nbsp;<span style="color:#4be6fa">Date</span>(<span style="color:#c10aff">1538811000000</span>),</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;y:&nbsp;[<span style="color:#c10aff">6623.</span><span style="color:#c10aff">48</span>,&nbsp;<span style="color:#c10aff">6627</span>,&nbsp;<span style="color:#c10aff">6618.</span><span style="color:#c10aff">38</span>,&nbsp;<span style="color:#c10aff">6620.</span><span style="color:#c10aff">35</span>]</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;},</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;{</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;x:&nbsp;<span style="color:#ff3399">new</span>&nbsp;<span style="color:#4be6fa">Date</span>(<span style="color:#c10aff">1538812800000</span>),</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;y:&nbsp;[<span style="color:#c10aff">6619.</span><span style="color:#c10aff">43</span>,&nbsp;<span style="color:#c10aff">6620.</span><span style="color:#c10aff">35</span>,&nbsp;<span style="color:#c10aff">6610.</span><span style="color:#c10aff">05</span>,&nbsp;<span style="color:#c10aff">6615.</span><span style="color:#c10aff">53</span>]</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;},</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;{</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;x:&nbsp;<span style="color:#ff3399">new</span>&nbsp;<span style="color:#4be6fa">Date</span>(<span style="color:#c10aff">1538814600000</span>),</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;y:&nbsp;[<span style="color:#c10aff">6615.</span><span style="color:#c10aff">53</span>,&nbsp;<span style="color:#c10aff">6617.</span><span style="color:#c10aff">93</span>,&nbsp;<span style="color:#c10aff">6610</span>,&nbsp;<span style="color:#c10aff">6615.</span><span style="color:#c10aff">19</span>]</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;},</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;{</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;x:&nbsp;<span style="color:#ff3399">new</span>&nbsp;<span style="color:#4be6fa">Date</span>(<span style="color:#c10aff">1538816400000</span>),</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;y:&nbsp;[<span style="color:#c10aff">6615.</span><span style="color:#c10aff">19</span>,&nbsp;<span style="color:#c10aff">6621.</span><span style="color:#c10aff">6</span>,&nbsp;<span style="color:#c10aff">6608.</span><span style="color:#c10aff">2</span>,&nbsp;<span style="color:#c10aff">6620</span>]</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;},</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;{</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;x:&nbsp;<span style="color:#ff3399">new</span>&nbsp;<span style="color:#4be6fa">Date</span>(<span style="color:#c10aff">1538818200000</span>),</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;y:&nbsp;[<span style="color:#c10aff">6619.</span><span style="color:#c10aff">54</span>,&nbsp;<span style="color:#c10aff">6625.</span><span style="color:#c10aff">17</span>,&nbsp;<span style="color:#c10aff">6614.</span><span style="color:#c10aff">15</span>,&nbsp;<span style="color:#c10aff">6620</span>]</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;},</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;{</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;x:&nbsp;<span style="color:#ff3399">new</span>&nbsp;<span style="color:#4be6fa">Date</span>(<span style="color:#c10aff">1538820000000</span>),</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;y:&nbsp;[<span style="color:#c10aff">6620.</span><span style="color:#c10aff">33</span>,&nbsp;<span style="color:#c10aff">6634.</span><span style="color:#c10aff">15</span>,&nbsp;<span style="color:#c10aff">6617.</span><span style="color:#c10aff">24</span>,&nbsp;<span style="color:#c10aff">6624.</span><span style="color:#c10aff">61</span>]</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;},</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;{</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;x:&nbsp;<span style="color:#ff3399">new</span>&nbsp;<span style="color:#4be6fa">Date</span>(<span style="color:#c10aff">1538821800000</span>),</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;y:&nbsp;[<span style="color:#c10aff">6625.</span><span style="color:#c10aff">95</span>,&nbsp;<span style="color:#c10aff">6626</span>,&nbsp;<span style="color:#c10aff">6611.</span><span style="color:#c10aff">66</span>,&nbsp;<span style="color:#c10aff">6617.</span><span style="color:#c10aff">58</span>]</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;},</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;{</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;x:&nbsp;<span style="color:#ff3399">new</span>&nbsp;<span style="color:#4be6fa">Date</span>(<span style="color:#c10aff">1538823600000</span>),</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;y:&nbsp;[<span style="color:#c10aff">6619</span>,&nbsp;<span style="color:#c10aff">6625.</span><span style="color:#c10aff">97</span>,&nbsp;<span style="color:#c10aff">6595.</span><span style="color:#c10aff">27</span>,&nbsp;<span style="color:#c10aff">6598.</span><span style="color:#c10aff">86</span>]</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;},</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;{</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;x:&nbsp;<span style="color:#ff3399">new</span>&nbsp;<span style="color:#4be6fa">Date</span>(<span style="color:#c10aff">1538825400000</span>),</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;y:&nbsp;[<span style="color:#c10aff">6598.</span><span style="color:#c10aff">86</span>,&nbsp;<span style="color:#c10aff">6598.</span><span style="color:#c10aff">88</span>,&nbsp;<span style="color:#c10aff">6570</span>,&nbsp;<span style="color:#c10aff">6587.</span><span style="color:#c10aff">16</span>]</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;},</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;{</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;x:&nbsp;<span style="color:#ff3399">new</span>&nbsp;<span style="color:#4be6fa">Date</span>(<span style="color:#c10aff">1538827200000</span>),</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;y:&nbsp;[<span style="color:#c10aff">6588.</span><span style="color:#c10aff">86</span>,&nbsp;<span style="color:#c10aff">6600</span>,&nbsp;<span style="color:#c10aff">6580</span>,&nbsp;<span style="color:#c10aff">6593.</span><span style="color:#c10aff">4</span>]</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;},</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;{</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;x:&nbsp;<span style="color:#ff3399">new</span>&nbsp;<span style="color:#4be6fa">Date</span>(<span style="color:#c10aff">1538829000000</span>),</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;y:&nbsp;[<span style="color:#c10aff">6593.</span><span style="color:#c10aff">99</span>,&nbsp;<span style="color:#c10aff">6598.</span><span style="color:#c10aff">89</span>,&nbsp;<span style="color:#c10aff">6585</span>,&nbsp;<span style="color:#c10aff">6587.</span><span style="color:#c10aff">81</span>]</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;},</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;{</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;x:&nbsp;<span style="color:#ff3399">new</span>&nbsp;<span style="color:#4be6fa">Date</span>(<span style="color:#c10aff">1538830800000</span>),</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;y:&nbsp;[<span style="color:#c10aff">6587.</span><span style="color:#c10aff">81</span>,&nbsp;<span style="color:#c10aff">6592.</span><span style="color:#c10aff">73</span>,&nbsp;<span style="color:#c10aff">6567.</span><span style="color:#c10aff">14</span>,&nbsp;<span style="color:#c10aff">6578</span>]</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;},</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;{</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;x:&nbsp;<span style="color:#ff3399">new</span>&nbsp;<span style="color:#4be6fa">Date</span>(<span style="color:#c10aff">1538832600000</span>),</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;y:&nbsp;[<span style="color:#c10aff">6578.</span><span style="color:#c10aff">35</span>,&nbsp;<span style="color:#c10aff">6581.</span><span style="color:#c10aff">72</span>,&nbsp;<span style="color:#c10aff">6567.</span><span style="color:#c10aff">39</span>,&nbsp;<span style="color:#c10aff">6579</span>]</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;},</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;{</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;x:&nbsp;<span style="color:#ff3399">new</span>&nbsp;<span style="color:#4be6fa">Date</span>(<span style="color:#c10aff">1538834400000</span>),</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;y:&nbsp;[<span style="color:#c10aff">6579.</span><span style="color:#c10aff">38</span>,&nbsp;<span style="color:#c10aff">6580.</span><span style="color:#c10aff">92</span>,&nbsp;<span style="color:#c10aff">6566.</span><span style="color:#c10aff">77</span>,&nbsp;<span style="color:#c10aff">6575.</span><span style="color:#c10aff">96</span>]</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;},</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;{</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;x:&nbsp;<span style="color:#ff3399">new</span>&nbsp;<span style="color:#4be6fa">Date</span>(<span style="color:#c10aff">1538836200000</span>),</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;y:&nbsp;[<span style="color:#c10aff">6575.</span><span style="color:#c10aff">96</span>,&nbsp;<span style="color:#c10aff">6589</span>,&nbsp;<span style="color:#c10aff">6571.</span><span style="color:#c10aff">77</span>,&nbsp;<span style="color:#c10aff">6588.</span><span style="color:#c10aff">92</span>]</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;},</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;{</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;x:&nbsp;<span style="color:#ff3399">new</span>&nbsp;<span style="color:#4be6fa">Date</span>(<span style="color:#c10aff">1538838000000</span>),</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;y:&nbsp;[<span style="color:#c10aff">6588.</span><span style="color:#c10aff">92</span>,&nbsp;<span style="color:#c10aff">6594</span>,&nbsp;<span style="color:#c10aff">6577.</span><span style="color:#c10aff">55</span>,&nbsp;<span style="color:#c10aff">6589.</span><span style="color:#c10aff">22</span>]</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;},</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;{</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;x:&nbsp;<span style="color:#ff3399">new</span>&nbsp;<span style="color:#4be6fa">Date</span>(<span style="color:#c10aff">1538839800000</span>),</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;y:&nbsp;[<span style="color:#c10aff">6589.</span><span style="color:#c10aff">3</span>,&nbsp;<span style="color:#c10aff">6598.</span><span style="color:#c10aff">89</span>,&nbsp;<span style="color:#c10aff">6589.</span><span style="color:#c10aff">1</span>,&nbsp;<span style="color:#c10aff">6596.</span><span style="color:#c10aff">08</span>]</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;},</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;{</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;x:&nbsp;<span style="color:#ff3399">new</span>&nbsp;<span style="color:#4be6fa">Date</span>(<span style="color:#c10aff">1538841600000</span>),</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;y:&nbsp;[<span style="color:#c10aff">6597.</span><span style="color:#c10aff">5</span>,&nbsp;<span style="color:#c10aff">6600</span>,&nbsp;<span style="color:#c10aff">6588.</span><span style="color:#c10aff">39</span>,&nbsp;<span style="color:#c10aff">6596.</span><span style="color:#c10aff">25</span>]</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;},</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;{</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;x:&nbsp;<span style="color:#ff3399">new</span>&nbsp;<span style="color:#4be6fa">Date</span>(<span style="color:#c10aff">1538843400000</span>),</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;y:&nbsp;[<span style="color:#c10aff">6598.</span><span style="color:#c10aff">03</span>,&nbsp;<span style="color:#c10aff">6600</span>,&nbsp;<span style="color:#c10aff">6588.</span><span style="color:#c10aff">73</span>,&nbsp;<span style="color:#c10aff">6595.</span><span style="color:#c10aff">97</span>]</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;},</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;{</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;x:&nbsp;<span style="color:#ff3399">new</span>&nbsp;<span style="color:#4be6fa">Date</span>(<span style="color:#c10aff">1538845200000</span>),</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;y:&nbsp;[<span style="color:#c10aff">6595.</span><span style="color:#c10aff">97</span>,&nbsp;<span style="color:#c10aff">6602.</span><span style="color:#c10aff">01</span>,&nbsp;<span style="color:#c10aff">6588.</span><span style="color:#c10aff">17</span>,&nbsp;<span style="color:#c10aff">6602</span>]</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;},</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;{</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;x:&nbsp;<span style="color:#ff3399">new</span>&nbsp;<span style="color:#4be6fa">Date</span>(<span style="color:#c10aff">1538847000000</span>),</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;y:&nbsp;[<span style="color:#c10aff">6602</span>,&nbsp;<span style="color:#c10aff">6607</span>,&nbsp;<span style="color:#c10aff">6596.</span><span style="color:#c10aff">51</span>,&nbsp;<span style="color:#c10aff">6599.</span><span style="color:#c10aff">95</span>]</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;},</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;{</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;x:&nbsp;<span style="color:#ff3399">new</span>&nbsp;<span style="color:#4be6fa">Date</span>(<span style="color:#c10aff">1538848800000</span>),</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;y:&nbsp;[<span style="color:#c10aff">6600.</span><span style="color:#c10aff">63</span>,&nbsp;<span style="color:#c10aff">6601.</span><span style="color:#c10aff">21</span>,&nbsp;<span style="color:#c10aff">6590.</span><span style="color:#c10aff">39</span>,&nbsp;<span style="color:#c10aff">6591.</span><span style="color:#c10aff">02</span>]</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;},</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;{</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;x:&nbsp;<span style="color:#ff3399">new</span>&nbsp;<span style="color:#4be6fa">Date</span>(<span style="color:#c10aff">1538850600000</span>),</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;y:&nbsp;[<span style="color:#c10aff">6591.</span><span style="color:#c10aff">02</span>,&nbsp;<span style="color:#c10aff">6603.</span><span style="color:#c10aff">08</span>,&nbsp;<span style="color:#c10aff">6591</span>,&nbsp;<span style="color:#c10aff">6591</span>]</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;},</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;{</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;x:&nbsp;<span style="color:#ff3399">new</span>&nbsp;<span style="color:#4be6fa">Date</span>(<span style="color:#c10aff">1538852400000</span>),</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;y:&nbsp;[<span style="color:#c10aff">6591</span>,&nbsp;<span style="color:#c10aff">6601.</span><span style="color:#c10aff">32</span>,&nbsp;<span style="color:#c10aff">6585</span>,&nbsp;<span style="color:#c10aff">6592</span>]</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;},</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;{</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;x:&nbsp;<span style="color:#ff3399">new</span>&nbsp;<span style="color:#4be6fa">Date</span>(<span style="color:#c10aff">1538854200000</span>),</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;y:&nbsp;[<span style="color:#c10aff">6593.</span><span style="color:#c10aff">13</span>,&nbsp;<span style="color:#c10aff">6596.</span><span style="color:#c10aff">01</span>,&nbsp;<span style="color:#c10aff">6590</span>,&nbsp;<span style="color:#c10aff">6593.</span><span style="color:#c10aff">34</span>]</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;},</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;{</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;x:&nbsp;<span style="color:#ff3399">new</span>&nbsp;<span style="color:#4be6fa">Date</span>(<span style="color:#c10aff">1538856000000</span>),</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;y:&nbsp;[<span style="color:#c10aff">6593.</span><span style="color:#c10aff">34</span>,&nbsp;<span style="color:#c10aff">6604.</span><span style="color:#c10aff">76</span>,&nbsp;<span style="color:#c10aff">6582.</span><span style="color:#c10aff">63</span>,&nbsp;<span style="color:#c10aff">6593.</span><span style="color:#c10aff">86</span>]</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;},</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;{</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;x:&nbsp;<span style="color:#ff3399">new</span>&nbsp;<span style="color:#4be6fa">Date</span>(<span style="color:#c10aff">1538857800000</span>),</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;y:&nbsp;[<span style="color:#c10aff">6593.</span><span style="color:#c10aff">86</span>,&nbsp;<span style="color:#c10aff">6604.</span><span style="color:#c10aff">28</span>,&nbsp;<span style="color:#c10aff">6586.</span><span style="color:#c10aff">57</span>,&nbsp;<span style="color:#c10aff">6600.</span><span style="color:#c10aff">01</span>]</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;},</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;{</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;x:&nbsp;<span style="color:#ff3399">new</span>&nbsp;<span style="color:#4be6fa">Date</span>(<span style="color:#c10aff">1538859600000</span>),</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;y:&nbsp;[<span style="color:#c10aff">6601.</span><span style="color:#c10aff">81</span>,&nbsp;<span style="color:#c10aff">6603.</span><span style="color:#c10aff">21</span>,&nbsp;<span style="color:#c10aff">6592.</span><span style="color:#c10aff">78</span>,&nbsp;<span style="color:#c10aff">6596.</span><span style="color:#c10aff">25</span>]</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;},</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;{</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;x:&nbsp;<span style="color:#ff3399">new</span>&nbsp;<span style="color:#4be6fa">Date</span>(<span style="color:#c10aff">1538861400000</span>),</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;y:&nbsp;[<span style="color:#c10aff">6596.</span><span style="color:#c10aff">25</span>,&nbsp;<span style="color:#c10aff">6604.</span><span style="color:#c10aff">2</span>,&nbsp;<span style="color:#c10aff">6590</span>,&nbsp;<span style="color:#c10aff">6602.</span><span style="color:#c10aff">99</span>]</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;},</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;{</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;x:&nbsp;<span style="color:#ff3399">new</span>&nbsp;<span style="color:#4be6fa">Date</span>(<span style="color:#c10aff">1538863200000</span>),</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;y:&nbsp;[<span style="color:#c10aff">6602.</span><span style="color:#c10aff">99</span>,&nbsp;<span style="color:#c10aff">6606</span>,&nbsp;<span style="color:#c10aff">6584.</span><span style="color:#c10aff">99</span>,&nbsp;<span style="color:#c10aff">6587.</span><span style="color:#c10aff">81</span>]</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;},</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;{</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;x:&nbsp;<span style="color:#ff3399">new</span>&nbsp;<span style="color:#4be6fa">Date</span>(<span style="color:#c10aff">1538865000000</span>),</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;y:&nbsp;[<span style="color:#c10aff">6587.</span><span style="color:#c10aff">81</span>,&nbsp;<span style="color:#c10aff">6595</span>,&nbsp;<span style="color:#c10aff">6583.</span><span style="color:#c10aff">27</span>,&nbsp;<span style="color:#c10aff">6591.</span><span style="color:#c10aff">96</span>]</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;},</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;{</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;x:&nbsp;<span style="color:#ff3399">new</span>&nbsp;<span style="color:#4be6fa">Date</span>(<span style="color:#c10aff">1538866800000</span>),</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;y:&nbsp;[<span style="color:#c10aff">6591.</span><span style="color:#c10aff">97</span>,&nbsp;<span style="color:#c10aff">6596.</span><span style="color:#c10aff">07</span>,&nbsp;<span style="color:#c10aff">6585</span>,&nbsp;<span style="color:#c10aff">6588.</span><span style="color:#c10aff">39</span>]</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;},</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;{</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;x:&nbsp;<span style="color:#ff3399">new</span>&nbsp;<span style="color:#4be6fa">Date</span>(<span style="color:#c10aff">1538868600000</span>),</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;y:&nbsp;[<span style="color:#c10aff">6587.</span><span style="color:#c10aff">6</span>,&nbsp;<span style="color:#c10aff">6598.</span><span style="color:#c10aff">21</span>,&nbsp;<span style="color:#c10aff">6587.</span><span style="color:#c10aff">6</span>,&nbsp;<span style="color:#c10aff">6594.</span><span style="color:#c10aff">27</span>]</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;},</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;{</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;x:&nbsp;<span style="color:#ff3399">new</span>&nbsp;<span style="color:#4be6fa">Date</span>(<span style="color:#c10aff">1538870400000</span>),</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;y:&nbsp;[<span style="color:#c10aff">6596.</span><span style="color:#c10aff">44</span>,&nbsp;<span style="color:#c10aff">6601</span>,&nbsp;<span style="color:#c10aff">6590</span>,&nbsp;<span style="color:#c10aff">6596.</span><span style="color:#c10aff">55</span>]</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;},</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;{</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;x:&nbsp;<span style="color:#ff3399">new</span>&nbsp;<span style="color:#4be6fa">Date</span>(<span style="color:#c10aff">1538872200000</span>),</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;y:&nbsp;[<span style="color:#c10aff">6598.</span><span style="color:#c10aff">91</span>,&nbsp;<span style="color:#c10aff">6605</span>,&nbsp;<span style="color:#c10aff">6596.</span><span style="color:#c10aff">61</span>,&nbsp;<span style="color:#c10aff">6600.</span><span style="color:#c10aff">02</span>]</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;},</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;{</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;x:&nbsp;<span style="color:#ff3399">new</span>&nbsp;<span style="color:#4be6fa">Date</span>(<span style="color:#c10aff">1538874000000</span>),</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;y:&nbsp;[<span style="color:#c10aff">6600.</span><span style="color:#c10aff">55</span>,&nbsp;<span style="color:#c10aff">6605</span>,&nbsp;<span style="color:#c10aff">6589.</span><span style="color:#c10aff">14</span>,&nbsp;<span style="color:#c10aff">6593.</span><span style="color:#c10aff">01</span>]</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;},</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;{</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;x:&nbsp;<span style="color:#ff3399">new</span>&nbsp;<span style="color:#4be6fa">Date</span>(<span style="color:#c10aff">1538875800000</span>),</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;y:&nbsp;[<span style="color:#c10aff">6593.</span><span style="color:#c10aff">15</span>,&nbsp;<span style="color:#c10aff">6605</span>,&nbsp;<span style="color:#c10aff">6592</span>,&nbsp;<span style="color:#c10aff">6603.</span><span style="color:#c10aff">06</span>]</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;},</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;{</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;x:&nbsp;<span style="color:#ff3399">new</span>&nbsp;<span style="color:#4be6fa">Date</span>(<span style="color:#c10aff">1538877600000</span>),</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;y:&nbsp;[<span style="color:#c10aff">6603.</span><span style="color:#c10aff">07</span>,&nbsp;<span style="color:#c10aff">6604.</span><span style="color:#c10aff">5</span>,&nbsp;<span style="color:#c10aff">6599.</span><span style="color:#c10aff">09</span>,&nbsp;<span style="color:#c10aff">6603.</span><span style="color:#c10aff">89</span>]</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;},</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;{</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;x:&nbsp;<span style="color:#ff3399">new</span>&nbsp;<span style="color:#4be6fa">Date</span>(<span style="color:#c10aff">1538879400000</span>),</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;y:&nbsp;[<span style="color:#c10aff">6604.</span><span style="color:#c10aff">44</span>,&nbsp;<span style="color:#c10aff">6604.</span><span style="color:#c10aff">44</span>,&nbsp;<span style="color:#c10aff">6600</span>,&nbsp;<span style="color:#c10aff">6603.</span><span style="color:#c10aff">5</span>]</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;},</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;{</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;x:&nbsp;<span style="color:#ff3399">new</span>&nbsp;<span style="color:#4be6fa">Date</span>(<span style="color:#c10aff">1538881200000</span>),</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;y:&nbsp;[<span style="color:#c10aff">6603.</span><span style="color:#c10aff">5</span>,&nbsp;<span style="color:#c10aff">6603.</span><span style="color:#c10aff">99</span>,&nbsp;<span style="color:#c10aff">6597.</span><span style="color:#c10aff">5</span>,&nbsp;<span style="color:#c10aff">6603.</span><span style="color:#c10aff">86</span>]</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;},</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;{</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;x:&nbsp;<span style="color:#ff3399">new</span>&nbsp;<span style="color:#4be6fa">Date</span>(<span style="color:#c10aff">1538883000000</span>),</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;y:&nbsp;[<span style="color:#c10aff">6603.</span><span style="color:#c10aff">85</span>,&nbsp;<span style="color:#c10aff">6605</span>,&nbsp;<span style="color:#c10aff">6600</span>,&nbsp;<span style="color:#c10aff">6604.</span><span style="color:#c10aff">07</span>]</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;},</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;{</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;x:&nbsp;<span style="color:#ff3399">new</span>&nbsp;<span style="color:#4be6fa">Date</span>(<span style="color:#c10aff">1538884800000</span>),</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;y:&nbsp;[<span style="color:#c10aff">6604.</span><span style="color:#c10aff">98</span>,&nbsp;<span style="color:#c10aff">6606</span>,&nbsp;<span style="color:#c10aff">6604.</span><span style="color:#c10aff">07</span>,&nbsp;<span style="color:#c10aff">6606</span>]</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;},</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;]</div><div style="padding:0 6px; white-space:pre; line-height:130%">}],</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;chart:&nbsp;{</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;type:&nbsp;<span style="color:#ffd500">'candlestick'</span>,</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;height:&nbsp;<span style="color:#c10aff">350</span></div><div style="padding:0 6px; white-space:pre; line-height:130%">},</div><div style="padding:0 6px; white-space:pre; line-height:130%">title:&nbsp;{</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;text:&nbsp;<span style="color:#ffd500">'CandleStick&nbsp;Chart'</span>,</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;align:&nbsp;<span style="color:#ffd500">'left'</span></div><div style="padding:0 6px; white-space:pre; line-height:130%">},</div><div style="padding:0 6px; white-space:pre; line-height:130%">xaxis:&nbsp;{</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;type:&nbsp;<span style="color:#ffd500">'datetime'</span></div><div style="padding:0 6px; white-space:pre; line-height:130%">},</div><div style="padding:0 6px; white-space:pre; line-height:130%">yaxis:&nbsp;{</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;tooltip:&nbsp;{</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;enabled:&nbsp;<span style="color:#ff3399">true</span></div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;}</div><div style="padding:0 6px; white-space:pre; line-height:130%">}</div><div style="padding:0 6px; white-space:pre; line-height:130%">};</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;</div><div style="padding:0 6px; white-space:pre; line-height:130%"><span style="color:#ff3399">var</span>&nbsp;chart&nbsp;<span style="color:#aaffaa"></span><span style="color:#ff3399">=</span>&nbsp;<span style="color:#ff3399">new</span>&nbsp;ApexCharts(<span style="color:#4be6fa">document</span>.querySelector(<span style="color:#ffd500">"#candleChart"</span>),&nbsp;options);</div><div style="padding:0 6px; white-space:pre; line-height:130%">chart.render();</div></pre><div style="text-align:right;margin-top:-13px;margin-right:5px;font-size:9px;font-style:italic"><a href="http://colorscripter.com/info#e" target="_blank" style="color:#4f4f4ftext-decoration:none">Colored by Color Scripter</a></div></td><td style="vertical-align:bottom;padding:0 2px 4px 0"><a href="http://colorscripter.com/info#e" target="_blank" style="text-decoration:none;color:white"><span style="font-size:9px;word-break:normal;background-color:#4f4f4f;color:white;border-radius:10px;padding:1px">cs</span></a></td></tr></table></div>
+           </div>
+         </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

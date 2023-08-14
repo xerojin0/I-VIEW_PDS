@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>I&VIEW Design System</title>
+    <link rel="stylesheet" href="../resource/chart/apexchart/apexcharts.css">
+    <link rel="stylesheet" href="../css/contents.css">
+
+    <style>
+      /* 커스텀 범례 CSS */
+      .chat_legend {display: table; width: 100%;margin-bottom: 18px;border-radius: 3px;background-color: #f1f3fa}
+      .chat_legend > div {display: table-cell; text-align: center;}
+      .chat_legend button {width: 100%;height: 60px;font-size: 20px;background: none;}
+      .chat_legend button.active {opacity: .5}
+      .chat_legend button strong{font-weight: 400;color: #414145;}
+    </style>
+
+    <script src="../resource/jquery.min.js"></script>
+    <!-- apexcharts IE 지원 -->
+    <script type="text/javascript">
+      window.Promise ||
+      document.write('<script src="../resource/polyfill.min.js"><\/script>')
+      window.Promise ||
+      document.write('<script src="../resource/classlist.js"><\/script>')
+      window.Promise ||
+      document.write('<script src="../resource/findIndex.js"><\/script>')
+      window.Promise ||
+      document.write('<script src="../resource/canvg.js"><\/script>')
+    </script>
+    <script src="../resource/chart/apexchart/apexcharts.min.js"></script>
+
+    <script src="../js/script.js"></script>
+    <script>
+      $(function(){
+// 차트 옵션
+var options = {
+  series:[{ // 차트 데이터
+    name: "김상담",
+    data: [10, 20, 15, 25, 20, 30]
+  }, {
+    name: "상담1팀",
+    data: [0, 15, 10, 30, 15, 35]
+  }],
+  colors:["#727cf5", "#0acf97"], // 차트 기본 색상 ( 데이터가 하나라고 해도 배열로 해야함 )
+  chart: {
+    width:'100%',
+    height: 500,
+    type: 'line',
+    dropShadow: { // 차트 라인 그림자
+     enabled: 1,
+     opacity: .2,
+     blur: 7,
+     left: -7,
+     top: 7
+   },
+   toolbar:{
+     show: true,
+     tools:{ // 툴바-다운로드 아이콘 이미지 변경
+       download: '<img src="../img/icon/chart_menu_icon.png" alt="차트 메뉴 아이콘">'
+     }
+   },
+    zoom: {
+      enabled: false
+    },
+    animations: { // 로딩시 애니메이션
+        enabled: true,
+        easing: 'linear'
+    }
+  },
+  dataLabels: {
+    enabled: false
+  },
+  legend:{
+    show: false
+  },
+  stroke: { // 라인차트 형태
+    curve: "smooth", // straight : 직선, smooth : 곡선, stepline : 계단형태
+    width: 4
+  },
+  xaxis: { // x축
+       type: "string",
+       categories:["09:00", "11:00", "13:00", "15:00", "17:00", "19:00"],
+       tooltip: {
+           enabled: false
+       },
+       axisBorder: { // x축 가로 border
+           show: false
+       }
+   },
+  yaxis:{
+    labels:{
+      formatter: function(e) {// y축 값에 대한 사용자 정의
+        return e + "k"// 단위 표시
+      },
+      offsetX: -10
+    }
+  }
+};
+// 차트
+var chart = new ApexCharts(document.querySelector("#lineChart"), options);
+chart.render();
+
+// 범례 커스텀 관련
+$('.legend01 i').css('color',chart.w.globals.colors[0]); // 차트색상
+$('.legend01 strong').text(chart.w.globals.seriesNames[0]); // 차트항목이름
+$('.legend02 i').css('color',chart.w.globals.colors[1]);
+$('.legend02 strong').text(chart.w.globals.seriesNames[1]);
+$('.legend01_btn').on('click',function(){ // 버튼 클릭시 차트 항목 show/hide 토글
+  chart.toggleSeries(chart.w.globals.seriesNames[0]);
+  $(this).toggleClass('active');
+});
+$('.legend02_btn').on('click',function(){
+  chart.toggleSeries(chart.w.globals.seriesNames[1]);
+  $(this).toggleClass('active');
+});
+      });
+    </script>
+  <body>
+    <div class="content_wrap">
+      <div class="row">
+        <div class="layout col_12">
+          <div class="title_box">
+            <h2 class="tit00">apexcharts</h2>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="layout col_12">
+          <p class="homepage"><a href="https://apexcharts.com/" target="_blank" title="새창">apexcharts 홈페이지 링크</a></p>
+          <div class="p_menu">
+            <ul id="pMenu"></ul>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="layout col_12">
+         <div class="title_box item_tit">
+           <h3 class="tit01">Line chart ( 범례 custom / Analyzer 3.0 대시보드 )</h3>
+         </div>
+         <div class="item_exam">
+           <div class="title_box">
+             <h4 class="tit02">결과화면</h4>
+           </div>
+           <div class="chart_box">
+             <div class="chat_legend">
+               <div class="legend01">
+                 <button type="button" class="legend01_btn">
+                   <i class="fas fa-circle"></i>
+                   <strong></strong>
+                 </button>
+               </div>
+               <div class="legend02">
+                 <button type="button" class="legend02_btn">
+                   <i class="fas fa-circle"></i>
+                   <strong></strong>
+                 </button>
+               </div>
+             </div>
+             <div id="lineChart"></div>
+           </div>
+           <div class="title_box">
+             <h4 class="tit02">HTML</h4>
+           </div>
+           <div class="code_box">
+<div class="colorscripter-code" style="color:#f0f0f0;font-family:Consolas, 'Liberation Mono', Menlo, Courier, monospace !important; position:relative !important;overflow:auto"><table class="colorscripter-code-table" style="margin:0;padding:0;border:none;background-color:#272727;border-radius:4px;" cellspacing="0" cellpadding="0"><tr><td style="padding:6px 0;text-align:left"><pre style="margin:0;padding:0;color:#f0f0f0;font-family:Consolas, 'Liberation Mono', Menlo, Courier, monospace !important;line-height:130%"><div style="padding:0 6px; white-space:pre; line-height:130%"><span style="color:#f0f0f0">&lt;</span><span style="color:#ff3399">link</span>&nbsp;<span style="color:#a8ff58">rel</span>=<span style="color:#ffd500">"stylesheet"</span>&nbsp;<span style="color:#a8ff58">href</span>=<span style="color:#ffd500">"../resource/chart/apexchart/apexcharts.css"</span><span style="color:#f0f0f0">&gt;</span></div><div style="padding:0 6px; white-space:pre; line-height:130%"><span style="color:#999999">&lt;!--&nbsp;apexcharts&nbsp;IE&nbsp;지원&nbsp;--&gt;</span></div><div style="padding:0 6px; white-space:pre; line-height:130%"><span style="color:#f0f0f0">&lt;</span><span style="color:#ff3399">script</span>&nbsp;<span style="color:#a8ff58">type</span>=<span style="color:#ffd500">"text/javascript"</span><span style="color:#ff3399"></span><span style="color:#f0f0f0">&gt;</span></div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;<span style="color:#4be6fa">window</span>.Promise&nbsp;<span style="color:#0086b3"></span><span style="color:#ff3399">|</span><span style="color:#0086b3"></span><span style="color:#ff3399">|</span></div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;<span style="color:#4be6fa">document</span>.write(<span style="color:#ffd500">'&lt;script&nbsp;src="../resource/polyfill.min.js"&gt;&lt;\/script&gt;'</span>)</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;<span style="color:#4be6fa">window</span>.Promise&nbsp;<span style="color:#0086b3"></span><span style="color:#ff3399">|</span><span style="color:#0086b3"></span><span style="color:#ff3399">|</span></div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;<span style="color:#4be6fa">document</span>.write(<span style="color:#ffd500">'&lt;script&nbsp;src="../resource/classlist.js"&gt;&lt;\/script&gt;'</span>)</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;<span style="color:#4be6fa">window</span>.Promise&nbsp;<span style="color:#0086b3"></span><span style="color:#ff3399">|</span><span style="color:#0086b3"></span><span style="color:#ff3399">|</span></div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;<span style="color:#4be6fa">document</span>.write(<span style="color:#ffd500">'&lt;script&nbsp;src="../resource/findIndex.js"&gt;&lt;\/script&gt;'</span>)</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;<span style="color:#4be6fa">window</span>.Promise&nbsp;<span style="color:#0086b3"></span><span style="color:#ff3399">|</span><span style="color:#0086b3"></span><span style="color:#ff3399">|</span></div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;<span style="color:#4be6fa">document</span>.write(<span style="color:#ffd500">'&lt;script&nbsp;src="../resource/canvg.js"&gt;&lt;\/script&gt;'</span>)</div><div style="padding:0 6px; white-space:pre; line-height:130%"><span style="color:#f0f0f0">&lt;</span><span style="color:#f0f0f0">/</span><span style="color:#ff3399">script</span><span style="color:#f0f0f0">&gt;</span></div><div style="padding:0 6px; white-space:pre; line-height:130%"><span style="color:#f0f0f0">&lt;</span><span style="color:#ff3399">script</span>&nbsp;<span style="color:#a8ff58">src</span>=<span style="color:#ffd500">"../resource/chart/apexchart/apexcharts.min.js"</span><span style="color:#ff3399"></span><span style="color:#f0f0f0">&gt;</span><span style="color:#f0f0f0">&lt;</span><span style="color:#f0f0f0">/</span><span style="color:#ff3399">script</span><span style="color:#f0f0f0">&gt;</span></div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;</div><div style="padding:0 6px; white-space:pre; line-height:130%"><span style="color:#999999">&lt;!--&nbsp;차트&nbsp;--&gt;</span></div><div style="padding:0 6px; white-space:pre; line-height:130%"><span style="color:#f0f0f0">&lt;</span><span style="color:#ff3399">div</span>&nbsp;<span style="color:#a8ff58">id</span>=<span style="color:#ffd500">"lineChart"</span><span style="color:#a8ff58"></span><span style="color:#f0f0f0">&gt;</span><span style="color:#f0f0f0">&lt;</span><span style="color:#f0f0f0">/</span><span style="color:#ff3399">div</span><span style="color:#f0f0f0">&gt;</span></div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;</div><div style="padding:0 6px; white-space:pre; line-height:130%"><span style="color:#999999">&lt;!--&nbsp;커스텀&nbsp;&nbsp;--&gt;</span></div><div style="padding:0 6px; white-space:pre; line-height:130%"><span style="color:#f0f0f0">&lt;</span><span style="color:#ff3399">div</span>&nbsp;<span style="color:#a8ff58">class</span>=<span style="color:#ffd500">"chat_legend"</span><span style="color:#a8ff58"></span><span style="color:#f0f0f0">&gt;</span></div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;<span style="color:#f0f0f0">&lt;</span><span style="color:#ff3399">div</span>&nbsp;<span style="color:#a8ff58">class</span>=<span style="color:#ffd500">"legend01"</span><span style="color:#a8ff58"></span><span style="color:#f0f0f0">&gt;</span></div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;<span style="color:#f0f0f0">&lt;</span><span style="color:#ff3399">button</span>&nbsp;<span style="color:#a8ff58">type</span>=<span style="color:#ffd500">"button"</span><span style="color:#a8ff58"></span>&nbsp;<span style="color:#a8ff58">class</span>=<span style="color:#ffd500">"legend01_btn"</span><span style="color:#a8ff58"></span><span style="color:#f0f0f0">&gt;</span></div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#f0f0f0">&lt;</span><span style="color:#ff3399">i</span>&nbsp;<span style="color:#a8ff58">class</span>=<span style="color:#ffd500">"fas&nbsp;fa-circle"</span><span style="color:#a8ff58"></span><span style="color:#f0f0f0">&gt;</span><span style="color:#f0f0f0">&lt;</span><span style="color:#f0f0f0">/</span><span style="color:#ff3399">i</span><span style="color:#f0f0f0">&gt;</span></div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#f0f0f0">&lt;</span><span style="color:#ff3399">strong</span><span style="color:#f0f0f0">&gt;</span><span style="color:#f0f0f0">&lt;</span><span style="color:#f0f0f0">/</span><span style="color:#ff3399">strong</span><span style="color:#f0f0f0">&gt;</span></div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;<span style="color:#f0f0f0">&lt;</span><span style="color:#f0f0f0">/</span><span style="color:#ff3399">button</span><span style="color:#f0f0f0">&gt;</span></div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;<span style="color:#f0f0f0">&lt;</span><span style="color:#f0f0f0">/</span><span style="color:#ff3399">div</span><span style="color:#f0f0f0">&gt;</span></div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;<span style="color:#f0f0f0">&lt;</span><span style="color:#ff3399">div</span>&nbsp;<span style="color:#a8ff58">class</span>=<span style="color:#ffd500">"legend02"</span><span style="color:#a8ff58"></span><span style="color:#f0f0f0">&gt;</span></div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;<span style="color:#f0f0f0">&lt;</span><span style="color:#ff3399">button</span>&nbsp;<span style="color:#a8ff58">type</span>=<span style="color:#ffd500">"button"</span><span style="color:#a8ff58"></span>&nbsp;<span style="color:#a8ff58">class</span>=<span style="color:#ffd500">"legend02_btn"</span><span style="color:#a8ff58"></span><span style="color:#f0f0f0">&gt;</span></div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#f0f0f0">&lt;</span><span style="color:#ff3399">i</span>&nbsp;<span style="color:#a8ff58">class</span>=<span style="color:#ffd500">"fas&nbsp;fa-circle"</span><span style="color:#a8ff58"></span><span style="color:#f0f0f0">&gt;</span><span style="color:#f0f0f0">&lt;</span><span style="color:#f0f0f0">/</span><span style="color:#ff3399">i</span><span style="color:#f0f0f0">&gt;</span></div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#f0f0f0">&lt;</span><span style="color:#ff3399">strong</span><span style="color:#f0f0f0">&gt;</span><span style="color:#f0f0f0">&lt;</span><span style="color:#f0f0f0">/</span><span style="color:#ff3399">strong</span><span style="color:#f0f0f0">&gt;</span></div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;<span style="color:#f0f0f0">&lt;</span><span style="color:#f0f0f0">/</span><span style="color:#ff3399">button</span><span style="color:#f0f0f0">&gt;</span></div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;<span style="color:#f0f0f0">&lt;</span><span style="color:#f0f0f0">/</span><span style="color:#ff3399">div</span><span style="color:#f0f0f0">&gt;</span></div><div style="padding:0 6px; white-space:pre; line-height:130%"><span style="color:#f0f0f0">&lt;</span><span style="color:#f0f0f0">/</span><span style="color:#ff3399">div</span><span style="color:#f0f0f0">&gt;</span></div></pre><div style="text-align:right;margin-top:-13px;margin-right:5px;font-size:9px;font-style:italic"><a href="http://colorscripter.com/info#e" target="_blank" style="color:#4f4f4ftext-decoration:none">Colored by Color Scripter</a></div></td><td style="vertical-align:bottom;padding:0 2px 4px 0"><a href="http://colorscripter.com/info#e" target="_blank" style="text-decoration:none;color:white"><span style="font-size:9px;word-break:normal;background-color:#4f4f4f;color:white;border-radius:10px;padding:1px">cs</span></a></td></tr></table></div>
+           </div>
+           <div class="title_box">
+             <h4 class="tit02">CSS</h4>
+           </div>
+           <div class="code_box">
+             <div class="colorscripter-code" style="color:#f0f0f0;font-family:Consolas, 'Liberation Mono', Menlo, Courier, monospace !important; position:relative !important;overflow:auto"><table class="colorscripter-code-table" style="margin:0;padding:0;border:none;background-color:#272727;border-radius:4px;" cellspacing="0" cellpadding="0"><tr><td style="padding:6px 0;text-align:left"><pre style="margin:0;padding:0;color:#f0f0f0;font-family:Consolas, 'Liberation Mono', Menlo, Courier, monospace !important;line-height:130%"><div style="padding:0 6px; white-space:pre; line-height:130%"><span style="color:#ff3399"></span><span style="color:#999999">/*&nbsp;커스텀&nbsp;범례&nbsp;CSS&nbsp;*/</span><span style="color:#ff3399"></span></div><div style="padding:0 6px; white-space:pre; line-height:130%"><span style="color:#ff3399">.chat_legend&nbsp;</span>{<span style="color:#4be6fa">display</span><span style="color:#ff3399">:</span><span style="color:#E083FF">&nbsp;table</span><span style="color:#ff3399">;</span><span style="color:#4be6fa">&nbsp;width</span><span style="color:#ff3399">:</span><span style="color:#E083FF">&nbsp;100%</span><span style="color:#ff3399">;</span><span style="color:#4be6fa">margin-bottom</span><span style="color:#ff3399">:</span><span style="color:#E083FF">&nbsp;18px</span><span style="color:#ff3399">;</span><span style="color:#4be6fa">border-radius</span><span style="color:#ff3399">:</span><span style="color:#E083FF">&nbsp;3px</span><span style="color:#ff3399">;</span><span style="color:#4be6fa">background-color</span><span style="color:#ff3399">:</span><span style="color:#E083FF">&nbsp;#f1f3fa</span>}<span style="color:#ff3399"></span></div><div style="padding:0 6px; white-space:pre; line-height:130%"><span style="color:#ff3399">.chat_legend&nbsp;</span><span style="color:#a8ff58">&gt;</span><span style="color:#ff3399">&nbsp;div&nbsp;</span>{<span style="color:#4be6fa">display</span><span style="color:#ff3399">:</span><span style="color:#E083FF">&nbsp;table-cell</span><span style="color:#ff3399">;</span><span style="color:#4be6fa">&nbsp;text-align</span><span style="color:#ff3399">:</span><span style="color:#E083FF">&nbsp;center</span><span style="color:#ff3399">;</span><span style="color:#E083FF"></span>}<span style="color:#ff3399"></span></div><div style="padding:0 6px; white-space:pre; line-height:130%"><span style="color:#ff3399">.chat_legend&nbsp;button&nbsp;</span>{<span style="color:#4be6fa">width</span><span style="color:#ff3399">:</span><span style="color:#E083FF">&nbsp;100%</span><span style="color:#ff3399">;</span><span style="color:#4be6fa">height</span><span style="color:#ff3399">:</span><span style="color:#E083FF">&nbsp;60px</span><span style="color:#ff3399">;</span><span style="color:#4be6fa">font-size</span><span style="color:#ff3399">:</span><span style="color:#E083FF">&nbsp;20px</span><span style="color:#ff3399">;</span><span style="color:#4be6fa">background</span><span style="color:#ff3399">:</span><span style="color:#E083FF">&nbsp;none</span><span style="color:#ff3399">;</span><span style="color:#E083FF"></span>}<span style="color:#ff3399"></span></div><div style="padding:0 6px; white-space:pre; line-height:130%"><span style="color:#ff3399">.chat_legend&nbsp;button.active&nbsp;</span>{<span style="color:#4be6fa">opacity</span><span style="color:#ff3399">:</span><span style="color:#E083FF">&nbsp;.5</span>}<span style="color:#ff3399"></span></div><div style="padding:0 6px; white-space:pre; line-height:130%"><span style="color:#ff3399">.chat_legend&nbsp;button&nbsp;strong</span>{<span style="color:#4be6fa">font-weight</span><span style="color:#ff3399">:</span><span style="color:#E083FF">&nbsp;400</span><span style="color:#ff3399">;</span><span style="color:#4be6fa">color</span><span style="color:#ff3399">:</span><span style="color:#E083FF">&nbsp;#414145</span><span style="color:#ff3399">;</span><span style="color:#E083FF"></span>}</div></pre><div style="text-align:right;margin-top:-13px;margin-right:5px;font-size:9px;font-style:italic"><a href="http://colorscripter.com/info#e" target="_blank" style="color:#4f4f4ftext-decoration:none">Colored by Color Scripter</a></div></td><td style="vertical-align:bottom;padding:0 2px 4px 0"><a href="http://colorscripter.com/info#e" target="_blank" style="text-decoration:none;color:white"><span style="font-size:9px;word-break:normal;background-color:#4f4f4f;color:white;border-radius:10px;padding:1px">cs</span></a></td></tr></table></div>
+           </div>
+           <div class="title_box">
+             <h4 class="tit02">JS</h4>
+           </div>
+           <div class="code_box">
+<div class="colorscripter-code" style="color:#f0f0f0;font-family:Consolas, 'Liberation Mono', Menlo, Courier, monospace !important; position:relative !important;overflow:auto"><table class="colorscripter-code-table" style="margin:0;padding:0;border:none;background-color:#272727;border-radius:4px;" cellspacing="0" cellpadding="0"><tr><td style="padding:6px 0;text-align:left"><pre style="margin:0;padding:0;color:#f0f0f0;font-family:Consolas, 'Liberation Mono', Menlo, Courier, monospace !important;line-height:130%"><div style="padding:0 6px; white-space:pre; line-height:130%"><span style="color:#999999">//&nbsp;차트&nbsp;옵션</span></div><div style="padding:0 6px; white-space:pre; line-height:130%"><span style="color:#ff3399">var</span>&nbsp;options&nbsp;<span style="color:#aaffaa"></span><span style="color:#ff3399">=</span>&nbsp;{</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;series:[{&nbsp;<span style="color:#999999">//&nbsp;차트&nbsp;데이터</span></div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#4be6fa">name</span>:&nbsp;<span style="color:#ffd500">"김상담"</span>,</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;data:&nbsp;[<span style="color:#c10aff">10</span>,&nbsp;<span style="color:#c10aff">20</span>,&nbsp;<span style="color:#c10aff">15</span>,&nbsp;<span style="color:#c10aff">25</span>,&nbsp;<span style="color:#c10aff">20</span>,&nbsp;<span style="color:#c10aff">30</span>]</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;},&nbsp;{</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#4be6fa">name</span>:&nbsp;<span style="color:#ffd500">"상담1팀"</span>,</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;data:&nbsp;[<span style="color:#c10aff">0</span>,&nbsp;<span style="color:#c10aff">15</span>,&nbsp;<span style="color:#c10aff">10</span>,&nbsp;<span style="color:#c10aff">30</span>,&nbsp;<span style="color:#c10aff">15</span>,&nbsp;<span style="color:#c10aff">35</span>]</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;}],</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;colors:[<span style="color:#ffd500">"#727cf5"</span>,&nbsp;<span style="color:#ffd500">"#0acf97"</span>],&nbsp;<span style="color:#999999">//&nbsp;차트&nbsp;기본&nbsp;색상&nbsp;(&nbsp;데이터가&nbsp;하나라고&nbsp;해도&nbsp;배열로&nbsp;해야함&nbsp;)</span></div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;chart:&nbsp;{</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;width:<span style="color:#ffd500">'100%'</span>,</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;height:&nbsp;<span style="color:#c10aff">500</span>,</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;type:&nbsp;<span style="color:#ffd500">'line'</span>,</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;dropShadow:&nbsp;{&nbsp;<span style="color:#999999">//&nbsp;차트&nbsp;라인&nbsp;그림자</span></div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;enabled:&nbsp;<span style="color:#c10aff">1</span>,</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;opacity:&nbsp;.<span style="color:#c10aff">2</span>,</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;blur:&nbsp;<span style="color:#c10aff">7</span>,</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;left:&nbsp;<span style="color:#aaffaa"></span><span style="color:#ff3399">-</span><span style="color:#c10aff">7</span>,</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;top:&nbsp;<span style="color:#c10aff">7</span></div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;},</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;toolbar:{</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;show:&nbsp;<span style="color:#ff3399">true</span>,</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;tools:{&nbsp;<span style="color:#999999">//&nbsp;툴바-다운로드&nbsp;아이콘&nbsp;이미지&nbsp;변경</span></div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;download:&nbsp;<span style="color:#ffd500">'&lt;img&nbsp;src="../img/icon/chart_menu_icon.png"&nbsp;alt="차트&nbsp;메뉴&nbsp;아이콘"&gt;'</span></div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;},</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;zoom:&nbsp;{</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;enabled:&nbsp;<span style="color:#c10aff">false</span></div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;},</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;animations:&nbsp;{&nbsp;<span style="color:#999999">//&nbsp;로딩시&nbsp;애니메이션</span></div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;enabled:&nbsp;<span style="color:#ff3399">true</span>,</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;easing:&nbsp;<span style="color:#ffd500">'linear'</span></div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;}</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;},</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;dataLabels:&nbsp;{</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;enabled:&nbsp;<span style="color:#c10aff">false</span></div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;},</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;legend:{</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;show:&nbsp;<span style="color:#c10aff">false</span></div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;},</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;stroke:&nbsp;{&nbsp;<span style="color:#999999">//&nbsp;라인차트&nbsp;형태</span></div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;curve:&nbsp;<span style="color:#ffd500">"smooth"</span>,&nbsp;<span style="color:#999999">//&nbsp;straight&nbsp;:&nbsp;직선,&nbsp;smooth&nbsp;:&nbsp;곡선,&nbsp;stepline&nbsp;:&nbsp;계단형태</span></div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;width:&nbsp;<span style="color:#c10aff">4</span></div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;},</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;xaxis:&nbsp;{&nbsp;<span style="color:#999999">//&nbsp;x축</span></div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;type:&nbsp;<span style="color:#ffd500">"string"</span>,</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;categories:[<span style="color:#ffd500">"09:00"</span>,&nbsp;<span style="color:#ffd500">"11:00"</span>,&nbsp;<span style="color:#ffd500">"13:00"</span>,&nbsp;<span style="color:#ffd500">"15:00"</span>,&nbsp;<span style="color:#ffd500">"17:00"</span>,&nbsp;<span style="color:#ffd500">"19:00"</span>],</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;tooltip:&nbsp;{</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;enabled:&nbsp;<span style="color:#c10aff">false</span></div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;},</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;axisBorder:&nbsp;{&nbsp;<span style="color:#999999">//&nbsp;x축&nbsp;가로&nbsp;border</span></div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;show:&nbsp;<span style="color:#c10aff">false</span></div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;},</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;yaxis:{</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;labels:{</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;formatter:&nbsp;<span style="color:#ff3399">function</span>(e)&nbsp;{<span style="color:#999999">//&nbsp;y축&nbsp;값에&nbsp;대한&nbsp;사용자&nbsp;정의</span></div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#ff3399">return</span>&nbsp;e&nbsp;<span style="color:#aaffaa"></span><span style="color:#ff3399">+</span>&nbsp;<span style="color:#ffd500">"k"</span><span style="color:#999999">//&nbsp;단위&nbsp;표시</span></div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;},</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;offsetX:&nbsp;<span style="color:#aaffaa"></span><span style="color:#ff3399">-</span><span style="color:#c10aff">10</span></div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;}</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;}</div><div style="padding:0 6px; white-space:pre; line-height:130%">};</div><div style="padding:0 6px; white-space:pre; line-height:130%"><span style="color:#999999">//&nbsp;차트</span></div><div style="padding:0 6px; white-space:pre; line-height:130%"><span style="color:#ff3399">var</span>&nbsp;chart&nbsp;<span style="color:#aaffaa"></span><span style="color:#ff3399">=</span>&nbsp;<span style="color:#ff3399">new</span>&nbsp;ApexCharts(<span style="color:#4be6fa">document</span>.querySelector(<span style="color:#ffd500">"#lineChart"</span>),&nbsp;options);</div><div style="padding:0 6px; white-space:pre; line-height:130%">chart.render();</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;</div><div style="padding:0 6px; white-space:pre; line-height:130%"><span style="color:#999999">//&nbsp;범례&nbsp;커스텀&nbsp;관련</span></div><div style="padding:0 6px; white-space:pre; line-height:130%">$(<span style="color:#ffd500">'.legend01&nbsp;i'</span>).css(<span style="color:#ffd500">'color'</span>,chart.w.globals.colors[<span style="color:#c10aff">0</span>]);&nbsp;<span style="color:#999999">//&nbsp;차트색상</span></div><div style="padding:0 6px; white-space:pre; line-height:130%">$(<span style="color:#ffd500">'.legend01&nbsp;strong'</span>).text(chart.w.globals.seriesNames[<span style="color:#c10aff">0</span>]);&nbsp;<span style="color:#999999">//&nbsp;차트항목이름</span></div><div style="padding:0 6px; white-space:pre; line-height:130%">$(<span style="color:#ffd500">'.legend02&nbsp;i'</span>).css(<span style="color:#ffd500">'color'</span>,chart.w.globals.colors[<span style="color:#c10aff">1</span>]);</div><div style="padding:0 6px; white-space:pre; line-height:130%">$(<span style="color:#ffd500">'.legend02&nbsp;strong'</span>).text(chart.w.globals.seriesNames[<span style="color:#c10aff">1</span>]);</div><div style="padding:0 6px; white-space:pre; line-height:130%">$(<span style="color:#ffd500">'.legend01_btn'</span>).on(<span style="color:#ffd500">'click'</span>,<span style="color:#ff3399">function</span>(){&nbsp;<span style="color:#999999">//&nbsp;버튼&nbsp;클릭시&nbsp;차트&nbsp;항목&nbsp;show/hide&nbsp;토글</span></div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;chart.toggleSeries(chart.w.globals.seriesNames[<span style="color:#c10aff">0</span>]);</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;$(<span style="color:#4be6fa">this</span>).toggleClass(<span style="color:#ffd500">'active'</span>);</div><div style="padding:0 6px; white-space:pre; line-height:130%">});</div><div style="padding:0 6px; white-space:pre; line-height:130%">$(<span style="color:#ffd500">'.legend02_btn'</span>).on(<span style="color:#ffd500">'click'</span>,<span style="color:#ff3399">function</span>(){</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;chart.toggleSeries(chart.w.globals.seriesNames[<span style="color:#c10aff">1</span>]);</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;$(<span style="color:#4be6fa">this</span>).toggleClass(<span style="color:#ffd500">'active'</span>);</div><div style="padding:0 6px; white-space:pre; line-height:130%">});</div></pre><div style="text-align:right;margin-top:-13px;margin-right:5px;font-size:9px;font-style:italic"><a href="http://colorscripter.com/info#e" target="_blank" style="color:#4f4f4ftext-decoration:none">Colored by Color Scripter</a></div></td><td style="vertical-align:bottom;padding:0 2px 4px 0"><a href="http://colorscripter.com/info#e" target="_blank" style="text-decoration:none;color:white"><span style="font-size:9px;word-break:normal;background-color:#4f4f4f;color:white;border-radius:10px;padding:1px">cs</span></a></td></tr></table></div>
+           </div>
+         </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

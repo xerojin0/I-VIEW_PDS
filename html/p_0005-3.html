@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>I&VIEW Design System</title>
+    <link rel="stylesheet" href="../css/contents.css">
+
+    <script src="../resource/jquery.min.js"></script>
+    <script src="../resource/chart/gauge/gaugemeter.js"></script>
+    <script src="../js/script.js"></script>
+    <script>
+      $(function(){
+        $(".gauge_meter").gaugeMeter();
+      });
+    </script>
+    <style media="screen">
+      .gauge_meter {position: relative;display: inline-block;overflow: hidden;text-align: center;cursor: default;}
+      .gauge_meter strong,
+      .gauge_meter b {display: inline-block;position: absolute;margin: 0 23%;width: 54%;text-align: center;font-weight: 600;color: rgba(0,0,0,.8);overflow: hidden;white-space: nowrap;text-overflow: ellipsis;}
+      .gauge_meter b {color: #000;font-weight: 400;opacity: .8;}
+      .gauge_meter[data-style="Semi"] b {width: 80%;margin: 0 10%;}
+      .gauge_meter s,
+      .gauge_meter u {text-decoration: None;font-size: .60em;font-weight: 200;opacity: .6;}
+    </style>
+  <body>
+    <div class="content_wrap">
+      <div class="row">
+        <div class="layout col_12">
+          <div class="title_box">
+            <h2 class="tit00">Other Chart</h2>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="layout col_12">
+          <p class="homepage"><a href="https://github.com/Mictronics/GaugeMeter" target="_blank" title="새창">GaugeMeter</a></p>
+          <div class="p_menu">
+            <ul id="pMenu"></ul>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="layout col_12">
+         <div class="title_box item_tit">
+           <h3 class="tit01">gauge chart</h3>
+         </div>
+         <div class="item_exam">
+           <div class="title_box">
+             <h4 class="tit02">결과화면</h4>
+           </div>
+           <div class="chart_box">
+              <div class="gauge_meter" data-percent="77" data-label="Percent" data-size="188"></div>
+              <div class="gauge_meter" data-percent="50" data-size="188" data-color="#5567ff" data-back="#d9dbe2" data-theme="Red-Gold-Green" data-append="mph" data-animate_gauge_colors="true" data-animate_text_colors="true" data-width="15" data-label="Speed" data-style="Arch" data-label_color="#000"></div>
+              <div class="gauge_meter" data-percent="100" data-size="188" data-color="#5567ff" data-back="#d9dbe2" data-text="1.21" data-append="G" data-width="15" data-label="Mr Fusion" data-style="Semi" data-label_color="#000"></div>
+              <div class="gauge_meter" data-percent="100" data-size="188" data-color="#5567ff" data-back="#d9dbe2" data-append="Y" data-width="15" data-label="Flux Capacitor" data-label_color="#000" data-stripe="2" data-animationstep="2"></div>
+           </div>
+           <div class="title_box">
+             <h4 class="tit02">HTML</h4>
+           </div>
+           <div class="code_box">
+<div class="colorscripter-code" style="color:#f0f0f0;font-family:Consolas, 'Liberation Mono', Menlo, Courier, monospace !important; position:relative !important;overflow:auto"><table class="colorscripter-code-table" style="margin:0;padding:0;border:none;background-color:#272727;border-radius:4px;" cellspacing="0" cellpadding="0"><tr><td style="padding:6px 0;text-align:left"><pre style="margin:0;padding:0;color:#f0f0f0;font-family:Consolas, 'Liberation Mono', Menlo, Courier, monospace !important;line-height:130%"><div style="padding:0 6px; white-space:pre; line-height:130%"><span style="color:#f0f0f0">&lt;</span><span style="color:#ff3399">script</span>&nbsp;<span style="color:#a8ff58">src</span>=<span style="color:#ffd500">"../resource/chart/gauge/gaugemeter.js"</span><span style="color:#ff3399"></span><span style="color:#f0f0f0">&gt;</span><span style="color:#f0f0f0">&lt;</span><span style="color:#f0f0f0">/</span><span style="color:#ff3399">script</span><span style="color:#f0f0f0">&gt;</span></div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;</div><div style="padding:0 6px; white-space:pre; line-height:130%"><span style="color:#f0f0f0">&lt;</span><span style="color:#ff3399">div</span>&nbsp;<span style="color:#a8ff58">class</span>=<span style="color:#ffd500">"gauge_meter"</span><span style="color:#a8ff58"></span>&nbsp;<span style="color:#a8ff58">data-percent</span>=<span style="color:#ffd500">"60"</span><span style="color:#a8ff58"></span>&nbsp;<span style="color:#a8ff58">data-label</span>=<span style="color:#ffd500">"Percent"</span><span style="color:#a8ff58"></span>&nbsp;<span style="color:#a8ff58">data-size</span>=<span style="color:#ffd500">"188"</span><span style="color:#a8ff58"></span><span style="color:#f0f0f0">&gt;</span><span style="color:#f0f0f0">&lt;</span><span style="color:#f0f0f0">/</span><span style="color:#ff3399">div</span><span style="color:#f0f0f0">&gt;</span></div></pre></td><td style="vertical-align:bottom;padding:0 2px 4px 0"><a href="http://colorscripter.com/info#e" target="_blank" style="text-decoration:none;color:white"><span style="font-size:9px;word-break:normal;background-color:#4f4f4f;color:white;border-radius:10px;padding:1px">cs</span></a></td></tr></table></div>
+           </div>
+           <div class="title_box">
+             <h4 class="tit02">Option</h4>
+           </div>
+           <div class="code_box">
+             <ul class="list_box01 mb_0">
+               <li>data-percent : 게이지 설정 값</li>
+               <li>data-style : 기본은 원, Arch : 아치형, semi : 반원</li>
+               <li>data-width : 게이지 두께</li>
+               <li>data-label : 중앙의 설정 값, 텍스트 아래 보조 텍스트 </li>
+               <li>data-size : 차트 크기 설정 ( px 단위 )</li>
+               <li>data-color : 게이지 진행률 막대 색상 ( 디폴트 - #2C94E0 // data-theme가 지정된 경우 무시됨 )/ data-back : 게이지 배경색상 ( 디폴트 - RGBa (0,0,0, .06) )</li>
+               <li>data-theme : 게이지 진행률 막대 색상 및 그라데이션 (게이지 값의 변화에 따라 색상 변경 // 디폴트 : Red-Gold-Green)</li>
+               <li>data-stripe : 게이지 진행률 막대를 단색 또는 스트라이프 형식으로 표시, 값이 0보다 클 경우 스트라이프로 변경되며 해당 값이 두께</li>
+             </ul>
+           </div>
+           <div class="title_box">
+             <h4 class="tit02">CSS</h4>
+           </div>
+           <div class="code_box">
+             <div class="colorscripter-code" style="color:#f0f0f0;font-family:Consolas, 'Liberation Mono', Menlo, Courier, monospace !important; position:relative !important;overflow:auto"><table class="colorscripter-code-table" style="margin:0;padding:0;border:none;background-color:#272727;border-radius:4px;" cellspacing="0" cellpadding="0"><tr><td style="padding:6px 0;text-align:left"><pre style="margin:0;padding:0;color:#f0f0f0;font-family:Consolas, 'Liberation Mono', Menlo, Courier, monospace !important;line-height:130%"><div style="padding:0 6px; white-space:pre; line-height:130%"><span style="color:#ff3399">.gauge_meter&nbsp;</span>{<span style="color:#4be6fa">position</span><span style="color:#ff3399">:</span><span style="color:#E083FF">&nbsp;relative</span><span style="color:#ff3399">;</span><span style="color:#4be6fa">display</span><span style="color:#ff3399">:</span><span style="color:#E083FF">&nbsp;inline-block</span><span style="color:#ff3399">;</span><span style="color:#4be6fa">overflow</span><span style="color:#ff3399">:</span><span style="color:#E083FF">&nbsp;hidden</span><span style="color:#ff3399">;</span><span style="color:#4be6fa">text-align</span><span style="color:#ff3399">:</span><span style="color:#E083FF">&nbsp;center</span><span style="color:#ff3399">;</span><span style="color:#4be6fa">cursor</span><span style="color:#ff3399">:</span><span style="color:#E083FF">&nbsp;default</span><span style="color:#ff3399">;</span><span style="color:#E083FF"></span>}<span style="color:#ff3399"></span></div><div style="padding:0 6px; white-space:pre; line-height:130%"><span style="color:#ff3399">.gauge_meter&nbsp;strong</span>,<span style="color:#ff3399"></span></div><div style="padding:0 6px; white-space:pre; line-height:130%"><span style="color:#ff3399">.gauge_meter&nbsp;b&nbsp;</span>{<span style="color:#4be6fa">display</span><span style="color:#ff3399">:</span><span style="color:#E083FF">&nbsp;inline-block</span><span style="color:#ff3399">;</span><span style="color:#4be6fa">position</span><span style="color:#ff3399">:</span><span style="color:#E083FF">&nbsp;absolute</span><span style="color:#ff3399">;</span><span style="color:#4be6fa">margin</span><span style="color:#ff3399">:</span><span style="color:#E083FF">&nbsp;0&nbsp;23%</span><span style="color:#ff3399">;</span><span style="color:#4be6fa">width</span><span style="color:#ff3399">:</span><span style="color:#E083FF">&nbsp;54%</span><span style="color:#ff3399">;</span><span style="color:#4be6fa">text-align</span><span style="color:#ff3399">:</span><span style="color:#E083FF">&nbsp;center</span><span style="color:#ff3399">;</span><span style="color:#4be6fa">font-weight</span><span style="color:#ff3399">:</span><span style="color:#E083FF">&nbsp;600</span><span style="color:#ff3399">;</span><span style="color:#4be6fa">color</span><span style="color:#ff3399">:</span><span style="color:#E083FF">&nbsp;rgba(0,0,0,.8)</span><span style="color:#ff3399">;</span><span style="color:#4be6fa">overflow</span><span style="color:#ff3399">:</span><span style="color:#E083FF">&nbsp;hidden</span><span style="color:#ff3399">;</span><span style="color:#4be6fa">white-space</span><span style="color:#ff3399">:</span><span style="color:#E083FF">&nbsp;nowrap</span><span style="color:#ff3399">;</span><span style="color:#4be6fa">text-overflow</span><span style="color:#ff3399">:</span><span style="color:#E083FF">&nbsp;ellipsis</span><span style="color:#ff3399">;</span><span style="color:#E083FF"></span>}<span style="color:#ff3399"></span></div><div style="padding:0 6px; white-space:pre; line-height:130%"><span style="color:#ff3399">.gauge_meter&nbsp;b&nbsp;</span>{<span style="color:#4be6fa">color</span><span style="color:#ff3399">:</span><span style="color:#E083FF">&nbsp;#000</span><span style="color:#ff3399">;</span><span style="color:#4be6fa">font-weight</span><span style="color:#ff3399">:</span><span style="color:#E083FF">&nbsp;400</span><span style="color:#ff3399">;</span><span style="color:#4be6fa">opacity</span><span style="color:#ff3399">:</span><span style="color:#E083FF">&nbsp;.8</span><span style="color:#ff3399">;</span><span style="color:#E083FF"></span>}<span style="color:#ff3399"></span></div><div style="padding:0 6px; white-space:pre; line-height:130%"><span style="color:#ff3399">.gauge_meter</span>[<span style="color:#a8ff58">data-style</span><span style="color:#ff3399">=</span><span style="color:#a8ff58">"Semi"</span>]<span style="color:#ff3399">&nbsp;b&nbsp;</span>{<span style="color:#4be6fa">width</span><span style="color:#ff3399">:</span><span style="color:#E083FF">&nbsp;80%</span><span style="color:#ff3399">;</span><span style="color:#4be6fa">margin</span><span style="color:#ff3399">:</span><span style="color:#E083FF">&nbsp;0&nbsp;10%</span><span style="color:#ff3399">;</span><span style="color:#E083FF"></span>}<span style="color:#ff3399"></span></div><div style="padding:0 6px; white-space:pre; line-height:130%"><span style="color:#ff3399">.gauge_meter&nbsp;s</span>,<span style="color:#ff3399"></span></div><div style="padding:0 6px; white-space:pre; line-height:130%"><span style="color:#ff3399">.gauge_meter&nbsp;u&nbsp;</span>{<span style="color:#4be6fa">text-decoration</span><span style="color:#ff3399">:</span><span style="color:#E083FF">&nbsp;None</span><span style="color:#ff3399">;</span><span style="color:#4be6fa">font-size</span><span style="color:#ff3399">:</span><span style="color:#E083FF">&nbsp;.60em</span><span style="color:#ff3399">;</span><span style="color:#4be6fa">font-weight</span><span style="color:#ff3399">:</span><span style="color:#E083FF">&nbsp;200</span><span style="color:#ff3399">;</span><span style="color:#4be6fa">opacity</span><span style="color:#ff3399">:</span><span style="color:#E083FF">&nbsp;.6</span><span style="color:#ff3399">;</span><span style="color:#E083FF"></span>}</div></pre><div style="text-align:right;margin-top:-13px;margin-right:5px;font-size:9px;font-style:italic"><a href="http://colorscripter.com/info#e" target="_blank" style="color:#4f4f4ftext-decoration:none">Colored by Color Scripter</a></div></td><td style="vertical-align:bottom;padding:0 2px 4px 0"><a href="http://colorscripter.com/info#e" target="_blank" style="text-decoration:none;color:white"><span style="font-size:9px;word-break:normal;background-color:#4f4f4f;color:white;border-radius:10px;padding:1px">cs</span></a></td></tr></table></div>
+           </div>
+           <div class="title_box">
+             <h4 class="tit02">JS</h4>
+           </div>
+           <div class="code_box">
+<div class="colorscripter-code" style="color:#f0f0f0;font-family:Consolas, 'Liberation Mono', Menlo, Courier, monospace !important; position:relative !important;overflow:auto"><table class="colorscripter-code-table" style="margin:0;padding:0;border:none;background-color:#272727;border-radius:4px;" cellspacing="0" cellpadding="0"><tr><td style="padding:6px 0;text-align:left"><pre style="margin:0;padding:0;color:#f0f0f0;font-family:Consolas, 'Liberation Mono', Menlo, Courier, monospace !important;line-height:130%"><div style="padding:0 6px; white-space:pre; line-height:130%">$(<span style="color:#ffd500">".gauge_meter"</span>).gaugeMeter();</div></pre></td><td style="vertical-align:bottom;padding:0 2px 4px 0"><a href="http://colorscripter.com/info#e" target="_blank" style="text-decoration:none;color:white"><span style="font-size:9px;word-break:normal;background-color:#4f4f4f;color:white;border-radius:10px;padding:1px">cs</span></a></td></tr></table></div>
+           </div>
+         </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

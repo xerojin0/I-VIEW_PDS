@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>I&VIEW Design System</title>
+    <link rel="stylesheet" href="../css/contents.css">
+
+    <script src="../resource/jquery.min.js"></script>
+    <script src="../js/script.js"></script>
+  <body>
+    <div class="content_wrap">
+      <div class="row">
+        <div class="layout col_12">
+          <div class="title_box">
+            <h2 class="tit00">모바일</h2>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="layout col_12">
+          <div class="title_box item_tit">
+            <h3 class="tit01">1. project</h3>
+          </div>
+          <div class="list_box02">
+            <ul>
+              <li>NEXTOR_MOCKUP_3.0 > m</li>
+              <li>LG_BLACKBOX > mo
+              <p>기준 font-size : 13px / rem 단위 사용</p></li>
+            </ul>
+          </div>
+         <div class="title_box item_tit">
+           <h3 class="tit01">2. viewport</h3>
+         </div>
+         <div class="code_box">
+           <div class="colorscripter-code" style="color:#f0f0f0;font-family:Consolas, 'Liberation Mono', Menlo, Courier, monospace !important; position:relative !important;overflow:auto"><table class="colorscripter-code-table" style="margin:0;padding:0;border:none;background-color:#272727;border-radius:4px;" cellspacing="0" cellpadding="0"><tr><td style="padding:6px 0;text-align:left"><pre style="margin:0;padding:0;color:#f0f0f0;font-family:Consolas, 'Liberation Mono', Menlo, Courier, monospace !important;line-height:130%"><div style="padding:0 6px; white-space:pre; line-height:130%"><span style="color:#f0f0f0">&lt;</span><span style="color:#ff3399">meta</span>&nbsp;<span style="color:#a8ff58">name</span>=<span style="color:#ffd500">"viewport"</span><span style="color:#a8ff58"></span>&nbsp;<span style="color:#a8ff58">content</span>=<span style="color:#ffd500">"width=device-width,&nbsp;user-scalable=no,&nbsp;initial-scale=1,&nbsp;minimum-scale=1,&nbsp;maximum-scale=1"</span><span style="color:#a8ff58"></span><span style="color:#f0f0f0">&gt;</span></div></pre></td><td style="vertical-align:bottom;padding:0 2px 4px 0"><a href="http://colorscripter.com/info#e" target="_blank" style="text-decoration:none;color:white"><span style="font-size:9px;word-break:normal;background-color:#4f4f4f;color:white;border-radius:10px;padding:1px">cs</span></a></td></tr></table></div>
+          </div>
+          <div class="title_box item_tit">
+            <h3 class="tit01">3. info</h3>
+          </div>
+          <div class="list_box01">
+            <ul>
+              <li>폰트사이즈 자동변경 방지 : <strong>-webkit-text-size-adjust:none;</strong></li>
+              <li>링크 하이라이트 색상 변경 : <strong>-webkit-tap-highlight-color:rgba(0,0,0,0);</strong></li>
+              <li>다크모드 (NEXTOR_MOCKUP_3.0)
+                <div class="info_cont">
+                  <p>localStorage 사용</p>
+<div class="colorscripter-code" style="color:#f0f0f0;font-family:Consolas, 'Liberation Mono', Menlo, Courier, monospace !important; position:relative !important;overflow:auto"><table class="colorscripter-code-table" style="margin:0;padding:0;border:none;background-color:#272727;border-radius:4px;" cellspacing="0" cellpadding="0"><tr><td style="padding:6px 0;text-align:left"><pre style="margin:0;padding:0;color:#f0f0f0;font-family:Consolas, 'Liberation Mono', Menlo, Courier, monospace !important;line-height:130%"><div style="padding:0 6px; white-space:pre; line-height:130%"><span style="color:#ff3399">var</span>&nbsp;mode&nbsp;<span style="color:#aaffaa"></span><span style="color:#ff3399">=</span>&nbsp;localStorage.getItem(<span style="color:#ffd500">'mode'</span>);&nbsp;<span style="color:#999999">//&nbsp;현재&nbsp;화면모드</span></div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;</div><div style="padding:0 6px; white-space:pre; line-height:130%"><span style="color:#999999">//&nbsp;mode&nbsp;값에&nbsp;따른&nbsp;색상변경등&nbsp;함수</span></div><div style="padding:0 6px; white-space:pre; line-height:130%"><span style="color:#ff3399">function</span>&nbsp;modeChart(viewMode){</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;<span style="color:#ff3399">if</span>&nbsp;(viewMode&nbsp;<span style="color:#aaffaa"></span><span style="color:#ff3399">=</span><span style="color:#aaffaa"></span><span style="color:#ff3399">=</span>&nbsp;<span style="color:#ffd500">'dark_mode'</span>)&nbsp;{</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;}&nbsp;<span style="color:#ff3399">else</span>&nbsp;<span style="color:#ff3399">if</span>(viewMode&nbsp;<span style="color:#aaffaa"></span><span style="color:#ff3399">=</span><span style="color:#aaffaa"></span><span style="color:#ff3399">=</span>&nbsp;<span style="color:#0086b3">undefined</span>){</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;}</div><div style="padding:0 6px; white-space:pre; line-height:130%">}</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;</div><div style="padding:0 6px; white-space:pre; line-height:130%">modeChart(mode);</div><div style="padding:0 6px; white-space:pre; line-height:130%"><span style="color:#999999">//&nbsp;모드&nbsp;바꾸기&nbsp;</span></div><div style="padding:0 6px; white-space:pre; line-height:130%">$(<span style="color:#ffd500">'.view_mode&nbsp;input[type="radio"]'</span>).on(<span style="color:#ffd500">'click'</span>,<span style="color:#ff3399">function</span>(){</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;<span style="color:#ff3399">var</span>&nbsp;modeID&nbsp;<span style="color:#aaffaa"></span><span style="color:#ff3399">=</span>&nbsp;$(<span style="color:#4be6fa">this</span>).attr(<span style="color:#ffd500">'id'</span>);</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;<span style="color:#ff3399">if</span>&nbsp;(modeID&nbsp;<span style="color:#aaffaa"></span><span style="color:#ff3399">=</span><span style="color:#aaffaa"></span><span style="color:#ff3399">=</span>&nbsp;<span style="color:#ffd500">'dark'</span>)&nbsp;{</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;$(<span style="color:#ffd500">"body"</span>).addClass(<span style="color:#ffd500">"dark_mode"</span>);</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;localStorage.setItem(<span style="color:#ffd500">'mode'</span>,&nbsp;<span style="color:#ffd500">'dark_mode'</span>);</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;modeChart(localStorage.mode);</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;}&nbsp;<span style="color:#ff3399">else</span>&nbsp;{</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;$(<span style="color:#ffd500">"body"</span>).removeClass(<span style="color:#ffd500">"dark_mode"</span>);</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;localStorage.clear();</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;modeChart();</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;}</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;$(<span style="color:#ffd500">'body'</span>).removeClass(<span style="color:#ffd500">'bg'</span>);</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;$(<span style="color:#ffd500">'.profile_box&nbsp;.navpop_cont'</span>).removeClass(<span style="color:#ffd500">'open'</span>);</div><div style="padding:0 6px; white-space:pre; line-height:130%">});</div></pre><div style="text-align:right;margin-top:-13px;margin-right:5px;font-size:9px;font-style:italic"><a href="http://colorscripter.com/info#e" target="_blank" style="color:#4f4f4f; text-decoration:none">Colored by Color Scripter</a></div></td><td style="vertical-align:bottom;padding:0 2px 4px 0"><a href="http://colorscripter.com/info#e" target="_blank" style="text-decoration:none;color:white"><span style="font-size:9px;word-break:normal;background-color:#4f4f4f;color:white;border-radius:10px;padding:1px">cs</span></a></td></tr></table></div>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

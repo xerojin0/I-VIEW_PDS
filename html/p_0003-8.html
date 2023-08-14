@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>I&VIEW Design System</title>
+    <link rel="stylesheet" href="../resource/chart/apexchart/apexcharts.css">
+    <link rel="stylesheet" href="../css/contents.css">
+
+    <script src="../resource/jquery.min.js"></script>
+    <!-- apexcharts IE 지원 -->
+    <script type="text/javascript">
+      window.Promise ||
+      document.write('<script src="../resource/polyfill.min.js"><\/script>')
+      window.Promise ||
+      document.write('<script src="../resource/classlist.js"><\/script>')
+      window.Promise ||
+      document.write('<script src="../resource/findIndex.js"><\/script>')
+      window.Promise ||
+      document.write('<script src="../resource/canvg.js"><\/script>')
+    </script>
+    <script src="../resource/chart/apexchart/apexcharts.min.js"></script>
+
+    <script src="../js/script.js"></script>
+    <script>
+      $(function(){
+// 차트 옵션
+var options = {
+  series: [{ // 차트 데이터
+       name: "Current Week",
+       data: [10, 20, 15, 25, 20, 30, 20]
+   }, {
+       name: "Previous Week",
+       data: [0, 15, 10, 30, 15, 35, 25]
+   }],
+  colors:["#727cf5", "#0acf97"], // 차트 기본 색상 ( 데이터가 하나라고 해도 배열로 해야함 )
+  chart: {
+    width:2500,
+    height: 500,
+    type: 'line',
+    foreColor: '#008ffb', // 차트의 텍스트 색상
+    dropShadow: { // 차트 라인 그림자
+       enabled: 1,
+       opacity: .2,
+       blur: 7,
+       left: -7,
+       top: 7
+   },
+   toolbar:{ // 차트 다운로드 기능
+     show: false
+   },
+    zoom: { // 차트 구간 확대/축소
+      enabled: false
+    },
+    animations: { // 로딩시 애니메이션
+        enabled: true,
+        easing: 'linear'
+    }
+  },
+  dataLabels: { // 데이터라벨
+    enabled: true,
+    formatter: function(e) { // 라벨값에 단위 표시
+      return e + "k"
+    },
+    background: { // 데이터 라벨 영역 공간 만듬
+      enabled: true,
+      padding: 10
+    }
+  },
+  legend:{ // 범례
+    labels:{
+      useSeriesColors: true // 기본 색상 적용 유무
+    }
+  },
+  stroke: { // 라인차트 형태
+    curve: "smooth", // straight : 직선, smooth : 곡선, stepline : 계단형태
+    width: 4
+  },
+  xaxis: { // x축
+     type: "string",
+     categories: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
+     tooltip: {
+         enabled: false
+     },
+     axisBorder: { // x축 가로 border
+         show: false
+     }
+ },
+  yaxis:{ // y축
+    labels:{
+      formatter: function(e) { // y축 값에 대한 사용자 정의
+        return e + "k" // k 단위 표시
+      },
+      offsetX: -10
+    }
+  }
+};
+// 차트
+var chart = new ApexCharts(document.querySelector("#lineChart"), options);
+chart.render();
+
+// y축 복사 , chart_axis에 추가
+$('.apexcharts-yaxis').clone().appendTo($('.chart_axis'));
+// 가로 스크롤 휠
+$(".chart_wrap").on('mousewheel',function(e){
+ var oEvt = e.originalEvent,
+     delta = oEvt.deltaY || oEvt.wheelDelta;
+
+ if(delta > 0){
+   $(this).scrollLeft(-delta + $(this).scrollLeft());
+ }else{
+   $(this).scrollLeft(-delta + $(this).scrollLeft());
+ }
+});
+// 휠로 차트 스크롤시 브라우저 스크롤 막기
+$('.chart_box').hover(function(){
+   $('body').css('overflow','hidden');
+}, function() {
+  $('body').css('overflow','auto');
+});
+      });
+    </script>
+  <body>
+    <div class="content_wrap">
+      <div class="row">
+        <div class="layout col_12">
+          <div class="title_box">
+            <h2 class="tit00">apexcharts</h2>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="layout col_12">
+          <p class="homepage"><a href="https://apexcharts.com/" target="_blank" title="새창">apexcharts 홈페이지 링크</a></p>
+          <div class="p_menu">
+            <ul id="pMenu"></ul>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="layout col_12">
+         <div class="title_box item_tit">
+           <h3 class="tit01">Line chart</h3>
+         </div>
+         <div class="item_exam">
+           <div class="title_box">
+             <h4 class="tit02">결과화면</h4>
+           </div>
+           <div class="chart_box scrolling">
+             <div class="chart_wrap">
+               <div id="lineChart"></div>
+             </div>
+             <!-- 스크롤 Y축 -->
+             <svg class="chart_axis" height="500"></svg>
+           </div>
+           <div class="title_box">
+             <h4 class="tit02">HTML</h4>
+           </div>
+           <div class="code_box">
+<div class="colorscripter-code" style="color:#f0f0f0;font-family:Consolas, 'Liberation Mono', Menlo, Courier, monospace !important; position:relative !important;overflow:auto"><table class="colorscripter-code-table" style="margin:0;padding:0;border:none;background-color:#272727;border-radius:4px;" cellspacing="0" cellpadding="0"><tr><td style="padding:6px 0;text-align:left"><pre style="margin:0;padding:0;color:#f0f0f0;font-family:Consolas, 'Liberation Mono', Menlo, Courier, monospace !important;line-height:130%"><div style="padding:0 6px; white-space:pre; line-height:130%"><span style="color:#f0f0f0">&lt;</span><span style="color:#ff3399">link</span>&nbsp;<span style="color:#a8ff58">rel</span>=<span style="color:#ffd500">"stylesheet"</span>&nbsp;<span style="color:#a8ff58">href</span>=<span style="color:#ffd500">"../resource/chart/apexchart/apexcharts.css"</span><span style="color:#f0f0f0">&gt;</span></div><div style="padding:0 6px; white-space:pre; line-height:130%"><span style="color:#999999">&lt;!--&nbsp;apexcharts&nbsp;IE&nbsp;지원&nbsp;--&gt;</span></div><div style="padding:0 6px; white-space:pre; line-height:130%"><span style="color:#f0f0f0">&lt;</span><span style="color:#ff3399">script</span>&nbsp;<span style="color:#a8ff58">type</span>=<span style="color:#ffd500">"text/javascript"</span><span style="color:#ff3399"></span><span style="color:#f0f0f0">&gt;</span></div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;<span style="color:#4be6fa">window</span>.Promise&nbsp;<span style="color:#0086b3"></span><span style="color:#ff3399">|</span><span style="color:#0086b3"></span><span style="color:#ff3399">|</span></div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;<span style="color:#4be6fa">document</span>.write(<span style="color:#ffd500">'&lt;script&nbsp;src="../resource/polyfill.min.js"&gt;&lt;\/script&gt;'</span>)</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;<span style="color:#4be6fa">window</span>.Promise&nbsp;<span style="color:#0086b3"></span><span style="color:#ff3399">|</span><span style="color:#0086b3"></span><span style="color:#ff3399">|</span></div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;<span style="color:#4be6fa">document</span>.write(<span style="color:#ffd500">'&lt;script&nbsp;src="../resource/classlist.js"&gt;&lt;\/script&gt;'</span>)</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;<span style="color:#4be6fa">window</span>.Promise&nbsp;<span style="color:#0086b3"></span><span style="color:#ff3399">|</span><span style="color:#0086b3"></span><span style="color:#ff3399">|</span></div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;<span style="color:#4be6fa">document</span>.write(<span style="color:#ffd500">'&lt;script&nbsp;src="../resource/findIndex.js"&gt;&lt;\/script&gt;'</span>)</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;<span style="color:#4be6fa">window</span>.Promise&nbsp;<span style="color:#0086b3"></span><span style="color:#ff3399">|</span><span style="color:#0086b3"></span><span style="color:#ff3399">|</span></div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;<span style="color:#4be6fa">document</span>.write(<span style="color:#ffd500">'&lt;script&nbsp;src="../resource/canvg.js"&gt;&lt;\/script&gt;'</span>)</div><div style="padding:0 6px; white-space:pre; line-height:130%"><span style="color:#f0f0f0">&lt;</span><span style="color:#f0f0f0">/</span><span style="color:#ff3399">script</span><span style="color:#f0f0f0">&gt;</span></div><div style="padding:0 6px; white-space:pre; line-height:130%"><span style="color:#f0f0f0">&lt;</span><span style="color:#ff3399">script</span>&nbsp;<span style="color:#a8ff58">src</span>=<span style="color:#ffd500">"../resource/chart/apexchart/apexcharts.min.js"</span><span style="color:#ff3399"></span><span style="color:#f0f0f0">&gt;</span><span style="color:#f0f0f0">&lt;</span><span style="color:#f0f0f0">/</span><span style="color:#ff3399">script</span><span style="color:#f0f0f0">&gt;</span></div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;</div><div style="padding:0 6px; white-space:pre; line-height:130%"><span style="color:#f0f0f0">&lt;</span><span style="color:#ff3399">div</span>&nbsp;<span style="color:#a8ff58">id</span>=<span style="color:#ffd500">"lineChart"</span><span style="color:#a8ff58"></span><span style="color:#f0f0f0">&gt;</span><span style="color:#f0f0f0">&lt;</span><span style="color:#f0f0f0">/</span><span style="color:#ff3399">div</span><span style="color:#f0f0f0">&gt;</span></div></pre><div style="text-align:right;margin-top:-13px;margin-right:5px;font-size:9px;font-style:italic"><a href="http://colorscripter.com/info#e" target="_blank" style="color:#4f4f4ftext-decoration:none">Colored by Color Scripter</a></div></td><td style="vertical-align:bottom;padding:0 2px 4px 0"><a href="http://colorscripter.com/info#e" target="_blank" style="text-decoration:none;color:white"><span style="font-size:9px;word-break:normal;background-color:#4f4f4f;color:white;border-radius:10px;padding:1px">cs</span></a></td></tr></table></div>
+           </div>
+           <div class="title_box">
+             <h4 class="tit02">JS</h4>
+           </div>
+           <div class="code_box">
+<div class="colorscripter-code" style="color:#f0f0f0;font-family:Consolas, 'Liberation Mono', Menlo, Courier, monospace !important; position:relative !important;overflow:auto"><table class="colorscripter-code-table" style="margin:0;padding:0;border:none;background-color:#272727;border-radius:4px;" cellspacing="0" cellpadding="0"><tr><td style="padding:6px 0;text-align:left"><pre style="margin:0;padding:0;color:#f0f0f0;font-family:Consolas, 'Liberation Mono', Menlo, Courier, monospace !important;line-height:130%"><div style="padding:0 6px; white-space:pre; line-height:130%"><span style="color:#999999">//&nbsp;차트&nbsp;옵션</span></div><div style="padding:0 6px; white-space:pre; line-height:130%"><span style="color:#ff3399">var</span>&nbsp;options&nbsp;<span style="color:#0086b3"></span><span style="color:#ff3399">=</span>&nbsp;{</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;series:&nbsp;[{&nbsp;<span style="color:#999999">//&nbsp;차트&nbsp;데이터</span></div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#4be6fa">name</span>:&nbsp;<span style="color:#ffd500">"Current&nbsp;Week"</span>,</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;data:&nbsp;[<span style="color:#c10aff">10</span>,&nbsp;<span style="color:#c10aff">20</span>,&nbsp;<span style="color:#c10aff">15</span>,&nbsp;<span style="color:#c10aff">25</span>,&nbsp;<span style="color:#c10aff">20</span>,&nbsp;<span style="color:#c10aff">30</span>,&nbsp;<span style="color:#c10aff">20</span>]</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;},&nbsp;{</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#4be6fa">name</span>:&nbsp;<span style="color:#ffd500">"Previous&nbsp;Week"</span>,</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;data:&nbsp;[<span style="color:#c10aff">0</span>,&nbsp;<span style="color:#c10aff">15</span>,&nbsp;<span style="color:#c10aff">10</span>,&nbsp;<span style="color:#c10aff">30</span>,&nbsp;<span style="color:#c10aff">15</span>,&nbsp;<span style="color:#c10aff">35</span>,&nbsp;<span style="color:#c10aff">25</span>]</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;}],</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;colors:[<span style="color:#ffd500">"#727cf5"</span>,&nbsp;<span style="color:#ffd500">"#0acf97"</span>],&nbsp;<span style="color:#999999">//&nbsp;차트&nbsp;기본&nbsp;색상&nbsp;(&nbsp;데이터가&nbsp;하나라고&nbsp;해도&nbsp;배열로&nbsp;해야함&nbsp;)</span></div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;chart:&nbsp;{</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;width:<span style="color:#ffd500">'100%'</span>,</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;height:&nbsp;<span style="color:#c10aff">500</span>,</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;type:&nbsp;<span style="color:#ffd500">'line'</span>,</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;foreColor:&nbsp;<span style="color:#ffd500">'#008ffb'</span>,&nbsp;<span style="color:#999999">//&nbsp;차트의&nbsp;텍스트&nbsp;색상</span></div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;dropShadow:&nbsp;{&nbsp;<span style="color:#999999">//&nbsp;차트&nbsp;라인&nbsp;그림자</span></div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;enabled:&nbsp;<span style="color:#c10aff">1</span>,</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;opacity:&nbsp;.<span style="color:#c10aff">2</span>,</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;blur:&nbsp;<span style="color:#c10aff">7</span>,</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;left:&nbsp;<span style="color:#0086b3"></span><span style="color:#ff3399">-</span><span style="color:#c10aff">7</span>,</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;top:&nbsp;<span style="color:#c10aff">7</span></div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;},</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;toolbar:{&nbsp;<span style="color:#999999">//&nbsp;차트&nbsp;다운로드&nbsp;기능</span></div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;show:&nbsp;<span style="color:#c10aff">false</span></div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;},</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;zoom:&nbsp;{&nbsp;<span style="color:#999999">//&nbsp;차트&nbsp;구간&nbsp;확대/축소</span></div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;enabled:&nbsp;<span style="color:#c10aff">false</span></div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;},</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;animations:&nbsp;{&nbsp;<span style="color:#999999">//&nbsp;로딩시&nbsp;애니메이션</span></div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;enabled:&nbsp;<span style="color:#c10aff">true</span>,</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;easing:&nbsp;<span style="color:#ffd500">'linear'</span></div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;}</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;},</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;dataLabels:&nbsp;{&nbsp;<span style="color:#999999">//&nbsp;데이터라벨</span></div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;enabled:&nbsp;<span style="color:#c10aff">true</span>,</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;formatter:&nbsp;<span style="color:#ff3399">function</span>(e)&nbsp;{&nbsp;<span style="color:#999999">//&nbsp;라벨값에&nbsp;대한&nbsp;사용자&nbsp;</span></div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#ff3399">return</span>&nbsp;e&nbsp;<span style="color:#0086b3"></span><span style="color:#ff3399">+</span>&nbsp;<span style="color:#ffd500">"k"</span></div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;},</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;background:&nbsp;{&nbsp;<span style="color:#999999">//&nbsp;데이터&nbsp;라벨&nbsp;영역&nbsp;공간&nbsp;만듬</span></div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;enabled:&nbsp;<span style="color:#c10aff">true</span>,</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;padding:&nbsp;<span style="color:#c10aff">10</span></div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;}</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;},</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;legend:{&nbsp;<span style="color:#999999">//&nbsp;범례</span></div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;labels:{</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;useSeriesColors:&nbsp;<span style="color:#c10aff">true</span>&nbsp;<span style="color:#999999">//&nbsp;기본&nbsp;색상&nbsp;적용&nbsp;유무</span></div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;}</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;},</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;stroke:&nbsp;{&nbsp;<span style="color:#999999">//&nbsp;라인차트&nbsp;형태</span></div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;curve:&nbsp;<span style="color:#ffd500">"smooth"</span>,&nbsp;<span style="color:#999999">//&nbsp;straight&nbsp;:&nbsp;직선,&nbsp;smooth&nbsp;:&nbsp;곡선,&nbsp;stepline&nbsp;:&nbsp;계단형태</span></div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;width:&nbsp;<span style="color:#c10aff">4</span></div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;},</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;xaxis:&nbsp;{&nbsp;<span style="color:#999999">//&nbsp;x축</span></div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;type:&nbsp;<span style="color:#ffd500">"string"</span>,</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;categories:&nbsp;[<span style="color:#ffd500">"Mon"</span>,&nbsp;<span style="color:#ffd500">"Tue"</span>,&nbsp;<span style="color:#ffd500">"Wed"</span>,&nbsp;<span style="color:#ffd500">"Thu"</span>,&nbsp;<span style="color:#ffd500">"Fri"</span>,&nbsp;<span style="color:#ffd500">"Sat"</span>,&nbsp;<span style="color:#ffd500">"Sun"</span>],</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;tooltip:&nbsp;{</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;enabled:&nbsp;<span style="color:#c10aff">false</span></div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;},</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;axisBorder:&nbsp;{&nbsp;<span style="color:#999999">//&nbsp;x축&nbsp;가로&nbsp;border&nbsp;</span></div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;show:&nbsp;<span style="color:#c10aff">false</span></div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;},</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;yaxis:{&nbsp;<span style="color:#999999">//&nbsp;y축</span></div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;labels:{</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;formatter:&nbsp;<span style="color:#ff3399">function</span>(e)&nbsp;{&nbsp;<span style="color:#999999">//&nbsp;y축&nbsp;값에&nbsp;대한&nbsp;사용자&nbsp;정의</span></div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#ff3399">return</span>&nbsp;e&nbsp;<span style="color:#0086b3"></span><span style="color:#ff3399">+</span>&nbsp;<span style="color:#ffd500">"k"</span>&nbsp;<span style="color:#999999">//&nbsp;k&nbsp;단위&nbsp;표시</span></div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;},</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;offsetX:&nbsp;<span style="color:#0086b3"></span><span style="color:#ff3399">-</span><span style="color:#c10aff">10</span></div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;}</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;}</div><div style="padding:0 6px; white-space:pre; line-height:130%">};</div><div style="padding:0 6px; white-space:pre; line-height:130%"><span style="color:#999999">//&nbsp;차트</span></div><div style="padding:0 6px; white-space:pre; line-height:130%"><span style="color:#ff3399">var</span>&nbsp;chart&nbsp;<span style="color:#0086b3"></span><span style="color:#ff3399">=</span>&nbsp;<span style="color:#ff3399">new</span>&nbsp;ApexCharts(<span style="color:#4be6fa">document</span>.querySelector(<span style="color:#ffd500">"#lineChart"</span>),&nbsp;options);</div><div style="padding:0 6px; white-space:pre; line-height:130%">chart.render();</div></pre><div style="text-align:right;margin-top:-13px;margin-right:5px;font-size:9px;font-style:italic"><a href="http://colorscripter.com/info#e" target="_blank" style="color:#4f4f4ftext-decoration:none">Colored by Color Scripter</a></div></td><td style="vertical-align:bottom;padding:0 2px 4px 0"><a href="http://colorscripter.com/info#e" target="_blank" style="text-decoration:none;color:white"><span style="font-size:9px;word-break:normal;background-color:#4f4f4f;color:white;border-radius:10px;padding:1px">cs</span></a></td></tr></table></div>
+           </div>
+         </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

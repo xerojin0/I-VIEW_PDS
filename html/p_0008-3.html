@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>I&VIEW Design System</title>
+  <link rel="stylesheet" href="../css/contents.css">
+
+  <script src="../resource/jquery.min.js"></script>
+  <script src="../js/script.js"></script>
+</head>
+<body>
+  <div class="content_wrap">
+    <div class="row">
+      <div class="layout col_12">
+        <div class="title_box">
+          <h2 class="tit00">페이지 01</h2>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="layout col_12">
+        <div class="p_menu">
+          <ul id="pMenu"></ul>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="layout col_12">
+        <div class="title_box item_tit">
+          <h3 class="tit01">비밀번호 체크</h3>
+        </div>
+        <div class="item_exam">
+          <div class="title_box">
+            <h4 class="tit02">info</h4>
+          </div>
+          <div class="list_box01 mb_0">
+            <ul>
+              <li>NEXTOR_MOCKUP_3.0 비밀번호 변경폼</li>
+              <li>숫자, 알파벳(대문자, 소문자), 특수문자 2가지 조합 - 낮음<br>
+              숫자, 알파벳(대문자, 소문자), 특수문자 3가지 조합 - 적정<br>
+              숫자, 알파벳(대문자, 소문자), 특수문자 4가지 조합 - 높음</li>
+              <li>공백문자 체크</li>
+              <li>숫자만 입력했을때 체크</li>
+              <li>글자수 최소 8, 최대 16 체크</li>
+              <li>abcdefg~z / 01234~9 / qwerty~vbnm 체크</li>
+            </ul>
+          </div>
+          <div class="title_box">
+            <h4 class="tit02">결과화면</h4>
+          </div>
+          <div class="login_form">
+            <form action="login.html" method="get" class="form" id="pwdChangeForm">
+              <h2>ID or Email</h2>
+              <input type="text" class="id" id="loginId" placeholder="아이디" required autofocus title="아이디 입력">
+              <h2>Password</h2>
+              <input type="password" name="password" id="loginPwd" class="pass passChk" placeholder="패스워드" required title="패스워드 입력">
+              <h2>New Password</h2>
+              <div class="pass_chkbox">
+                <input type="text" name="password" id="newPwd" class="pass passChk" placeholder="신규 패스워드" required title="패스워드 입력">
+                <div class="chk_dotbox">
+                  <div class="chk_dot"></div>
+                  <div class="chk_dot"></div>
+                  <div class="chk_dot"></div>
+                </div>
+                <div class="chk_txt">비밀번호는 추측하기 어려울 수록 좋습니다.</div>
+              </div>
+              <span class="err_txt"></span>
+              <h2>New Password Check</h2>
+              <input type="pasword" name="password" id="chkNewPwd" class="pass" placeholder="신규 패스워드 확인" required title="패스워드 입력">
+              <div class="button_group">
+                <button class="sign_btn" type="submit"><span>저장</span></button>
+                <a href="login.html" class="sign_btn cancel"><span>취소</span></a>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

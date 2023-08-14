@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>I&VIEW Design System</title>
+    <link rel="stylesheet" href="../resource/chart/flowchart/css/jquery.flowchart.css">
+    <link rel="stylesheet" href="../resource/chart/flowchart/css/custom.css">
+    <link rel="stylesheet" href="../css/contents.css">
+
+    <script src="../resource/jquery.min.js"></script>
+    <script src="../resource/jquery-ui/jquery-ui.js"></script>
+    <script src="../resource/chart/flowchart/js/jquery.flowchart.js"></script>
+    <!-- 확대, 축소 이동 플러그인 -->
+    <script src="../resource/chart/flowchart/js/jquery.panzoom.min.js"></script>
+
+    <script src="../js/script.js"></script>
+    <script>
+      $(function(){
+        var $flowchart = $('#flowchart');
+        var $container = $flowchart.parent();
+        var $operatorTitle = $('#drag_ele_tit');
+
+        var cx = $flowchart.width() / 1;
+        var cy = $flowchart.height() / 1;
+
+        // Panzoom initialization...
+        $flowchart.panzoom();
+
+        // Centering panzoom
+        $flowchart.panzoom('pan', -cx + $container.width() / 1, -cy + $container.height() / 1);
+
+        // Panzoom zoom handling...
+        var possibleZooms = [0.5, 0.75, 1, 2, 3];
+        var currentZoom = 1;
+        $container.on('mousewheel.focal', function( e ) {
+            e.preventDefault();
+            var delta = (e.delta || e.originalEvent.wheelDelta) || e.originalEvent.detail;
+            var zoomOut = delta ? delta < 0 : e.originalEvent.deltaY > 0;
+            currentZoom = Math.max(0, Math.min(possibleZooms.length - 1, (currentZoom + (zoomOut * 2 - 1))));
+
+            $flowchart.flowchart('setPositionRatio', possibleZooms[currentZoom]);
+            $flowchart.panzoom('zoom', possibleZooms[currentZoom], {
+                animate: false,
+                focal: e
+            });
+        });
+        // zoom 100% reset
+        $('.zoom_refresh').click(function(){
+          $flowchart.flowchart('setPositionRatio', 1);
+          $flowchart.css('transform', 'matrix(1, 0, 0, 1, -3114, -1214)');
+        });
+
+        var data = {};
+        // Apply the plugin on a standard, empty div...
+        $flowchart.flowchart({
+          data: data,
+          onOperatorSelectLabel: function(operatorId, labelKey) {
+            $operatorTitle.val($flowchart.flowchart('getOperatorLabel', operatorId, labelKey));
+            return true;
+          },
+          onLinkCreate: function(linkId, linkData) {
+            return true;
+          }
+        });
+
+        $('.delete_selected_button').click(function() {
+          $flowchart.flowchart('deleteSelected');
+          $operatorTitle.val('');
+        });
+
+        var $draggableOperators = $('.draggable_operator');
+        function getOperatorData($element) {
+          var nbInputs = parseInt($element.data('nb-inputs'));
+          var nbOutputs = parseInt($element.data('nb-outputs'));
+          var nodetype = $element.data('nodetype');
+          var data = {
+            properties: {
+              title: $element.text(),
+              inputs: {},
+              outputs: {},
+              nodetype: nodetype
+            }
+          };
+          var i = 0;
+          for (i = 0; i < nbInputs; i++) {
+            if (data.properties.nodetype == 'node_end') {
+              data.properties.inputs['input_' + i] = {
+                label: '시나리오를 종료합니다'
+              };
+            } else {
+              data.properties.inputs['input_' + i] = {
+                label: 'In'
+              };
+            }
+          }
+          for (i = 0; i < nbOutputs; i++) {
+            if (data.properties.nodetype == 'node_start') {
+                data.properties.outputs['output_' + i] = {
+                  label: '시나리오를 시작합니다'
+                };
+            } else {
+                data.properties.outputs['output_' + i] = {
+                  label: '멘트를 입력하세요'
+                };
+            }
+          }
+          return data;
+        }
+
+        var operatorId = 0;
+        $draggableOperators.draggable({
+            cursor: "move",
+            opacity: 0.7,
+
+            helper: 'clone',
+            appendTo: 'body',
+            zIndex: 1000,
+
+            helper: function(e) {
+              var $this = $(this);
+              var data = getOperatorData($this);
+              return $flowchart.flowchart('getOperatorElement', data);
+            },
+            stop: function(e, ui) {
+                var $this = $(this);
+                var elOffset = ui.offset;
+                var containerOffset = $container.offset();
+                if (elOffset.left > containerOffset.left &&
+                    elOffset.top > containerOffset.top &&
+                    elOffset.left < containerOffset.left + $container.width() &&
+                    elOffset.top < containerOffset.top + $container.height()) {
+
+                    var flowchartOffset = $flowchart.offset();
+
+                    var relativeLeft = elOffset.left - flowchartOffset.left;
+                    var relativeTop = elOffset.top - flowchartOffset.top;
+
+                    var positionRatio = $flowchart.flowchart('getPositionRatio');
+                    relativeLeft /= positionRatio;
+                    relativeTop /= positionRatio;
+
+                    var data = getOperatorData($this);
+                    data.left = relativeLeft;
+                    data.top = relativeTop;
+
+                    $flowchart.flowchart('addOperator', data);
+                }
+            }
+        });
+
+        $('.get_data').click(function() {
+          var data = $flowchart.flowchart('getData');
+          console.log(JSON.stringify(data, null, 2));
+        });
+        $('.set_label_data').on('click',function() {
+          var data = $flowchart.flowchart('getData');
+          var selOprId = $flowchart.flowchart('getOperatorLabelSelectOprId');
+          var selLblKey = $flowchart.flowchart('getOperatorLabelSelectLblKey');
+          if (data.operators[selOprId].properties.nodetype != "node_end") {
+            eval('data.operators[selOprId].properties.outputs.' + selLblKey).label = $('#drag_ele_tit').val();
+          } else {
+            eval('data.operators[selOprId].properties.inputs.' + selLblKey).label = $('#drag_ele_tit').val();
+          }
+          $flowchart.flowchart('setData', data);
+        });
+
+        $('#casecnt').on('change', function() {
+          $('#nodecondition').data('nb-outputs',this.value);
+        })
+      });
+
+      /* 테스트 입력 드래그 기능*/
+      $("#drag_ele_prop").draggable({
+        containment: 'parent' // 부모요소 안에 종속
+      });
+      </script>
+  <body>
+    <div class="content_wrap">
+      <div class="row">
+        <div class="layout col_12">
+          <div class="title_box">
+            <h2 class="tit00">Other Chart</h2>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="layout col_12">
+          <p class="homepage"><a href="https://github.com/sdrdis/jquery.flowchart" target="_blank" title="새창">flow chart</a></p>
+          <div class="p_menu">
+            <ul id="pMenu"></ul>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="layout col_12">
+          <div class="title_box item_tit">
+            <h3 class="tit01">flow chart (ROVA)</h3>
+          </div>
+         <div class="item_exam">
+           <div class="title_box">
+             <h4 class="tit02">결과화면</h4>
+           </div>
+           <div class="flow_wrap">
+             <div class="flowchart_box">
+               <div class="draggable_operators">
+                 <div class="left_align">
+                   <div class="drag_wrap">
+                     <div class="draggable_operator node_start" data-nb-inputs="0" data-nb-outputs="1" data-nodetype="node_start">시작 노드</div>
+                     <div class="draggable_operator node_comment" data-nb-inputs="1" data-nb-outputs="1" data-nodetype="node_comment">ROVA 멘트</div>
+                     <div class="node_comment_group">
+                       <div class="select_box">
+                         <label for="casecnt" class="txt_hidden">고객멘트 CASE 수 선택</label>
+                         <select id="casecnt">
+                           <option value="1">고객멘트 CASE 수</option>
+                           <option value="1">1</option>
+                           <option value="2">2</option>
+                           <option value="3">3</option>
+                           <option value="4">4</option>
+                           <option value="5">5</option>
+                           <option value="6">6</option>
+                           <option value="7">7</option>
+                           <option value="8">8</option>
+                           <option value="9">9</option>
+                           <option value="10">10</option>
+                         </select>
+                       </div>
+                       <div class="draggable_operator node_condition" data-nb-inputs="1" data-nb-outputs="1" id="nodecondition" data-nodetype="node_condition"> 고객 멘트</div>
+                     </div>
+                     <div class="draggable_operator node_end" data-nb-inputs="1" data-nb-outputs="0" data-nodetype="node_end">종료 노드</div>
+                   </div>
+                 </div>
+                 <div class="right_align">
+                   <div class="button_box">
+                     <button type="button" class="btn zoom_refresh"><span><i class="fas fa-search-plus"></i> 100%</span></button>
+                     <button type="button" class="btn get_data"><span>Get data</span></button>
+                     <button type="button" class="btn delete_selected_button"><span>Delete selected operator / link</span></button>
+                   </div>
+                 </div>
+               </div>
+               <div class="flow_body">
+                 <div class="flowchart" id="flowchart"></div>
+                 <div class="drag_ele_prop" id="drag_ele_prop">
+                   <label for="drag_ele_tit">Operator's title: </label>
+                   <button type="button" class="btn set_label_data">적용</button>
+                   <textarea id="drag_ele_tit" class="drag_ele_txt"></textarea>
+                 </div>
+               </div>
+             </div>
+           </div>
+           <div class="title_box">
+             <h4 class="tit02">HTML</h4>
+           </div>
+           <div class="code_box">
+<div class="colorscripter-code" style="color:#f0f0f0;font-family:Consolas, 'Liberation Mono', Menlo, Courier, monospace !important; position:relative !important;overflow:auto"><table class="colorscripter-code-table" style="margin:0;padding:0;border:none;background-color:#272727;border-radius:4px;" cellspacing="0" cellpadding="0"><tr><td style="padding:6px 0;text-align:left"><pre style="margin:0;padding:0;color:#f0f0f0;font-family:Consolas, 'Liberation Mono', Menlo, Courier, monospace !important;line-height:130%"><div style="padding:0 6px; white-space:pre; line-height:130%"><span style="color:#f0f0f0">&lt;</span><span style="color:#ff3399">link</span>&nbsp;<span style="color:#a8ff58">rel</span>=<span style="color:#ffd500">"stylesheet"</span><span style="color:#a8ff58"></span>&nbsp;<span style="color:#a8ff58">href</span>=<span style="color:#ffd500">"../resource/chart/flowchart/css/jquery.flowchart.css"</span><span style="color:#a8ff58"></span><span style="color:#f0f0f0">&gt;</span></div><div style="padding:0 6px; white-space:pre; line-height:130%"><span style="color:#999999">&lt;!--&nbsp;rova&nbsp;custom&nbsp;css&nbsp;--&gt;</span></div><div style="padding:0 6px; white-space:pre; line-height:130%"><span style="color:#f0f0f0">&lt;</span><span style="color:#ff3399">link</span>&nbsp;<span style="color:#a8ff58">rel</span>=<span style="color:#ffd500">"stylesheet"</span><span style="color:#a8ff58"></span>&nbsp;<span style="color:#a8ff58">href</span>=<span style="color:#ffd500">"../resource/chart/flowchart/css/custom.css"</span><span style="color:#a8ff58"></span><span style="color:#f0f0f0">&gt;</span></div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;</div><div style="padding:0 6px; white-space:pre; line-height:130%"><span style="color:#f0f0f0">&lt;</span><span style="color:#ff3399">script</span>&nbsp;<span style="color:#a8ff58">src</span>=<span style="color:#ffd500">"../resource/jquery-ui/jquery-ui.js"</span><span style="color:#ff3399"></span><span style="color:#f0f0f0">&gt;</span><span style="color:#f0f0f0">&lt;</span><span style="color:#f0f0f0">/</span><span style="color:#ff3399">script</span><span style="color:#f0f0f0">&gt;</span></div><div style="padding:0 6px; white-space:pre; line-height:130%"><span style="color:#f0f0f0">&lt;</span><span style="color:#ff3399">script</span>&nbsp;<span style="color:#a8ff58">src</span>=<span style="color:#ffd500">"../resource/chart/flowchart/js/jquery.flowchart.js"</span><span style="color:#ff3399"></span><span style="color:#f0f0f0">&gt;</span><span style="color:#f0f0f0">&lt;</span><span style="color:#f0f0f0">/</span><span style="color:#ff3399">script</span><span style="color:#f0f0f0">&gt;</span></div><div style="padding:0 6px; white-space:pre; line-height:130%"><span style="color:#999999">&lt;!--&nbsp;확대,&nbsp;축소&nbsp;이동&nbsp;플러그인&nbsp;--&gt;</span></div><div style="padding:0 6px; white-space:pre; line-height:130%"><span style="color:#f0f0f0">&lt;</span><span style="color:#ff3399">script</span>&nbsp;<span style="color:#a8ff58">src</span>=<span style="color:#ffd500">"../resource/chart/flowchart/js/jquery.panzoom.min.js"</span><span style="color:#ff3399"></span><span style="color:#f0f0f0">&gt;</span><span style="color:#f0f0f0">&lt;</span><span style="color:#f0f0f0">/</span><span style="color:#ff3399">script</span><span style="color:#f0f0f0">&gt;</span></div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;</div><div style="padding:0 6px; white-space:pre; line-height:130%"><span style="color:#999999">&lt;!--&nbsp;시작노드&nbsp;~&nbsp;종료노드&nbsp;부분은&nbsp;파일에서&nbsp;&nbsp;--&gt;</span></div><div style="padding:0 6px; white-space:pre; line-height:130%"><span style="color:#f0f0f0">&lt;</span><span style="color:#ff3399">div</span>&nbsp;<span style="color:#a8ff58">class</span>=<span style="color:#ffd500">"flowchart"</span><span style="color:#a8ff58"></span>&nbsp;<span style="color:#a8ff58">id</span>=<span style="color:#ffd500">"flowchart"</span><span style="color:#a8ff58"></span><span style="color:#f0f0f0">&gt;</span><span style="color:#f0f0f0">&lt;</span><span style="color:#f0f0f0">/</span><span style="color:#ff3399">div</span><span style="color:#f0f0f0">&gt;</span></div></pre><div style="text-align:right;margin-top:-13px;margin-right:5px;font-size:9px;font-style:italic"><a href="http://colorscripter.com/info#e" target="_blank" style="color:#4f4f4ftext-decoration:none">Colored by Color Scripter</a></div></td><td style="vertical-align:bottom;padding:0 2px 4px 0"><a href="http://colorscripter.com/info#e" target="_blank" style="text-decoration:none;color:white"><span style="font-size:9px;word-break:normal;background-color:#4f4f4f;color:white;border-radius:10px;padding:1px">cs</span></a></td></tr></table></div>
+           </div>
+           <div class="title_box">
+             <h4 class="tit02">JS</h4>
+           </div>
+           <div class="code_box">
+<div class="colorscripter-code" style="color:#f0f0f0;font-family:Consolas, 'Liberation Mono', Menlo, Courier, monospace !important; position:relative !important;overflow:auto"><table class="colorscripter-code-table" style="margin:0;padding:0;border:none;background-color:#272727;border-radius:4px;" cellspacing="0" cellpadding="0"><tr><td style="padding:6px 0;text-align:left"><pre style="margin:0;padding:0;color:#f0f0f0;font-family:Consolas, 'Liberation Mono', Menlo, Courier, monospace !important;line-height:130%"><div style="padding:0 6px; white-space:pre; line-height:130%">$(<span style="color:#ff3399">function</span>(){</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;<span style="color:#ff3399">var</span>&nbsp;$flowchart&nbsp;<span style="color:#aaffaa"></span><span style="color:#ff3399">=</span>&nbsp;$(<span style="color:#ffd500">'#flowchart'</span>);</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;<span style="color:#ff3399">var</span>&nbsp;$container&nbsp;<span style="color:#aaffaa"></span><span style="color:#ff3399">=</span>&nbsp;$flowchart.<span style="color:#4be6fa">parent</span>();</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;<span style="color:#ff3399">var</span>&nbsp;$operatorTitle&nbsp;<span style="color:#aaffaa"></span><span style="color:#ff3399">=</span>&nbsp;$(<span style="color:#ffd500">'#drag_ele_tit'</span>);</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;<span style="color:#ff3399">var</span>&nbsp;cx&nbsp;<span style="color:#aaffaa"></span><span style="color:#ff3399">=</span>&nbsp;$flowchart.width()&nbsp;<span style="color:#aaffaa"></span><span style="color:#ff3399">/</span>&nbsp;<span style="color:#c10aff">1</span>;</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;<span style="color:#ff3399">var</span>&nbsp;cy&nbsp;<span style="color:#aaffaa"></span><span style="color:#ff3399">=</span>&nbsp;$flowchart.height()&nbsp;<span style="color:#aaffaa"></span><span style="color:#ff3399">/</span>&nbsp;<span style="color:#c10aff">1</span>;</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;<span style="color:#999999">//&nbsp;Panzoom&nbsp;initialization...</span></div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;$flowchart.panzoom();</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;<span style="color:#999999">//&nbsp;Centering&nbsp;panzoom</span></div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;$flowchart.panzoom(<span style="color:#ffd500">'pan'</span>,&nbsp;<span style="color:#aaffaa"></span><span style="color:#ff3399">-</span>cx&nbsp;<span style="color:#aaffaa"></span><span style="color:#ff3399">+</span>&nbsp;$container.width()&nbsp;<span style="color:#aaffaa"></span><span style="color:#ff3399">/</span>&nbsp;<span style="color:#c10aff">1</span>,&nbsp;<span style="color:#aaffaa"></span><span style="color:#ff3399">-</span>cy&nbsp;<span style="color:#aaffaa"></span><span style="color:#ff3399">+</span>&nbsp;$container.height()&nbsp;<span style="color:#aaffaa"></span><span style="color:#ff3399">/</span>&nbsp;<span style="color:#c10aff">1</span>);</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;<span style="color:#999999">//&nbsp;Panzoom&nbsp;zoom&nbsp;handling...</span></div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;<span style="color:#ff3399">var</span>&nbsp;possibleZooms&nbsp;<span style="color:#aaffaa"></span><span style="color:#ff3399">=</span>&nbsp;[<span style="color:#c10aff">0.</span><span style="color:#c10aff">5</span>,&nbsp;<span style="color:#c10aff">0.</span><span style="color:#c10aff">75</span>,&nbsp;<span style="color:#c10aff">1</span>,&nbsp;<span style="color:#c10aff">2</span>,&nbsp;<span style="color:#c10aff">3</span>];</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;<span style="color:#ff3399">var</span>&nbsp;currentZoom&nbsp;<span style="color:#aaffaa"></span><span style="color:#ff3399">=</span>&nbsp;<span style="color:#c10aff">1</span>;</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;$container.on(<span style="color:#ffd500">'mousewheel.focal'</span>,&nbsp;<span style="color:#ff3399">function</span>(&nbsp;e&nbsp;)&nbsp;{</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;e.preventDefault();</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#ff3399">var</span>&nbsp;delta&nbsp;<span style="color:#aaffaa"></span><span style="color:#ff3399">=</span>&nbsp;(e.delta&nbsp;<span style="color:#aaffaa"></span><span style="color:#ff3399">|</span><span style="color:#aaffaa"></span><span style="color:#ff3399">|</span>&nbsp;e.originalEvent.wheelDelta)&nbsp;<span style="color:#aaffaa"></span><span style="color:#ff3399">|</span><span style="color:#aaffaa"></span><span style="color:#ff3399">|</span>&nbsp;e.originalEvent.detail;</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#ff3399">var</span>&nbsp;zoomOut&nbsp;<span style="color:#aaffaa"></span><span style="color:#ff3399">=</span>&nbsp;delta&nbsp;?&nbsp;delta&nbsp;<span style="color:#aaffaa"></span><span style="color:#ff3399">&lt;</span>&nbsp;<span style="color:#c10aff">0</span>&nbsp;:&nbsp;e.originalEvent.deltaY&nbsp;<span style="color:#aaffaa"></span><span style="color:#ff3399">&gt;</span>&nbsp;<span style="color:#c10aff">0</span>;</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;currentZoom&nbsp;<span style="color:#aaffaa"></span><span style="color:#ff3399">=</span>&nbsp;Math.max(<span style="color:#c10aff">0</span>,&nbsp;Math.min(possibleZooms.<span style="color:#4be6fa">length</span>&nbsp;<span style="color:#aaffaa"></span><span style="color:#ff3399">-</span>&nbsp;<span style="color:#c10aff">1</span>,&nbsp;(currentZoom&nbsp;<span style="color:#aaffaa"></span><span style="color:#ff3399">+</span>&nbsp;(zoomOut&nbsp;<span style="color:#aaffaa"></span><span style="color:#ff3399">*</span>&nbsp;<span style="color:#c10aff">2</span>&nbsp;<span style="color:#aaffaa"></span><span style="color:#ff3399">-</span>&nbsp;<span style="color:#c10aff">1</span>))));</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$flowchart.flowchart(<span style="color:#ffd500">'setPositionRatio'</span>,&nbsp;possibleZooms[currentZoom]);</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$flowchart.panzoom(<span style="color:#ffd500">'zoom'</span>,&nbsp;possibleZooms[currentZoom],&nbsp;{</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;animate:&nbsp;<span style="color:#c10aff">false</span>,</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;focal:&nbsp;e</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;});</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;});</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;<span style="color:#999999">//&nbsp;zoom&nbsp;100%&nbsp;reset</span></div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;$(<span style="color:#ffd500">'.zoom_refresh'</span>).click(<span style="color:#ff3399">function</span>(){</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;$flowchart.flowchart(<span style="color:#ffd500">'setPositionRatio'</span>,&nbsp;<span style="color:#c10aff">1</span>);</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;$flowchart.css(<span style="color:#ffd500">'transform'</span>,&nbsp;<span style="color:#ffd500">'matrix(1,&nbsp;0,&nbsp;0,&nbsp;1,&nbsp;-3114,&nbsp;-1214)'</span>);</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;});</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;<span style="color:#ff3399">var</span>&nbsp;data&nbsp;<span style="color:#aaffaa"></span><span style="color:#ff3399">=</span>&nbsp;{};</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;<span style="color:#999999">//&nbsp;Apply&nbsp;the&nbsp;plugin&nbsp;on&nbsp;a&nbsp;standard,&nbsp;empty&nbsp;div...</span></div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;$flowchart.flowchart({</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;data:&nbsp;data,</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;onOperatorSelectLabel:&nbsp;<span style="color:#ff3399">function</span>(operatorId,&nbsp;labelKey)&nbsp;{</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$operatorTitle.val($flowchart.flowchart(<span style="color:#ffd500">'getOperatorLabel'</span>,&nbsp;operatorId,&nbsp;labelKey));</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#ff3399">return</span>&nbsp;<span style="color:#ff3399">true</span>;</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;},</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;onLinkCreate:&nbsp;<span style="color:#ff3399">function</span>(linkId,&nbsp;linkData)&nbsp;{</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#ff3399">return</span>&nbsp;<span style="color:#ff3399">true</span>;</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;}</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;});</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;$(<span style="color:#ffd500">'.delete_selected_button'</span>).click(<span style="color:#ff3399">function</span>()&nbsp;{</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;$flowchart.flowchart(<span style="color:#ffd500">'deleteSelected'</span>);</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;$operatorTitle.val(<span style="color:#ffd500">''</span>);</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;});</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;<span style="color:#ff3399">var</span>&nbsp;$draggableOperators&nbsp;<span style="color:#aaffaa"></span><span style="color:#ff3399">=</span>&nbsp;$(<span style="color:#ffd500">'.draggable_operator'</span>);</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;<span style="color:#ff3399">function</span>&nbsp;getOperatorData($element)&nbsp;{</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#ff3399">var</span>&nbsp;nbInputs&nbsp;<span style="color:#aaffaa"></span><span style="color:#ff3399">=</span>&nbsp;<span style="color:#4be6fa">parseInt</span>($element.data(<span style="color:#ffd500">'nb-inputs'</span>));</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#ff3399">var</span>&nbsp;nbOutputs&nbsp;<span style="color:#aaffaa"></span><span style="color:#ff3399">=</span>&nbsp;<span style="color:#4be6fa">parseInt</span>($element.data(<span style="color:#ffd500">'nb-outputs'</span>));</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#ff3399">var</span>&nbsp;nodetype&nbsp;<span style="color:#aaffaa"></span><span style="color:#ff3399">=</span>&nbsp;$element.data(<span style="color:#ffd500">'nodetype'</span>);</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#ff3399">var</span>&nbsp;data&nbsp;<span style="color:#aaffaa"></span><span style="color:#ff3399">=</span>&nbsp;{</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;properties:&nbsp;{</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;title:&nbsp;$element.text(),</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;inputs:&nbsp;{},</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;outputs:&nbsp;{},</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;nodetype:&nbsp;nodetype</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;};</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#ff3399">var</span>&nbsp;i&nbsp;<span style="color:#aaffaa"></span><span style="color:#ff3399">=</span>&nbsp;<span style="color:#c10aff">0</span>;</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#ff3399">for</span>&nbsp;(i&nbsp;<span style="color:#aaffaa"></span><span style="color:#ff3399">=</span>&nbsp;<span style="color:#c10aff">0</span>;&nbsp;i&nbsp;<span style="color:#aaffaa"></span><span style="color:#ff3399">&lt;</span>&nbsp;nbInputs;&nbsp;i<span style="color:#aaffaa"></span><span style="color:#ff3399">+</span><span style="color:#aaffaa"></span><span style="color:#ff3399">+</span>)&nbsp;{</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#ff3399">if</span>&nbsp;(data.properties.nodetype&nbsp;<span style="color:#aaffaa"></span><span style="color:#ff3399">=</span><span style="color:#aaffaa"></span><span style="color:#ff3399">=</span>&nbsp;<span style="color:#ffd500">'node_end'</span>)&nbsp;{</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;data.properties.inputs[<span style="color:#ffd500">'input_'</span>&nbsp;<span style="color:#aaffaa"></span><span style="color:#ff3399">+</span>&nbsp;i]&nbsp;<span style="color:#aaffaa"></span><span style="color:#ff3399">=</span>&nbsp;{</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;label:&nbsp;<span style="color:#ffd500">'시나리오를&nbsp;종료합니다'</span></div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;};</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;<span style="color:#ff3399">else</span>&nbsp;{</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;data.properties.inputs[<span style="color:#ffd500">'input_'</span>&nbsp;<span style="color:#aaffaa"></span><span style="color:#ff3399">+</span>&nbsp;i]&nbsp;<span style="color:#aaffaa"></span><span style="color:#ff3399">=</span>&nbsp;{</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;label:&nbsp;<span style="color:#ffd500">'In'</span></div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;};</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;}</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#ff3399">for</span>&nbsp;(i&nbsp;<span style="color:#aaffaa"></span><span style="color:#ff3399">=</span>&nbsp;<span style="color:#c10aff">0</span>;&nbsp;i&nbsp;<span style="color:#aaffaa"></span><span style="color:#ff3399">&lt;</span>&nbsp;nbOutputs;&nbsp;i<span style="color:#aaffaa"></span><span style="color:#ff3399">+</span><span style="color:#aaffaa"></span><span style="color:#ff3399">+</span>)&nbsp;{</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#ff3399">if</span>&nbsp;(data.properties.nodetype&nbsp;<span style="color:#aaffaa"></span><span style="color:#ff3399">=</span><span style="color:#aaffaa"></span><span style="color:#ff3399">=</span>&nbsp;<span style="color:#ffd500">'node_start'</span>)&nbsp;{</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;data.properties.outputs[<span style="color:#ffd500">'output_'</span>&nbsp;<span style="color:#aaffaa"></span><span style="color:#ff3399">+</span>&nbsp;i]&nbsp;<span style="color:#aaffaa"></span><span style="color:#ff3399">=</span>&nbsp;{</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;label:&nbsp;<span style="color:#ffd500">'시나리오를&nbsp;시작합니다'</span></div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;};</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;<span style="color:#ff3399">else</span>&nbsp;{</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;data.properties.outputs[<span style="color:#ffd500">'output_'</span>&nbsp;<span style="color:#aaffaa"></span><span style="color:#ff3399">+</span>&nbsp;i]&nbsp;<span style="color:#aaffaa"></span><span style="color:#ff3399">=</span>&nbsp;{</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;label:&nbsp;<span style="color:#ffd500">'멘트를&nbsp;입력하세요'</span></div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;};</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;}</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#ff3399">return</span>&nbsp;data;</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;}</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;<span style="color:#ff3399">var</span>&nbsp;operatorId&nbsp;<span style="color:#aaffaa"></span><span style="color:#ff3399">=</span>&nbsp;<span style="color:#c10aff">0</span>;</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;$draggableOperators.draggable({</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;cursor:&nbsp;<span style="color:#ffd500">"move"</span>,</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;opacity:&nbsp;<span style="color:#c10aff">0.</span><span style="color:#c10aff">7</span>,</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;helper:&nbsp;<span style="color:#ffd500">'clone'</span>,</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;appendTo:&nbsp;<span style="color:#ffd500">'body'</span>,</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;zIndex:&nbsp;<span style="color:#c10aff">1000</span>,</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;helper:&nbsp;<span style="color:#ff3399">function</span>(e)&nbsp;{</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#ff3399">var</span>&nbsp;$this&nbsp;<span style="color:#aaffaa"></span><span style="color:#ff3399">=</span>&nbsp;$(this);</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#ff3399">var</span>&nbsp;data&nbsp;<span style="color:#aaffaa"></span><span style="color:#ff3399">=</span>&nbsp;getOperatorData($this);</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#ff3399">return</span>&nbsp;$flowchart.flowchart(<span style="color:#ffd500">'getOperatorElement'</span>,&nbsp;data);</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;},</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#4be6fa">stop</span>:&nbsp;<span style="color:#ff3399">function</span>(e,&nbsp;ui)&nbsp;{</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#ff3399">var</span>&nbsp;$this&nbsp;<span style="color:#aaffaa"></span><span style="color:#ff3399">=</span>&nbsp;$(this);</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#ff3399">var</span>&nbsp;elOffset&nbsp;<span style="color:#aaffaa"></span><span style="color:#ff3399">=</span>&nbsp;ui.offset;</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#ff3399">var</span>&nbsp;containerOffset&nbsp;<span style="color:#aaffaa"></span><span style="color:#ff3399">=</span>&nbsp;$container.offset();</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#ff3399">if</span>&nbsp;(elOffset.left&nbsp;<span style="color:#aaffaa"></span><span style="color:#ff3399">&gt;</span>&nbsp;containerOffset.left&nbsp;<span style="color:#aaffaa"></span><span style="color:#ff3399">&amp;</span><span style="color:#aaffaa"></span><span style="color:#ff3399">&amp;</span></div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;elOffset.top&nbsp;<span style="color:#aaffaa"></span><span style="color:#ff3399">&gt;</span>&nbsp;containerOffset.top&nbsp;<span style="color:#aaffaa"></span><span style="color:#ff3399">&amp;</span><span style="color:#aaffaa"></span><span style="color:#ff3399">&amp;</span></div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;elOffset.left&nbsp;<span style="color:#aaffaa"></span><span style="color:#ff3399">&lt;</span>&nbsp;containerOffset.left&nbsp;<span style="color:#aaffaa"></span><span style="color:#ff3399">+</span>&nbsp;$container.width()&nbsp;<span style="color:#aaffaa"></span><span style="color:#ff3399">&amp;</span><span style="color:#aaffaa"></span><span style="color:#ff3399">&amp;</span></div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;elOffset.top&nbsp;<span style="color:#aaffaa"></span><span style="color:#ff3399">&lt;</span>&nbsp;containerOffset.top&nbsp;<span style="color:#aaffaa"></span><span style="color:#ff3399">+</span>&nbsp;$container.height())&nbsp;{</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#ff3399">var</span>&nbsp;flowchartOffset&nbsp;<span style="color:#aaffaa"></span><span style="color:#ff3399">=</span>&nbsp;$flowchart.offset();</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#ff3399">var</span>&nbsp;relativeLeft&nbsp;<span style="color:#aaffaa"></span><span style="color:#ff3399">=</span>&nbsp;elOffset.left&nbsp;<span style="color:#aaffaa"></span><span style="color:#ff3399">-</span>&nbsp;flowchartOffset.left;</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#ff3399">var</span>&nbsp;relativeTop&nbsp;<span style="color:#aaffaa"></span><span style="color:#ff3399">=</span>&nbsp;elOffset.top&nbsp;<span style="color:#aaffaa"></span><span style="color:#ff3399">-</span>&nbsp;flowchartOffset.top;</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#ff3399">var</span>&nbsp;positionRatio&nbsp;<span style="color:#aaffaa"></span><span style="color:#ff3399">=</span>&nbsp;$flowchart.flowchart(<span style="color:#ffd500">'getPositionRatio'</span>);</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;relativeLeft&nbsp;<span style="color:#aaffaa"></span><span style="color:#ff3399">/</span><span style="color:#aaffaa"></span><span style="color:#ff3399">=</span>&nbsp;positionRatio;</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;relativeTop&nbsp;<span style="color:#aaffaa"></span><span style="color:#ff3399">/</span><span style="color:#aaffaa"></span><span style="color:#ff3399">=</span>&nbsp;positionRatio;</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#ff3399">var</span>&nbsp;data&nbsp;<span style="color:#aaffaa"></span><span style="color:#ff3399">=</span>&nbsp;getOperatorData($this);</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;data.left&nbsp;<span style="color:#aaffaa"></span><span style="color:#ff3399">=</span>&nbsp;relativeLeft;</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;data.top&nbsp;<span style="color:#aaffaa"></span><span style="color:#ff3399">=</span>&nbsp;relativeTop;</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$flowchart.flowchart(<span style="color:#ffd500">'addOperator'</span>,&nbsp;data);</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;});</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;$(<span style="color:#ffd500">'.get_data'</span>).click(<span style="color:#ff3399">function</span>()&nbsp;{</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#ff3399">var</span>&nbsp;data&nbsp;<span style="color:#aaffaa"></span><span style="color:#ff3399">=</span>&nbsp;$flowchart.flowchart(<span style="color:#ffd500">'getData'</span>);</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#4be6fa">console</span>.log(JSON.stringify(data,&nbsp;<span style="color:#4be6fa">null</span>,&nbsp;<span style="color:#c10aff">2</span>));</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;});</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;$(<span style="color:#ffd500">'.set_label_data'</span>).on(<span style="color:#ffd500">'click'</span>,<span style="color:#ff3399">function</span>()&nbsp;{</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#ff3399">var</span>&nbsp;data&nbsp;<span style="color:#aaffaa"></span><span style="color:#ff3399">=</span>&nbsp;$flowchart.flowchart(<span style="color:#ffd500">'getData'</span>);</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#ff3399">var</span>&nbsp;selOprId&nbsp;<span style="color:#aaffaa"></span><span style="color:#ff3399">=</span>&nbsp;$flowchart.flowchart(<span style="color:#ffd500">'getOperatorLabelSelectOprId'</span>);</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#ff3399">var</span>&nbsp;selLblKey&nbsp;<span style="color:#aaffaa"></span><span style="color:#ff3399">=</span>&nbsp;$flowchart.flowchart(<span style="color:#ffd500">'getOperatorLabelSelectLblKey'</span>);</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#ff3399">if</span>&nbsp;(data.operators[selOprId].properties.nodetype&nbsp;<span style="color:#aaffaa"></span><span style="color:#ff3399">!</span><span style="color:#aaffaa"></span><span style="color:#ff3399">=</span>&nbsp;<span style="color:#ffd500">"node_end"</span>)&nbsp;{</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#ff3399">eval</span>(<span style="color:#ffd500">'data.operators[selOprId].properties.outputs.'</span>&nbsp;<span style="color:#aaffaa"></span><span style="color:#ff3399">+</span>&nbsp;selLblKey).label&nbsp;<span style="color:#aaffaa"></span><span style="color:#ff3399">=</span>&nbsp;$(<span style="color:#ffd500">'#drag_ele_tit'</span>).val();</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;<span style="color:#ff3399">else</span>&nbsp;{</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#ff3399">eval</span>(<span style="color:#ffd500">'data.operators[selOprId].properties.inputs.'</span>&nbsp;<span style="color:#aaffaa"></span><span style="color:#ff3399">+</span>&nbsp;selLblKey).label&nbsp;<span style="color:#aaffaa"></span><span style="color:#ff3399">=</span>&nbsp;$(<span style="color:#ffd500">'#drag_ele_tit'</span>).val();</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;}</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;$flowchart.flowchart(<span style="color:#ffd500">'setData'</span>,&nbsp;data);</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;});</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;$(<span style="color:#ffd500">'#casecnt'</span>).on(<span style="color:#ffd500">'change'</span>,&nbsp;<span style="color:#ff3399">function</span>()&nbsp;{</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;$(<span style="color:#ffd500">'#nodecondition'</span>).data(<span style="color:#ffd500">'nb-outputs'</span>,this.value);</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;})</div><div style="padding:0 6px; white-space:pre; line-height:130%">});</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;</div><div style="padding:0 6px; white-space:pre; line-height:130%"><span style="color:#999999">/*&nbsp;테스트&nbsp;입력&nbsp;드래그&nbsp;기능*/</span></div><div style="padding:0 6px; white-space:pre; line-height:130%">$(<span style="color:#ffd500">"#drag_ele_prop"</span>).draggable({</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;containment:&nbsp;<span style="color:#ffd500">'parent'</span>&nbsp;<span style="color:#999999">//&nbsp;부모요소&nbsp;안에&nbsp;종속</span></div><div style="padding:0 6px; white-space:pre; line-height:130%">});</div></pre><div style="text-align:right;margin-top:-13px;margin-right:5px;font-size:9px;font-style:italic"><a href="http://colorscripter.com/info#e" target="_blank" style="color:#4f4f4ftext-decoration:none">Colored by Color Scripter</a></div></td><td style="vertical-align:bottom;padding:0 2px 4px 0"><a href="http://colorscripter.com/info#e" target="_blank" style="text-decoration:none;color:white"><span style="font-size:9px;word-break:normal;background-color:#4f4f4f;color:white;border-radius:10px;padding:1px">cs</span></a></td></tr></table></div>
+           </div>
+         </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

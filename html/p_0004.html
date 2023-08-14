@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>I&VIEW Design System</title>
+    <link rel="stylesheet" href="../css/contents.css">
+
+    <script src="../resource/jquery.min.js"></script>
+    <script src="../resource/chart/d3/d3.v4.min.js"></script>
+    <script src="../js/script.js"></script>
+    <script>
+      $(function(){
+        var graph = { // 차트 데이터
+          "nodes": [
+            {"id": "공항", "group": 1},
+            {"id": "관광", "group": 2},
+            {"id": "관광객", "group": 2},
+            {"id": "노선", "group": 2},
+            {"id": "마케팅 전략", "group": 2},
+            {"id": "인천국제공항", "group": 2},
+            {"id": "외국인", "group": 2},
+            {"id": "한국", "group": 2},
+            {"id": "고객", "group": 2},
+            {"id": "출국", "group": 2},
+            {"id": "현황", "group": 2}
+          ],
+          "links": [
+            {"source": "공항", "target": "관광", "value": 1},
+            {"source": "공항", "target": "관광객", "value": 1},
+            {"source": "공항", "target": "노선", "value": 1},
+            {"source": "공항", "target": "마케팅 전략", "value": 1},
+            {"source": "공항", "target": "인천국제공항", "value": 1},
+            {"source": "공항", "target": "외국인", "value": 1},
+            {"source": "공항", "target": "한국", "value": 1},
+            {"source": "공항", "target": "고객", "value": 1},
+            {"source": "공항", "target": "출국", "value": 1},
+            {"source": "공항", "target": "현황", "value": 1}
+          ]
+        };
+
+        var fWid = $('.chart_box').width();
+        var mapOptions = {
+          width: fWid,
+          height: 350,
+          nodeRadius: 1,
+          nodeStroke: 'white',
+          nodeStrokeWidth: 2
+        };
+
+        // initialize svg
+        var svg = d3.select('#force') // div force를 선택하여 svg 추가
+          .append('svg')
+          .attr('width', mapOptions.width)
+          .attr('height', mapOptions.height);
+
+        // 지정된 반지름 값으로 노드를 겹치지 않도록.
+        var collide = d3.forceCollide(mapOptions.nodeRadius*1.5);
+
+        // force simulation
+        var simulation = d3.forceSimulation()
+          .force("link", d3.forceLink().id(function(d) {return d.id; }).distance(function(i){return 112;}).strength(0.1))
+          .force("charge", d3.forceManyBody())
+          .force("center", d3.forceCenter(mapOptions.width / 2, mapOptions.height / 2.2))
+          .force("collide", collide);
+
+        // add links
+        var link = svg.append("g")
+          .attr("class", "links")
+          .selectAll("line")
+          .data(graph.links)
+          .enter().append("line")
+          .attr("stroke-width", function(d) { return Math.sqrt(d.value); })
+          .attr("stroke", '#ccc');
+
+        var color = d3.scaleOrdinal(d3.schemeCategory10);
+        // add nodes
+        var node = svg.append("g")
+          .attr("class", "nodes")
+          .selectAll("circle")
+          .data(graph.nodes)
+          .enter().append("circle")
+          .attr('class', 'node')
+          .attr("r", function(d, i){
+            if (i == 0) {
+              return 35;
+            } else {
+              return 0;
+            }
+          })
+          .attr('stroke', mapOptions.nodeStroke)
+          .attr('stroke-width', mapOptions.nodeStrokeWidth)
+          .attr("fill", function(d, i) {
+            if (i == 0) {
+              return '#42519e';
+            } else {
+              return;
+            }
+          });
+
+        // add node labels
+        var texts = svg.selectAll('text.node-label')
+          .data(graph.nodes)
+          .enter().append('text')
+          .attr('class', 'node-label')
+          .attr('fill', function(d, i) {
+            if (i == 0) {
+              return '#fff';
+            } else {
+              return '#000';
+            }
+          })
+          .attr('dy', '0.35em')
+          .attr('dx', '-0.9em')
+          .text(function(d) { return d.id; });
+
+        // add tick function
+        simulation
+          .nodes(graph.nodes)
+          .on("tick", ticked);
+
+        // add link forces
+        simulation.force("link")
+          .links(graph.links);
+
+        function ticked() {
+          link.attr("x1", function(d) { return d.source.x; })
+              .attr("y1", function(d) { return d.source.y; })
+              .attr("x2", function(d) { return d.target.x; })
+              .attr("y2", function(d) { return d.target.y; });
+
+          node.attr("cx", function(d) { return d.x; })
+              .attr("cy", function(d) { return d.y; });
+
+          texts.attr('transform', function(d) {
+            return 'translate(' + d.x + ',' + d.y + ')';
+          });
+        }
+      });
+      </script>
+  <body>
+    <div class="content_wrap">
+      <div class="row">
+        <div class="layout col_12">
+          <div class="title_box">
+            <h2 class="tit00">D3 Chart</h2>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="layout col_12">
+          <p class="homepage"><a href="https://d3js.org/" target="_blank" title="새창">D3 홈페이지 링크</a></p>
+          <p class="homepage"><a href="https://github.com/zziuni/d3/wiki/API-Reference" target="_blank" title="새창">D3 API Reference - 한글(v3 기준이라 조금 다를수 있음)</a></p>
+          <p class="homepage"><a href="https://github.com/d3/d3-force" target="_blank" title="새창">D3 force 관련</a></p>
+          <div class="p_menu">
+            <ul id="pMenu"></ul>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="layout col_12">
+         <div class="title_box item_tit">
+           <h3 class="tit01">force directed</h3>
+         </div>
+         <div class="item_exam">
+           <div class="title_box">
+             <h4 class="tit02">결과화면</h4>
+           </div>
+           <div class="chart_box">
+             <div id="force"></div>
+           </div>
+           <div class="title_box">
+             <h4 class="tit02">HTML</h4>
+           </div>
+           <div class="code_box">
+<div class="colorscripter-code" style="color:#f0f0f0;font-family:Consolas, 'Liberation Mono', Menlo, Courier, monospace !important; position:relative !important;overflow:auto"><table class="colorscripter-code-table" style="margin:0;padding:0;border:none;background-color:#272727;border-radius:4px;" cellspacing="0" cellpadding="0"><tr><td style="padding:6px 0;text-align:left"><pre style="margin:0;padding:0;color:#f0f0f0;font-family:Consolas, 'Liberation Mono', Menlo, Courier, monospace !important;line-height:130%"><div style="padding:0 6px; white-space:pre; line-height:130%"><span style="color:#f0f0f0">&lt;</span><span style="color:#ff3399">script</span>&nbsp;<span style="color:#a8ff58">src</span>=<span style="color:#ffd500">"../resource/chart/d3/d3.v4.min.js"</span><span style="color:#ff3399"></span><span style="color:#f0f0f0">&gt;</span><span style="color:#f0f0f0">&lt;</span><span style="color:#f0f0f0">/</span><span style="color:#ff3399">script</span><span style="color:#f0f0f0">&gt;</span></div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;</div><div style="padding:0 6px; white-space:pre; line-height:130%"><span style="color:#f0f0f0">&lt;</span><span style="color:#ff3399">div</span>&nbsp;<span style="color:#a8ff58">id</span>=<span style="color:#ffd500">"force"</span><span style="color:#a8ff58"></span><span style="color:#f0f0f0">&gt;</span><span style="color:#f0f0f0">&lt;</span><span style="color:#f0f0f0">/</span><span style="color:#ff3399">div</span><span style="color:#f0f0f0">&gt;</span></div></pre><div style="text-align:right;margin-top:-13px;margin-right:5px;font-size:9px;font-style:italic"><a href="http://colorscripter.com/info#e" target="_blank" style="color:#4f4f4ftext-decoration:none">Colored by Color Scripter</a></div></td><td style="vertical-align:bottom;padding:0 2px 4px 0"><a href="http://colorscripter.com/info#e" target="_blank" style="text-decoration:none;color:white"><span style="font-size:9px;word-break:normal;background-color:#4f4f4f;color:white;border-radius:10px;padding:1px">cs</span></a></td></tr></table></div>
+           </div>
+           <div class="title_box">
+             <h4 class="tit02">JS</h4>
+           </div>
+           <div class="code_box">
+<div class="colorscripter-code" style="color:#f0f0f0;font-family:Consolas, 'Liberation Mono', Menlo, Courier, monospace !important; position:relative !important;overflow:auto"><table class="colorscripter-code-table" style="margin:0;padding:0;border:none;background-color:#272727;border-radius:4px;" cellspacing="0" cellpadding="0"><tr><td style="padding:6px 0;text-align:left"><pre style="margin:0;padding:0;color:#f0f0f0;font-family:Consolas, 'Liberation Mono', Menlo, Courier, monospace !important;line-height:130%"><div style="padding:0 6px; white-space:pre; line-height:130%"><span style="color:#ff3399">var</span>&nbsp;graph&nbsp;<span style="color:#0086b3"></span><span style="color:#ff3399">=</span>&nbsp;{&nbsp;<span style="color:#999999">//&nbsp;차트&nbsp;데이터</span></div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;<span style="color:#ffd500">"nodes"</span>:&nbsp;[</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;{<span style="color:#ffd500">"id"</span>:&nbsp;<span style="color:#ffd500">"공항"</span>,&nbsp;<span style="color:#ffd500">"group"</span>:&nbsp;<span style="color:#c10aff">1</span>},</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;{<span style="color:#ffd500">"id"</span>:&nbsp;<span style="color:#ffd500">"관광"</span>,&nbsp;<span style="color:#ffd500">"group"</span>:&nbsp;<span style="color:#c10aff">2</span>},</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;{<span style="color:#ffd500">"id"</span>:&nbsp;<span style="color:#ffd500">"관광객"</span>,&nbsp;<span style="color:#ffd500">"group"</span>:&nbsp;<span style="color:#c10aff">2</span>},</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;{<span style="color:#ffd500">"id"</span>:&nbsp;<span style="color:#ffd500">"노선"</span>,&nbsp;<span style="color:#ffd500">"group"</span>:&nbsp;<span style="color:#c10aff">2</span>},</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;{<span style="color:#ffd500">"id"</span>:&nbsp;<span style="color:#ffd500">"마케팅&nbsp;전략"</span>,&nbsp;<span style="color:#ffd500">"group"</span>:&nbsp;<span style="color:#c10aff">2</span>},</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;{<span style="color:#ffd500">"id"</span>:&nbsp;<span style="color:#ffd500">"인천국제공항"</span>,&nbsp;<span style="color:#ffd500">"group"</span>:&nbsp;<span style="color:#c10aff">2</span>},</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;{<span style="color:#ffd500">"id"</span>:&nbsp;<span style="color:#ffd500">"외국인"</span>,&nbsp;<span style="color:#ffd500">"group"</span>:&nbsp;<span style="color:#c10aff">2</span>},</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;{<span style="color:#ffd500">"id"</span>:&nbsp;<span style="color:#ffd500">"한국"</span>,&nbsp;<span style="color:#ffd500">"group"</span>:&nbsp;<span style="color:#c10aff">2</span>},</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;{<span style="color:#ffd500">"id"</span>:&nbsp;<span style="color:#ffd500">"고객"</span>,&nbsp;<span style="color:#ffd500">"group"</span>:&nbsp;<span style="color:#c10aff">2</span>},</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;{<span style="color:#ffd500">"id"</span>:&nbsp;<span style="color:#ffd500">"출국"</span>,&nbsp;<span style="color:#ffd500">"group"</span>:&nbsp;<span style="color:#c10aff">2</span>},</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;{<span style="color:#ffd500">"id"</span>:&nbsp;<span style="color:#ffd500">"현황"</span>,&nbsp;<span style="color:#ffd500">"group"</span>:&nbsp;<span style="color:#c10aff">2</span>}</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;],</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;<span style="color:#ffd500">"links"</span>:&nbsp;[</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;{<span style="color:#ffd500">"source"</span>:&nbsp;<span style="color:#ffd500">"공항"</span>,&nbsp;<span style="color:#ffd500">"target"</span>:&nbsp;<span style="color:#ffd500">"관광"</span>,&nbsp;<span style="color:#ffd500">"value"</span>:&nbsp;<span style="color:#c10aff">1</span>},</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;{<span style="color:#ffd500">"source"</span>:&nbsp;<span style="color:#ffd500">"공항"</span>,&nbsp;<span style="color:#ffd500">"target"</span>:&nbsp;<span style="color:#ffd500">"관광객"</span>,&nbsp;<span style="color:#ffd500">"value"</span>:&nbsp;<span style="color:#c10aff">1</span>},</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;{<span style="color:#ffd500">"source"</span>:&nbsp;<span style="color:#ffd500">"공항"</span>,&nbsp;<span style="color:#ffd500">"target"</span>:&nbsp;<span style="color:#ffd500">"노선"</span>,&nbsp;<span style="color:#ffd500">"value"</span>:&nbsp;<span style="color:#c10aff">1</span>},</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;{<span style="color:#ffd500">"source"</span>:&nbsp;<span style="color:#ffd500">"공항"</span>,&nbsp;<span style="color:#ffd500">"target"</span>:&nbsp;<span style="color:#ffd500">"마케팅&nbsp;전략"</span>,&nbsp;<span style="color:#ffd500">"value"</span>:&nbsp;<span style="color:#c10aff">1</span>},</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;{<span style="color:#ffd500">"source"</span>:&nbsp;<span style="color:#ffd500">"공항"</span>,&nbsp;<span style="color:#ffd500">"target"</span>:&nbsp;<span style="color:#ffd500">"인천국제공항"</span>,&nbsp;<span style="color:#ffd500">"value"</span>:&nbsp;<span style="color:#c10aff">1</span>},</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;{<span style="color:#ffd500">"source"</span>:&nbsp;<span style="color:#ffd500">"공항"</span>,&nbsp;<span style="color:#ffd500">"target"</span>:&nbsp;<span style="color:#ffd500">"외국인"</span>,&nbsp;<span style="color:#ffd500">"value"</span>:&nbsp;<span style="color:#c10aff">1</span>},</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;{<span style="color:#ffd500">"source"</span>:&nbsp;<span style="color:#ffd500">"공항"</span>,&nbsp;<span style="color:#ffd500">"target"</span>:&nbsp;<span style="color:#ffd500">"한국"</span>,&nbsp;<span style="color:#ffd500">"value"</span>:&nbsp;<span style="color:#c10aff">1</span>},</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;{<span style="color:#ffd500">"source"</span>:&nbsp;<span style="color:#ffd500">"공항"</span>,&nbsp;<span style="color:#ffd500">"target"</span>:&nbsp;<span style="color:#ffd500">"고객"</span>,&nbsp;<span style="color:#ffd500">"value"</span>:&nbsp;<span style="color:#c10aff">1</span>},</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;{<span style="color:#ffd500">"source"</span>:&nbsp;<span style="color:#ffd500">"공항"</span>,&nbsp;<span style="color:#ffd500">"target"</span>:&nbsp;<span style="color:#ffd500">"출국"</span>,&nbsp;<span style="color:#ffd500">"value"</span>:&nbsp;<span style="color:#c10aff">1</span>},</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;{<span style="color:#ffd500">"source"</span>:&nbsp;<span style="color:#ffd500">"공항"</span>,&nbsp;<span style="color:#ffd500">"target"</span>:&nbsp;<span style="color:#ffd500">"현황"</span>,&nbsp;<span style="color:#ffd500">"value"</span>:&nbsp;<span style="color:#c10aff">1</span>}</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;]</div><div style="padding:0 6px; white-space:pre; line-height:130%">};</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;</div><div style="padding:0 6px; white-space:pre; line-height:130%"><span style="color:#ff3399">var</span>&nbsp;fWid&nbsp;<span style="color:#0086b3"></span><span style="color:#ff3399">=</span>&nbsp;$(<span style="color:#ffd500">'.chart_box'</span>).width();</div><div style="padding:0 6px; white-space:pre; line-height:130%"><span style="color:#ff3399">var</span>&nbsp;mapOptions&nbsp;<span style="color:#0086b3"></span><span style="color:#ff3399">=</span>&nbsp;{</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;width:&nbsp;fWid,</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;height:&nbsp;<span style="color:#c10aff">350</span>,</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;nodeRadius:&nbsp;<span style="color:#c10aff">1</span>,</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;nodeStroke:&nbsp;<span style="color:#ffd500">'white'</span>,</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;nodeStrokeWidth:&nbsp;<span style="color:#c10aff">2</span></div><div style="padding:0 6px; white-space:pre; line-height:130%">};</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;</div><div style="padding:0 6px; white-space:pre; line-height:130%"><span style="color:#999999">//&nbsp;initialize&nbsp;svg</span></div><div style="padding:0 6px; white-space:pre; line-height:130%"><span style="color:#ff3399">var</span>&nbsp;svg&nbsp;<span style="color:#0086b3"></span><span style="color:#ff3399">=</span>&nbsp;d3.select(<span style="color:#ffd500">'#force'</span>)&nbsp;<span style="color:#999999">//&nbsp;div&nbsp;force를&nbsp;선택하여&nbsp;svg&nbsp;추가</span></div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;.append(<span style="color:#ffd500">'svg'</span>)</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;.attr(<span style="color:#ffd500">'width'</span>,&nbsp;mapOptions.width)</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;.attr(<span style="color:#ffd500">'height'</span>,&nbsp;mapOptions.height);</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;</div><div style="padding:0 6px; white-space:pre; line-height:130%"><span style="color:#999999">//&nbsp;지정된&nbsp;반지름&nbsp;값으로&nbsp;노드를&nbsp;겹치지&nbsp;않도록.</span></div><div style="padding:0 6px; white-space:pre; line-height:130%"><span style="color:#ff3399">var</span>&nbsp;collide&nbsp;<span style="color:#0086b3"></span><span style="color:#ff3399">=</span>&nbsp;d3.forceCollide(mapOptions.nodeRadius<span style="color:#0086b3"></span><span style="color:#ff3399">*</span><span style="color:#c10aff">1.</span><span style="color:#c10aff">5</span>);</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;</div><div style="padding:0 6px; white-space:pre; line-height:130%"><span style="color:#999999">//&nbsp;force&nbsp;simulation</span></div><div style="padding:0 6px; white-space:pre; line-height:130%"><span style="color:#ff3399">var</span>&nbsp;simulation&nbsp;<span style="color:#0086b3"></span><span style="color:#ff3399">=</span>&nbsp;d3.forceSimulation()</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;.force(<span style="color:#ffd500">"link"</span>,&nbsp;d3.forceLink().id(<span style="color:#ff3399">function</span>(d)&nbsp;{&nbsp;<span style="color:#ff3399">return</span>&nbsp;d.id;&nbsp;}).distance(<span style="color:#ff3399">function</span>(i){<span style="color:#ff3399">return</span>&nbsp;<span style="color:#c10aff">112</span>;}).strength(<span style="color:#c10aff">0.</span><span style="color:#c10aff">1</span>))</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;.force(<span style="color:#ffd500">"charge"</span>,&nbsp;d3.forceManyBody())</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;.force(<span style="color:#ffd500">"center"</span>,&nbsp;d3.forceCenter(mapOptions.width&nbsp;<span style="color:#0086b3"></span><span style="color:#ff3399">/</span>&nbsp;<span style="color:#c10aff">2</span>,&nbsp;mapOptions.height&nbsp;<span style="color:#0086b3"></span><span style="color:#ff3399">/</span>&nbsp;<span style="color:#c10aff">2.</span><span style="color:#c10aff">2</span>))</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;.force(<span style="color:#ffd500">"collide"</span>,&nbsp;collide);</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;</div><div style="padding:0 6px; white-space:pre; line-height:130%"><span style="color:#999999">//&nbsp;add&nbsp;links</span></div><div style="padding:0 6px; white-space:pre; line-height:130%"><span style="color:#ff3399">var</span>&nbsp;link&nbsp;<span style="color:#0086b3"></span><span style="color:#ff3399">=</span>&nbsp;svg.append(<span style="color:#ffd500">"g"</span>)</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;.attr(<span style="color:#ffd500">"class"</span>,&nbsp;<span style="color:#ffd500">"links"</span>)</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;.selectAll(<span style="color:#ffd500">"line"</span>)</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;.data(graph.links)</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;.enter().append(<span style="color:#ffd500">"line"</span>)</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;.attr(<span style="color:#ffd500">"stroke-width"</span>,&nbsp;<span style="color:#ff3399">function</span>(d)&nbsp;{&nbsp;<span style="color:#ff3399">return</span>&nbsp;Math.sqrt(d.value);&nbsp;})</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;.attr(<span style="color:#ffd500">"stroke"</span>,&nbsp;<span style="color:#ffd500">'#ccc'</span>);</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;</div><div style="padding:0 6px; white-space:pre; line-height:130%"><span style="color:#ff3399">var</span>&nbsp;color&nbsp;<span style="color:#0086b3"></span><span style="color:#ff3399">=</span>&nbsp;d3.scaleOrdinal(d3.schemeCategory10);</div><div style="padding:0 6px; white-space:pre; line-height:130%"><span style="color:#999999">//&nbsp;add&nbsp;nodes</span></div><div style="padding:0 6px; white-space:pre; line-height:130%"><span style="color:#ff3399">var</span>&nbsp;node&nbsp;<span style="color:#0086b3"></span><span style="color:#ff3399">=</span>&nbsp;svg.append(<span style="color:#ffd500">"g"</span>)</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;.attr(<span style="color:#ffd500">"class"</span>,&nbsp;<span style="color:#ffd500">"nodes"</span>)</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;.selectAll(<span style="color:#ffd500">"circle"</span>)</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;.data(graph.nodes)</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;.enter().append(<span style="color:#ffd500">"circle"</span>)</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;.attr(<span style="color:#ffd500">'class'</span>,&nbsp;<span style="color:#ffd500">'node'</span>)</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;.attr(<span style="color:#ffd500">"r"</span>,&nbsp;<span style="color:#ff3399">function</span>(d,&nbsp;i){</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#ff3399">if</span>&nbsp;(i&nbsp;<span style="color:#0086b3"></span><span style="color:#ff3399">=</span><span style="color:#0086b3"></span><span style="color:#ff3399">=</span>&nbsp;<span style="color:#c10aff">0</span>)&nbsp;{</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#ff3399">return</span>&nbsp;<span style="color:#c10aff">35</span>;</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;<span style="color:#ff3399">else</span>&nbsp;{</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#ff3399">return</span>&nbsp;<span style="color:#c10aff">0</span>;</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;}</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;})</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;.attr(<span style="color:#ffd500">'stroke'</span>,&nbsp;mapOptions.nodeStroke)</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;.attr(<span style="color:#ffd500">'stroke-width'</span>,&nbsp;mapOptions.nodeStrokeWidth)</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;.attr(<span style="color:#ffd500">"fill"</span>,&nbsp;<span style="color:#ff3399">function</span>(d,&nbsp;i)&nbsp;{</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#ff3399">if</span>&nbsp;(i&nbsp;<span style="color:#0086b3"></span><span style="color:#ff3399">=</span><span style="color:#0086b3"></span><span style="color:#ff3399">=</span>&nbsp;<span style="color:#c10aff">0</span>)&nbsp;{</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#ff3399">return</span>&nbsp;<span style="color:#ffd500">'#42519e'</span>;</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;<span style="color:#ff3399">else</span>&nbsp;{</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#ff3399">return</span>;</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;}</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;});</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;</div><div style="padding:0 6px; white-space:pre; line-height:130%"><span style="color:#999999">//&nbsp;add&nbsp;node&nbsp;labels</span></div><div style="padding:0 6px; white-space:pre; line-height:130%"><span style="color:#ff3399">var</span>&nbsp;texts&nbsp;<span style="color:#0086b3"></span><span style="color:#ff3399">=</span>&nbsp;svg.selectAll(<span style="color:#ffd500">'text.node-label'</span>)</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;.data(graph.nodes)</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;.enter().append(<span style="color:#ffd500">'text'</span>)</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;.attr(<span style="color:#ffd500">'class'</span>,&nbsp;<span style="color:#ffd500">'node-label'</span>)</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;.attr(<span style="color:#ffd500">'fill'</span>,&nbsp;<span style="color:#ff3399">function</span>(d,&nbsp;i)&nbsp;{</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#ff3399">if</span>&nbsp;(i&nbsp;<span style="color:#0086b3"></span><span style="color:#ff3399">=</span><span style="color:#0086b3"></span><span style="color:#ff3399">=</span>&nbsp;<span style="color:#c10aff">0</span>)&nbsp;{</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#ff3399">return</span>&nbsp;<span style="color:#ffd500">'#fff'</span>;</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;<span style="color:#ff3399">else</span>&nbsp;{</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#ff3399">return</span>&nbsp;<span style="color:#ffd500">'#000'</span>;</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;}</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;})</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;.attr(<span style="color:#ffd500">'dy'</span>,&nbsp;<span style="color:#ffd500">'0.35em'</span>)</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;.attr(<span style="color:#ffd500">'dx'</span>,&nbsp;<span style="color:#ffd500">'-0.9em'</span>)</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;.text(<span style="color:#ff3399">function</span>(d)&nbsp;{&nbsp;<span style="color:#ff3399">return</span>&nbsp;d.id;&nbsp;});</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;</div><div style="padding:0 6px; white-space:pre; line-height:130%"><span style="color:#999999">//&nbsp;add&nbsp;tick&nbsp;function</span></div><div style="padding:0 6px; white-space:pre; line-height:130%">simulation</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;.nodes(graph.nodes)</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;.on(<span style="color:#ffd500">"tick"</span>,&nbsp;ticked);</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;</div><div style="padding:0 6px; white-space:pre; line-height:130%"><span style="color:#999999">//&nbsp;add&nbsp;link&nbsp;forces</span></div><div style="padding:0 6px; white-space:pre; line-height:130%">simulation.force(<span style="color:#ffd500">"link"</span>)</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;.links(graph.links);</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;</div><div style="padding:0 6px; white-space:pre; line-height:130%"><span style="color:#ff3399">function</span>&nbsp;ticked()&nbsp;{</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;link.attr(<span style="color:#ffd500">"x1"</span>,&nbsp;<span style="color:#ff3399">function</span>(d)&nbsp;{&nbsp;<span style="color:#ff3399">return</span>&nbsp;d.source.x;&nbsp;})</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.attr(<span style="color:#ffd500">"y1"</span>,&nbsp;<span style="color:#ff3399">function</span>(d)&nbsp;{&nbsp;<span style="color:#ff3399">return</span>&nbsp;d.source.y;&nbsp;})</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.attr(<span style="color:#ffd500">"x2"</span>,&nbsp;<span style="color:#ff3399">function</span>(d)&nbsp;{&nbsp;<span style="color:#ff3399">return</span>&nbsp;d.target.x;&nbsp;})</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.attr(<span style="color:#ffd500">"y2"</span>,&nbsp;<span style="color:#ff3399">function</span>(d)&nbsp;{&nbsp;<span style="color:#ff3399">return</span>&nbsp;d.target.y;&nbsp;});</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;node.attr(<span style="color:#ffd500">"cx"</span>,&nbsp;<span style="color:#ff3399">function</span>(d)&nbsp;{&nbsp;<span style="color:#ff3399">return</span>&nbsp;d.x;&nbsp;})</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.attr(<span style="color:#ffd500">"cy"</span>,&nbsp;<span style="color:#ff3399">function</span>(d)&nbsp;{&nbsp;<span style="color:#ff3399">return</span>&nbsp;d.y;&nbsp;});</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;texts.attr(<span style="color:#ffd500">'transform'</span>,&nbsp;<span style="color:#ff3399">function</span>(d)&nbsp;{</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#ff3399">return</span>&nbsp;<span style="color:#ffd500">'translate('</span>&nbsp;<span style="color:#0086b3"></span><span style="color:#ff3399">+</span>&nbsp;d.x&nbsp;<span style="color:#0086b3"></span><span style="color:#ff3399">+</span>&nbsp;<span style="color:#ffd500">','</span>&nbsp;<span style="color:#0086b3"></span><span style="color:#ff3399">+</span>&nbsp;d.y&nbsp;<span style="color:#0086b3"></span><span style="color:#ff3399">+</span>&nbsp;<span style="color:#ffd500">')'</span>;</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;});</div><div style="padding:0 6px; white-space:pre; line-height:130%">}</div></pre><div style="text-align:right;margin-top:-13px;margin-right:5px;font-size:9px;font-style:italic"><a href="http://colorscripter.com/info#e" target="_blank" style="color:#4f4f4ftext-decoration:none">Colored by Color Scripter</a></div></td><td style="vertical-align:bottom;padding:0 2px 4px 0"><a href="http://colorscripter.com/info#e" target="_blank" style="text-decoration:none;color:white"><span style="font-size:9px;word-break:normal;background-color:#4f4f4f;color:white;border-radius:10px;padding:1px">cs</span></a></td></tr></table></div>
+           </div>
+         </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

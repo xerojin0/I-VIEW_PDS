@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>I&VIEW Design System</title>
+    <link rel="stylesheet" href="../css/contents.css">
+
+    <script src="../resource/jquery.min.js"></script>
+    <script src="../resource/chart/wordcloud/jquery.awesomeCloud-0.2.js"></script>
+    <script src="../js/script.js"></script>
+    <script>
+      $(function(){
+        $("#wordcloud").awesomeCloud({
+          "size" : {
+            "grid" : 10, // 단어 간 간격
+            "factor" : 1 // 글씨 크기 관련
+          },
+          "options" : {
+            "color" : "random-light",
+            "rotationRatio" : 0.35 // 0은 수평, 1은 수직
+          },
+          "font" : "'NanumSquare', serif",
+          "shape" : "circle" // 전체 모양 ( "circle", "square", "diamond", "triangle", "triangle-forward", "x", "pentagon" or "star" )
+        });
+      });
+      </script>
+  <body>
+    <div class="content_wrap">
+      <div class="row">
+        <div class="layout col_12">
+          <div class="title_box">
+            <h2 class="tit00">Other Chart</h2>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="layout col_12">
+          <p class="homepage"><a href="https://github.com/metaloha/jQuery.awesomeCloud.plugin" target="_blank" title="새창">jQuery.awesomeCloud</a></p>
+          <div class="p_menu">
+            <ul id="pMenu"></ul>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="layout col_12">
+         <div class="title_box item_tit">
+           <h3 class="tit01">word cloud (테크 마켓)</h3>
+         </div>
+         <div class="item_exam">
+           <div class="title_box">
+             <h4 class="tit02">결과화면</h4>
+           </div>
+           <div class="chart_box">
+             <div class="chart" id="wordcloud" style="height:500px;">
+              <span data-weight="9">페기항공기</span>
+               <span data-weight="27">흡열</span>
+               <span data-weight="38">흡열냉각</span>
+               <span data-weight="43">흡열재료</span>
+               <span data-weight="20">이상연소</span>
+               <span data-weight="19">비정상스핀</span
+               ><span data-weight="26">이륙단념</span>
+               <span data-weight="31">마모</span>
+               <span data-weight="16">급감속비행체</span>
+               <span data-weight="27">절대고도</span>
+               <span data-weight="18">절대점도</span>
+               <span data-weight="16">가속시험</span>
+               <span data-weight="31">가감속상승</span>
+               <span data-weight="65">가속극</span
+               ><span data-weight="37">가속계통</span>
+               <span data-weight="35">합격품질수준</span>
+               <span data-weight="30">허용률</span>
+               <span data-weight="40">점검창</span>
+               <span data-weight="29">사고경향성</span>
+               <span data-weight="20">우발공격</span>
+               <span data-weight="19">순응</span>
+               <span data-weight="55">축압기</span>
+               <span data-weight="36">완충기</span>
+               <span data-weight="12">정확도</span>
+               <span data-weight="25">교유발전기</span>
+               <span data-weight="29">산화납</span>
+               <span data-weight="35">포착추적레이더</span>
+               <span data-weight="150">곡예</span>
+               <span data-weight="33">아크릴수지</span>
+               <span data-weight="200"><a href="http://google.com/search?q=항공기술">항공기술</a></span>
+               <span data-weight="23">적극방공</span>
+               <span data-weight="26">현용항공기</span>
+               <span data-weight="30">능동형 통신위성</span>
+               <span data-weight="35">능동제어기술</span>
+               <span data-weight="37">능동플러터</span>
+               <span data-weight="36">작동계수</span>
+               <span data-weight="4">실제총중량</span>
+               <span data-weight="25">도착시간</span>
+               <span data-weight="4">도착시각</span>
+               <span data-weight="4">작동장치</span>
+               <span data-weight="22">급성고공병</span>
+               <span data-weight="25">적합시험</span>
+               <span data-weight="34">어댑터부스터</span>
+               <span data-weight="25">적응비행제어</span>
+               <span data-weight="33">부가가치</span>
+               <span data-weight="23">추가장비</span>
+               <span data-weight="25">제트연료첨가제</span>
+               <span data-weight="39">점착지</span>
+               <span data-weight="30">단열변화</span>
+               <span data-weight="63">단열</span>
+               <span data-weight="18">냉각</span>
+               <span data-weight="32">급속냉각</span>
+               <span data-weight="19">단열화염온도</span>
+               <span data-weight="22">단열과정</span>
+               <span data-weight="19">가변노출</span>
+               <span data-weight="19">행정용항공기</span>
+               <span data-weight="18">성인운임</span>
+               <span data-weight="14">첨단복합재료</span>
+               <span data-weight="19">단열감율</span>
+               <span data-weight="12">고급비행훈련</span>
+               <span data-weight="38">고등기동</span>
+               <span data-weight="27">진행비</span>
+               <span data-weight="55">전진비</span>
+               <span data-weight="38">수평기류</span>
+               <span data-weight="28">기류안개</span>
+               <span data-weight="35">역빗놀이</span>
+               <span data-weight="23">권장항로</span>
+               <span data-weight="23">항공사진</span>
+               <span data-weight="22">공중투하</span>
+               <span data-weight="23">지도작성항공사진기</span>
+               <span data-weight="22">항공기납치</span>
+               <span data-weight="47">항공어뢰</span>
+               <span data-weight="35">공력음향학</span>
+               <span data-weight="51">항공의학</span>
+               <span data-weight="26">탄도학</span>
+               <span data-weight="19">항공치통</span>
+               <span data-weight="23">비행장</span>
+               <span data-weight="16">비행장대공</span>
+               <span data-weight="35">기후표</span>
+               <span data-weight="21">관제제</span>
+               <span data-weight="30">관제업무</span>
+               <span data-weight="46">비행장표고</span>
+               <span data-weight="21">비행장규격</span>
+               <span data-weight="19">활주로</span>
+               <span data-weight="26">비상활주로</span>
+               <span data-weight="38">활주로피해복구</span>
+               <span data-weight="59">비행장교통</span>
+               <span data-weight="21">수신호</span>
+               <span data-weight="18">골재</span>
+               <span data-weight="24">탄소섬유</span>
+               <span data-weight="21">공력평형조종면</span>
+               <span data-weight="32">공력중심</span>
+               <span data-weight="15">공력특성</span>
+               <span data-weight="6">공기항력</span>
+               <span data-weight="24">공력가열</span>
+               <span data-weight="6">공탄성학</span>
+               <span data-weight="6">날개꼴</span>
+               <span data-weight="6">버드스트라이크</span>
+               <span data-weight="38">항공고정업무</span>
+               <span data-weight="21">항공로지</span>
+               <span data-weight="22">항공용 윤활유</span>
+               <span data-weight="19">항공기상학</span>
+               <span data-weight="21">항공장해등</span>
+               <span data-weight="54">항공심리학</span>
+               <span data-weight="19">항공업무지구국</span>
+               <span data-weight="28">무공기층</span>
+               <span data-weight="19">비행기</span>
+               <span data-weight="21">항공우주</span>
+               <span data-weight="16">에어로솔</span>
+               <span data-weight="18">시효경화</span>
+               <span data-weight="43">반자동</span>
+               <span data-weight="16">에일러베이터</span>
+               <span data-weight="17">에일러론</span>
+               <span data-weight="7">에일러론 리버설</span>
+               <span data-weight="7">공군</span>
+               <span data-weight="7">공중급유</span>
+               <span data-weight="22">상승기류</span>
+               <span data-weight="22">항공화물</span>
+               <span data-weight="24">비상착륙</span>
+               <span data-weight="26">공기조화기</span>
+               <span data-weight="16">항공운송회사</span>
+               <span data-weight="3">불시착</span>
+               <span data-weight="3">항공기장비</span>
+               <span data-weight="3">항공기 급유시설</span>
+               <span data-weight="3">기수방위</span>
+               <span data-weight="3">비행시간</span>
+               <span data-weight="3">항공계기</span>
+               <span data-weight="3">급속통제</span>
+               <span data-weight="3">항공정비</span>
+               <span data-weight="3">항공기무선통신</span>
+               <span data-weight="3">시운전소음</span>
+               <span data-weight="21">주기장</span>
+               <span data-weight="21">대기광</span>
+               <span data-weight="26">공기흡입구</span>
+               <span data-weight="23">항로</span>
+               <span data-weight="27">항공회사코드</span>
+               <span data-weight="13">항공로</span>
+               <span data-weight="3">이상접근</span>
+               <span data-weight="16">관제탑</span>
+               <span data-weight="25">격납고</span>
+               <span data-weight="19">비행속도계</span>
+               <span data-weight="26">비상</span>
+               <span data-weight="15">제공</span>
+               <span data-weight="16">임시활주로</span>
+               <span data-weight="16">공중유도로</span>
+               <span data-weight="5">여객기</span>
+               <span data-weight="5">교통관제</span>
+               <span data-weight="5">항공로등대</span>
+               <span data-weight="5">착륙기어</span>
+               <span data-weight="5">이상착륙</span>
+               <span data-weight="5">전구동식 꼬리날개</span>
+               <span data-weight="5">연합</span>
+               <span data-weight="25">인천국제공항</span>
+             </div>
+           </div>
+           <div class="title_box">
+             <h4 class="tit02">HTML</h4>
+           </div>
+           <div class="code_box">
+<div class="colorscripter-code" style="color:#f0f0f0;font-family:Consolas, 'Liberation Mono', Menlo, Courier, monospace !important; position:relative !important;overflow:auto"><table class="colorscripter-code-table" style="margin:0;padding:0;border:none;background-color:#272727;border-radius:4px;" cellspacing="0" cellpadding="0"><tr><td style="padding:6px 0;text-align:left"><pre style="margin:0;padding:0;color:#f0f0f0;font-family:Consolas, 'Liberation Mono', Menlo, Courier, monospace !important;line-height:130%"><div style="padding:0 6px; white-space:pre; line-height:130%"><span style="color:#f0f0f0">&lt;</span><span style="color:#ff3399">script</span>&nbsp;<span style="color:#a8ff58">src</span>=<span style="color:#ffd500">"../resource/chart/wordcloud/jquery.awesomeCloud-0.2.js"</span><span style="color:#ff3399"></span><span style="color:#f0f0f0">&gt;</span><span style="color:#f0f0f0">&lt;</span><span style="color:#f0f0f0">/</span><span style="color:#ff3399">script</span><span style="color:#f0f0f0">&gt;</span></div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;</div><div style="padding:0 6px; white-space:pre; line-height:130%"><span style="color:#f0f0f0">&lt;</span><span style="color:#ff3399">div</span>&nbsp;<span style="color:#a8ff58">class</span>=<span style="color:#ffd500">"chart"</span><span style="color:#a8ff58"></span>&nbsp;<span style="color:#a8ff58">id</span>=<span style="color:#ffd500">"wordcloud"</span><span style="color:#a8ff58"></span>&nbsp;<span style="color:#a8ff58">style</span>=<span style="color:#ffd500">"height:500px;"</span><span style="color:#a8ff58"></span><span style="color:#f0f0f0">&gt;</span></div><div style="padding:0 6px; white-space:pre; line-height:130%"><span style="color:#f0f0f0">&lt;</span><span style="color:#ff3399">span</span>&nbsp;<span style="color:#a8ff58">data-weight</span>=<span style="color:#ffd500">"9"</span><span style="color:#a8ff58"></span><span style="color:#f0f0f0">&gt;</span>페기항공기<span style="color:#f0f0f0">&lt;</span><span style="color:#f0f0f0">/</span><span style="color:#ff3399">span</span><span style="color:#f0f0f0">&gt;</span></div><div style="padding:0 6px; white-space:pre; line-height:130%">~</div><div style="padding:0 6px; white-space:pre; line-height:130%"><span style="color:#f0f0f0">&lt;</span><span style="color:#ff3399">span</span>&nbsp;<span style="color:#a8ff58">data-weight</span>=<span style="color:#ffd500">"200"</span><span style="color:#a8ff58"></span><span style="color:#f0f0f0">&gt;</span><span style="color:#f0f0f0">&lt;</span><span style="color:#ff3399">a</span>&nbsp;<span style="color:#a8ff58">href</span>=<span style="color:#ffd500">"http://google.com/search?q=항공기술"</span><span style="color:#a8ff58"></span><span style="color:#f0f0f0">&gt;</span>항공기술<span style="color:#f0f0f0">&lt;</span><span style="color:#f0f0f0">/</span><span style="color:#ff3399">a</span><span style="color:#f0f0f0">&gt;</span><span style="color:#f0f0f0">&lt;</span><span style="color:#f0f0f0">/</span><span style="color:#ff3399">span</span><span style="color:#f0f0f0">&gt;</span></div><div style="padding:0 6px; white-space:pre; line-height:130%">~</div><div style="padding:0 6px; white-space:pre; line-height:130%"><span style="color:#f0f0f0">&lt;</span><span style="color:#ff3399">span</span>&nbsp;<span style="color:#a8ff58">data-weight</span>=<span style="color:#ffd500">"25"</span><span style="color:#a8ff58"></span><span style="color:#f0f0f0">&gt;</span>인천국제공항<span style="color:#f0f0f0">&lt;</span><span style="color:#f0f0f0">/</span><span style="color:#ff3399">span</span><span style="color:#f0f0f0">&gt;</span></div><div style="padding:0 6px; white-space:pre; line-height:130%"><span style="color:#f0f0f0">&lt;</span><span style="color:#f0f0f0">/</span><span style="color:#ff3399">div</span><span style="color:#f0f0f0">&gt;</span></div></pre><div style="text-align:right;margin-top:-13px;margin-right:5px;font-size:9px;font-style:italic"><a href="http://colorscripter.com/info#e" target="_blank" style="color:#4f4f4ftext-decoration:none">Colored by Color Scripter</a></div></td><td style="vertical-align:bottom;padding:0 2px 4px 0"><a href="http://colorscripter.com/info#e" target="_blank" style="text-decoration:none;color:white"><span style="font-size:9px;word-break:normal;background-color:#4f4f4f;color:white;border-radius:10px;padding:1px">cs</span></a></td></tr></table></div>
+           </div>
+           <div class="title_box">
+             <h4 class="tit02">JS</h4>
+           </div>
+           <div class="code_box">
+<div class="colorscripter-code" style="color:#f0f0f0;font-family:Consolas, 'Liberation Mono', Menlo, Courier, monospace !important; position:relative !important;overflow:auto"><table class="colorscripter-code-table" style="margin:0;padding:0;border:none;background-color:#272727;border-radius:4px;" cellspacing="0" cellpadding="0"><tr><td style="padding:6px 0;text-align:left"><pre style="margin:0;padding:0;color:#f0f0f0;font-family:Consolas, 'Liberation Mono', Menlo, Courier, monospace !important;line-height:130%"><div style="padding:0 6px; white-space:pre; line-height:130%">$(<span style="color:#ffd500">"#wordcloud"</span>).awesomeCloud({</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;<span style="color:#ffd500">"size"</span>&nbsp;:&nbsp;{&nbsp;</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#ffd500">"grid"</span>&nbsp;:&nbsp;<span style="color:#c10aff">10</span>,&nbsp;<span style="color:#999999">//&nbsp;단어&nbsp;간&nbsp;간격</span></div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#ffd500">"factor"</span>&nbsp;:&nbsp;<span style="color:#c10aff">1</span>&nbsp;<span style="color:#999999">//&nbsp;글씨&nbsp;크기&nbsp;관련</span></div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;},</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;<span style="color:#ffd500">"options"</span>&nbsp;:&nbsp;{</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#ffd500">"color"</span>&nbsp;:&nbsp;<span style="color:#ffd500">"random-light"</span>,</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#ffd500">"rotationRatio"</span>&nbsp;:&nbsp;<span style="color:#c10aff">0.</span><span style="color:#c10aff">35</span>&nbsp;<span style="color:#999999">//&nbsp;0은&nbsp;수평,&nbsp;1은&nbsp;수직</span></div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;},</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;<span style="color:#ffd500">"font"</span>&nbsp;:&nbsp;<span style="color:#ffd500">"'NanumSquare',&nbsp;serif"</span>,</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;<span style="color:#ffd500">"shape"</span>&nbsp;:&nbsp;<span style="color:#ffd500">"circle"</span>&nbsp;<span style="color:#999999">//&nbsp;전체&nbsp;모양&nbsp;(&nbsp;"circle",&nbsp;"square",&nbsp;"diamond",&nbsp;"triangle",&nbsp;"triangle-forward",&nbsp;"x",&nbsp;"pentagon"&nbsp;or&nbsp;"star"&nbsp;)</span></div><div style="padding:0 6px; white-space:pre; line-height:130%">});</div></pre><div style="text-align:right;margin-top:-13px;margin-right:5px;font-size:9px;font-style:italic"><a href="http://colorscripter.com/info#e" target="_blank" style="color:#4f4f4ftext-decoration:none">Colored by Color Scripter</a></div></td><td style="vertical-align:bottom;padding:0 2px 4px 0"><a href="http://colorscripter.com/info#e" target="_blank" style="text-decoration:none;color:white"><span style="font-size:9px;word-break:normal;background-color:#4f4f4f;color:white;border-radius:10px;padding:1px">cs</span></a></td></tr></table></div>
+           </div>
+         </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

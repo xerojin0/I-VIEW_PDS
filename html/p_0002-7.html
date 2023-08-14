@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>I&VIEW Design System</title>
+    <link rel="stylesheet" href="../resource/chart/chartjs/Chart.min.css">
+    <link rel="stylesheet" href="../css/contents.css">
+
+    <script src="../resource/jquery.min.js"></script>
+    <script src="../resource/chart/chartjs/Chart.min.js"></script>
+    <script src="../js/script.js"></script>
+    <script>
+      $(function(){
+var ctx = document.getElementById("lineChart"); //캔버스 id값 가져오기
+var chartBoxW = $('.chart_box').width();
+ctx.width = chartBoxW + 300; // 차트 넓이 지정
+ctx.height = 500; // 차트 높이
+var myChart = new Chart(ctx, {
+  type: 'line', //그래프 형태 지정하기
+  data: {
+    labels: ["1월", "2월", "3월", "4월", "5월", "6월", "7월", "8월", "9월", "10월"], //X축 제목
+    datasets: [{
+      label: '항목1',
+      data: [12, 19, 3, 5, 2, 3, 15, 16, 20, 5],
+      backgroundColor:'rgba(255, 99, 132, 0.2)',
+      borderColor:'rgba(255,99,132,1)',
+      borderWidth: 1 //선굵기
+    },{
+      label: '항목2',
+      data: [6, 3, 1, 7, 2, 13, 15, 16, 20, 5],
+      backgroundColor:'rgba(54, 162, 235, 0.2)',
+      borderColor:'rgba(54, 162, 235, 1)',
+      borderWidth: 1 //선굵기
+   }]
+  },
+  options: {
+    responsive: false,
+    scales: { //X,Y축 옵션
+      yAxes: [{
+        ticks: {
+          beginAtZero: true //Y축의 값이 0부터 시작
+        }
+      }]
+    },
+    animation: {
+      onComplete: function () { // 스크롤시 보일 차트 y축 추가
+        var sourceCanvas = myChart.chart.canvas;
+        var copyWidth = myChart.scales['y-axis-0'].width - 10;
+        var copyHeight = myChart.scales['y-axis-0'].height + myChart.scales['y-axis-0'].top + 10;
+        var targetCtx = document.getElementById("chartAxis").getContext("2d");
+        targetCtx.canvas.width = copyWidth;
+        targetCtx.drawImage(sourceCanvas, 0, 0, copyWidth, copyHeight, 0, 0, copyWidth, copyHeight);
+      }
+    }
+  }
+});
+// 스크롤시 보일 차트 y축 높이
+var axis = document.getElementById("chartAxis");
+var chartH = ctx.offsetHeight;
+axis.height = chartH;
+// 가로 스크롤 휠
+$(".chart_wrap").on('mousewheel',function(e){
+ var oEvt = e.originalEvent,
+     delta = oEvt.deltaY || oEvt.wheelDelta;
+
+ if(delta > 0){
+   $(this).scrollLeft(-delta + $(this).scrollLeft());
+ }else{
+   $(this).scrollLeft(-delta + $(this).scrollLeft());
+ }
+});
+// 차트 가로스크롤 휠 이동을 위한 body 스크롤 막기
+$('.chart_box').hover(function(){
+   $('body').css('overflow','hidden');
+}, function() {
+  $('body').css('overflow','auto');
+});
+      });
+    </script>
+  <body>
+    <div class="content_wrap">
+      <div class="row">
+        <div class="layout col_12">
+          <div class="title_box">
+            <h2 class="tit00">Chart.js</h2>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="layout col_12">
+          <p class="homepage"><a href="https://www.chartjs.org/" target="_blank" title="새창">chart.js 홈페이지 링크</a></p>
+          <div class="p_menu">
+            <ul id="pMenu"></ul>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="layout col_12">
+         <div class="title_box item_tit">
+           <h3 class="tit01">line chart</h3>
+         </div>
+         <div class="item_exam">
+           <div class="title_box">
+             <h4 class="tit02">결과화면</h4>
+           </div>
+           <div class="chart_box scrolling">
+             <div class="chart_wrap">
+               <canvas id="lineChart"></canvas>
+             </div>
+             <!-- 스크롤 Y축 -->
+             <canvas id="chartAxis" class="chart_axis"></canvas>
+           </div>
+           <div class="title_box">
+             <h4 class="tit02">HTML</h4>
+           </div>
+           <div class="code_box">
+<div class="colorscripter-code" style="color:#f0f0f0;font-family:Consolas, 'Liberation Mono', Menlo, Courier, monospace !important; position:relative !important;overflow:auto"><table class="colorscripter-code-table" style="margin:0;padding:0;border:none;background-color:#272727;border-radius:4px;" cellspacing="0" cellpadding="0"><tr><td style="padding:6px 0;text-align:left"><pre style="margin:0;padding:0;color:#f0f0f0;font-family:Consolas, 'Liberation Mono', Menlo, Courier, monospace !important;line-height:130%"><div style="padding:0 6px; white-space:pre; line-height:130%"><span style="color:#f0f0f0">&lt;</span><span style="color:#ff3399">link</span>&nbsp;<span style="color:#a8ff58">rel</span>=<span style="color:#ffd500">"stylesheet"</span><span style="color:#a8ff58"></span>&nbsp;<span style="color:#a8ff58">href</span>=<span style="color:#ffd500">"../resource/chart/chartjs/Chart.min.css"</span><span style="color:#a8ff58"></span><span style="color:#f0f0f0">&gt;</span></div><div style="padding:0 6px; white-space:pre; line-height:130%"><span style="color:#f0f0f0">&lt;</span><span style="color:#ff3399">script</span>&nbsp;<span style="color:#a8ff58">src</span>=<span style="color:#ffd500">"../resource/chart/chartjs/Chart.min.js"</span><span style="color:#ff3399"></span><span style="color:#f0f0f0">&gt;</span><span style="color:#f0f0f0">&lt;</span><span style="color:#f0f0f0">/</span><span style="color:#ff3399">script</span><span style="color:#f0f0f0">&gt;</span></div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;</div><div style="padding:0 6px; white-space:pre; line-height:130%"><span style="color:#f0f0f0">&lt;</span><span style="color:#ff3399">div</span>&nbsp;<span style="color:#a8ff58">class</span>=<span style="color:#ffd500">"chart_box&nbsp;scrolling"</span><span style="color:#a8ff58"></span><span style="color:#f0f0f0">&gt;</span></div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;<span style="color:#f0f0f0">&lt;</span><span style="color:#ff3399">div</span>&nbsp;<span style="color:#a8ff58">class</span>=<span style="color:#ffd500">"chart_wrap"</span><span style="color:#a8ff58"></span><span style="color:#f0f0f0">&gt;</span></div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;<span style="color:#f0f0f0">&lt;</span><span style="color:#ff3399">canvas</span>&nbsp;<span style="color:#a8ff58">id</span>=<span style="color:#ffd500">"lineChart"</span><span style="color:#a8ff58"></span><span style="color:#f0f0f0">&gt;</span><span style="color:#f0f0f0">&lt;</span><span style="color:#f0f0f0">/</span><span style="color:#ff3399">canvas</span><span style="color:#f0f0f0">&gt;</span></div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;<span style="color:#f0f0f0">&lt;</span><span style="color:#f0f0f0">/</span><span style="color:#ff3399">div</span><span style="color:#f0f0f0">&gt;</span></div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;<span style="color:#999999">&lt;!--&nbsp;스크롤&nbsp;Y축&nbsp;--&gt;</span></div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;<span style="color:#f0f0f0">&lt;</span><span style="color:#ff3399">canvas</span>&nbsp;<span style="color:#a8ff58">id</span>=<span style="color:#ffd500">"chartAxis"</span><span style="color:#a8ff58"></span>&nbsp;<span style="color:#a8ff58">class</span>=<span style="color:#ffd500">"chart_axis"</span><span style="color:#a8ff58"></span><span style="color:#f0f0f0">&gt;</span><span style="color:#f0f0f0">&lt;</span><span style="color:#f0f0f0">/</span><span style="color:#ff3399">canvas</span><span style="color:#f0f0f0">&gt;</span></div><div style="padding:0 6px; white-space:pre; line-height:130%"><span style="color:#f0f0f0">&lt;</span><span style="color:#f0f0f0">/</span><span style="color:#ff3399">div</span><span style="color:#f0f0f0">&gt;</span></div></pre><div style="text-align:right;margin-top:-13px;margin-right:5px;font-size:9px;font-style:italic"><a href="http://colorscripter.com/info#e" target="_blank" style="color:#4f4f4ftext-decoration:none">Colored by Color Scripter</a></div></td><td style="vertical-align:bottom;padding:0 2px 4px 0"><a href="http://colorscripter.com/info#e" target="_blank" style="text-decoration:none;color:white"><span style="font-size:9px;word-break:normal;background-color:#4f4f4f;color:white;border-radius:10px;padding:1px">cs</span></a></td></tr></table></div>
+           </div>
+           <div class="title_box">
+             <h4 class="tit02">JS</h4>
+           </div>
+           <div class="code_box">
+<div class="colorscripter-code" style="color:#f0f0f0;font-family:Consolas, 'Liberation Mono', Menlo, Courier, monospace !important; position:relative !important;overflow:auto"><table class="colorscripter-code-table" style="margin:0;padding:0;border:none;background-color:#272727;border-radius:4px;" cellspacing="0" cellpadding="0"><tr><td style="padding:6px 0;text-align:left"><pre style="margin:0;padding:0;color:#f0f0f0;font-family:Consolas, 'Liberation Mono', Menlo, Courier, monospace !important;line-height:130%"><div style="padding:0 6px; white-space:pre; line-height:130%"><span style="color:#ff3399">var</span>&nbsp;ctx&nbsp;<span style="color:#aaffaa"></span><span style="color:#ff3399">=</span>&nbsp;<span style="color:#4be6fa">document</span>.<span style="color:#4be6fa">getElementById</span>(<span style="color:#ffd500">"lineChart"</span>);&nbsp;<span style="color:#999999">//캔버스&nbsp;id값&nbsp;가져오기</span></div><div style="padding:0 6px; white-space:pre; line-height:130%"><span style="color:#ff3399">var</span>&nbsp;chartBoxW&nbsp;<span style="color:#aaffaa"></span><span style="color:#ff3399">=</span>&nbsp;$(<span style="color:#ffd500">'.chart_box'</span>).width();</div><div style="padding:0 6px; white-space:pre; line-height:130%">ctx.width&nbsp;<span style="color:#aaffaa"></span><span style="color:#ff3399">=</span>&nbsp;chartBoxW&nbsp;<span style="color:#aaffaa"></span><span style="color:#ff3399">+</span>&nbsp;<span style="color:#c10aff">300</span>;&nbsp;<span style="color:#999999">//&nbsp;차트&nbsp;넓이&nbsp;지정</span></div><div style="padding:0 6px; white-space:pre; line-height:130%">ctx.height&nbsp;<span style="color:#aaffaa"></span><span style="color:#ff3399">=</span>&nbsp;<span style="color:#c10aff">500</span>;&nbsp;<span style="color:#999999">//&nbsp;차트&nbsp;높이</span></div><div style="padding:0 6px; white-space:pre; line-height:130%"><span style="color:#ff3399">var</span>&nbsp;myChart&nbsp;<span style="color:#aaffaa"></span><span style="color:#ff3399">=</span>&nbsp;<span style="color:#ff3399">new</span>&nbsp;Chart(ctx,&nbsp;{</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;type:&nbsp;<span style="color:#ffd500">'line'</span>,&nbsp;<span style="color:#999999">//그래프&nbsp;형태&nbsp;지정하기</span></div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;data:&nbsp;{</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;labels:&nbsp;[<span style="color:#ffd500">"1월"</span>,&nbsp;<span style="color:#ffd500">"2월"</span>,&nbsp;<span style="color:#ffd500">"3월"</span>,&nbsp;<span style="color:#ffd500">"4월"</span>,&nbsp;<span style="color:#ffd500">"5월"</span>,&nbsp;<span style="color:#ffd500">"6월"</span>,&nbsp;<span style="color:#ffd500">"7월"</span>,&nbsp;<span style="color:#ffd500">"8월"</span>,&nbsp;<span style="color:#ffd500">"9월"</span>,&nbsp;<span style="color:#ffd500">"10월"</span>],&nbsp;<span style="color:#999999">//X축&nbsp;제목</span></div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;datasets:&nbsp;[{</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;label:&nbsp;<span style="color:#ffd500">'항목1'</span>,</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;data:&nbsp;[<span style="color:#c10aff">12</span>,&nbsp;<span style="color:#c10aff">19</span>,&nbsp;<span style="color:#c10aff">3</span>,&nbsp;<span style="color:#c10aff">5</span>,&nbsp;<span style="color:#c10aff">2</span>,&nbsp;<span style="color:#c10aff">3</span>,&nbsp;<span style="color:#c10aff">15</span>,&nbsp;<span style="color:#c10aff">16</span>,&nbsp;<span style="color:#c10aff">20</span>,&nbsp;<span style="color:#c10aff">5</span>],</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;backgroundColor:<span style="color:#ffd500">'rgba(255,&nbsp;99,&nbsp;132,&nbsp;0.2)'</span>,</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;borderColor:<span style="color:#ffd500">'rgba(255,99,132,1)'</span>,</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;borderWidth:&nbsp;<span style="color:#c10aff">1</span>&nbsp;<span style="color:#999999">//선굵기</span></div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;},{</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;label:&nbsp;<span style="color:#ffd500">'항목2'</span>,</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;data:&nbsp;[<span style="color:#c10aff">6</span>,&nbsp;<span style="color:#c10aff">3</span>,&nbsp;<span style="color:#c10aff">1</span>,&nbsp;<span style="color:#c10aff">7</span>,&nbsp;<span style="color:#c10aff">2</span>,&nbsp;<span style="color:#c10aff">13</span>,&nbsp;<span style="color:#c10aff">15</span>,&nbsp;<span style="color:#c10aff">16</span>,&nbsp;<span style="color:#c10aff">20</span>,&nbsp;<span style="color:#c10aff">5</span>],</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;backgroundColor:<span style="color:#ffd500">'rgba(54,&nbsp;162,&nbsp;235,&nbsp;0.2)'</span>,</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;borderColor:<span style="color:#ffd500">'rgba(54,&nbsp;162,&nbsp;235,&nbsp;1)'</span>,</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;borderWidth:&nbsp;<span style="color:#c10aff">1</span>&nbsp;<span style="color:#999999">//선굵기</span></div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;}]</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;},</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;options:&nbsp;{</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;responsive:&nbsp;<span style="color:#c10aff">false</span>,</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;scales:&nbsp;{&nbsp;<span style="color:#999999">//X,Y축&nbsp;옵션</span></div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;yAxes:&nbsp;[{</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ticks:&nbsp;{</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;beginAtZero:&nbsp;<span style="color:#ff3399">true</span>&nbsp;<span style="color:#999999">//Y축의&nbsp;값이&nbsp;0부터&nbsp;시작</span></div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}]</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;},</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;animation:&nbsp;{</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;onComplete:&nbsp;<span style="color:#ff3399">function</span>&nbsp;()&nbsp;{&nbsp;<span style="color:#999999">//&nbsp;스크롤시&nbsp;보일&nbsp;차트&nbsp;y축&nbsp;추가</span></div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#ff3399">var</span>&nbsp;sourceCanvas&nbsp;<span style="color:#aaffaa"></span><span style="color:#ff3399">=</span>&nbsp;myChart.chart.canvas;</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#ff3399">var</span>&nbsp;copyWidth&nbsp;<span style="color:#aaffaa"></span><span style="color:#ff3399">=</span>&nbsp;myChart.scales[<span style="color:#ffd500">'y-axis-0'</span>].width&nbsp;<span style="color:#aaffaa"></span><span style="color:#ff3399">-</span>&nbsp;<span style="color:#c10aff">10</span>;</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#ff3399">var</span>&nbsp;copyHeight&nbsp;<span style="color:#aaffaa"></span><span style="color:#ff3399">=</span>&nbsp;myChart.scales[<span style="color:#ffd500">'y-axis-0'</span>].height&nbsp;<span style="color:#aaffaa"></span><span style="color:#ff3399">+</span>&nbsp;myChart.scales[<span style="color:#ffd500">'y-axis-0'</span>].top&nbsp;<span style="color:#aaffaa"></span><span style="color:#ff3399">+</span>&nbsp;<span style="color:#c10aff">10</span>;</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#ff3399">var</span>&nbsp;targetCtx&nbsp;<span style="color:#aaffaa"></span><span style="color:#ff3399">=</span>&nbsp;<span style="color:#4be6fa">document</span>.<span style="color:#4be6fa">getElementById</span>(<span style="color:#ffd500">"chartAxis"</span>).getContext(<span style="color:#ffd500">"2d"</span>);</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;targetCtx.canvas.width&nbsp;<span style="color:#aaffaa"></span><span style="color:#ff3399">=</span>&nbsp;copyWidth;</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;targetCtx.drawImage(sourceCanvas,&nbsp;<span style="color:#c10aff">0</span>,&nbsp;<span style="color:#c10aff">0</span>,&nbsp;copyWidth,&nbsp;copyHeight,&nbsp;<span style="color:#c10aff">0</span>,&nbsp;<span style="color:#c10aff">0</span>,&nbsp;copyWidth,&nbsp;copyHeight);</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;}</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;}</div><div style="padding:0 6px; white-space:pre; line-height:130%">});</div><div style="padding:0 6px; white-space:pre; line-height:130%"><span style="color:#999999">//&nbsp;스크롤시&nbsp;보일&nbsp;차트&nbsp;y축&nbsp;높이</span></div><div style="padding:0 6px; white-space:pre; line-height:130%"><span style="color:#ff3399">var</span>&nbsp;axis&nbsp;<span style="color:#aaffaa"></span><span style="color:#ff3399">=</span>&nbsp;<span style="color:#4be6fa">document</span>.<span style="color:#4be6fa">getElementById</span>(<span style="color:#ffd500">"chartAxis"</span>);</div><div style="padding:0 6px; white-space:pre; line-height:130%"><span style="color:#ff3399">var</span>&nbsp;chartH&nbsp;<span style="color:#aaffaa"></span><span style="color:#ff3399">=</span>&nbsp;ctx.offsetHeight;</div><div style="padding:0 6px; white-space:pre; line-height:130%">axis.height&nbsp;<span style="color:#aaffaa"></span><span style="color:#ff3399">=</span>&nbsp;chartH;</div><div style="padding:0 6px; white-space:pre; line-height:130%"><span style="color:#999999">//&nbsp;가로&nbsp;스크롤&nbsp;휠</span></div><div style="padding:0 6px; white-space:pre; line-height:130%">$(<span style="color:#ffd500">".chart_wrap"</span>).on(<span style="color:#ffd500">'mousewheel'</span>,<span style="color:#ff3399">function</span>(e){</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;<span style="color:#ff3399">var</span>&nbsp;oEvt&nbsp;<span style="color:#aaffaa"></span><span style="color:#ff3399">=</span>&nbsp;e.originalEvent,</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;delta&nbsp;<span style="color:#aaffaa"></span><span style="color:#ff3399">=</span>&nbsp;oEvt.deltaY&nbsp;<span style="color:#aaffaa"></span><span style="color:#ff3399">|</span><span style="color:#aaffaa"></span><span style="color:#ff3399">|</span>&nbsp;oEvt.wheelDelta;</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;<span style="color:#ff3399">if</span>(delta&nbsp;<span style="color:#aaffaa"></span><span style="color:#ff3399">&gt;</span>&nbsp;<span style="color:#c10aff">0</span>){</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;$(<span style="color:#4be6fa">this</span>).scrollLeft(<span style="color:#aaffaa"></span><span style="color:#ff3399">-</span>delta&nbsp;<span style="color:#aaffaa"></span><span style="color:#ff3399">+</span>&nbsp;$(<span style="color:#4be6fa">this</span>).scrollLeft());</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;}<span style="color:#ff3399">else</span>{</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;$(<span style="color:#4be6fa">this</span>).scrollLeft(<span style="color:#aaffaa"></span><span style="color:#ff3399">-</span>delta&nbsp;<span style="color:#aaffaa"></span><span style="color:#ff3399">+</span>&nbsp;$(<span style="color:#4be6fa">this</span>).scrollLeft());</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;}</div><div style="padding:0 6px; white-space:pre; line-height:130%">});</div><div style="padding:0 6px; white-space:pre; line-height:130%"><span style="color:#999999">//&nbsp;차트&nbsp;가로스크롤&nbsp;휠&nbsp;이동을&nbsp;위한&nbsp;body&nbsp;스크롤&nbsp;막기</span></div><div style="padding:0 6px; white-space:pre; line-height:130%">$(<span style="color:#ffd500">'.chart_box'</span>).hover(<span style="color:#ff3399">function</span>(){</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;$(<span style="color:#ffd500">'body'</span>).css(<span style="color:#ffd500">'overflow'</span>,<span style="color:#ffd500">'hidden'</span>);</div><div style="padding:0 6px; white-space:pre; line-height:130%">},&nbsp;<span style="color:#ff3399">function</span>()&nbsp;{</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;$(<span style="color:#ffd500">'body'</span>).css(<span style="color:#ffd500">'overflow'</span>,<span style="color:#ffd500">'auto'</span>);</div><div style="padding:0 6px; white-space:pre; line-height:130%">})</div></pre><div style="text-align:right;margin-top:-13px;margin-right:5px;font-size:9px;font-style:italic"><a href="http://colorscripter.com/info#e" target="_blank" style="color:#4f4f4ftext-decoration:none">Colored by Color Scripter</a></div></td><td style="vertical-align:bottom;padding:0 2px 4px 0"><a href="http://colorscripter.com/info#e" target="_blank" style="text-decoration:none;color:white"><span style="font-size:9px;word-break:normal;background-color:#4f4f4f;color:white;border-radius:10px;padding:1px">cs</span></a></td></tr></table></div>
+           </div>
+         </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
