@@ -37,16 +37,6 @@
             var val =  $(this).text();
             var href =  $(this).attr('href').split('.');
             var fileName = href[0].substring(2);
-
-            ////////// 탭 생성시 중복확인 안함(default 태그) //////////
- //                nthTabs.addTab({
- //                    id: "p"+anum,
- //                    title:val,
- //                    url: 'p_'+anum+'.html',
- //                    active: true,
- //                    allowClose: true
- //                })
-
             ////////// 탭 중복시 존재하는 지 확인후 생성 //////////
             if(nthTabs.isExistsTab('#p'+fileName)) {
                 nthTabs.toggleTab('#p'+fileName);
@@ -91,10 +81,10 @@
               <li class="has-sub">
                 <a href="#"><i class="fas fa-code"></i><span>퍼블리싱</span></a>
                 <ul class="documents">
-                  <li><a href="#">공통 컴포넌트</a></li>
-                  <li><a href="#">PC</a></li>
-                  <li><a href="#">MO</a></li>
-                  <li><a href="#">CSS 애니메이션 01</a></li>
+                  <li><a href="p_0001.html">공통 컴포넌트</a></li>
+                  <li><a href="p_0002.html">PC</a></li>
+                  <li><a href="p_0003.html">MO</a></li>
+                  <li><a href="p_0004.html">CSS 애니메이션 01</a></li>
                   <li><a href="#">js 애니메이션 01</a></li>
                   <li><a href="#">페이지 요소 01</a></li>
                 </ul>
