@@ -83,30 +83,34 @@
 /* Noto Sans CJK KR */
 @font-face {
     font-weight: 200;
-    font-family: 'Noto-Sans-CJK-KR';
+    font-family: 'NotoSansKR';
     font-style: light;
-    src: url(/fonts/Noto-Sans-CJK-KR-Light.otf) format("otf");
+    src: url(font/NotoSansKR-Light.woff2) format("woff2"),url(font/NotoSansKR-Light.woff) format("woff"),
+    url(font/NotoSansKR-Light.otf) format("otf");
     font-display: swap;
 }
 @font-face {
     font-weight: 400;
-    font-family: 'Noto-Sans-CJK-KR';
+    font-family: 'NotoSansKR';
     font-style: normal;
-    src: url(/fonts/Noto-Sans-CJK-KR-Regular.woff2) format("woff2"),url(/fonts/Noto-Sans-CJK-KR-Regular.woff) format("woff");
+    src: url(font/NotoSansKR-Regular.woff2) format("woff2"),url(font/NotoSansKR-Regular.woff) format("woff"),
+    url(font/NotoSansKR-Regular.otf) format("otf");
     font-display: swap;
 }
 @font-face {
     font-weight: 500;
-    font-family: 'Noto-Sans-CJK-KR';
+    font-family: 'NotoSansKR';
     font-style: medium;
-    src: url(/fonts/Noto-Sans-CJK-KR-Medium.otf) format("otf");
+    src: url(font/NotoSansKR-Medium.woff2) format("woff2"),url(font/NotoSansKR-Medium.woff) format("woff"),
+    url(font/NotoSansKR-Medium.otf) format("otf");
     font-display: swap;
 }
 @font-face {
     font-weight: 700;
-    font-family: 'Noto-Sans-CJK-KR';
+    font-family: 'NotoSansKR';
     font-style: bold;
-    src: url(/fonts/Noto-Sans-CJK-KR-Bold.woff2) format("woff2"),url(/fonts/Noto-Sans-CJK-KR-Bold.woff) format("woff");
+    src: url(font/NotoSansKR-bold.woff2) format("woff2"),url(font/NotoSansKR-bold.woff) format("woff"),
+    url(font/NotoSansKR-bold.otf) format("otf");
     font-display: swap;
 }
 
@@ -115,14 +119,14 @@
     font-weight: 500;
     font-family: 'Segoe-UI';
     font-style: normal;
-    src: url(/fonts/Segoe-UI-Regular.woff2) format("woff2"),url(/fonts/Segoe-UI-Regular.woff) format("woff");
+    src: url(font/Segoe-UI-Regular.woff2) format("woff2"),url(font/Segoe-UI-Regular.woff) format("woff");
     font-display: swap;
 }
 @font-face {
     font-weight: 500;
     font-family: 'Segoe-UI';
     font-style: normal;
-    src: url(/fonts/Segoe-UI-Bold.woff2) format("woff2"),url(/fonts/Segoe-UI-Bold.woff) format("woff");
+    src: url(font/Segoe-UI-Bold.woff2) format("woff2"),url(font/Segoe-UI-Bold.woff) format("woff");
     font-display: swap;
 }
 
