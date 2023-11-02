@@ -229,3 +229,17 @@
     font-weight: normal;
     font-style: normal;
 }
+
+/* Consola Mono */
+@font-face {
+    font-family: 'ConsolaMono';
+    font-style: normal;
+    font-weight: 400;
+    src: local('Consola Mono'), url('https://fonts.cdnfonts.com/s/78407/ConsolaMono-Book.woff') format('woff');
+}
+@font-face {
+    font-family: 'ConsolaMono';
+    font-style: normal;
+    font-weight: 700;
+    src: local('Consola Mono'), url('https://fonts.cdnfonts.com/s/78407/ConsolaMono-Bold.woff') format('woff');
+}
