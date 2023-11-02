@@ -243,3 +243,11 @@
     font-weight: 700;
     src: local('Consola Mono'), url('https://fonts.cdnfonts.com/s/78407/ConsolaMono-Bold.woff') format('woff');
 }
+
+/* bodoni */
+@font-face{
+    font-family:bodoni;
+    font-style:normal;
+    font-weight:400;
+    src:local('Bodoni'),url(https://fonts.cdnfonts.com/s/14285/bodoni_[allfont.net].woff) format('woff');
+}
