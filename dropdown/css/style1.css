@@ -1,0 +1,41 @@
+@import url('demo.css');
+@import url('common.css');
+@import url('icons.css');
+
+.cd-dropdown > a,
+.cd-dropdown ul li:nth-last-child(-n+3) a {
+	box-shadow: 0 1px 1px rgba(0,0,0,0.1);
+}
+
+.cd-dropdown ul {
+	position: absolute;
+	top: 0px;
+	width: 100%;
+}
+
+.cd-dropdown ul li {
+	position: absolute;
+	width: 100%;
+}
+
+.cd-active.cd-dropdown > a {
+	color: #fc756f;
+}
+
+.cd-active.cd-dropdown > a,
+.cd-active.cd-dropdown ul li a {
+	box-shadow: 0 1px 1px rgba(0,0,0,0.1);
+}
+
+.cd-active.cd-dropdown ul li a {
+	-webkit-transition: all 0.2s linear 0s;
+	-moz-transition: all 0.2s linear 0s;
+	-ms-transition: all 0.2s linear 0s;
+	-o-transition: all 0.2s linear 0s;
+	transition: all 0.2s linear 0s;
+}
+
+.cd-active.cd-dropdown ul li a:hover {
+	background: #fc756f;
+	color: #fff;
+}
