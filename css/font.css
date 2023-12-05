@@ -2,6 +2,7 @@
 
 /* fontawesome */
 @import url(fontawesome.css);
+@import "//cdn.jsdelivr.net/npm/font-applesdgothicneo@1.0/all.min.css";
 
 /* Monterrat */
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap');
