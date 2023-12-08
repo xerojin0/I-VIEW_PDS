@@ -389,3 +389,12 @@
 				url("font/Moonlight-Regular.ttf")format("truetype"),
 				url("font/Moonlight-Regular.svg#Moonlight-Regular")format("svg");
 }
+
+/* Creattion  */
+@font-face { 
+    font-family:'Creattion'; 
+    font-style:normal; 
+    font-weight:400; 
+    src:url("font/Creattion.ttf")format("truetype"),
+		    url("font/Creattion.otf")format("otf");
+}
