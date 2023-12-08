@@ -376,3 +376,16 @@
         url(https://cdn.jsdelivr.net/npm/font-applesdgothicneo@1.0/fonts/900_AppleSDGothicNeo-Heavy.woff2) format('woff2'),
         url(https://cdn.jsdelivr.net/npm/font-applesdgothicneo@1.0/fonts/900_AppleSDGothicNeo-Heavy.otf) format('opentype') 
 } 
+
+/* Moonlight */
+@font-face { 
+    font-family:'Moonlight-Regular'; 
+    font-style:normal; 
+    font-weight:100; 
+    src: url("font/Moonlight-Regular.eot");
+    src: url("font/Moonlight-Regular.eot?#iefix")format("embedded-opentype"),
+			   url("font/Moonlight-Regular.woff")format("woff"),
+				 url("font/Moonlight-Regular.woff2")format("woff2"),
+				 url("font/Moonlight-Regular.ttf")format("truetype"),
+				 url("font/Moonlight-Regular.svg#Moonlight-Regular")format("svg");
+}
