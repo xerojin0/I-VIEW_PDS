@@ -382,12 +382,9 @@
     font-family:'Moonlight-Regular'; 
     font-style:normal; 
     font-weight:100; 
-    src:url("font/Moonlight-Regular.eot");
-    src:url("font/Moonlight-Regular.eot?#iefix")format("embedded-opentype"),
-				url("font/Moonlight-Regular.woff")format("woff"),
-				url("font/Moonlight-Regular.woff2")format("woff2"),
-				url("font/Moonlight-Regular.ttf")format("truetype"),
-				url("font/Moonlight-Regular.svg#Moonlight-Regular")format("svg");
+    src:url("font/Moonlight-Regular.eot"),
+        url("font/Moonlight-Regular.woff")format("woff"),
+        url("font/Moonlight-Regular.woff2")format("woff2")
 }
 
 /* Creattion  */
