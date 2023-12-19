@@ -377,7 +377,7 @@
         url(https://cdn.jsdelivr.net/npm/font-applesdgothicneo@1.0/fonts/900_AppleSDGothicNeo-Heavy.otf) format('opentype') 
 } 
 
-/* Moonlight */
+/* Moonlight Regular */
 @font-face { 
     font-family:'Moonlight-Regular'; 
     font-style:normal; 
@@ -387,13 +387,23 @@
         url("font/Moonlight-Regular.woff2")format("woff2")
 }
 
+/* Moonlight */
+@font-face { 
+    font-family:'Moonlight'; 
+    font-style:normal; 
+    font-weight:100; 
+    src:url("font/Moonlight.ttf")format("truetype"),
+        url("font/Moonlight.otf")format("otf");
+}
+
+
 /* Creattion  */
 @font-face { 
     font-family:'Creattion'; 
     font-style:normal; 
     font-weight:400; 
     src:url("font/Creattion.ttf")format("truetype"),
-		    url("font/Creattion.otf")format("otf");
+        url("font/Creattion.otf")format("otf");
 }
 
 /* GowunDodum-Regular */
