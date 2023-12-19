@@ -1,91 +1,88 @@
 <!DOCTYPE html>
 <html lang="ko">
   <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <title>I&VIEW Design System</title>
-    <link rel="stylesheet" href="../resource/chart/apexchart/apexcharts.css">
-    <link rel="stylesheet" href="../css/contents.css">
+    <link rel="stylesheet" href="../resource/chart/apexchart/apexcharts.css" />
+    <link rel="stylesheet" href="../css/contents.css" />
 
     <script src="../resource/jquery.min.js"></script>
     <!-- apexcharts IE 지원 -->
     <script type="text/javascript">
-      window.Promise ||
-      document.write('<script src="../resource/polyfill.min.js"><\/script>')
-      window.Promise ||
-      document.write('<script src="../resource/classlist.js"><\/script>')
-      window.Promise ||
-      document.write('<script src="../resource/findIndex.js"><\/script>')
-      window.Promise ||
-      document.write('<script src="../resource/canvg.js"><\/script>')
+      window.Promise || document.write('<script src="../resource/polyfill.min.js"><\/script>');
+      window.Promise || document.write('<script src="../resource/classlist.js"><\/script>');
+      window.Promise || document.write('<script src="../resource/findIndex.js"><\/script>');
+      window.Promise || document.write('<script src="../resource/canvg.js"><\/script>');
     </script>
     <script src="../resource/chart/apexchart/apexcharts.min.js"></script>
 
     <script src="../js/script.js"></script>
     <script>
-      $(function(){
-// 차트 옵션
-var options = {
-    series: [100],
-    chart: {
-    height: 350,
-    type: 'radialBar',
-    sparkline: {
-      enabled: true
-    }
-  },
-  plotOptions: {
-    radialBar: {
-      hollow: {
-        size: '70%', // 차트 크기 대비 백분률
-      }
-    },
-  },
-  labels: ['Cricket'],
-};
-// 차트
-var chart = new ApexCharts(document.querySelector("#radial"), options);
-chart.render();
+      $(function () {
+        // 차트 옵션
+        var options = {
+          series: [100],
+          chart: {
+            height: 350,
+            type: "radialBar",
+            sparkline: {
+              enabled: true,
+            },
+          },
+          plotOptions: {
+            radialBar: {
+              hollow: {
+                size: "70%", // 차트 크기 대비 백분률
+              },
+            },
+          },
+          labels: ["Cricket"],
+        };
+        // 차트
+        var chart = new ApexCharts(document.querySelector("#radial"), options);
+        chart.render();
 
-// 차트 옵션
-var option2 ={
-  series: [77],
-  chart: {
-    type: 'radialBar',
-    width: '450px', // 기본 100%, 450지정
-    offsetY: -20,
-    sparkline: {
-      enabled: true
-    }
-  },
-  plotOptions: {
-    radialBar: {
-      startAngle: -90, // 시작 각도
-      endAngle: 90, // 끝 각도
-      track: {
-        background: "#e9ecef",
-        strokeWidth: '97%',
-        margin: 0,
-      },
-      dataLabels: {
-        name: {
-          show: false
-        },
-        value: {
-          offsetY: -2,
-          fontSize: '20px',
-          fontWeight: 'bold'
-        }
-      }
-    }
-  },
-  labels: ['인구']
-};
-// 차트
-var chart = new ApexCharts(document.querySelector("#gauge"), option2);
-chart.render();
+        // 차트 옵션
+        var option2 = {
+          series: [77],
+          chart: {
+            type: "radialBar",
+            width: "450px", // 기본 100%, 450지정
+            offsetY: -20,
+            sparkline: {
+              enabled: true,
+            },
+          },
+          plotOptions: {
+            radialBar: {
+              startAngle: -90, // 시작 각도
+              endAngle: 90, // 끝 각도
+              track: {
+                background: "#e9ecef",
+                strokeWidth: "97%",
+                margin: 0,
+              },
+              dataLabels: {
+                name: {
+                  show: false,
+                },
+                value: {
+                  offsetY: -2,
+                  fontSize: "20px",
+                  fontWeight: "bold",
+                },
+              },
+            },
+          },
+          labels: ["인구"],
+        };
+        // 차트
+        var chart = new ApexCharts(document.querySelector("#gauge"), option2);
+        chart.render();
       });
-      </script>
+    </script>
+  </head>
   <body>
     <div class="content_wrap">
       <div class="row">
@@ -115,13 +112,91 @@ chart.render();
               <h4 class="tit02">HTML</h4>
             </div>
             <div class="code_box">
-<div class="colorscripter-code" style="color:#f0f0f0;font-family:Consolas, 'Liberation Mono', Menlo, Courier, monospace !important; position:relative !important;overflow:auto"><table class="colorscripter-code-table" style="margin:0;padding:0;border:none;background-color:#272727;border-radius:4px;" cellspacing="0" cellpadding="0"><tr><td style="padding:6px 0;text-align:left"><pre style="margin:0;padding:0;color:#f0f0f0;font-family:Consolas, 'Liberation Mono', Menlo, Courier, monospace !important;line-height:130%"><div style="padding:0 6px; white-space:pre; line-height:130%"><span style="color:#f0f0f0">&lt;</span><span style="color:#ff3399">link</span>&nbsp;<span style="color:#a8ff58">rel</span>=<span style="color:#ffd500">"stylesheet"</span><span style="color:#a8ff58"></span>&nbsp;<span style="color:#a8ff58">href</span>=<span style="color:#ffd500">"../resource/chart/apexchart/apexcharts.css"</span><span style="color:#a8ff58"></span><span style="color:#f0f0f0">&gt;</span></div><div style="padding:0 6px; white-space:pre; line-height:130%"><span style="color:#999999">&lt;!--&nbsp;apexcharts&nbsp;IE&nbsp;지원&nbsp;--&gt;</span></div><div style="padding:0 6px; white-space:pre; line-height:130%"><span style="color:#f0f0f0">&lt;</span><span style="color:#ff3399">script</span>&nbsp;<span style="color:#a8ff58">type</span>=<span style="color:#ffd500">"text/javascript"</span><span style="color:#ff3399"></span><span style="color:#f0f0f0">&gt;</span></div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;<span style="color:#4be6fa">window</span>.<span style="color:#4be6fa">Promise</span>&nbsp;<span style="color:#aaffaa"></span><span style="color:#ff3399">|</span><span style="color:#aaffaa"></span><span style="color:#ff3399">|</span></div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;<span style="color:#4be6fa">document</span>.write(<span style="color:#ffd500">'&lt;script&nbsp;src="../resource/polyfill.min.js"&gt;&lt;\/script&gt;'</span>)</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;<span style="color:#4be6fa">window</span>.<span style="color:#4be6fa">Promise</span>&nbsp;<span style="color:#aaffaa"></span><span style="color:#ff3399">|</span><span style="color:#aaffaa"></span><span style="color:#ff3399">|</span></div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;<span style="color:#4be6fa">document</span>.write(<span style="color:#ffd500">'&lt;script&nbsp;src="../resource/classlist.js"&gt;&lt;\/script&gt;'</span>)</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;<span style="color:#4be6fa">window</span>.<span style="color:#4be6fa">Promise</span>&nbsp;<span style="color:#aaffaa"></span><span style="color:#ff3399">|</span><span style="color:#aaffaa"></span><span style="color:#ff3399">|</span></div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;<span style="color:#4be6fa">document</span>.write(<span style="color:#ffd500">'&lt;script&nbsp;src="../resource/findIndex.js"&gt;&lt;\/script&gt;'</span>)</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;<span style="color:#4be6fa">window</span>.<span style="color:#4be6fa">Promise</span>&nbsp;<span style="color:#aaffaa"></span><span style="color:#ff3399">|</span><span style="color:#aaffaa"></span><span style="color:#ff3399">|</span></div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;<span style="color:#4be6fa">document</span>.write(<span style="color:#ffd500">'&lt;script&nbsp;src="../resource/canvg.js"&gt;&lt;\/script&gt;'</span>)</div><div style="padding:0 6px; white-space:pre; line-height:130%"><span style="color:#f0f0f0">&lt;</span><span style="color:#f0f0f0">/</span><span style="color:#ff3399">script</span><span style="color:#f0f0f0">&gt;</span></div><div style="padding:0 6px; white-space:pre; line-height:130%"><span style="color:#f0f0f0">&lt;</span><span style="color:#ff3399">script</span>&nbsp;<span style="color:#a8ff58">src</span>=<span style="color:#ffd500">"../resource/chart/apexchart/apexcharts.min.js"</span><span style="color:#ff3399"></span><span style="color:#f0f0f0">&gt;</span><span style="color:#f0f0f0">&lt;</span><span style="color:#f0f0f0">/</span><span style="color:#ff3399">script</span><span style="color:#f0f0f0">&gt;</span></div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;</div><div style="padding:0 6px; white-space:pre; line-height:130%"><span style="color:#f0f0f0">&lt;</span><span style="color:#ff3399">div</span>&nbsp;<span style="color:#a8ff58">id</span>=<span style="color:#ffd500">"radial"</span><span style="color:#a8ff58"></span><span style="color:#f0f0f0">&gt;</span><span style="color:#f0f0f0">&lt;</span><span style="color:#f0f0f0">/</span><span style="color:#ff3399">div</span><span style="color:#f0f0f0">&gt;</span></div></pre><div style="text-align:right;margin-top:-13px;margin-right:5px;font-size:9px;font-style:italic"><a href="http://colorscripter.com/info#e" target="_blank" style="color:#4f4f4ftext-decoration:none">Colored by Color Scripter</a></div></td><td style="vertical-align:bottom;padding:0 2px 4px 0"><a href="http://colorscripter.com/info#e" target="_blank" style="text-decoration:none;color:white"><span style="font-size:9px;word-break:normal;background-color:#4f4f4f;color:white;border-radius:10px;padding:1px">cs</span></a></td></tr></table></div>
+              <div
+                class="colorscripter-code"
+                style="
+                  color: #f0f0f0;
+                  font-family: Consolas, 'Liberation Mono', Menlo, Courier, monospace !important;
+                  position: relative !important;
+                  overflow: auto;
+                "
+              >
+                <table
+                  class="colorscripter-code-table"
+                  style="margin: 0; padding: 0; border: none; background-color: #272727; border-radius: 4px"
+                  cellspacing="0"
+                  cellpadding="0"
+                >
+                  <tr>
+                    <td style="padding: 6px 0; text-align: left">
+                      <pre
+                        style="
+                          margin: 0;
+                          padding: 0;
+                          color: #f0f0f0;
+                          font-family: Consolas, 'Liberation Mono', Menlo, Courier, monospace !important;
+                          line-height: 130%;
+                        "
+                      ><div style="padding:0 6px; white-space:pre; line-height:130%"><span style="color:#f0f0f0">&lt;</span><span style="color:#ff3399">link</span>&nbsp;<span style="color:#a8ff58">rel</span>=<span style="color:#ffd500">"stylesheet"</span><span style="color:#a8ff58"></span>&nbsp;<span style="color:#a8ff58">href</span>=<span style="color:#ffd500">"../resource/chart/apexchart/apexcharts.css"</span><span style="color:#a8ff58"></span><span style="color:#f0f0f0">&gt;</span></div><div style="padding:0 6px; white-space:pre; line-height:130%"><span style="color:#999999">&lt;!--&nbsp;apexcharts&nbsp;IE&nbsp;지원&nbsp;--&gt;</span></div><div style="padding:0 6px; white-space:pre; line-height:130%"><span style="color:#f0f0f0">&lt;</span><span style="color:#ff3399">script</span>&nbsp;<span style="color:#a8ff58">type</span>=<span style="color:#ffd500">"text/javascript"</span><span style="color:#ff3399"></span><span style="color:#f0f0f0">&gt;</span></div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;<span style="color:#4be6fa">window</span>.<span style="color:#4be6fa">Promise</span>&nbsp;<span style="color:#aaffaa"></span><span style="color:#ff3399">|</span><span style="color:#aaffaa"></span><span style="color:#ff3399">|</span></div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;<span style="color:#4be6fa">document</span>.write(<span style="color:#ffd500">'&lt;script&nbsp;src="../resource/polyfill.min.js"&gt;&lt;\/script&gt;'</span>)</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;<span style="color:#4be6fa">window</span>.<span style="color:#4be6fa">Promise</span>&nbsp;<span style="color:#aaffaa"></span><span style="color:#ff3399">|</span><span style="color:#aaffaa"></span><span style="color:#ff3399">|</span></div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;<span style="color:#4be6fa">document</span>.write(<span style="color:#ffd500">'&lt;script&nbsp;src="../resource/classlist.js"&gt;&lt;\/script&gt;'</span>)</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;<span style="color:#4be6fa">window</span>.<span style="color:#4be6fa">Promise</span>&nbsp;<span style="color:#aaffaa"></span><span style="color:#ff3399">|</span><span style="color:#aaffaa"></span><span style="color:#ff3399">|</span></div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;<span style="color:#4be6fa">document</span>.write(<span style="color:#ffd500">'&lt;script&nbsp;src="../resource/findIndex.js"&gt;&lt;\/script&gt;'</span>)</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;<span style="color:#4be6fa">window</span>.<span style="color:#4be6fa">Promise</span>&nbsp;<span style="color:#aaffaa"></span><span style="color:#ff3399">|</span><span style="color:#aaffaa"></span><span style="color:#ff3399">|</span></div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;<span style="color:#4be6fa">document</span>.write(<span style="color:#ffd500">'&lt;script&nbsp;src="../resource/canvg.js"&gt;&lt;\/script&gt;'</span>)</div><div style="padding:0 6px; white-space:pre; line-height:130%"><span style="color:#f0f0f0">&lt;</span><span style="color:#f0f0f0">/</span><span style="color:#ff3399">script</span><span style="color:#f0f0f0">&gt;</span></div><div style="padding:0 6px; white-space:pre; line-height:130%"><span style="color:#f0f0f0">&lt;</span><span style="color:#ff3399">script</span>&nbsp;<span style="color:#a8ff58">src</span>=<span style="color:#ffd500">"../resource/chart/apexchart/apexcharts.min.js"</span><span style="color:#ff3399"></span><span style="color:#f0f0f0">&gt;</span><span style="color:#f0f0f0">&lt;</span><span style="color:#f0f0f0">/</span><span style="color:#ff3399">script</span><span style="color:#f0f0f0">&gt;</span></div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;</div><div style="padding:0 6px; white-space:pre; line-height:130%"><span style="color:#f0f0f0">&lt;</span><span style="color:#ff3399">div</span>&nbsp;<span style="color:#a8ff58">id</span>=<span style="color:#ffd500">"radial"</span><span style="color:#a8ff58"></span><span style="color:#f0f0f0">&gt;</span><span style="color:#f0f0f0">&lt;</span><span style="color:#f0f0f0">/</span><span style="color:#ff3399">div</span><span style="color:#f0f0f0">&gt;</span></div></pre>
+                      <div style="text-align: right; margin-top: -13px; margin-right: 5px; font-size: 9px; font-style: italic">
+                        <a href="http://colorscripter.com/info#e" target="_blank" style="color:#4f4f4ftext-decoration:none">Colored by Color Scripter</a>
+                      </div>
+                    </td>
+                    <td style="vertical-align: bottom; padding: 0 2px 4px 0">
+                      <a href="http://colorscripter.com/info#e" target="_blank" style="text-decoration: none; color: white"
+                        ><span style="font-size: 9px; word-break: normal; background-color: #4f4f4f; color: white; border-radius: 10px; padding: 1px"
+                          >cs</span
+                        ></a
+                      >
+                    </td>
+                  </tr>
+                </table>
+              </div>
             </div>
             <div class="title_box">
               <h4 class="tit02">JS</h4>
             </div>
             <div class="code_box">
-<div class="colorscripter-code" style="color:#f0f0f0;font-family:Consolas, 'Liberation Mono', Menlo, Courier, monospace !important; position:relative !important;overflow:auto"><table class="colorscripter-code-table" style="margin:0;padding:0;border:none;background-color:#272727;border-radius:4px;" cellspacing="0" cellpadding="0"><tr><td style="padding:6px 0;text-align:left"><pre style="margin:0;padding:0;color:#f0f0f0;font-family:Consolas, 'Liberation Mono', Menlo, Courier, monospace !important;line-height:130%"><div style="padding:0 6px; white-space:pre; line-height:130%"><span style="color:#999999">//&nbsp;차트&nbsp;옵션</span></div><div style="padding:0 6px; white-space:pre; line-height:130%"><span style="color:#ff3399">var</span>&nbsp;options&nbsp;<span style="color:#aaffaa"></span><span style="color:#ff3399">=</span>&nbsp;{</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;series:&nbsp;[<span style="color:#c10aff">100</span>],</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;chart:&nbsp;{</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;height:&nbsp;<span style="color:#c10aff">350</span>,</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;type:&nbsp;<span style="color:#ffd500">'radialBar'</span>,</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;},</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;plotOptions:&nbsp;{</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;radialBar:&nbsp;{</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;hollow:&nbsp;{</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;size:&nbsp;<span style="color:#ffd500">'70%'</span>,&nbsp;<span style="color:#999999">//&nbsp;차트&nbsp;크기&nbsp;대비&nbsp;백분률</span></div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;},</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;},</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;labels:&nbsp;[<span style="color:#ffd500">'Cricket'</span>],</div><div style="padding:0 6px; white-space:pre; line-height:130%">};</div><div style="padding:0 6px; white-space:pre; line-height:130%"><span style="color:#999999">//&nbsp;차트</span></div><div style="padding:0 6px; white-space:pre; line-height:130%"><span style="color:#ff3399">var</span>&nbsp;chart&nbsp;<span style="color:#aaffaa"></span><span style="color:#ff3399">=</span>&nbsp;<span style="color:#ff3399">new</span>&nbsp;ApexCharts(<span style="color:#4be6fa">document</span>.querySelector(<span style="color:#ffd500">"#radial"</span>),&nbsp;options);</div><div style="padding:0 6px; white-space:pre; line-height:130%">chart.render();</div></pre><div style="text-align:right;margin-top:-13px;margin-right:5px;font-size:9px;font-style:italic"><a href="http://colorscripter.com/info#e" target="_blank" style="color:#4f4f4ftext-decoration:none">Colored by Color Scripter</a></div></td><td style="vertical-align:bottom;padding:0 2px 4px 0"><a href="http://colorscripter.com/info#e" target="_blank" style="text-decoration:none;color:white"><span style="font-size:9px;word-break:normal;background-color:#4f4f4f;color:white;border-radius:10px;padding:1px">cs</span></a></td></tr></table></div>
+              <div
+                class="colorscripter-code"
+                style="
+                  color: #f0f0f0;
+                  font-family: Consolas, 'Liberation Mono', Menlo, Courier, monospace !important;
+                  position: relative !important;
+                  overflow: auto;
+                "
+              >
+                <table
+                  class="colorscripter-code-table"
+                  style="margin: 0; padding: 0; border: none; background-color: #272727; border-radius: 4px"
+                  cellspacing="0"
+                  cellpadding="0"
+                >
+                  <tr>
+                    <td style="padding: 6px 0; text-align: left">
+                      <pre
+                        style="
+                          margin: 0;
+                          padding: 0;
+                          color: #f0f0f0;
+                          font-family: Consolas, 'Liberation Mono', Menlo, Courier, monospace !important;
+                          line-height: 130%;
+                        "
+                      ><div style="padding:0 6px; white-space:pre; line-height:130%"><span style="color:#999999">//&nbsp;차트&nbsp;옵션</span></div><div style="padding:0 6px; white-space:pre; line-height:130%"><span style="color:#ff3399">var</span>&nbsp;options&nbsp;<span style="color:#aaffaa"></span><span style="color:#ff3399">=</span>&nbsp;{</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;series:&nbsp;[<span style="color:#c10aff">100</span>],</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;chart:&nbsp;{</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;height:&nbsp;<span style="color:#c10aff">350</span>,</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;type:&nbsp;<span style="color:#ffd500">'radialBar'</span>,</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;},</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;plotOptions:&nbsp;{</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;radialBar:&nbsp;{</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;hollow:&nbsp;{</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;size:&nbsp;<span style="color:#ffd500">'70%'</span>,&nbsp;<span style="color:#999999">//&nbsp;차트&nbsp;크기&nbsp;대비&nbsp;백분률</span></div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;},</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;},</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;labels:&nbsp;[<span style="color:#ffd500">'Cricket'</span>],</div><div style="padding:0 6px; white-space:pre; line-height:130%">};</div><div style="padding:0 6px; white-space:pre; line-height:130%"><span style="color:#999999">//&nbsp;차트</span></div><div style="padding:0 6px; white-space:pre; line-height:130%"><span style="color:#ff3399">var</span>&nbsp;chart&nbsp;<span style="color:#aaffaa"></span><span style="color:#ff3399">=</span>&nbsp;<span style="color:#ff3399">new</span>&nbsp;ApexCharts(<span style="color:#4be6fa">document</span>.querySelector(<span style="color:#ffd500">"#radial"</span>),&nbsp;options);</div><div style="padding:0 6px; white-space:pre; line-height:130%">chart.render();</div></pre>
+                      <div style="text-align: right; margin-top: -13px; margin-right: 5px; font-size: 9px; font-style: italic">
+                        <a href="http://colorscripter.com/info#e" target="_blank" style="color:#4f4f4ftext-decoration:none">Colored by Color Scripter</a>
+                      </div>
+                    </td>
+                    <td style="vertical-align: bottom; padding: 0 2px 4px 0">
+                      <a href="http://colorscripter.com/info#e" target="_blank" style="text-decoration: none; color: white"
+                        ><span style="font-size: 9px; word-break: normal; background-color: #4f4f4f; color: white; border-radius: 10px; padding: 1px"
+                          >cs</span
+                        ></a
+                      >
+                    </td>
+                  </tr>
+                </table>
+              </div>
             </div>
           </div>
           <div class="title_box item_tit">
@@ -138,7 +213,46 @@ chart.render();
               <h4 class="tit02">JS</h4>
             </div>
             <div class="code_box">
-<div class="colorscripter-code" style="color:#f0f0f0;font-family:Consolas, 'Liberation Mono', Menlo, Courier, monospace !important; position:relative !important;overflow:auto"><table class="colorscripter-code-table" style="margin:0;padding:0;border:none;background-color:#272727;border-radius:4px;" cellspacing="0" cellpadding="0"><tr><td style="padding:6px 0;text-align:left"><pre style="margin:0;padding:0;color:#f0f0f0;font-family:Consolas, 'Liberation Mono', Menlo, Courier, monospace !important;line-height:130%"><div style="padding:0 6px; white-space:pre; line-height:130%"><span style="color:#999999">//&nbsp;차트&nbsp;옵션</span></div><div style="padding:0 6px; white-space:pre; line-height:130%"><span style="color:#ff3399">var</span>&nbsp;option2&nbsp;<span style="color:#aaffaa"></span><span style="color:#ff3399">=</span>{</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;series:&nbsp;[<span style="color:#c10aff">77</span>],</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;chart:&nbsp;{</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;type:&nbsp;<span style="color:#ffd500">'radialBar'</span>,</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;width:&nbsp;<span style="color:#ffd500">'450px'</span>,&nbsp;<span style="color:#999999">//&nbsp;기본&nbsp;100%,&nbsp;450지정</span></div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;offsetY:&nbsp;<span style="color:#aaffaa"></span><span style="color:#ff3399">-</span><span style="color:#c10aff">20</span>,</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;sparkline:&nbsp;{</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;enabled:&nbsp;<span style="color:#ff3399">true</span></div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;}</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;},</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;plotOptions:&nbsp;{</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;radialBar:&nbsp;{</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;startAngle:&nbsp;<span style="color:#aaffaa"></span><span style="color:#ff3399">-</span><span style="color:#c10aff">90</span>,&nbsp;<span style="color:#999999">//&nbsp;시작&nbsp;각도</span></div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;endAngle:&nbsp;<span style="color:#c10aff">90</span>,&nbsp;<span style="color:#999999">//&nbsp;끝&nbsp;각도</span></div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;track:&nbsp;{&nbsp;</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;background:&nbsp;<span style="color:#ffd500">"#e9ecef"</span>,</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;strokeWidth:&nbsp;<span style="color:#ffd500">'97%'</span>,</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;margin:&nbsp;<span style="color:#c10aff">0</span>,</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;},</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;dataLabels:&nbsp;{</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#4be6fa">name</span>:&nbsp;{</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;show:&nbsp;<span style="color:#c10aff">false</span></div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;},</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;value:&nbsp;{</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;offsetY:&nbsp;<span style="color:#aaffaa"></span><span style="color:#ff3399">-</span><span style="color:#c10aff">2</span>,</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;fontSize:&nbsp;<span style="color:#ffd500">'20px'</span>,</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;fontWeight:&nbsp;<span style="color:#ffd500">'bold'</span></div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;}</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;},</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;labels:&nbsp;[<span style="color:#ffd500">'인구'</span>]</div><div style="padding:0 6px; white-space:pre; line-height:130%">};</div><div style="padding:0 6px; white-space:pre; line-height:130%"><span style="color:#999999">//&nbsp;차트</span></div><div style="padding:0 6px; white-space:pre; line-height:130%"><span style="color:#ff3399">var</span>&nbsp;chart&nbsp;<span style="color:#aaffaa"></span><span style="color:#ff3399">=</span>&nbsp;<span style="color:#ff3399">new</span>&nbsp;ApexCharts(<span style="color:#4be6fa">document</span>.querySelector(<span style="color:#ffd500">"#gauge"</span>),&nbsp;option2);</div><div style="padding:0 6px; white-space:pre; line-height:130%">chart.render();</div></pre><div style="text-align:right;margin-top:-13px;margin-right:5px;font-size:9px;font-style:italic"><a href="http://colorscripter.com/info#e" target="_blank" style="color:#4f4f4ftext-decoration:none">Colored by Color Scripter</a></div></td><td style="vertical-align:bottom;padding:0 2px 4px 0"><a href="http://colorscripter.com/info#e" target="_blank" style="text-decoration:none;color:white"><span style="font-size:9px;word-break:normal;background-color:#4f4f4f;color:white;border-radius:10px;padding:1px">cs</span></a></td></tr></table></div>
+              <div
+                class="colorscripter-code"
+                style="
+                  color: #f0f0f0;
+                  font-family: Consolas, 'Liberation Mono', Menlo, Courier, monospace !important;
+                  position: relative !important;
+                  overflow: auto;
+                "
+              >
+                <table
+                  class="colorscripter-code-table"
+                  style="margin: 0; padding: 0; border: none; background-color: #272727; border-radius: 4px"
+                  cellspacing="0"
+                  cellpadding="0"
+                >
+                  <tr>
+                    <td style="padding: 6px 0; text-align: left">
+                      <pre
+                        style="
+                          margin: 0;
+                          padding: 0;
+                          color: #f0f0f0;
+                          font-family: Consolas, 'Liberation Mono', Menlo, Courier, monospace !important;
+                          line-height: 130%;
+                        "
+                      ><div style="padding:0 6px; white-space:pre; line-height:130%"><span style="color:#999999">//&nbsp;차트&nbsp;옵션</span></div><div style="padding:0 6px; white-space:pre; line-height:130%"><span style="color:#ff3399">var</span>&nbsp;option2&nbsp;<span style="color:#aaffaa"></span><span style="color:#ff3399">=</span>{</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;series:&nbsp;[<span style="color:#c10aff">77</span>],</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;chart:&nbsp;{</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;type:&nbsp;<span style="color:#ffd500">'radialBar'</span>,</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;width:&nbsp;<span style="color:#ffd500">'450px'</span>,&nbsp;<span style="color:#999999">//&nbsp;기본&nbsp;100%,&nbsp;450지정</span></div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;offsetY:&nbsp;<span style="color:#aaffaa"></span><span style="color:#ff3399">-</span><span style="color:#c10aff">20</span>,</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;sparkline:&nbsp;{</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;enabled:&nbsp;<span style="color:#ff3399">true</span></div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;}</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;},</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;plotOptions:&nbsp;{</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;radialBar:&nbsp;{</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;startAngle:&nbsp;<span style="color:#aaffaa"></span><span style="color:#ff3399">-</span><span style="color:#c10aff">90</span>,&nbsp;<span style="color:#999999">//&nbsp;시작&nbsp;각도</span></div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;endAngle:&nbsp;<span style="color:#c10aff">90</span>,&nbsp;<span style="color:#999999">//&nbsp;끝&nbsp;각도</span></div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;track:&nbsp;{&nbsp;</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;background:&nbsp;<span style="color:#ffd500">"#e9ecef"</span>,</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;strokeWidth:&nbsp;<span style="color:#ffd500">'97%'</span>,</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;margin:&nbsp;<span style="color:#c10aff">0</span>,</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;},</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;dataLabels:&nbsp;{</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#4be6fa">name</span>:&nbsp;{</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;show:&nbsp;<span style="color:#c10aff">false</span></div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;},</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;value:&nbsp;{</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;offsetY:&nbsp;<span style="color:#aaffaa"></span><span style="color:#ff3399">-</span><span style="color:#c10aff">2</span>,</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;fontSize:&nbsp;<span style="color:#ffd500">'20px'</span>,</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;fontWeight:&nbsp;<span style="color:#ffd500">'bold'</span></div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;}</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;},</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;labels:&nbsp;[<span style="color:#ffd500">'인구'</span>]</div><div style="padding:0 6px; white-space:pre; line-height:130%">};</div><div style="padding:0 6px; white-space:pre; line-height:130%"><span style="color:#999999">//&nbsp;차트</span></div><div style="padding:0 6px; white-space:pre; line-height:130%"><span style="color:#ff3399">var</span>&nbsp;chart&nbsp;<span style="color:#aaffaa"></span><span style="color:#ff3399">=</span>&nbsp;<span style="color:#ff3399">new</span>&nbsp;ApexCharts(<span style="color:#4be6fa">document</span>.querySelector(<span style="color:#ffd500">"#gauge"</span>),&nbsp;option2);</div><div style="padding:0 6px; white-space:pre; line-height:130%">chart.render();</div></pre>
+                      <div style="text-align: right; margin-top: -13px; margin-right: 5px; font-size: 9px; font-style: italic">
+                        <a href="http://colorscripter.com/info#e" target="_blank" style="color:#4f4f4ftext-decoration:none">Colored by Color Scripter</a>
+                      </div>
+                    </td>
+                    <td style="vertical-align: bottom; padding: 0 2px 4px 0">
+                      <a href="http://colorscripter.com/info#e" target="_blank" style="text-decoration: none; color: white"
+                        ><span style="font-size: 9px; word-break: normal; background-color: #4f4f4f; color: white; border-radius: 10px; padding: 1px"
+                          >cs</span
+                        ></a
+                      >
+                    </td>
+                  </tr>
+                </table>
+              </div>
             </div>
           </div>
         </div>

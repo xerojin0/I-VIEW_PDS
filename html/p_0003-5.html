@@ -1,218 +1,241 @@
 <!DOCTYPE html>
 <html lang="ko">
   <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <title>I&VIEW Design System</title>
-    <link rel="stylesheet" href="../resource/chart/apexchart/apexcharts.css">
-    <link rel="stylesheet" href="../css/contents.css">
+    <link rel="stylesheet" href="../resource/chart/apexchart/apexcharts.css" />
+    <link rel="stylesheet" href="../css/contents.css" />
 
     <script src="../resource/jquery.min.js"></script>
     <!-- apexcharts IE 지원 -->
     <script type="text/javascript">
-      window.Promise ||
-      document.write('<script src="../resource/polyfill.min.js"><\/script>')
-      window.Promise ||
-      document.write('<script src="../resource/classlist.js"><\/script>')
-      window.Promise ||
-      document.write('<script src="../resource/findIndex.js"><\/script>')
-      window.Promise ||
-      document.write('<script src="../resource/canvg.js"><\/script>')
+      window.Promise || document.write('<script src="../resource/polyfill.min.js"><\/script>');
+      window.Promise || document.write('<script src="../resource/classlist.js"><\/script>');
+      window.Promise || document.write('<script src="../resource/findIndex.js"><\/script>');
+      window.Promise || document.write('<script src="../resource/canvg.js"><\/script>');
     </script>
     <script src="../resource/chart/apexchart/apexcharts.min.js"></script>
 
     <script src="../js/script.js"></script>
     <script>
-      $(function(){
-// 차트 옵션
-var mixOpt = {
-    series: [{ // 차트 데이터 - 다중차트를 만들 경우 type 항목을 추가 하여 사용
-    name: '2020여객',
-    type: 'column',
-    data: [12454255, 12744086, 13018518, 13298395, 13484287, 13596860, 14281476]
-  }, {
-    name: '2019여객',
-    type: 'column',
-    data: [11398476, 12554754, 12779628, 12790595, 12995914, 13014552, 13463725]
-  }, {
-    name: '2020운항',
-    type: 'line',
-    data: [66579, 73621, 72122, 73538, 73724, 76079, 76610]
-  }, {
-    name: '2019운항',
-    type: 'line',
-    data: [70105, 76728, 75292, 79058, 77696, 80159, 80114]
-  }],
-  chart: {
-    height: 500,
-    type: 'line',
-    stacked: false,
-    toolbar: false
-  },
-  colors: [function (chartData) { // bar/pie/donut/radialBar chart의 경우 데이터 값으로 색상을 지정할 수 있는 함수 사용 가능
-    var value = chartData.value,
-        seriesIndex = chartData.seriesIndex,
-        w = chartData.w;
-    var data = w.config.series[0].data;
+      $(function () {
+        // 차트 옵션
+        var mixOpt = {
+          series: [
+            {
+              // 차트 데이터 - 다중차트를 만들 경우 type 항목을 추가 하여 사용
+              name: "2020여객",
+              type: "column",
+              data: [12454255, 12744086, 13018518, 13298395, 13484287, 13596860, 14281476],
+            },
+            {
+              name: "2019여객",
+              type: "column",
+              data: [11398476, 12554754, 12779628, 12790595, 12995914, 13014552, 13463725],
+            },
+            {
+              name: "2020운항",
+              type: "line",
+              data: [66579, 73621, 72122, 73538, 73724, 76079, 76610],
+            },
+            {
+              name: "2019운항",
+              type: "line",
+              data: [70105, 76728, 75292, 79058, 77696, 80159, 80114],
+            },
+          ],
+          chart: {
+            height: 500,
+            type: "line",
+            stacked: false,
+            toolbar: false,
+          },
+          colors: [
+            function (chartData) {
+              // bar/pie/donut/radialBar chart의 경우 데이터 값으로 색상을 지정할 수 있는 함수 사용 가능
+              var value = chartData.value,
+                seriesIndex = chartData.seriesIndex,
+                w = chartData.w;
+              var data = w.config.series[0].data;
 
-    if (value == data[data.length - 1]) {
-      return '#ec8bff';
-    } else {
-      return '#8bbafe';
-    }
-  }, '#d4d4d4', '#388e95', '#676a75'],
-  dataLabels: {
-    enabled: false
-  },
-  stroke: { // 차트 보더 & 선 굵기 등
-    width: [0, 0, 3, 3], // 라인차트에만 3 씩 적용
-    dashArray: [0, 0, 3, 0] // 첫번째 라인차트(2020운항)의 선 dashed로 지정
-  },
-  markers: {
-    size: 5,
-    discrete: [{ // 개별 데이터 포인트의 마커 스타일을 다르게 지정
-      seriesIndex: 2, // index번호 2번 데이터 ( 2020 운항 )
-      dataPointIndex: 6, // index번호 6번 데이터 포인트
-      fillColor: '#e04ab6',
-      strokeColor: '#f5a2dd',
-      size: 5
-    }],
-    colors: ['#388e95', '#676a75'],
-    strokeWidth: 3,
-    strokeColors: ['transparent', 'transparent','#d2e6e7', '#adaeb0']
-  },
-  xaxis: { // x축
-    categories: ['3/14', '3/15', '3/16', '3/17', '3/18', '3/19', '3/20'],
-    labels:{
-      style:{
-        colors: '#a5adc6',
-        fontSize: '13px'
-      }
-    },
-    tooltip:{
-      enabled: false
-    }
-  },
-  yaxis: [ // y축
-      { // 2020년 여객수 y축
-        showAlways: true, // 항상 표시 유무
-        labels: {
-          style: {
-            colors: '#a5adc6',
-            fontSize: '13px'
+              if (value == data[data.length - 1]) {
+                return "#ec8bff";
+              } else {
+                return "#8bbafe";
+              }
+            },
+            "#d4d4d4",
+            "#388e95",
+            "#676a75",
+          ],
+          dataLabels: {
+            enabled: false,
           },
-          offsetX: -30, // 가로 오프셋 좌표값 지정
-          formatter: function(val, index){ // y축값에 대한 사용자 정의
-            var n = Math.floor(val/1000);
-            n = n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-            return n;
-          }
-        },
-        title:{
-          text: '(천)',
-          rotate: 0,
-          offsetX: 42, // 오프셋 x 좌표값 지정
-          offsetY: -240, // 오프셋 y 좌표값 지정
-          style: {
-            color: '#a5adc6',
-            fontSize: '12px',
-            fontWeight: 400
-          }
-        }
-      },
-      { // 2019년 여객수 y축
-        seriesName: '2020여객', // 20여객 y축 참조
-        show: false,
-        labels: {
-          formatter: function(val, index){
-            var n = Math.floor(val/1000);
-            n = n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-            return n;
-          }
-        }
-      },
-      { // 2020년 운항수 y축
-        showAlways: true, // 항상 표시 유무
-        opposite: true, // true면 오른쪽에 위치하게됨
-        labels: {
-          style: {
-            colors: '#a5adc6',
-            fontSize: '13px'
+          stroke: {
+            // 차트 보더 & 선 굵기 등
+            width: [0, 0, 3, 3], // 라인차트에만 3 씩 적용
+            dashArray: [0, 0, 3, 0], // 첫번째 라인차트(2020운항)의 선 dashed로 지정
           },
-          offsetX: -30,
-          formatter: function(val, index){
-            var n = Math.floor(val/1000);
-            n = n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-            return n;
-          }
-        },
-        title:{
-          text: '(천)',
-          rotate: 0,
-          offsetX: -25,
-          offsetY: -240,
-          style: {
-            color: '#a5adc6',
-            fontSize: '12px',
-            fontWeight: 400
-          }
-        }
-      },
-      { // 2019년 운항수 y축 - 20운항 y축 참조
-        seriesName: '2020운항', // 20운항 y축 참조
-        opposite: true, // true면 오른쪽에 위치하게됨
-        show: false,
-        labels: {
-          formatter: function(val, index){
-            var n = Math.floor(val/1000);
-            n = n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-            return n;
-          }
-        }
-      },
-    ],
-    grid:{ // 차트 요소를 그릴 위치 결정
-      padding:{ // 여백
-        top:10,
-        right: -25,
-        bottom:-10,
-        left: -25
-      }
-    },
-    tooltip: {
-      fixed: { // 툴팁을 고정된 위치에서 띄움
-        enabled: true,
-        position: 'topLeft', // topRight, topLeft, bottomRight, bottomLeft
-        offsetY: 0,
-        offsetX: 100
-      },
-    },
-    legend: {
-      show: false
-    }
-  };
-  // 차트
-  var mixChart = new ApexCharts(document.querySelector("#mixChart"), mixOpt);
-  mixChart.render();
-  // 일별 여객,운항 실적 비교 차트 범례
-  $('#dChartLegend01').on('click',function(){
-    mixChart.toggleSeries(mixChart.w.globals.seriesNames[0]);
-    $(this).toggleClass('active');
-  });
-  $('#dChartLegend02').on('click',function(){
-    mixChart.toggleSeries(mixChart.w.globals.seriesNames[1]);
-    $(this).toggleClass('active');
-  });
-  $('#dChartLegend03').on('click',function(){
-    mixChart.toggleSeries(mixChart.w.globals.seriesNames[2]);
-    $(this).toggleClass('active');
-  });
-  $('#dChartLegend04').on('click',function(){
-    mixChart.toggleSeries(mixChart.w.globals.seriesNames[3]);
-    $(this).toggleClass('active');
-  });
+          markers: {
+            size: 5,
+            discrete: [
+              {
+                // 개별 데이터 포인트의 마커 스타일을 다르게 지정
+                seriesIndex: 2, // index번호 2번 데이터 ( 2020 운항 )
+                dataPointIndex: 6, // index번호 6번 데이터 포인트
+                fillColor: "#e04ab6",
+                strokeColor: "#f5a2dd",
+                size: 5,
+              },
+            ],
+            colors: ["#388e95", "#676a75"],
+            strokeWidth: 3,
+            strokeColors: ["transparent", "transparent", "#d2e6e7", "#adaeb0"],
+          },
+          xaxis: {
+            // x축
+            categories: ["3/14", "3/15", "3/16", "3/17", "3/18", "3/19", "3/20"],
+            labels: {
+              style: {
+                colors: "#a5adc6",
+                fontSize: "13px",
+              },
+            },
+            tooltip: {
+              enabled: false,
+            },
+          },
+          yaxis: [
+            // y축
+            {
+              // 2020년 여객수 y축
+              showAlways: true, // 항상 표시 유무
+              labels: {
+                style: {
+                  colors: "#a5adc6",
+                  fontSize: "13px",
+                },
+                offsetX: -30, // 가로 오프셋 좌표값 지정
+                formatter: function (val, index) {
+                  // y축값에 대한 사용자 정의
+                  var n = Math.floor(val / 1000);
+                  n = n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                  return n;
+                },
+              },
+              title: {
+                text: "(천)",
+                rotate: 0,
+                offsetX: 42, // 오프셋 x 좌표값 지정
+                offsetY: -240, // 오프셋 y 좌표값 지정
+                style: {
+                  color: "#a5adc6",
+                  fontSize: "12px",
+                  fontWeight: 400,
+                },
+              },
+            },
+            {
+              // 2019년 여객수 y축
+              seriesName: "2020여객", // 20여객 y축 참조
+              show: false,
+              labels: {
+                formatter: function (val, index) {
+                  var n = Math.floor(val / 1000);
+                  n = n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                  return n;
+                },
+              },
+            },
+            {
+              // 2020년 운항수 y축
+              showAlways: true, // 항상 표시 유무
+              opposite: true, // true면 오른쪽에 위치하게됨
+              labels: {
+                style: {
+                  colors: "#a5adc6",
+                  fontSize: "13px",
+                },
+                offsetX: -30,
+                formatter: function (val, index) {
+                  var n = Math.floor(val / 1000);
+                  n = n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                  return n;
+                },
+              },
+              title: {
+                text: "(천)",
+                rotate: 0,
+                offsetX: -25,
+                offsetY: -240,
+                style: {
+                  color: "#a5adc6",
+                  fontSize: "12px",
+                  fontWeight: 400,
+                },
+              },
+            },
+            {
+              // 2019년 운항수 y축 - 20운항 y축 참조
+              seriesName: "2020운항", // 20운항 y축 참조
+              opposite: true, // true면 오른쪽에 위치하게됨
+              show: false,
+              labels: {
+                formatter: function (val, index) {
+                  var n = Math.floor(val / 1000);
+                  n = n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                  return n;
+                },
+              },
+            },
+          ],
+          grid: {
+            // 차트 요소를 그릴 위치 결정
+            padding: {
+              // 여백
+              top: 10,
+              right: -25,
+              bottom: -10,
+              left: -25,
+            },
+          },
+          tooltip: {
+            fixed: {
+              // 툴팁을 고정된 위치에서 띄움
+              enabled: true,
+              position: "topLeft", // topRight, topLeft, bottomRight, bottomLeft
+              offsetY: 0,
+              offsetX: 100,
+            },
+          },
+          legend: {
+            show: false,
+          },
+        };
+        // 차트
+        var mixChart = new ApexCharts(document.querySelector("#mixChart"), mixOpt);
+        mixChart.render();
+        // 일별 여객,운항 실적 비교 차트 범례
+        $("#dChartLegend01").on("click", function () {
+          mixChart.toggleSeries(mixChart.w.globals.seriesNames[0]);
+          $(this).toggleClass("active");
+        });
+        $("#dChartLegend02").on("click", function () {
+          mixChart.toggleSeries(mixChart.w.globals.seriesNames[1]);
+          $(this).toggleClass("active");
+        });
+        $("#dChartLegend03").on("click", function () {
+          mixChart.toggleSeries(mixChart.w.globals.seriesNames[2]);
+          $(this).toggleClass("active");
+        });
+        $("#dChartLegend04").on("click", function () {
+          mixChart.toggleSeries(mixChart.w.globals.seriesNames[3]);
+          $(this).toggleClass("active");
+        });
       });
     </script>
+  </head>
   <body>
     <div class="content_wrap">
       <div class="row">
@@ -232,29 +255,107 @@ var mixOpt = {
       </div>
       <div class="row">
         <div class="layout col_12">
-         <div class="title_box item_tit">
-           <h3 class="tit01">Bar + Line chart (지능형 플랫폼)</h3>
-         </div>
-         <div class="item_exam">
-           <div class="title_box">
-             <h4 class="tit02">결과화면</h4>
-           </div>
-           <div class="chart_box">
+          <div class="title_box item_tit">
+            <h3 class="tit01">Bar + Line chart (지능형 플랫폼)</h3>
+          </div>
+          <div class="item_exam">
+            <div class="title_box">
+              <h4 class="tit02">결과화면</h4>
+            </div>
+            <div class="chart_box">
               <div id="mixChart"></div>
-           </div>
-           <div class="title_box">
-             <h4 class="tit02">HTML</h4>
-           </div>
-           <div class="code_box">
-<div class="colorscripter-code" style="color:#f0f0f0;font-family:Consolas, 'Liberation Mono', Menlo, Courier, monospace !important; position:relative !important;overflow:auto"><table class="colorscripter-code-table" style="margin:0;padding:0;border:none;background-color:#272727;border-radius:4px;" cellspacing="0" cellpadding="0"><tr><td style="padding:6px 0;text-align:left"><pre style="margin:0;padding:0;color:#f0f0f0;font-family:Consolas, 'Liberation Mono', Menlo, Courier, monospace !important;line-height:130%"><div style="padding:0 6px; white-space:pre; line-height:130%"><span style="color:#f0f0f0">&lt;</span><span style="color:#ff3399">link</span>&nbsp;<span style="color:#a8ff58">rel</span>=<span style="color:#ffd500">"stylesheet"</span>&nbsp;<span style="color:#a8ff58">href</span>=<span style="color:#ffd500">"../resource/chart/apexchart/apexcharts.css"</span><span style="color:#f0f0f0">&gt;</span></div><div style="padding:0 6px; white-space:pre; line-height:130%"><span style="color:#999999">&lt;!--&nbsp;apexcharts&nbsp;IE&nbsp;지원&nbsp;--&gt;</span></div><div style="padding:0 6px; white-space:pre; line-height:130%"><span style="color:#f0f0f0">&lt;</span><span style="color:#ff3399">script</span>&nbsp;<span style="color:#a8ff58">type</span>=<span style="color:#ffd500">"text/javascript"</span><span style="color:#ff3399"></span><span style="color:#f0f0f0">&gt;</span></div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;<span style="color:#4be6fa">window</span>.Promise&nbsp;<span style="color:#0086b3"></span><span style="color:#ff3399">|</span><span style="color:#0086b3"></span><span style="color:#ff3399">|</span></div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;<span style="color:#4be6fa">document</span>.write(<span style="color:#ffd500">'&lt;script&nbsp;src="../resource/polyfill.min.js"&gt;&lt;\/script&gt;'</span>)</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;<span style="color:#4be6fa">window</span>.Promise&nbsp;<span style="color:#0086b3"></span><span style="color:#ff3399">|</span><span style="color:#0086b3"></span><span style="color:#ff3399">|</span></div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;<span style="color:#4be6fa">document</span>.write(<span style="color:#ffd500">'&lt;script&nbsp;src="../resource/classlist.js"&gt;&lt;\/script&gt;'</span>)</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;<span style="color:#4be6fa">window</span>.Promise&nbsp;<span style="color:#0086b3"></span><span style="color:#ff3399">|</span><span style="color:#0086b3"></span><span style="color:#ff3399">|</span></div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;<span style="color:#4be6fa">document</span>.write(<span style="color:#ffd500">'&lt;script&nbsp;src="../resource/findIndex.js"&gt;&lt;\/script&gt;'</span>)</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;<span style="color:#4be6fa">window</span>.Promise&nbsp;<span style="color:#0086b3"></span><span style="color:#ff3399">|</span><span style="color:#0086b3"></span><span style="color:#ff3399">|</span></div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;<span style="color:#4be6fa">document</span>.write(<span style="color:#ffd500">'&lt;script&nbsp;src="../resource/canvg.js"&gt;&lt;\/script&gt;'</span>)</div><div style="padding:0 6px; white-space:pre; line-height:130%"><span style="color:#f0f0f0">&lt;</span><span style="color:#f0f0f0">/</span><span style="color:#ff3399">script</span><span style="color:#f0f0f0">&gt;</span></div><div style="padding:0 6px; white-space:pre; line-height:130%"><span style="color:#f0f0f0">&lt;</span><span style="color:#ff3399">script</span>&nbsp;<span style="color:#a8ff58">src</span>=<span style="color:#ffd500">"../resource/chart/apexchart/apexcharts.min.js"</span><span style="color:#ff3399"></span><span style="color:#f0f0f0">&gt;</span><span style="color:#f0f0f0">&lt;</span><span style="color:#f0f0f0">/</span><span style="color:#ff3399">script</span><span style="color:#f0f0f0">&gt;</span></div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;</div><div style="padding:0 6px; white-space:pre; line-height:130%"><span style="color:#f0f0f0">&lt;</span><span style="color:#ff3399">div</span>&nbsp;<span style="color:#a8ff58">id</span>=<span style="color:#ffd500">"mixChart"</span><span style="color:#a8ff58"></span><span style="color:#f0f0f0">&gt;</span><span style="color:#f0f0f0">&lt;</span><span style="color:#f0f0f0">/</span><span style="color:#ff3399">div</span><span style="color:#f0f0f0">&gt;</span></div></pre><div style="text-align:right;margin-top:-13px;margin-right:5px;font-size:9px;font-style:italic"><a href="http://colorscripter.com/info#e" target="_blank" style="color:#4f4f4ftext-decoration:none">Colored by Color Scripter</a></div></td><td style="vertical-align:bottom;padding:0 2px 4px 0"><a href="http://colorscripter.com/info#e" target="_blank" style="text-decoration:none;color:white"><span style="font-size:9px;word-break:normal;background-color:#4f4f4f;color:white;border-radius:10px;padding:1px">cs</span></a></td></tr></table></div>
-           </div>
-           <div class="title_box">
-             <h4 class="tit02">JS</h4>
-           </div>
-           <div class="code_box">
-<div class="colorscripter-code" style="color:#f0f0f0;font-family:Consolas, 'Liberation Mono', Menlo, Courier, monospace !important; position:relative !important;overflow:auto"><table class="colorscripter-code-table" style="margin:0;padding:0;border:none;background-color:#272727;border-radius:4px;" cellspacing="0" cellpadding="0"><tr><td style="padding:6px 0;text-align:left"><pre style="margin:0;padding:0;color:#f0f0f0;font-family:Consolas, 'Liberation Mono', Menlo, Courier, monospace !important;line-height:130%"><div style="padding:0 6px; white-space:pre; line-height:130%"><span style="color:#999999">//&nbsp;차트&nbsp;옵션</span></div><div style="padding:0 6px; white-space:pre; line-height:130%"><span style="color:#ff3399">var</span>&nbsp;mixOpt&nbsp;<span style="color:#0086b3"></span><span style="color:#ff3399">=</span>&nbsp;{</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;series:&nbsp;[{&nbsp;<span style="color:#999999">//&nbsp;차트&nbsp;데이터&nbsp;-&nbsp;다중차트를&nbsp;만들&nbsp;경우&nbsp;type&nbsp;항목을&nbsp;추가&nbsp;하여&nbsp;사용</span></div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#4be6fa">name</span>:&nbsp;<span style="color:#ffd500">'2020여객'</span>,</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;type:&nbsp;<span style="color:#ffd500">'column'</span>,</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;data:&nbsp;[<span style="color:#c10aff">12454255</span>,&nbsp;<span style="color:#c10aff">12744086</span>,&nbsp;<span style="color:#c10aff">13018518</span>,&nbsp;<span style="color:#c10aff">13298395</span>,&nbsp;<span style="color:#c10aff">13484287</span>,&nbsp;<span style="color:#c10aff">13596860</span>,&nbsp;<span style="color:#c10aff">14281476</span>]</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;},&nbsp;{</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#4be6fa">name</span>:&nbsp;<span style="color:#ffd500">'2019여객'</span>,</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;type:&nbsp;<span style="color:#ffd500">'column'</span>,</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;data:&nbsp;[<span style="color:#c10aff">11398476</span>,&nbsp;<span style="color:#c10aff">12554754</span>,&nbsp;<span style="color:#c10aff">12779628</span>,&nbsp;<span style="color:#c10aff">12790595</span>,&nbsp;<span style="color:#c10aff">12995914</span>,&nbsp;<span style="color:#c10aff">13014552</span>,&nbsp;<span style="color:#c10aff">13463725</span>]</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;},&nbsp;{</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#4be6fa">name</span>:&nbsp;<span style="color:#ffd500">'2020운항'</span>,</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;type:&nbsp;<span style="color:#ffd500">'line'</span>,</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;data:&nbsp;[<span style="color:#c10aff">66579</span>,&nbsp;<span style="color:#c10aff">73621</span>,&nbsp;<span style="color:#c10aff">72122</span>,&nbsp;<span style="color:#c10aff">73538</span>,&nbsp;<span style="color:#c10aff">73724</span>,&nbsp;<span style="color:#c10aff">76079</span>,&nbsp;<span style="color:#c10aff">76610</span>]</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;},&nbsp;{</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#4be6fa">name</span>:&nbsp;<span style="color:#ffd500">'2019운항'</span>,</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;type:&nbsp;<span style="color:#ffd500">'line'</span>,</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;data:&nbsp;[<span style="color:#c10aff">70105</span>,&nbsp;<span style="color:#c10aff">76728</span>,&nbsp;<span style="color:#c10aff">75292</span>,&nbsp;<span style="color:#c10aff">79058</span>,&nbsp;<span style="color:#c10aff">77696</span>,&nbsp;<span style="color:#c10aff">80159</span>,&nbsp;<span style="color:#c10aff">80114</span>]</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;}],</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;chart:&nbsp;{</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;height:&nbsp;<span style="color:#c10aff">500</span>,</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;type:&nbsp;<span style="color:#ffd500">'line'</span>,</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;stacked:&nbsp;<span style="color:#c10aff">false</span>,</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;toolbar:&nbsp;<span style="color:#c10aff">false</span></div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;},</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;colors:&nbsp;[<span style="color:#ff3399">function</span>&nbsp;(chartData)&nbsp;{&nbsp;<span style="color:#999999">//&nbsp;bar/pie/donut/radialBar&nbsp;chart의&nbsp;경우&nbsp;데이터&nbsp;값으로&nbsp;색상을&nbsp;지정할&nbsp;수&nbsp;있는&nbsp;함수&nbsp;사용&nbsp;가능</span></div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#ff3399">var</span>&nbsp;value&nbsp;<span style="color:#0086b3"></span><span style="color:#ff3399">=</span>&nbsp;chartData.value,</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;seriesIndex&nbsp;<span style="color:#0086b3"></span><span style="color:#ff3399">=</span>&nbsp;chartData.seriesIndex,</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;w&nbsp;<span style="color:#0086b3"></span><span style="color:#ff3399">=</span>&nbsp;chartData.w;</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#ff3399">var</span>&nbsp;data&nbsp;<span style="color:#0086b3"></span><span style="color:#ff3399">=</span>&nbsp;w.config.series[<span style="color:#c10aff">0</span>].data;</div><div style="padding:0 6px; white-space:pre; line-height:130%"><span style="color:#999999">&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;마지막 항목만 색 다르게 적용</span></div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#ff3399">if</span>&nbsp;(value&nbsp;<span style="color:#0086b3"></span><span style="color:#ff3399">=</span><span style="color:#0086b3"></span><span style="color:#ff3399">=</span>&nbsp;data[data.<span style="color:#4be6fa">length</span>&nbsp;<span style="color:#0086b3"></span><span style="color:#ff3399">-</span>&nbsp;<span style="color:#c10aff">1</span>])&nbsp;{</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#ff3399">return</span>&nbsp;<span style="color:#ffd500">'#ec8bff'</span>;</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;<span style="color:#ff3399">else</span>&nbsp;{</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#ff3399">return</span>&nbsp;<span style="color:#ffd500">'#8bbafe'</span>;</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;}</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;},&nbsp;<span style="color:#ffd500">'#d4d4d4'</span>,&nbsp;<span style="color:#ffd500">'#388e95'</span>,&nbsp;<span style="color:#ffd500">'#676a75'</span>],</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;dataLabels:&nbsp;{</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;enabled:&nbsp;<span style="color:#c10aff">false</span></div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;},</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;stroke:&nbsp;{&nbsp;<span style="color:#999999">//&nbsp;차트&nbsp;보더&nbsp;&amp;&nbsp;선&nbsp;굵기&nbsp;등</span></div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;width:&nbsp;[<span style="color:#c10aff">0</span>,&nbsp;<span style="color:#c10aff">0</span>,&nbsp;<span style="color:#c10aff">3</span>,&nbsp;<span style="color:#c10aff">3</span>],&nbsp;<span style="color:#999999">//&nbsp;라인차트에만&nbsp;3&nbsp;씩&nbsp;적용</span></div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;dashArray:&nbsp;[<span style="color:#c10aff">0</span>,&nbsp;<span style="color:#c10aff">0</span>,&nbsp;<span style="color:#c10aff">3</span>,&nbsp;<span style="color:#c10aff">0</span>]&nbsp;<span style="color:#999999">//&nbsp;첫번째&nbsp;라인차트(2020운항)의&nbsp;선&nbsp;dashed로&nbsp;지정</span></div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;},</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;markers:&nbsp;{</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;size:&nbsp;<span style="color:#c10aff">5</span>,</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;discrete:&nbsp;[{&nbsp;<span style="color:#999999">//&nbsp;개별&nbsp;데이터&nbsp;포인트의&nbsp;마커&nbsp;스타일을&nbsp;다르게&nbsp;지정</span></div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;seriesIndex:&nbsp;<span style="color:#c10aff">2</span>,&nbsp;<span style="color:#999999">//&nbsp;index번호&nbsp;2번&nbsp;데이터&nbsp;(&nbsp;2020&nbsp;운항&nbsp;)</span></div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;dataPointIndex:&nbsp;<span style="color:#c10aff">6</span>,&nbsp;<span style="color:#999999">//&nbsp;index번호&nbsp;6번&nbsp;데이터&nbsp;포인트</span></div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;fillColor:&nbsp;<span style="color:#ffd500">'#e04ab6'</span>,</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;strokeColor:&nbsp;<span style="color:#ffd500">'#f5a2dd'</span>,</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;size:&nbsp;<span style="color:#c10aff">5</span></div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;}],</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;colors:&nbsp;[<span style="color:#ffd500">'#388e95'</span>,&nbsp;<span style="color:#ffd500">'#676a75'</span>],</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;strokeWidth:&nbsp;<span style="color:#c10aff">3</span>,</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;strokeColors:&nbsp;[<span style="color:#ffd500">'transparent'</span>,&nbsp;<span style="color:#ffd500">'transparent'</span>,<span style="color:#ffd500">'#d2e6e7'</span>,&nbsp;<span style="color:#ffd500">'#adaeb0'</span>]</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;},</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;xaxis:&nbsp;{&nbsp;<span style="color:#999999">//&nbsp;x축</span></div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;categories:&nbsp;[<span style="color:#ffd500">'3/14'</span>,&nbsp;<span style="color:#ffd500">'3/15'</span>,&nbsp;<span style="color:#ffd500">'3/16'</span>,&nbsp;<span style="color:#ffd500">'3/17'</span>,&nbsp;<span style="color:#ffd500">'3/18'</span>,&nbsp;<span style="color:#ffd500">'3/19'</span>,&nbsp;<span style="color:#ffd500">'3/20'</span>],</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;labels:{</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;style:{</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;colors:&nbsp;<span style="color:#ffd500">'#a5adc6'</span>,</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;fontSize:&nbsp;<span style="color:#ffd500">'13px'</span></div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;},</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;tooltip:{</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;enabled:&nbsp;<span style="color:#c10aff">false</span></div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;}</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;},</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;yaxis:&nbsp;[&nbsp;<span style="color:#999999">//&nbsp;y축</span></div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{&nbsp;<span style="color:#999999">//&nbsp;2020년&nbsp;여객수&nbsp;y축</span></div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;showAlways:&nbsp;<span style="color:#c10aff">true</span>,&nbsp;<span style="color:#999999">//&nbsp;항상&nbsp;표시&nbsp;유무</span></div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;labels:&nbsp;{</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;style:&nbsp;{</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;colors:&nbsp;<span style="color:#ffd500">'#a5adc6'</span>,</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;fontSize:&nbsp;<span style="color:#ffd500">'13px'</span></div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;},</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;offsetX:&nbsp;<span style="color:#0086b3"></span><span style="color:#ff3399">-</span><span style="color:#c10aff">30</span>,&nbsp;<span style="color:#999999">//&nbsp;가로&nbsp;오프셋&nbsp;좌표값&nbsp;지정</span></div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;formatter:&nbsp;<span style="color:#ff3399">function</span>(val,&nbsp;index){&nbsp;<span style="color:#999999">//&nbsp;y축값에&nbsp;대한&nbsp;사용자&nbsp;정의</span></div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#ff3399">var</span>&nbsp;n&nbsp;<span style="color:#0086b3"></span><span style="color:#ff3399">=</span>&nbsp;Math.floor(val<span style="color:#0086b3"></span><span style="color:#ff3399">/</span><span style="color:#c10aff">1000</span>);</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;n&nbsp;<span style="color:#0086b3"></span><span style="color:#ff3399">=</span>&nbsp;n.toString().replace(<span style="color:#0086b3"></span><span style="color:#ff3399">/</span>\B(?<span style="color:#0086b3"></span><span style="color:#ff3399">=</span>(\d{<span style="color:#c10aff">3</span>})<span style="color:#0086b3"></span><span style="color:#ff3399">+</span>(?<span style="color:#0086b3"></span><span style="color:#ff3399">!</span>\d))<span style="color:#0086b3"></span><span style="color:#ff3399">/</span>g,&nbsp;<span style="color:#ffd500">","</span>);</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#ff3399">return</span>&nbsp;n;</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;},</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;title:{</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;text:&nbsp;<span style="color:#ffd500">'(천)'</span>,</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;rotate:&nbsp;<span style="color:#c10aff">0</span>,</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;offsetX:&nbsp;<span style="color:#c10aff">42</span>,&nbsp;<span style="color:#999999">//&nbsp;오프셋&nbsp;x&nbsp;좌표값&nbsp;지정</span></div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;offsetY:&nbsp;<span style="color:#0086b3"></span><span style="color:#ff3399">-</span><span style="color:#c10aff">240</span>,&nbsp;<span style="color:#999999">//&nbsp;오프셋&nbsp;y&nbsp;좌표값&nbsp;지정</span></div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;style:&nbsp;{</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;color:&nbsp;<span style="color:#ffd500">'#a5adc6'</span>,</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;fontSize:&nbsp;<span style="color:#ffd500">'12px'</span>,</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;fontWeight:&nbsp;<span style="color:#c10aff">400</span></div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;},</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{&nbsp;<span style="color:#999999">//&nbsp;2019년&nbsp;여객수&nbsp;y축</span></div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;seriesName:&nbsp;<span style="color:#ffd500">'2020여객'</span>,&nbsp;<span style="color:#999999">//&nbsp;20여객&nbsp;y축&nbsp;참조</span></div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;show:&nbsp;<span style="color:#c10aff">false</span>,</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;labels:&nbsp;{</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;formatter:&nbsp;<span style="color:#ff3399">function</span>(val,&nbsp;index){</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#ff3399">var</span>&nbsp;n&nbsp;<span style="color:#0086b3"></span><span style="color:#ff3399">=</span>&nbsp;Math.floor(val<span style="color:#0086b3"></span><span style="color:#ff3399">/</span><span style="color:#c10aff">1000</span>);</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;n&nbsp;<span style="color:#0086b3"></span><span style="color:#ff3399">=</span>&nbsp;n.toString().replace(<span style="color:#0086b3"></span><span style="color:#ff3399">/</span>\B(?<span style="color:#0086b3"></span><span style="color:#ff3399">=</span>(\d{<span style="color:#c10aff">3</span>})<span style="color:#0086b3"></span><span style="color:#ff3399">+</span>(?<span style="color:#0086b3"></span><span style="color:#ff3399">!</span>\d))<span style="color:#0086b3"></span><span style="color:#ff3399">/</span>g,&nbsp;<span style="color:#ffd500">","</span>);</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#ff3399">return</span>&nbsp;n;</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;},</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{&nbsp;<span style="color:#999999">//&nbsp;2020년&nbsp;운항수&nbsp;y축</span></div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;showAlways:&nbsp;<span style="color:#c10aff">true</span>,&nbsp;<span style="color:#999999">//&nbsp;항상&nbsp;표시&nbsp;유무</span></div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;opposite:&nbsp;<span style="color:#c10aff">true</span>,&nbsp;<span style="color:#999999">//&nbsp;true면&nbsp;오른쪽에&nbsp;위치하게됨</span></div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;labels:&nbsp;{</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;style:&nbsp;{</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;colors:&nbsp;<span style="color:#ffd500">'#a5adc6'</span>,</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;fontSize:&nbsp;<span style="color:#ffd500">'13px'</span></div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;},</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;offsetX:&nbsp;<span style="color:#0086b3"></span><span style="color:#ff3399">-</span><span style="color:#c10aff">30</span>,</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;formatter:&nbsp;<span style="color:#ff3399">function</span>(val,&nbsp;index){</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#ff3399">var</span>&nbsp;n&nbsp;<span style="color:#0086b3"></span><span style="color:#ff3399">=</span>&nbsp;Math.floor(val<span style="color:#0086b3"></span><span style="color:#ff3399">/</span><span style="color:#c10aff">1000</span>);</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;n&nbsp;<span style="color:#0086b3"></span><span style="color:#ff3399">=</span>&nbsp;n.toString().replace(<span style="color:#0086b3"></span><span style="color:#ff3399">/</span>\B(?<span style="color:#0086b3"></span><span style="color:#ff3399">=</span>(\d{<span style="color:#c10aff">3</span>})<span style="color:#0086b3"></span><span style="color:#ff3399">+</span>(?<span style="color:#0086b3"></span><span style="color:#ff3399">!</span>\d))<span style="color:#0086b3"></span><span style="color:#ff3399">/</span>g,&nbsp;<span style="color:#ffd500">","</span>);</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#ff3399">return</span>&nbsp;n;</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;},</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;title:{</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;text:&nbsp;<span style="color:#ffd500">'(천)'</span>,</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;rotate:&nbsp;<span style="color:#c10aff">0</span>,</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;offsetX:&nbsp;<span style="color:#0086b3"></span><span style="color:#ff3399">-</span><span style="color:#c10aff">25</span>,</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;offsetY:&nbsp;<span style="color:#0086b3"></span><span style="color:#ff3399">-</span><span style="color:#c10aff">240</span>,</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;style:&nbsp;{</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;color:&nbsp;<span style="color:#ffd500">'#a5adc6'</span>,</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;fontSize:&nbsp;<span style="color:#ffd500">'12px'</span>,</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;fontWeight:&nbsp;<span style="color:#c10aff">400</span></div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;},</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{&nbsp;<span style="color:#999999">//&nbsp;2019년&nbsp;운항수&nbsp;y축&nbsp;-&nbsp;20운항&nbsp;y축&nbsp;참조</span></div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;seriesName:&nbsp;<span style="color:#ffd500">'2020운항'</span>,&nbsp;<span style="color:#999999">//&nbsp;20운항&nbsp;y축&nbsp;참조</span></div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;opposite:&nbsp;<span style="color:#c10aff">true</span>,&nbsp;<span style="color:#999999">//&nbsp;true면&nbsp;오른쪽에&nbsp;위치하게됨</span></div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;show:&nbsp;<span style="color:#c10aff">false</span>,</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;labels:&nbsp;{</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;formatter:&nbsp;<span style="color:#ff3399">function</span>(val,&nbsp;index){</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#ff3399">var</span>&nbsp;n&nbsp;<span style="color:#0086b3"></span><span style="color:#ff3399">=</span>&nbsp;Math.floor(val<span style="color:#0086b3"></span><span style="color:#ff3399">/</span><span style="color:#c10aff">1000</span>);</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;n&nbsp;<span style="color:#0086b3"></span><span style="color:#ff3399">=</span>&nbsp;n.toString().replace(<span style="color:#0086b3"></span><span style="color:#ff3399">/</span>\B(?<span style="color:#0086b3"></span><span style="color:#ff3399">=</span>(\d{<span style="color:#c10aff">3</span>})<span style="color:#0086b3"></span><span style="color:#ff3399">+</span>(?<span style="color:#0086b3"></span><span style="color:#ff3399">!</span>\d))<span style="color:#0086b3"></span><span style="color:#ff3399">/</span>g,&nbsp;<span style="color:#ffd500">","</span>);</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#ff3399">return</span>&nbsp;n;</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;},</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;],</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;grid:{&nbsp;<span style="color:#999999">//&nbsp;차트&nbsp;요소를&nbsp;그릴&nbsp;위치&nbsp;결정</span></div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;padding:{&nbsp;<span style="color:#999999">//&nbsp;여백</span></div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;top:<span style="color:#c10aff">10</span>,</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;right:&nbsp;<span style="color:#0086b3"></span><span style="color:#ff3399">-</span><span style="color:#c10aff">25</span>,</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;bottom:<span style="color:#0086b3"></span><span style="color:#ff3399">-</span><span style="color:#c10aff">10</span>,</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;left:&nbsp;<span style="color:#0086b3"></span><span style="color:#ff3399">-</span><span style="color:#c10aff">25</span></div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;},</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;tooltip:&nbsp;{</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;fixed:&nbsp;{&nbsp;<span style="color:#999999">//&nbsp;툴팁을&nbsp;고정된&nbsp;위치에서&nbsp;띄움</span></div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;enabled:&nbsp;<span style="color:#c10aff">true</span>,</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;position:&nbsp;<span style="color:#ffd500">'topLeft'</span>,&nbsp;<span style="color:#999999">//&nbsp;topRight,&nbsp;topLeft,&nbsp;bottomRight,&nbsp;bottomLeft</span></div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;offsetY:&nbsp;<span style="color:#c10aff">0</span>,</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;offsetX:&nbsp;<span style="color:#c10aff">100</span></div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;},</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;},</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;legend:&nbsp;{</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;show:&nbsp;<span style="color:#c10aff">false</span></div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;}</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;};</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;<span style="color:#999999">//&nbsp;차트</span></div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;<span style="color:#ff3399">var</span>&nbsp;mixChart&nbsp;<span style="color:#0086b3"></span><span style="color:#ff3399">=</span>&nbsp;<span style="color:#ff3399">new</span>&nbsp;ApexCharts(<span style="color:#4be6fa">document</span>.querySelector(<span style="color:#ffd500">"#mixChart"</span>),&nbsp;mixOpt);</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;mixChart.render();</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;<span style="color:#999999">//&nbsp;일별&nbsp;여객,운항&nbsp;실적&nbsp;비교&nbsp;차트&nbsp;범례</span></div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;$(<span style="color:#ffd500">'#dChartLegend01'</span>).on(<span style="color:#ffd500">'click'</span>,<span style="color:#ff3399">function</span>(){</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;mixChart.toggleSeries(mixChart.w.globals.seriesNames[<span style="color:#c10aff">0</span>]);</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;$(this).toggleClass(<span style="color:#ffd500">'active'</span>);</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;});</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;$(<span style="color:#ffd500">'#dChartLegend02'</span>).on(<span style="color:#ffd500">'click'</span>,<span style="color:#ff3399">function</span>(){</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;mixChart.toggleSeries(mixChart.w.globals.seriesNames[<span style="color:#c10aff">1</span>]);</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;$(this).toggleClass(<span style="color:#ffd500">'active'</span>);</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;});</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;$(<span style="color:#ffd500">'#dChartLegend03'</span>).on(<span style="color:#ffd500">'click'</span>,<span style="color:#ff3399">function</span>(){</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;mixChart.toggleSeries(mixChart.w.globals.seriesNames[<span style="color:#c10aff">2</span>]);</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;$(this).toggleClass(<span style="color:#ffd500">'active'</span>);</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;});</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;$(<span style="color:#ffd500">'#dChartLegend04'</span>).on(<span style="color:#ffd500">'click'</span>,<span style="color:#ff3399">function</span>(){</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;mixChart.toggleSeries(mixChart.w.globals.seriesNames[<span style="color:#c10aff">3</span>]);</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;$(this).toggleClass(<span style="color:#ffd500">'active'</span>);</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;});</div></pre><div style="text-align:right;margin-top:-13px;margin-right:5px;font-size:9px;font-style:italic"><a href="http://colorscripter.com/info#e" target="_blank" style="color:#4f4f4ftext-decoration:none">Colored by Color Scripter</a></div></td><td style="vertical-align:bottom;padding:0 2px 4px 0"><a href="http://colorscripter.com/info#e" target="_blank" style="text-decoration:none;color:white"><span style="font-size:9px;word-break:normal;background-color:#4f4f4f;color:white;border-radius:10px;padding:1px">cs</span></a></td></tr></table></div>
-           </div>
-         </div>
+            </div>
+            <div class="title_box">
+              <h4 class="tit02">HTML</h4>
+            </div>
+            <div class="code_box">
+              <div
+                class="colorscripter-code"
+                style="
+                  color: #f0f0f0;
+                  font-family: Consolas, 'Liberation Mono', Menlo, Courier, monospace !important;
+                  position: relative !important;
+                  overflow: auto;
+                "
+              >
+                <table
+                  class="colorscripter-code-table"
+                  style="margin: 0; padding: 0; border: none; background-color: #272727; border-radius: 4px"
+                  cellspacing="0"
+                  cellpadding="0"
+                >
+                  <tr>
+                    <td style="padding: 6px 0; text-align: left">
+                      <pre
+                        style="
+                          margin: 0;
+                          padding: 0;
+                          color: #f0f0f0;
+                          font-family: Consolas, 'Liberation Mono', Menlo, Courier, monospace !important;
+                          line-height: 130%;
+                        "
+                      ><div style="padding:0 6px; white-space:pre; line-height:130%"><span style="color:#f0f0f0">&lt;</span><span style="color:#ff3399">link</span>&nbsp;<span style="color:#a8ff58">rel</span>=<span style="color:#ffd500">"stylesheet"</span>&nbsp;<span style="color:#a8ff58">href</span>=<span style="color:#ffd500">"../resource/chart/apexchart/apexcharts.css"</span><span style="color:#f0f0f0">&gt;</span></div><div style="padding:0 6px; white-space:pre; line-height:130%"><span style="color:#999999">&lt;!--&nbsp;apexcharts&nbsp;IE&nbsp;지원&nbsp;--&gt;</span></div><div style="padding:0 6px; white-space:pre; line-height:130%"><span style="color:#f0f0f0">&lt;</span><span style="color:#ff3399">script</span>&nbsp;<span style="color:#a8ff58">type</span>=<span style="color:#ffd500">"text/javascript"</span><span style="color:#ff3399"></span><span style="color:#f0f0f0">&gt;</span></div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;<span style="color:#4be6fa">window</span>.Promise&nbsp;<span style="color:#0086b3"></span><span style="color:#ff3399">|</span><span style="color:#0086b3"></span><span style="color:#ff3399">|</span></div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;<span style="color:#4be6fa">document</span>.write(<span style="color:#ffd500">'&lt;script&nbsp;src="../resource/polyfill.min.js"&gt;&lt;\/script&gt;'</span>)</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;<span style="color:#4be6fa">window</span>.Promise&nbsp;<span style="color:#0086b3"></span><span style="color:#ff3399">|</span><span style="color:#0086b3"></span><span style="color:#ff3399">|</span></div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;<span style="color:#4be6fa">document</span>.write(<span style="color:#ffd500">'&lt;script&nbsp;src="../resource/classlist.js"&gt;&lt;\/script&gt;'</span>)</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;<span style="color:#4be6fa">window</span>.Promise&nbsp;<span style="color:#0086b3"></span><span style="color:#ff3399">|</span><span style="color:#0086b3"></span><span style="color:#ff3399">|</span></div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;<span style="color:#4be6fa">document</span>.write(<span style="color:#ffd500">'&lt;script&nbsp;src="../resource/findIndex.js"&gt;&lt;\/script&gt;'</span>)</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;<span style="color:#4be6fa">window</span>.Promise&nbsp;<span style="color:#0086b3"></span><span style="color:#ff3399">|</span><span style="color:#0086b3"></span><span style="color:#ff3399">|</span></div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;<span style="color:#4be6fa">document</span>.write(<span style="color:#ffd500">'&lt;script&nbsp;src="../resource/canvg.js"&gt;&lt;\/script&gt;'</span>)</div><div style="padding:0 6px; white-space:pre; line-height:130%"><span style="color:#f0f0f0">&lt;</span><span style="color:#f0f0f0">/</span><span style="color:#ff3399">script</span><span style="color:#f0f0f0">&gt;</span></div><div style="padding:0 6px; white-space:pre; line-height:130%"><span style="color:#f0f0f0">&lt;</span><span style="color:#ff3399">script</span>&nbsp;<span style="color:#a8ff58">src</span>=<span style="color:#ffd500">"../resource/chart/apexchart/apexcharts.min.js"</span><span style="color:#ff3399"></span><span style="color:#f0f0f0">&gt;</span><span style="color:#f0f0f0">&lt;</span><span style="color:#f0f0f0">/</span><span style="color:#ff3399">script</span><span style="color:#f0f0f0">&gt;</span></div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;</div><div style="padding:0 6px; white-space:pre; line-height:130%"><span style="color:#f0f0f0">&lt;</span><span style="color:#ff3399">div</span>&nbsp;<span style="color:#a8ff58">id</span>=<span style="color:#ffd500">"mixChart"</span><span style="color:#a8ff58"></span><span style="color:#f0f0f0">&gt;</span><span style="color:#f0f0f0">&lt;</span><span style="color:#f0f0f0">/</span><span style="color:#ff3399">div</span><span style="color:#f0f0f0">&gt;</span></div></pre>
+                      <div style="text-align: right; margin-top: -13px; margin-right: 5px; font-size: 9px; font-style: italic">
+                        <a href="http://colorscripter.com/info#e" target="_blank" style="color:#4f4f4ftext-decoration:none">Colored by Color Scripter</a>
+                      </div>
+                    </td>
+                    <td style="vertical-align: bottom; padding: 0 2px 4px 0">
+                      <a href="http://colorscripter.com/info#e" target="_blank" style="text-decoration: none; color: white"
+                        ><span style="font-size: 9px; word-break: normal; background-color: #4f4f4f; color: white; border-radius: 10px; padding: 1px"
+                          >cs</span
+                        ></a
+                      >
+                    </td>
+                  </tr>
+                </table>
+              </div>
+            </div>
+            <div class="title_box">
+              <h4 class="tit02">JS</h4>
+            </div>
+            <div class="code_box">
+              <div
+                class="colorscripter-code"
+                style="
+                  color: #f0f0f0;
+                  font-family: Consolas, 'Liberation Mono', Menlo, Courier, monospace !important;
+                  position: relative !important;
+                  overflow: auto;
+                "
+              >
+                <table
+                  class="colorscripter-code-table"
+                  style="margin: 0; padding: 0; border: none; background-color: #272727; border-radius: 4px"
+                  cellspacing="0"
+                  cellpadding="0"
+                >
+                  <tr>
+                    <td style="padding: 6px 0; text-align: left">
+                      <pre
+                        style="
+                          margin: 0;
+                          padding: 0;
+                          color: #f0f0f0;
+                          font-family: Consolas, 'Liberation Mono', Menlo, Courier, monospace !important;
+                          line-height: 130%;
+                        "
+                      ><div style="padding:0 6px; white-space:pre; line-height:130%"><span style="color:#999999">//&nbsp;차트&nbsp;옵션</span></div><div style="padding:0 6px; white-space:pre; line-height:130%"><span style="color:#ff3399">var</span>&nbsp;mixOpt&nbsp;<span style="color:#0086b3"></span><span style="color:#ff3399">=</span>&nbsp;{</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;series:&nbsp;[{&nbsp;<span style="color:#999999">//&nbsp;차트&nbsp;데이터&nbsp;-&nbsp;다중차트를&nbsp;만들&nbsp;경우&nbsp;type&nbsp;항목을&nbsp;추가&nbsp;하여&nbsp;사용</span></div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#4be6fa">name</span>:&nbsp;<span style="color:#ffd500">'2020여객'</span>,</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;type:&nbsp;<span style="color:#ffd500">'column'</span>,</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;data:&nbsp;[<span style="color:#c10aff">12454255</span>,&nbsp;<span style="color:#c10aff">12744086</span>,&nbsp;<span style="color:#c10aff">13018518</span>,&nbsp;<span style="color:#c10aff">13298395</span>,&nbsp;<span style="color:#c10aff">13484287</span>,&nbsp;<span style="color:#c10aff">13596860</span>,&nbsp;<span style="color:#c10aff">14281476</span>]</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;},&nbsp;{</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#4be6fa">name</span>:&nbsp;<span style="color:#ffd500">'2019여객'</span>,</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;type:&nbsp;<span style="color:#ffd500">'column'</span>,</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;data:&nbsp;[<span style="color:#c10aff">11398476</span>,&nbsp;<span style="color:#c10aff">12554754</span>,&nbsp;<span style="color:#c10aff">12779628</span>,&nbsp;<span style="color:#c10aff">12790595</span>,&nbsp;<span style="color:#c10aff">12995914</span>,&nbsp;<span style="color:#c10aff">13014552</span>,&nbsp;<span style="color:#c10aff">13463725</span>]</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;},&nbsp;{</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#4be6fa">name</span>:&nbsp;<span style="color:#ffd500">'2020운항'</span>,</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;type:&nbsp;<span style="color:#ffd500">'line'</span>,</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;data:&nbsp;[<span style="color:#c10aff">66579</span>,&nbsp;<span style="color:#c10aff">73621</span>,&nbsp;<span style="color:#c10aff">72122</span>,&nbsp;<span style="color:#c10aff">73538</span>,&nbsp;<span style="color:#c10aff">73724</span>,&nbsp;<span style="color:#c10aff">76079</span>,&nbsp;<span style="color:#c10aff">76610</span>]</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;},&nbsp;{</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#4be6fa">name</span>:&nbsp;<span style="color:#ffd500">'2019운항'</span>,</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;type:&nbsp;<span style="color:#ffd500">'line'</span>,</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;data:&nbsp;[<span style="color:#c10aff">70105</span>,&nbsp;<span style="color:#c10aff">76728</span>,&nbsp;<span style="color:#c10aff">75292</span>,&nbsp;<span style="color:#c10aff">79058</span>,&nbsp;<span style="color:#c10aff">77696</span>,&nbsp;<span style="color:#c10aff">80159</span>,&nbsp;<span style="color:#c10aff">80114</span>]</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;}],</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;chart:&nbsp;{</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;height:&nbsp;<span style="color:#c10aff">500</span>,</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;type:&nbsp;<span style="color:#ffd500">'line'</span>,</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;stacked:&nbsp;<span style="color:#c10aff">false</span>,</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;toolbar:&nbsp;<span style="color:#c10aff">false</span></div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;},</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;colors:&nbsp;[<span style="color:#ff3399">function</span>&nbsp;(chartData)&nbsp;{&nbsp;<span style="color:#999999">//&nbsp;bar/pie/donut/radialBar&nbsp;chart의&nbsp;경우&nbsp;데이터&nbsp;값으로&nbsp;색상을&nbsp;지정할&nbsp;수&nbsp;있는&nbsp;함수&nbsp;사용&nbsp;가능</span></div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#ff3399">var</span>&nbsp;value&nbsp;<span style="color:#0086b3"></span><span style="color:#ff3399">=</span>&nbsp;chartData.value,</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;seriesIndex&nbsp;<span style="color:#0086b3"></span><span style="color:#ff3399">=</span>&nbsp;chartData.seriesIndex,</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;w&nbsp;<span style="color:#0086b3"></span><span style="color:#ff3399">=</span>&nbsp;chartData.w;</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#ff3399">var</span>&nbsp;data&nbsp;<span style="color:#0086b3"></span><span style="color:#ff3399">=</span>&nbsp;w.config.series[<span style="color:#c10aff">0</span>].data;</div><div style="padding:0 6px; white-space:pre; line-height:130%"><span style="color:#999999">&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;마지막 항목만 색 다르게 적용</span></div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#ff3399">if</span>&nbsp;(value&nbsp;<span style="color:#0086b3"></span><span style="color:#ff3399">=</span><span style="color:#0086b3"></span><span style="color:#ff3399">=</span>&nbsp;data[data.<span style="color:#4be6fa">length</span>&nbsp;<span style="color:#0086b3"></span><span style="color:#ff3399">-</span>&nbsp;<span style="color:#c10aff">1</span>])&nbsp;{</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#ff3399">return</span>&nbsp;<span style="color:#ffd500">'#ec8bff'</span>;</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;<span style="color:#ff3399">else</span>&nbsp;{</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#ff3399">return</span>&nbsp;<span style="color:#ffd500">'#8bbafe'</span>;</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;}</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;},&nbsp;<span style="color:#ffd500">'#d4d4d4'</span>,&nbsp;<span style="color:#ffd500">'#388e95'</span>,&nbsp;<span style="color:#ffd500">'#676a75'</span>],</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;dataLabels:&nbsp;{</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;enabled:&nbsp;<span style="color:#c10aff">false</span></div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;},</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;stroke:&nbsp;{&nbsp;<span style="color:#999999">//&nbsp;차트&nbsp;보더&nbsp;&amp;&nbsp;선&nbsp;굵기&nbsp;등</span></div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;width:&nbsp;[<span style="color:#c10aff">0</span>,&nbsp;<span style="color:#c10aff">0</span>,&nbsp;<span style="color:#c10aff">3</span>,&nbsp;<span style="color:#c10aff">3</span>],&nbsp;<span style="color:#999999">//&nbsp;라인차트에만&nbsp;3&nbsp;씩&nbsp;적용</span></div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;dashArray:&nbsp;[<span style="color:#c10aff">0</span>,&nbsp;<span style="color:#c10aff">0</span>,&nbsp;<span style="color:#c10aff">3</span>,&nbsp;<span style="color:#c10aff">0</span>]&nbsp;<span style="color:#999999">//&nbsp;첫번째&nbsp;라인차트(2020운항)의&nbsp;선&nbsp;dashed로&nbsp;지정</span></div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;},</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;markers:&nbsp;{</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;size:&nbsp;<span style="color:#c10aff">5</span>,</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;discrete:&nbsp;[{&nbsp;<span style="color:#999999">//&nbsp;개별&nbsp;데이터&nbsp;포인트의&nbsp;마커&nbsp;스타일을&nbsp;다르게&nbsp;지정</span></div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;seriesIndex:&nbsp;<span style="color:#c10aff">2</span>,&nbsp;<span style="color:#999999">//&nbsp;index번호&nbsp;2번&nbsp;데이터&nbsp;(&nbsp;2020&nbsp;운항&nbsp;)</span></div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;dataPointIndex:&nbsp;<span style="color:#c10aff">6</span>,&nbsp;<span style="color:#999999">//&nbsp;index번호&nbsp;6번&nbsp;데이터&nbsp;포인트</span></div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;fillColor:&nbsp;<span style="color:#ffd500">'#e04ab6'</span>,</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;strokeColor:&nbsp;<span style="color:#ffd500">'#f5a2dd'</span>,</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;size:&nbsp;<span style="color:#c10aff">5</span></div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;}],</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;colors:&nbsp;[<span style="color:#ffd500">'#388e95'</span>,&nbsp;<span style="color:#ffd500">'#676a75'</span>],</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;strokeWidth:&nbsp;<span style="color:#c10aff">3</span>,</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;strokeColors:&nbsp;[<span style="color:#ffd500">'transparent'</span>,&nbsp;<span style="color:#ffd500">'transparent'</span>,<span style="color:#ffd500">'#d2e6e7'</span>,&nbsp;<span style="color:#ffd500">'#adaeb0'</span>]</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;},</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;xaxis:&nbsp;{&nbsp;<span style="color:#999999">//&nbsp;x축</span></div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;categories:&nbsp;[<span style="color:#ffd500">'3/14'</span>,&nbsp;<span style="color:#ffd500">'3/15'</span>,&nbsp;<span style="color:#ffd500">'3/16'</span>,&nbsp;<span style="color:#ffd500">'3/17'</span>,&nbsp;<span style="color:#ffd500">'3/18'</span>,&nbsp;<span style="color:#ffd500">'3/19'</span>,&nbsp;<span style="color:#ffd500">'3/20'</span>],</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;labels:{</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;style:{</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;colors:&nbsp;<span style="color:#ffd500">'#a5adc6'</span>,</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;fontSize:&nbsp;<span style="color:#ffd500">'13px'</span></div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;},</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;tooltip:{</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;enabled:&nbsp;<span style="color:#c10aff">false</span></div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;}</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;},</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;yaxis:&nbsp;[&nbsp;<span style="color:#999999">//&nbsp;y축</span></div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{&nbsp;<span style="color:#999999">//&nbsp;2020년&nbsp;여객수&nbsp;y축</span></div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;showAlways:&nbsp;<span style="color:#c10aff">true</span>,&nbsp;<span style="color:#999999">//&nbsp;항상&nbsp;표시&nbsp;유무</span></div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;labels:&nbsp;{</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;style:&nbsp;{</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;colors:&nbsp;<span style="color:#ffd500">'#a5adc6'</span>,</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;fontSize:&nbsp;<span style="color:#ffd500">'13px'</span></div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;},</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;offsetX:&nbsp;<span style="color:#0086b3"></span><span style="color:#ff3399">-</span><span style="color:#c10aff">30</span>,&nbsp;<span style="color:#999999">//&nbsp;가로&nbsp;오프셋&nbsp;좌표값&nbsp;지정</span></div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;formatter:&nbsp;<span style="color:#ff3399">function</span>(val,&nbsp;index){&nbsp;<span style="color:#999999">//&nbsp;y축값에&nbsp;대한&nbsp;사용자&nbsp;정의</span></div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#ff3399">var</span>&nbsp;n&nbsp;<span style="color:#0086b3"></span><span style="color:#ff3399">=</span>&nbsp;Math.floor(val<span style="color:#0086b3"></span><span style="color:#ff3399">/</span><span style="color:#c10aff">1000</span>);</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;n&nbsp;<span style="color:#0086b3"></span><span style="color:#ff3399">=</span>&nbsp;n.toString().replace(<span style="color:#0086b3"></span><span style="color:#ff3399">/</span>\B(?<span style="color:#0086b3"></span><span style="color:#ff3399">=</span>(\d{<span style="color:#c10aff">3</span>})<span style="color:#0086b3"></span><span style="color:#ff3399">+</span>(?<span style="color:#0086b3"></span><span style="color:#ff3399">!</span>\d))<span style="color:#0086b3"></span><span style="color:#ff3399">/</span>g,&nbsp;<span style="color:#ffd500">","</span>);</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#ff3399">return</span>&nbsp;n;</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;},</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;title:{</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;text:&nbsp;<span style="color:#ffd500">'(천)'</span>,</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;rotate:&nbsp;<span style="color:#c10aff">0</span>,</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;offsetX:&nbsp;<span style="color:#c10aff">42</span>,&nbsp;<span style="color:#999999">//&nbsp;오프셋&nbsp;x&nbsp;좌표값&nbsp;지정</span></div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;offsetY:&nbsp;<span style="color:#0086b3"></span><span style="color:#ff3399">-</span><span style="color:#c10aff">240</span>,&nbsp;<span style="color:#999999">//&nbsp;오프셋&nbsp;y&nbsp;좌표값&nbsp;지정</span></div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;style:&nbsp;{</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;color:&nbsp;<span style="color:#ffd500">'#a5adc6'</span>,</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;fontSize:&nbsp;<span style="color:#ffd500">'12px'</span>,</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;fontWeight:&nbsp;<span style="color:#c10aff">400</span></div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;},</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{&nbsp;<span style="color:#999999">//&nbsp;2019년&nbsp;여객수&nbsp;y축</span></div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;seriesName:&nbsp;<span style="color:#ffd500">'2020여객'</span>,&nbsp;<span style="color:#999999">//&nbsp;20여객&nbsp;y축&nbsp;참조</span></div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;show:&nbsp;<span style="color:#c10aff">false</span>,</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;labels:&nbsp;{</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;formatter:&nbsp;<span style="color:#ff3399">function</span>(val,&nbsp;index){</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#ff3399">var</span>&nbsp;n&nbsp;<span style="color:#0086b3"></span><span style="color:#ff3399">=</span>&nbsp;Math.floor(val<span style="color:#0086b3"></span><span style="color:#ff3399">/</span><span style="color:#c10aff">1000</span>);</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;n&nbsp;<span style="color:#0086b3"></span><span style="color:#ff3399">=</span>&nbsp;n.toString().replace(<span style="color:#0086b3"></span><span style="color:#ff3399">/</span>\B(?<span style="color:#0086b3"></span><span style="color:#ff3399">=</span>(\d{<span style="color:#c10aff">3</span>})<span style="color:#0086b3"></span><span style="color:#ff3399">+</span>(?<span style="color:#0086b3"></span><span style="color:#ff3399">!</span>\d))<span style="color:#0086b3"></span><span style="color:#ff3399">/</span>g,&nbsp;<span style="color:#ffd500">","</span>);</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#ff3399">return</span>&nbsp;n;</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;},</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{&nbsp;<span style="color:#999999">//&nbsp;2020년&nbsp;운항수&nbsp;y축</span></div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;showAlways:&nbsp;<span style="color:#c10aff">true</span>,&nbsp;<span style="color:#999999">//&nbsp;항상&nbsp;표시&nbsp;유무</span></div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;opposite:&nbsp;<span style="color:#c10aff">true</span>,&nbsp;<span style="color:#999999">//&nbsp;true면&nbsp;오른쪽에&nbsp;위치하게됨</span></div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;labels:&nbsp;{</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;style:&nbsp;{</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;colors:&nbsp;<span style="color:#ffd500">'#a5adc6'</span>,</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;fontSize:&nbsp;<span style="color:#ffd500">'13px'</span></div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;},</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;offsetX:&nbsp;<span style="color:#0086b3"></span><span style="color:#ff3399">-</span><span style="color:#c10aff">30</span>,</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;formatter:&nbsp;<span style="color:#ff3399">function</span>(val,&nbsp;index){</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#ff3399">var</span>&nbsp;n&nbsp;<span style="color:#0086b3"></span><span style="color:#ff3399">=</span>&nbsp;Math.floor(val<span style="color:#0086b3"></span><span style="color:#ff3399">/</span><span style="color:#c10aff">1000</span>);</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;n&nbsp;<span style="color:#0086b3"></span><span style="color:#ff3399">=</span>&nbsp;n.toString().replace(<span style="color:#0086b3"></span><span style="color:#ff3399">/</span>\B(?<span style="color:#0086b3"></span><span style="color:#ff3399">=</span>(\d{<span style="color:#c10aff">3</span>})<span style="color:#0086b3"></span><span style="color:#ff3399">+</span>(?<span style="color:#0086b3"></span><span style="color:#ff3399">!</span>\d))<span style="color:#0086b3"></span><span style="color:#ff3399">/</span>g,&nbsp;<span style="color:#ffd500">","</span>);</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#ff3399">return</span>&nbsp;n;</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;},</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;title:{</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;text:&nbsp;<span style="color:#ffd500">'(천)'</span>,</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;rotate:&nbsp;<span style="color:#c10aff">0</span>,</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;offsetX:&nbsp;<span style="color:#0086b3"></span><span style="color:#ff3399">-</span><span style="color:#c10aff">25</span>,</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;offsetY:&nbsp;<span style="color:#0086b3"></span><span style="color:#ff3399">-</span><span style="color:#c10aff">240</span>,</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;style:&nbsp;{</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;color:&nbsp;<span style="color:#ffd500">'#a5adc6'</span>,</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;fontSize:&nbsp;<span style="color:#ffd500">'12px'</span>,</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;fontWeight:&nbsp;<span style="color:#c10aff">400</span></div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;},</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{&nbsp;<span style="color:#999999">//&nbsp;2019년&nbsp;운항수&nbsp;y축&nbsp;-&nbsp;20운항&nbsp;y축&nbsp;참조</span></div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;seriesName:&nbsp;<span style="color:#ffd500">'2020운항'</span>,&nbsp;<span style="color:#999999">//&nbsp;20운항&nbsp;y축&nbsp;참조</span></div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;opposite:&nbsp;<span style="color:#c10aff">true</span>,&nbsp;<span style="color:#999999">//&nbsp;true면&nbsp;오른쪽에&nbsp;위치하게됨</span></div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;show:&nbsp;<span style="color:#c10aff">false</span>,</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;labels:&nbsp;{</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;formatter:&nbsp;<span style="color:#ff3399">function</span>(val,&nbsp;index){</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#ff3399">var</span>&nbsp;n&nbsp;<span style="color:#0086b3"></span><span style="color:#ff3399">=</span>&nbsp;Math.floor(val<span style="color:#0086b3"></span><span style="color:#ff3399">/</span><span style="color:#c10aff">1000</span>);</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;n&nbsp;<span style="color:#0086b3"></span><span style="color:#ff3399">=</span>&nbsp;n.toString().replace(<span style="color:#0086b3"></span><span style="color:#ff3399">/</span>\B(?<span style="color:#0086b3"></span><span style="color:#ff3399">=</span>(\d{<span style="color:#c10aff">3</span>})<span style="color:#0086b3"></span><span style="color:#ff3399">+</span>(?<span style="color:#0086b3"></span><span style="color:#ff3399">!</span>\d))<span style="color:#0086b3"></span><span style="color:#ff3399">/</span>g,&nbsp;<span style="color:#ffd500">","</span>);</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#ff3399">return</span>&nbsp;n;</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;},</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;],</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;grid:{&nbsp;<span style="color:#999999">//&nbsp;차트&nbsp;요소를&nbsp;그릴&nbsp;위치&nbsp;결정</span></div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;padding:{&nbsp;<span style="color:#999999">//&nbsp;여백</span></div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;top:<span style="color:#c10aff">10</span>,</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;right:&nbsp;<span style="color:#0086b3"></span><span style="color:#ff3399">-</span><span style="color:#c10aff">25</span>,</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;bottom:<span style="color:#0086b3"></span><span style="color:#ff3399">-</span><span style="color:#c10aff">10</span>,</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;left:&nbsp;<span style="color:#0086b3"></span><span style="color:#ff3399">-</span><span style="color:#c10aff">25</span></div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;},</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;tooltip:&nbsp;{</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;fixed:&nbsp;{&nbsp;<span style="color:#999999">//&nbsp;툴팁을&nbsp;고정된&nbsp;위치에서&nbsp;띄움</span></div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;enabled:&nbsp;<span style="color:#c10aff">true</span>,</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;position:&nbsp;<span style="color:#ffd500">'topLeft'</span>,&nbsp;<span style="color:#999999">//&nbsp;topRight,&nbsp;topLeft,&nbsp;bottomRight,&nbsp;bottomLeft</span></div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;offsetY:&nbsp;<span style="color:#c10aff">0</span>,</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;offsetX:&nbsp;<span style="color:#c10aff">100</span></div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;},</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;},</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;legend:&nbsp;{</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;show:&nbsp;<span style="color:#c10aff">false</span></div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;}</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;};</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;<span style="color:#999999">//&nbsp;차트</span></div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;<span style="color:#ff3399">var</span>&nbsp;mixChart&nbsp;<span style="color:#0086b3"></span><span style="color:#ff3399">=</span>&nbsp;<span style="color:#ff3399">new</span>&nbsp;ApexCharts(<span style="color:#4be6fa">document</span>.querySelector(<span style="color:#ffd500">"#mixChart"</span>),&nbsp;mixOpt);</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;mixChart.render();</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;<span style="color:#999999">//&nbsp;일별&nbsp;여객,운항&nbsp;실적&nbsp;비교&nbsp;차트&nbsp;범례</span></div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;$(<span style="color:#ffd500">'#dChartLegend01'</span>).on(<span style="color:#ffd500">'click'</span>,<span style="color:#ff3399">function</span>(){</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;mixChart.toggleSeries(mixChart.w.globals.seriesNames[<span style="color:#c10aff">0</span>]);</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;$(this).toggleClass(<span style="color:#ffd500">'active'</span>);</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;});</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;$(<span style="color:#ffd500">'#dChartLegend02'</span>).on(<span style="color:#ffd500">'click'</span>,<span style="color:#ff3399">function</span>(){</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;mixChart.toggleSeries(mixChart.w.globals.seriesNames[<span style="color:#c10aff">1</span>]);</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;$(this).toggleClass(<span style="color:#ffd500">'active'</span>);</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;});</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;$(<span style="color:#ffd500">'#dChartLegend03'</span>).on(<span style="color:#ffd500">'click'</span>,<span style="color:#ff3399">function</span>(){</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;mixChart.toggleSeries(mixChart.w.globals.seriesNames[<span style="color:#c10aff">2</span>]);</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;$(this).toggleClass(<span style="color:#ffd500">'active'</span>);</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;});</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;$(<span style="color:#ffd500">'#dChartLegend04'</span>).on(<span style="color:#ffd500">'click'</span>,<span style="color:#ff3399">function</span>(){</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;mixChart.toggleSeries(mixChart.w.globals.seriesNames[<span style="color:#c10aff">3</span>]);</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;$(this).toggleClass(<span style="color:#ffd500">'active'</span>);</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;});</div></pre>
+                      <div style="text-align: right; margin-top: -13px; margin-right: 5px; font-size: 9px; font-style: italic">
+                        <a href="http://colorscripter.com/info#e" target="_blank" style="color:#4f4f4ftext-decoration:none">Colored by Color Scripter</a>
+                      </div>
+                    </td>
+                    <td style="vertical-align: bottom; padding: 0 2px 4px 0">
+                      <a href="http://colorscripter.com/info#e" target="_blank" style="text-decoration: none; color: white"
+                        ><span style="font-size: 9px; word-break: normal; background-color: #4f4f4f; color: white; border-radius: 10px; padding: 1px"
+                          >cs</span
+                        ></a
+                      >
+                    </td>
+                  </tr>
+                </table>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>

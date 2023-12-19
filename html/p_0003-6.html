@@ -1,123 +1,130 @@
 <!DOCTYPE html>
 <html lang="ko">
   <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <title>I&VIEW Design System</title>
-    <link rel="stylesheet" href="../resource/chart/apexchart/apexcharts.css">
-    <link rel="stylesheet" href="../css/contents.css">
+    <link rel="stylesheet" href="../resource/chart/apexchart/apexcharts.css" />
+    <link rel="stylesheet" href="../css/contents.css" />
 
     <script src="../resource/jquery.min.js"></script>
     <!-- apexcharts IE 지원 -->
     <script type="text/javascript">
-      window.Promise ||
-      document.write('<script src="../resource/polyfill.min.js"><\/script>')
-      window.Promise ||
-      document.write('<script src="../resource/classlist.js"><\/script>')
-      window.Promise ||
-      document.write('<script src="../resource/findIndex.js"><\/script>')
-      window.Promise ||
-      document.write('<script src="../resource/canvg.js"><\/script>')
+      window.Promise || document.write('<script src="../resource/polyfill.min.js"><\/script>');
+      window.Promise || document.write('<script src="../resource/classlist.js"><\/script>');
+      window.Promise || document.write('<script src="../resource/findIndex.js"><\/script>');
+      window.Promise || document.write('<script src="../resource/canvg.js"><\/script>');
     </script>
     <script src="../resource/chart/apexchart/apexcharts.min.js"></script>
 
     <script src="../js/script.js"></script>
     <script>
-      $(function(){
-// 랜덤 데이터를 만들어주는 예제 함수
-var trigoStrength = 3
-var iteration = 11
-function getRandom() {
-  var i = iteration;
-  return (Math.sin(i / trigoStrength) * (i / trigoStrength) + i / trigoStrength + 1) * (trigoStrength * 2)
-}
-function generateMinuteWiseTimeSeries(baseval, count, yrange) {
-  var i = 0;
-  var series = [];
-  while (i < count) {
-    var x = baseval;
-    var y = ((Math.sin(i / trigoStrength) * (i / trigoStrength) + i / trigoStrength + 1) * (trigoStrength * 2))
-    series.push([x, y]);
-    baseval += 300000;
-    i++;
-  }
-  return series;
-}
-
-// 차트 옵션
-var options = {
-    series: [{ // 차트 데이터
-      name: 'PRODUCT A',
-      data: generateMinuteWiseTimeSeries(new Date("01/01/2020 23:20:00").getTime(), 12, {
-        min: 10,
-        max: 110
-      })
-    }],
-    colors: ["#4b4eb1"],
-    chart: {
-      type: 'bar',
-      width: '100%',
-      height: 500,
-      toolbar: {
-        show: false // 차트 다운로드 버튼
-      },
-      zoom: {
-        enabled: false // 차트 확대축소등
-      },
-      animations: { // 차트 업데이트 시 애니메이션
-        enabled: true,
-        easing: 'linear',
-        dynamicAnimation: { // 데이터가 업데이트 되서 변경되고 다시 차트가 렌더링 될 때 차트에 에니메이션 사용
-          speed: 1000
+      $(function () {
+        // 랜덤 데이터를 만들어주는 예제 함수
+        var trigoStrength = 3;
+        var iteration = 11;
+        function getRandom() {
+          var i = iteration;
+          return (Math.sin(i / trigoStrength) * (i / trigoStrength) + i / trigoStrength + 1) * (trigoStrength * 2);
         }
-      }
-    },
-    dataLabels: {
-      enabled: false
-    },
-    responsive: [{
-      breakpoint: 480,
-      options: {
-        legend: {
-          position: 'bottom',
-          offsetX: -10,
-          offsetY: 0
+        function generateMinuteWiseTimeSeries(baseval, count, yrange) {
+          var i = 0;
+          var series = [];
+          while (i < count) {
+            var x = baseval;
+            var y = (Math.sin(i / trigoStrength) * (i / trigoStrength) + i / trigoStrength + 1) * (trigoStrength * 2);
+            series.push([x, y]);
+            baseval += 300000;
+            i++;
+          }
+          return series;
         }
-      }
-    }],
-    plotOptions: {
-      bar: {
-        horizontal: false,
-        columnWidth: '50px'
-      },
-    },
-    xaxis: {
-      type: 'datetime',
-      range: 2700000
-    },
-    yaxis:{
-      decimalsInFloat:2 // 소수점 제어
-    },
-  legend: {
-    position: 'right',
-    offsetY: 40
-  },
-  fill: {
-    opacity: 1
-  }
-};
-// 차트
-var chart = new ApexCharts(document.querySelector("#barChart"), options);
-chart.render();
 
-window.setInterval(function () { // 3초에 한번씩 데이터 업데이트
-  iteration++;
-  chart.updateSeries([{
-    data: [].concat(chart.w.config.series[0].data, [[chart.w.globals.maxX + 300000, getRandom()]])
-  }]);
-}, 3000);
+        // 차트 옵션
+        var options = {
+          series: [
+            {
+              // 차트 데이터
+              name: "PRODUCT A",
+              data: generateMinuteWiseTimeSeries(new Date("01/01/2020 23:20:00").getTime(), 12, {
+                min: 10,
+                max: 110,
+              }),
+            },
+          ],
+          colors: ["#4b4eb1"],
+          chart: {
+            type: "bar",
+            width: "100%",
+            height: 500,
+            toolbar: {
+              show: false, // 차트 다운로드 버튼
+            },
+            zoom: {
+              enabled: false, // 차트 확대축소등
+            },
+            animations: {
+              // 차트 업데이트 시 애니메이션
+              enabled: true,
+              easing: "linear",
+              dynamicAnimation: {
+                // 데이터가 업데이트 되서 변경되고 다시 차트가 렌더링 될 때 차트에 에니메이션 사용
+                speed: 1000,
+              },
+            },
+          },
+          dataLabels: {
+            enabled: false,
+          },
+          responsive: [
+            {
+              breakpoint: 480,
+              options: {
+                legend: {
+                  position: "bottom",
+                  offsetX: -10,
+                  offsetY: 0,
+                },
+              },
+            },
+          ],
+          plotOptions: {
+            bar: {
+              horizontal: false,
+              columnWidth: "50px",
+            },
+          },
+          xaxis: {
+            type: "datetime",
+            range: 2700000,
+          },
+          yaxis: {
+            decimalsInFloat: 2, // 소수점 제어
+          },
+          legend: {
+            position: "right",
+            offsetY: 40,
+          },
+          fill: {
+            opacity: 1,
+          },
+        };
+        // 차트
+        var chart = new ApexCharts(document.querySelector("#barChart"), options);
+        chart.render();
+
+        window.setInterval(function () {
+          // 3초에 한번씩 데이터 업데이트
+          iteration++;
+          chart.updateSeries([
+            {
+              data: [].concat(chart.w.config.series[0].data, [[chart.w.globals.maxX + 300000, getRandom()]]),
+            },
+          ]);
+        }, 3000);
       });
-      </script>
+    </script>
+  </head>
   <body>
     <div class="content_wrap">
       <div class="row">
@@ -137,29 +144,107 @@ window.setInterval(function () { // 3초에 한번씩 데이터 업데이트
       </div>
       <div class="row">
         <div class="layout col_12">
-         <div class="title_box item_tit">
-           <h3 class="tit01">bar chart</h3>
-         </div>
-         <div class="item_exam">
-           <div class="title_box">
-             <h4 class="tit02">결과화면</h4>
-           </div>
-           <div class="chart_box">
+          <div class="title_box item_tit">
+            <h3 class="tit01">bar chart</h3>
+          </div>
+          <div class="item_exam">
+            <div class="title_box">
+              <h4 class="tit02">결과화면</h4>
+            </div>
+            <div class="chart_box">
               <div id="barChart"></div>
-           </div>
-           <div class="title_box">
-             <h4 class="tit02">HTML</h4>
-           </div>
-           <div class="code_box">
-<div class="colorscripter-code" style="color:#f0f0f0;font-family:Consolas, 'Liberation Mono', Menlo, Courier, monospace !important; position:relative !important;overflow:auto"><table class="colorscripter-code-table" style="margin:0;padding:0;border:none;background-color:#272727;border-radius:4px;" cellspacing="0" cellpadding="0"><tr><td style="padding:6px 0;text-align:left"><pre style="margin:0;padding:0;color:#f0f0f0;font-family:Consolas, 'Liberation Mono', Menlo, Courier, monospace !important;line-height:130%"><div style="padding:0 6px; white-space:pre; line-height:130%"><span style="color:#f0f0f0">&lt;</span><span style="color:#ff3399">link</span>&nbsp;<span style="color:#a8ff58">rel</span>=<span style="color:#ffd500">"stylesheet"</span>&nbsp;<span style="color:#a8ff58">href</span>=<span style="color:#ffd500">"../resource/chart/apexchart/apexcharts.css"</span><span style="color:#f0f0f0">&gt;</span></div><div style="padding:0 6px; white-space:pre; line-height:130%"><span style="color:#999999">&lt;!--&nbsp;apexcharts&nbsp;IE&nbsp;지원&nbsp;--&gt;</span></div><div style="padding:0 6px; white-space:pre; line-height:130%"><span style="color:#f0f0f0">&lt;</span><span style="color:#ff3399">script</span>&nbsp;<span style="color:#a8ff58">type</span>=<span style="color:#ffd500">"text/javascript"</span><span style="color:#ff3399"></span><span style="color:#f0f0f0">&gt;</span></div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;<span style="color:#4be6fa">window</span>.Promise&nbsp;<span style="color:#0086b3"></span><span style="color:#ff3399">|</span><span style="color:#0086b3"></span><span style="color:#ff3399">|</span></div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;<span style="color:#4be6fa">document</span>.write(<span style="color:#ffd500">'&lt;script&nbsp;src="../resource/polyfill.min.js"&gt;&lt;\/script&gt;'</span>)</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;<span style="color:#4be6fa">window</span>.Promise&nbsp;<span style="color:#0086b3"></span><span style="color:#ff3399">|</span><span style="color:#0086b3"></span><span style="color:#ff3399">|</span></div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;<span style="color:#4be6fa">document</span>.write(<span style="color:#ffd500">'&lt;script&nbsp;src="../resource/classlist.js"&gt;&lt;\/script&gt;'</span>)</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;<span style="color:#4be6fa">window</span>.Promise&nbsp;<span style="color:#0086b3"></span><span style="color:#ff3399">|</span><span style="color:#0086b3"></span><span style="color:#ff3399">|</span></div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;<span style="color:#4be6fa">document</span>.write(<span style="color:#ffd500">'&lt;script&nbsp;src="../resource/findIndex.js"&gt;&lt;\/script&gt;'</span>)</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;<span style="color:#4be6fa">window</span>.Promise&nbsp;<span style="color:#0086b3"></span><span style="color:#ff3399">|</span><span style="color:#0086b3"></span><span style="color:#ff3399">|</span></div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;<span style="color:#4be6fa">document</span>.write(<span style="color:#ffd500">'&lt;script&nbsp;src="../resource/canvg.js"&gt;&lt;\/script&gt;'</span>)</div><div style="padding:0 6px; white-space:pre; line-height:130%"><span style="color:#f0f0f0">&lt;</span><span style="color:#f0f0f0">/</span><span style="color:#ff3399">script</span><span style="color:#f0f0f0">&gt;</span></div><div style="padding:0 6px; white-space:pre; line-height:130%"><span style="color:#f0f0f0">&lt;</span><span style="color:#ff3399">script</span>&nbsp;<span style="color:#a8ff58">src</span>=<span style="color:#ffd500">"../resource/chart/apexchart/apexcharts.min.js"</span><span style="color:#ff3399"></span><span style="color:#f0f0f0">&gt;</span><span style="color:#f0f0f0">&lt;</span><span style="color:#f0f0f0">/</span><span style="color:#ff3399">script</span><span style="color:#f0f0f0">&gt;</span></div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;</div><div style="padding:0 6px; white-space:pre; line-height:130%"><span style="color:#f0f0f0">&lt;</span><span style="color:#ff3399">div</span>&nbsp;<span style="color:#a8ff58">id</span>=<span style="color:#ffd500">"barChart"</span><span style="color:#a8ff58"></span><span style="color:#f0f0f0">&gt;</span><span style="color:#f0f0f0">&lt;</span><span style="color:#f0f0f0">/</span><span style="color:#ff3399">div</span><span style="color:#f0f0f0">&gt;</span></div></pre><div style="text-align:right;margin-top:-13px;margin-right:5px;font-size:9px;font-style:italic"><a href="http://colorscripter.com/info#e" target="_blank" style="color:#4f4f4ftext-decoration:none">Colored by Color Scripter</a></div></td><td style="vertical-align:bottom;padding:0 2px 4px 0"><a href="http://colorscripter.com/info#e" target="_blank" style="text-decoration:none;color:white"><span style="font-size:9px;word-break:normal;background-color:#4f4f4f;color:white;border-radius:10px;padding:1px">cs</span></a></td></tr></table></div>
-           </div>
-           <div class="title_box">
-             <h4 class="tit02">JS</h4>
-           </div>
-           <div class="code_box">
-<div class="colorscripter-code" style="color:#f0f0f0;font-family:Consolas, 'Liberation Mono', Menlo, Courier, monospace !important; position:relative !important;overflow:auto"><table class="colorscripter-code-table" style="margin:0;padding:0;border:none;background-color:#272727;border-radius:4px;" cellspacing="0" cellpadding="0"><tr><td style="padding:6px 0;text-align:left"><pre style="margin:0;padding:0;color:#f0f0f0;font-family:Consolas, 'Liberation Mono', Menlo, Courier, monospace !important;line-height:130%"><div style="padding:0 6px; white-space:pre; line-height:130%"><span style="color:#999999">//&nbsp;랜덤&nbsp;데이터를&nbsp;만들어주는&nbsp;예제&nbsp;함수</span></div><div style="padding:0 6px; white-space:pre; line-height:130%"><span style="color:#ff3399">var</span>&nbsp;trigoStrength&nbsp;<span style="color:#0086b3"></span><span style="color:#ff3399">=</span>&nbsp;<span style="color:#c10aff">3</span></div><div style="padding:0 6px; white-space:pre; line-height:130%"><span style="color:#ff3399">var</span>&nbsp;iteration&nbsp;<span style="color:#0086b3"></span><span style="color:#ff3399">=</span>&nbsp;<span style="color:#c10aff">11</span></div><div style="padding:0 6px; white-space:pre; line-height:130%"><span style="color:#ff3399">function</span>&nbsp;getRandom()&nbsp;{</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;<span style="color:#ff3399">var</span>&nbsp;i&nbsp;<span style="color:#0086b3"></span><span style="color:#ff3399">=</span>&nbsp;iteration;</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;<span style="color:#ff3399">return</span>&nbsp;(Math.sin(i&nbsp;<span style="color:#0086b3"></span><span style="color:#ff3399">/</span>&nbsp;trigoStrength)&nbsp;<span style="color:#0086b3"></span><span style="color:#ff3399">*</span>&nbsp;(i&nbsp;<span style="color:#0086b3"></span><span style="color:#ff3399">/</span>&nbsp;trigoStrength)&nbsp;<span style="color:#0086b3"></span><span style="color:#ff3399">+</span>&nbsp;i&nbsp;<span style="color:#0086b3"></span><span style="color:#ff3399">/</span>&nbsp;trigoStrength&nbsp;<span style="color:#0086b3"></span><span style="color:#ff3399">+</span>&nbsp;<span style="color:#c10aff">1</span>)&nbsp;<span style="color:#0086b3"></span><span style="color:#ff3399">*</span>&nbsp;(trigoStrength&nbsp;<span style="color:#0086b3"></span><span style="color:#ff3399">*</span>&nbsp;<span style="color:#c10aff">2</span>)</div><div style="padding:0 6px; white-space:pre; line-height:130%">}</div><div style="padding:0 6px; white-space:pre; line-height:130%"><span style="color:#ff3399">function</span>&nbsp;generateMinuteWiseTimeSeries(baseval,&nbsp;count,&nbsp;yrange)&nbsp;{</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;<span style="color:#ff3399">var</span>&nbsp;i&nbsp;<span style="color:#0086b3"></span><span style="color:#ff3399">=</span>&nbsp;<span style="color:#c10aff">0</span>;</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;<span style="color:#ff3399">var</span>&nbsp;series&nbsp;<span style="color:#0086b3"></span><span style="color:#ff3399">=</span>&nbsp;[];</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;<span style="color:#ff3399">while</span>&nbsp;(i&nbsp;<span style="color:#0086b3"></span><span style="color:#ff3399">&lt;</span>&nbsp;count)&nbsp;{</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#ff3399">var</span>&nbsp;x&nbsp;<span style="color:#0086b3"></span><span style="color:#ff3399">=</span>&nbsp;baseval;</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#ff3399">var</span>&nbsp;y&nbsp;<span style="color:#0086b3"></span><span style="color:#ff3399">=</span>&nbsp;((Math.sin(i&nbsp;<span style="color:#0086b3"></span><span style="color:#ff3399">/</span>&nbsp;trigoStrength)&nbsp;<span style="color:#0086b3"></span><span style="color:#ff3399">*</span>&nbsp;(i&nbsp;<span style="color:#0086b3"></span><span style="color:#ff3399">/</span>&nbsp;trigoStrength)&nbsp;<span style="color:#0086b3"></span><span style="color:#ff3399">+</span>&nbsp;i&nbsp;<span style="color:#0086b3"></span><span style="color:#ff3399">/</span>&nbsp;trigoStrength&nbsp;<span style="color:#0086b3"></span><span style="color:#ff3399">+</span>&nbsp;<span style="color:#c10aff">1</span>)&nbsp;<span style="color:#0086b3"></span><span style="color:#ff3399">*</span>&nbsp;(trigoStrength&nbsp;<span style="color:#0086b3"></span><span style="color:#ff3399">*</span>&nbsp;<span style="color:#c10aff">2</span>))</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;series.push([x,&nbsp;y]);</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;baseval&nbsp;<span style="color:#0086b3"></span><span style="color:#ff3399">+</span><span style="color:#0086b3"></span><span style="color:#ff3399">=</span>&nbsp;<span style="color:#c10aff">300000</span>;</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;i<span style="color:#0086b3"></span><span style="color:#ff3399">+</span><span style="color:#0086b3"></span><span style="color:#ff3399">+</span>;</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;}</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;<span style="color:#ff3399">return</span>&nbsp;series;</div><div style="padding:0 6px; white-space:pre; line-height:130%">}</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;</div><div style="padding:0 6px; white-space:pre; line-height:130%"><span style="color:#999999">//&nbsp;차트&nbsp;옵션</span></div><div style="padding:0 6px; white-space:pre; line-height:130%"><span style="color:#ff3399">var</span>&nbsp;options&nbsp;<span style="color:#0086b3"></span><span style="color:#ff3399">=</span>&nbsp;{</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;series:&nbsp;[{&nbsp;<span style="color:#999999">//&nbsp;차트&nbsp;데이터</span></div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#4be6fa">name</span>:&nbsp;<span style="color:#ffd500">'PRODUCT&nbsp;A'</span>,</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;data:&nbsp;generateMinuteWiseTimeSeries(<span style="color:#ff3399">new</span>&nbsp;<span style="color:#4be6fa">Date</span>(<span style="color:#ffd500">"01/01/2020&nbsp;23:20:00"</span>).getTime(),&nbsp;<span style="color:#c10aff">12</span>,&nbsp;{</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;min:&nbsp;<span style="color:#c10aff">10</span>,</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;max:&nbsp;<span style="color:#c10aff">110</span></div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;})</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;}],</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;colors:&nbsp;[<span style="color:#ffd500">"#4b4eb1"</span>],</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;chart:&nbsp;{</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;type:&nbsp;<span style="color:#ffd500">'bar'</span>,</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;width:&nbsp;<span style="color:#ffd500">'100%'</span>,</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;height:&nbsp;<span style="color:#c10aff">500</span>,</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;toolbar:&nbsp;{</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;show:&nbsp;<span style="color:#c10aff">false</span>&nbsp;<span style="color:#999999">//&nbsp;차트&nbsp;다운로드&nbsp;버튼</span></div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;},</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;zoom:&nbsp;{</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;enabled:&nbsp;<span style="color:#c10aff">false</span>&nbsp;<span style="color:#999999">//&nbsp;차트&nbsp;확대축소등</span></div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;},</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;animations:&nbsp;{&nbsp;<span style="color:#999999">//&nbsp;차트&nbsp;업데이트&nbsp;시&nbsp;애니메이션</span></div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;enabled:&nbsp;<span style="color:#c10aff">true</span>,</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;easing:&nbsp;<span style="color:#ffd500">'linear'</span>,</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;dynamicAnimation:&nbsp;{&nbsp;<span style="color:#999999">//&nbsp;데이터가&nbsp;업데이트&nbsp;되서&nbsp;변경되고&nbsp;다시&nbsp;차트가&nbsp;렌더링&nbsp;될&nbsp;때&nbsp;차트에&nbsp;에니메이션&nbsp;사용</span></div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;speed:&nbsp;<span style="color:#c10aff">1000</span></div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;},</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;dataLabels:&nbsp;{</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;enabled:&nbsp;<span style="color:#c10aff">false</span></div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;},</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;responsive:&nbsp;[{</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;breakpoint:&nbsp;<span style="color:#c10aff">480</span>,</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;options:&nbsp;{</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;legend:&nbsp;{</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;position:&nbsp;<span style="color:#ffd500">'bottom'</span>,</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;offsetX:&nbsp;<span style="color:#0086b3"></span><span style="color:#ff3399">-</span><span style="color:#c10aff">10</span>,</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;offsetY:&nbsp;<span style="color:#c10aff">0</span></div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;}],</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;plotOptions:&nbsp;{</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;bar:&nbsp;{</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;horizontal:&nbsp;<span style="color:#c10aff">false</span>,</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;columnWidth:&nbsp;<span style="color:#ffd500">'50px'</span></div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;},</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;},</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;xaxis:&nbsp;{</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;type:&nbsp;<span style="color:#ffd500">'datetime'</span>,</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;range:&nbsp;<span style="color:#c10aff">2700000</span></div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;},</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;yaxis:{</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;decimalsInFloat:<span style="color:#c10aff">2</span>&nbsp;<span style="color:#999999">//&nbsp;소수점&nbsp;제어</span></div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;},</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;legend:&nbsp;{</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;position:&nbsp;<span style="color:#ffd500">'right'</span>,</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;offsetY:&nbsp;<span style="color:#c10aff">40</span></div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;},</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;fill:&nbsp;{</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;opacity:&nbsp;<span style="color:#c10aff">1</span></div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;}</div><div style="padding:0 6px; white-space:pre; line-height:130%">};</div><div style="padding:0 6px; white-space:pre; line-height:130%"><span style="color:#999999">//&nbsp;차트</span></div><div style="padding:0 6px; white-space:pre; line-height:130%"><span style="color:#ff3399">var</span>&nbsp;chart&nbsp;<span style="color:#0086b3"></span><span style="color:#ff3399">=</span>&nbsp;<span style="color:#ff3399">new</span>&nbsp;ApexCharts(<span style="color:#4be6fa">document</span>.querySelector(<span style="color:#ffd500">"#barChart"</span>),&nbsp;options);</div><div style="padding:0 6px; white-space:pre; line-height:130%">chart.render();</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;</div><div style="padding:0 6px; white-space:pre; line-height:130%"><span style="color:#4be6fa">window</span>.<span style="color:#4be6fa">setInterval</span>(<span style="color:#ff3399">function</span>&nbsp;()&nbsp;{&nbsp;<span style="color:#999999">//&nbsp;3초에&nbsp;한번씩&nbsp;데이터&nbsp;업데이트</span></div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;iteration<span style="color:#0086b3"></span><span style="color:#ff3399">+</span><span style="color:#0086b3"></span><span style="color:#ff3399">+</span>;</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;chart.updateSeries([{</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;data:&nbsp;[].concat(chart.w.config.series[<span style="color:#c10aff">0</span>].data,&nbsp;[[chart.w.globals.maxX&nbsp;<span style="color:#0086b3"></span><span style="color:#ff3399">+</span>&nbsp;<span style="color:#c10aff">300000</span>,&nbsp;getRandom()]])</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;}]);</div><div style="padding:0 6px; white-space:pre; line-height:130%">},&nbsp;<span style="color:#c10aff">3000</span>);</div></pre><div style="text-align:right;margin-top:-13px;margin-right:5px;font-size:9px;font-style:italic"><a href="http://colorscripter.com/info#e" target="_blank" style="color:#4f4f4ftext-decoration:none">Colored by Color Scripter</a></div></td><td style="vertical-align:bottom;padding:0 2px 4px 0"><a href="http://colorscripter.com/info#e" target="_blank" style="text-decoration:none;color:white"><span style="font-size:9px;word-break:normal;background-color:#4f4f4f;color:white;border-radius:10px;padding:1px">cs</span></a></td></tr></table></div>
-           </div>
-         </div>
+            </div>
+            <div class="title_box">
+              <h4 class="tit02">HTML</h4>
+            </div>
+            <div class="code_box">
+              <div
+                class="colorscripter-code"
+                style="
+                  color: #f0f0f0;
+                  font-family: Consolas, 'Liberation Mono', Menlo, Courier, monospace !important;
+                  position: relative !important;
+                  overflow: auto;
+                "
+              >
+                <table
+                  class="colorscripter-code-table"
+                  style="margin: 0; padding: 0; border: none; background-color: #272727; border-radius: 4px"
+                  cellspacing="0"
+                  cellpadding="0"
+                >
+                  <tr>
+                    <td style="padding: 6px 0; text-align: left">
+                      <pre
+                        style="
+                          margin: 0;
+                          padding: 0;
+                          color: #f0f0f0;
+                          font-family: Consolas, 'Liberation Mono', Menlo, Courier, monospace !important;
+                          line-height: 130%;
+                        "
+                      ><div style="padding:0 6px; white-space:pre; line-height:130%"><span style="color:#f0f0f0">&lt;</span><span style="color:#ff3399">link</span>&nbsp;<span style="color:#a8ff58">rel</span>=<span style="color:#ffd500">"stylesheet"</span>&nbsp;<span style="color:#a8ff58">href</span>=<span style="color:#ffd500">"../resource/chart/apexchart/apexcharts.css"</span><span style="color:#f0f0f0">&gt;</span></div><div style="padding:0 6px; white-space:pre; line-height:130%"><span style="color:#999999">&lt;!--&nbsp;apexcharts&nbsp;IE&nbsp;지원&nbsp;--&gt;</span></div><div style="padding:0 6px; white-space:pre; line-height:130%"><span style="color:#f0f0f0">&lt;</span><span style="color:#ff3399">script</span>&nbsp;<span style="color:#a8ff58">type</span>=<span style="color:#ffd500">"text/javascript"</span><span style="color:#ff3399"></span><span style="color:#f0f0f0">&gt;</span></div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;<span style="color:#4be6fa">window</span>.Promise&nbsp;<span style="color:#0086b3"></span><span style="color:#ff3399">|</span><span style="color:#0086b3"></span><span style="color:#ff3399">|</span></div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;<span style="color:#4be6fa">document</span>.write(<span style="color:#ffd500">'&lt;script&nbsp;src="../resource/polyfill.min.js"&gt;&lt;\/script&gt;'</span>)</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;<span style="color:#4be6fa">window</span>.Promise&nbsp;<span style="color:#0086b3"></span><span style="color:#ff3399">|</span><span style="color:#0086b3"></span><span style="color:#ff3399">|</span></div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;<span style="color:#4be6fa">document</span>.write(<span style="color:#ffd500">'&lt;script&nbsp;src="../resource/classlist.js"&gt;&lt;\/script&gt;'</span>)</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;<span style="color:#4be6fa">window</span>.Promise&nbsp;<span style="color:#0086b3"></span><span style="color:#ff3399">|</span><span style="color:#0086b3"></span><span style="color:#ff3399">|</span></div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;<span style="color:#4be6fa">document</span>.write(<span style="color:#ffd500">'&lt;script&nbsp;src="../resource/findIndex.js"&gt;&lt;\/script&gt;'</span>)</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;<span style="color:#4be6fa">window</span>.Promise&nbsp;<span style="color:#0086b3"></span><span style="color:#ff3399">|</span><span style="color:#0086b3"></span><span style="color:#ff3399">|</span></div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;<span style="color:#4be6fa">document</span>.write(<span style="color:#ffd500">'&lt;script&nbsp;src="../resource/canvg.js"&gt;&lt;\/script&gt;'</span>)</div><div style="padding:0 6px; white-space:pre; line-height:130%"><span style="color:#f0f0f0">&lt;</span><span style="color:#f0f0f0">/</span><span style="color:#ff3399">script</span><span style="color:#f0f0f0">&gt;</span></div><div style="padding:0 6px; white-space:pre; line-height:130%"><span style="color:#f0f0f0">&lt;</span><span style="color:#ff3399">script</span>&nbsp;<span style="color:#a8ff58">src</span>=<span style="color:#ffd500">"../resource/chart/apexchart/apexcharts.min.js"</span><span style="color:#ff3399"></span><span style="color:#f0f0f0">&gt;</span><span style="color:#f0f0f0">&lt;</span><span style="color:#f0f0f0">/</span><span style="color:#ff3399">script</span><span style="color:#f0f0f0">&gt;</span></div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;</div><div style="padding:0 6px; white-space:pre; line-height:130%"><span style="color:#f0f0f0">&lt;</span><span style="color:#ff3399">div</span>&nbsp;<span style="color:#a8ff58">id</span>=<span style="color:#ffd500">"barChart"</span><span style="color:#a8ff58"></span><span style="color:#f0f0f0">&gt;</span><span style="color:#f0f0f0">&lt;</span><span style="color:#f0f0f0">/</span><span style="color:#ff3399">div</span><span style="color:#f0f0f0">&gt;</span></div></pre>
+                      <div style="text-align: right; margin-top: -13px; margin-right: 5px; font-size: 9px; font-style: italic">
+                        <a href="http://colorscripter.com/info#e" target="_blank" style="color:#4f4f4ftext-decoration:none">Colored by Color Scripter</a>
+                      </div>
+                    </td>
+                    <td style="vertical-align: bottom; padding: 0 2px 4px 0">
+                      <a href="http://colorscripter.com/info#e" target="_blank" style="text-decoration: none; color: white"
+                        ><span style="font-size: 9px; word-break: normal; background-color: #4f4f4f; color: white; border-radius: 10px; padding: 1px"
+                          >cs</span
+                        ></a
+                      >
+                    </td>
+                  </tr>
+                </table>
+              </div>
+            </div>
+            <div class="title_box">
+              <h4 class="tit02">JS</h4>
+            </div>
+            <div class="code_box">
+              <div
+                class="colorscripter-code"
+                style="
+                  color: #f0f0f0;
+                  font-family: Consolas, 'Liberation Mono', Menlo, Courier, monospace !important;
+                  position: relative !important;
+                  overflow: auto;
+                "
+              >
+                <table
+                  class="colorscripter-code-table"
+                  style="margin: 0; padding: 0; border: none; background-color: #272727; border-radius: 4px"
+                  cellspacing="0"
+                  cellpadding="0"
+                >
+                  <tr>
+                    <td style="padding: 6px 0; text-align: left">
+                      <pre
+                        style="
+                          margin: 0;
+                          padding: 0;
+                          color: #f0f0f0;
+                          font-family: Consolas, 'Liberation Mono', Menlo, Courier, monospace !important;
+                          line-height: 130%;
+                        "
+                      ><div style="padding:0 6px; white-space:pre; line-height:130%"><span style="color:#999999">//&nbsp;랜덤&nbsp;데이터를&nbsp;만들어주는&nbsp;예제&nbsp;함수</span></div><div style="padding:0 6px; white-space:pre; line-height:130%"><span style="color:#ff3399">var</span>&nbsp;trigoStrength&nbsp;<span style="color:#0086b3"></span><span style="color:#ff3399">=</span>&nbsp;<span style="color:#c10aff">3</span></div><div style="padding:0 6px; white-space:pre; line-height:130%"><span style="color:#ff3399">var</span>&nbsp;iteration&nbsp;<span style="color:#0086b3"></span><span style="color:#ff3399">=</span>&nbsp;<span style="color:#c10aff">11</span></div><div style="padding:0 6px; white-space:pre; line-height:130%"><span style="color:#ff3399">function</span>&nbsp;getRandom()&nbsp;{</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;<span style="color:#ff3399">var</span>&nbsp;i&nbsp;<span style="color:#0086b3"></span><span style="color:#ff3399">=</span>&nbsp;iteration;</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;<span style="color:#ff3399">return</span>&nbsp;(Math.sin(i&nbsp;<span style="color:#0086b3"></span><span style="color:#ff3399">/</span>&nbsp;trigoStrength)&nbsp;<span style="color:#0086b3"></span><span style="color:#ff3399">*</span>&nbsp;(i&nbsp;<span style="color:#0086b3"></span><span style="color:#ff3399">/</span>&nbsp;trigoStrength)&nbsp;<span style="color:#0086b3"></span><span style="color:#ff3399">+</span>&nbsp;i&nbsp;<span style="color:#0086b3"></span><span style="color:#ff3399">/</span>&nbsp;trigoStrength&nbsp;<span style="color:#0086b3"></span><span style="color:#ff3399">+</span>&nbsp;<span style="color:#c10aff">1</span>)&nbsp;<span style="color:#0086b3"></span><span style="color:#ff3399">*</span>&nbsp;(trigoStrength&nbsp;<span style="color:#0086b3"></span><span style="color:#ff3399">*</span>&nbsp;<span style="color:#c10aff">2</span>)</div><div style="padding:0 6px; white-space:pre; line-height:130%">}</div><div style="padding:0 6px; white-space:pre; line-height:130%"><span style="color:#ff3399">function</span>&nbsp;generateMinuteWiseTimeSeries(baseval,&nbsp;count,&nbsp;yrange)&nbsp;{</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;<span style="color:#ff3399">var</span>&nbsp;i&nbsp;<span style="color:#0086b3"></span><span style="color:#ff3399">=</span>&nbsp;<span style="color:#c10aff">0</span>;</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;<span style="color:#ff3399">var</span>&nbsp;series&nbsp;<span style="color:#0086b3"></span><span style="color:#ff3399">=</span>&nbsp;[];</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;<span style="color:#ff3399">while</span>&nbsp;(i&nbsp;<span style="color:#0086b3"></span><span style="color:#ff3399">&lt;</span>&nbsp;count)&nbsp;{</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#ff3399">var</span>&nbsp;x&nbsp;<span style="color:#0086b3"></span><span style="color:#ff3399">=</span>&nbsp;baseval;</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#ff3399">var</span>&nbsp;y&nbsp;<span style="color:#0086b3"></span><span style="color:#ff3399">=</span>&nbsp;((Math.sin(i&nbsp;<span style="color:#0086b3"></span><span style="color:#ff3399">/</span>&nbsp;trigoStrength)&nbsp;<span style="color:#0086b3"></span><span style="color:#ff3399">*</span>&nbsp;(i&nbsp;<span style="color:#0086b3"></span><span style="color:#ff3399">/</span>&nbsp;trigoStrength)&nbsp;<span style="color:#0086b3"></span><span style="color:#ff3399">+</span>&nbsp;i&nbsp;<span style="color:#0086b3"></span><span style="color:#ff3399">/</span>&nbsp;trigoStrength&nbsp;<span style="color:#0086b3"></span><span style="color:#ff3399">+</span>&nbsp;<span style="color:#c10aff">1</span>)&nbsp;<span style="color:#0086b3"></span><span style="color:#ff3399">*</span>&nbsp;(trigoStrength&nbsp;<span style="color:#0086b3"></span><span style="color:#ff3399">*</span>&nbsp;<span style="color:#c10aff">2</span>))</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;series.push([x,&nbsp;y]);</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;baseval&nbsp;<span style="color:#0086b3"></span><span style="color:#ff3399">+</span><span style="color:#0086b3"></span><span style="color:#ff3399">=</span>&nbsp;<span style="color:#c10aff">300000</span>;</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;i<span style="color:#0086b3"></span><span style="color:#ff3399">+</span><span style="color:#0086b3"></span><span style="color:#ff3399">+</span>;</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;}</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;<span style="color:#ff3399">return</span>&nbsp;series;</div><div style="padding:0 6px; white-space:pre; line-height:130%">}</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;</div><div style="padding:0 6px; white-space:pre; line-height:130%"><span style="color:#999999">//&nbsp;차트&nbsp;옵션</span></div><div style="padding:0 6px; white-space:pre; line-height:130%"><span style="color:#ff3399">var</span>&nbsp;options&nbsp;<span style="color:#0086b3"></span><span style="color:#ff3399">=</span>&nbsp;{</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;series:&nbsp;[{&nbsp;<span style="color:#999999">//&nbsp;차트&nbsp;데이터</span></div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#4be6fa">name</span>:&nbsp;<span style="color:#ffd500">'PRODUCT&nbsp;A'</span>,</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;data:&nbsp;generateMinuteWiseTimeSeries(<span style="color:#ff3399">new</span>&nbsp;<span style="color:#4be6fa">Date</span>(<span style="color:#ffd500">"01/01/2020&nbsp;23:20:00"</span>).getTime(),&nbsp;<span style="color:#c10aff">12</span>,&nbsp;{</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;min:&nbsp;<span style="color:#c10aff">10</span>,</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;max:&nbsp;<span style="color:#c10aff">110</span></div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;})</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;}],</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;colors:&nbsp;[<span style="color:#ffd500">"#4b4eb1"</span>],</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;chart:&nbsp;{</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;type:&nbsp;<span style="color:#ffd500">'bar'</span>,</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;width:&nbsp;<span style="color:#ffd500">'100%'</span>,</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;height:&nbsp;<span style="color:#c10aff">500</span>,</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;toolbar:&nbsp;{</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;show:&nbsp;<span style="color:#c10aff">false</span>&nbsp;<span style="color:#999999">//&nbsp;차트&nbsp;다운로드&nbsp;버튼</span></div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;},</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;zoom:&nbsp;{</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;enabled:&nbsp;<span style="color:#c10aff">false</span>&nbsp;<span style="color:#999999">//&nbsp;차트&nbsp;확대축소등</span></div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;},</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;animations:&nbsp;{&nbsp;<span style="color:#999999">//&nbsp;차트&nbsp;업데이트&nbsp;시&nbsp;애니메이션</span></div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;enabled:&nbsp;<span style="color:#c10aff">true</span>,</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;easing:&nbsp;<span style="color:#ffd500">'linear'</span>,</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;dynamicAnimation:&nbsp;{&nbsp;<span style="color:#999999">//&nbsp;데이터가&nbsp;업데이트&nbsp;되서&nbsp;변경되고&nbsp;다시&nbsp;차트가&nbsp;렌더링&nbsp;될&nbsp;때&nbsp;차트에&nbsp;에니메이션&nbsp;사용</span></div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;speed:&nbsp;<span style="color:#c10aff">1000</span></div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;},</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;dataLabels:&nbsp;{</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;enabled:&nbsp;<span style="color:#c10aff">false</span></div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;},</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;responsive:&nbsp;[{</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;breakpoint:&nbsp;<span style="color:#c10aff">480</span>,</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;options:&nbsp;{</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;legend:&nbsp;{</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;position:&nbsp;<span style="color:#ffd500">'bottom'</span>,</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;offsetX:&nbsp;<span style="color:#0086b3"></span><span style="color:#ff3399">-</span><span style="color:#c10aff">10</span>,</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;offsetY:&nbsp;<span style="color:#c10aff">0</span></div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;}],</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;plotOptions:&nbsp;{</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;bar:&nbsp;{</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;horizontal:&nbsp;<span style="color:#c10aff">false</span>,</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;columnWidth:&nbsp;<span style="color:#ffd500">'50px'</span></div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;},</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;},</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;xaxis:&nbsp;{</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;type:&nbsp;<span style="color:#ffd500">'datetime'</span>,</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;range:&nbsp;<span style="color:#c10aff">2700000</span></div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;},</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;yaxis:{</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;decimalsInFloat:<span style="color:#c10aff">2</span>&nbsp;<span style="color:#999999">//&nbsp;소수점&nbsp;제어</span></div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;},</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;legend:&nbsp;{</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;position:&nbsp;<span style="color:#ffd500">'right'</span>,</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;offsetY:&nbsp;<span style="color:#c10aff">40</span></div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;},</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;fill:&nbsp;{</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;opacity:&nbsp;<span style="color:#c10aff">1</span></div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;}</div><div style="padding:0 6px; white-space:pre; line-height:130%">};</div><div style="padding:0 6px; white-space:pre; line-height:130%"><span style="color:#999999">//&nbsp;차트</span></div><div style="padding:0 6px; white-space:pre; line-height:130%"><span style="color:#ff3399">var</span>&nbsp;chart&nbsp;<span style="color:#0086b3"></span><span style="color:#ff3399">=</span>&nbsp;<span style="color:#ff3399">new</span>&nbsp;ApexCharts(<span style="color:#4be6fa">document</span>.querySelector(<span style="color:#ffd500">"#barChart"</span>),&nbsp;options);</div><div style="padding:0 6px; white-space:pre; line-height:130%">chart.render();</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;</div><div style="padding:0 6px; white-space:pre; line-height:130%"><span style="color:#4be6fa">window</span>.<span style="color:#4be6fa">setInterval</span>(<span style="color:#ff3399">function</span>&nbsp;()&nbsp;{&nbsp;<span style="color:#999999">//&nbsp;3초에&nbsp;한번씩&nbsp;데이터&nbsp;업데이트</span></div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;iteration<span style="color:#0086b3"></span><span style="color:#ff3399">+</span><span style="color:#0086b3"></span><span style="color:#ff3399">+</span>;</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;chart.updateSeries([{</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;data:&nbsp;[].concat(chart.w.config.series[<span style="color:#c10aff">0</span>].data,&nbsp;[[chart.w.globals.maxX&nbsp;<span style="color:#0086b3"></span><span style="color:#ff3399">+</span>&nbsp;<span style="color:#c10aff">300000</span>,&nbsp;getRandom()]])</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;}]);</div><div style="padding:0 6px; white-space:pre; line-height:130%">},&nbsp;<span style="color:#c10aff">3000</span>);</div></pre>
+                      <div style="text-align: right; margin-top: -13px; margin-right: 5px; font-size: 9px; font-style: italic">
+                        <a href="http://colorscripter.com/info#e" target="_blank" style="color:#4f4f4ftext-decoration:none">Colored by Color Scripter</a>
+                      </div>
+                    </td>
+                    <td style="vertical-align: bottom; padding: 0 2px 4px 0">
+                      <a href="http://colorscripter.com/info#e" target="_blank" style="text-decoration: none; color: white"
+                        ><span style="font-size: 9px; word-break: normal; background-color: #4f4f4f; color: white; border-radius: 10px; padding: 1px"
+                          >cs</span
+                        ></a
+                      >
+                    </td>
+                  </tr>
+                </table>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>

@@ -1,87 +1,95 @@
 <!DOCTYPE html>
 <html lang="ko">
   <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <title>I&VIEW Design System</title>
-    <link rel="stylesheet" href="../resource/chart/chartjs/Chart.min.css">
-    <link rel="stylesheet" href="../css/contents.css">
+    <link rel="stylesheet" href="../resource/chart/chartjs/Chart.min.css" />
+    <link rel="stylesheet" href="../css/contents.css" />
 
     <script src="../resource/jquery.min.js"></script>
     <script src="../resource/chart/chartjs/Chart.min.js"></script>
     <script src="../js/script.js"></script>
     <script>
-      $(function(){
+      $(function () {
         var ctx = document.getElementById("barChart"); //캔버스 id값 가져오기
         // 데이터 라벨 표시 --- 추가 옵션
         Chart.plugins.register({
-          afterDatasetsDraw: function(chart) {
+          afterDatasetsDraw: function (chart) {
             var ctx = chart.ctx;
-            chart.data.datasets.forEach(function(dataset, i) {
+            chart.data.datasets.forEach(function (dataset, i) {
               var meta = chart.getDatasetMeta(i);
               if (!meta.hidden) {
-                meta.data.forEach(function(element, index) {
+                meta.data.forEach(function (element, index) {
                   // Draw the text in black, with the specified font
-                  ctx.fillStyle = 'rgb(0, 0, 0)';
+                  ctx.fillStyle = "rgb(0, 0, 0)";
 
                   var fontSize = 16;
-                  var fontStyle = 'normal';
-                  var fontFamily = 'Helvetica Neue';
+                  var fontStyle = "normal";
+                  var fontFamily = "Helvetica Neue";
                   ctx.font = Chart.helpers.fontString(fontSize, fontStyle, fontFamily);
 
                   // Just naively convert to string for now
                   var dataString = dataset.data[index].toString();
                   // Make sure alignment settings are correct
-                  ctx.textAlign = 'center';
-                  ctx.textBaseline = 'middle';
+                  ctx.textAlign = "center";
+                  ctx.textBaseline = "middle";
 
                   var padding = 5;
                   var position = element.tooltipPosition();
-                  ctx.fillText(dataString, position.x, position.y - (fontSize / 2) - padding);
+                  ctx.fillText(dataString, position.x, position.y - fontSize / 2 - padding);
                 });
               }
             });
-          }
+          },
         });
         // 데이터 라벨 표시 --- 추가 옵션 End.
         var myChart = new Chart(ctx, {
-          type: 'bar', //그래프 형태 지정하기
+          type: "bar", //그래프 형태 지정하기
           data: {
             labels: ["1월", "2월", "3월", "4월", "5월", "6월"], //X축 제목
-            datasets: [{
-              label: '항목1',
-              data: [12, 19, 3, 5, 2, 3],
-              backgroundColor:'rgba(255, 99, 132, 0.2)',
-              borderColor:'rgba(255,99,132,1)',
-              borderWidth: 1 //선굵기
-            },{
-              label: '항목2',
-              data: [22, 20, 26, 17, 12, 13],
-              backgroundColor:'rgba(54, 162, 235, 0.2)',
-              borderColor:'rgba(54, 162, 235, 1)',
-              borderWidth: 1 //선굵기
-            },{
-              label: '항목3',
-              data: [12, 10, 16, 27, 22, 23],
-              type: 'line',
-              fill: false,
-              backgroundColor:'rgba(75, 192, 192, 0.2)',
-              borderColor:'rgba(75, 192, 192, 1)',
-              borderWidth: 1 //선굵기
-            }]
+            datasets: [
+              {
+                label: "항목1",
+                data: [12, 19, 3, 5, 2, 3],
+                backgroundColor: "rgba(255, 99, 132, 0.2)",
+                borderColor: "rgba(255,99,132,1)",
+                borderWidth: 1, //선굵기
+              },
+              {
+                label: "항목2",
+                data: [22, 20, 26, 17, 12, 13],
+                backgroundColor: "rgba(54, 162, 235, 0.2)",
+                borderColor: "rgba(54, 162, 235, 1)",
+                borderWidth: 1, //선굵기
+              },
+              {
+                label: "항목3",
+                data: [12, 10, 16, 27, 22, 23],
+                type: "line",
+                fill: false,
+                backgroundColor: "rgba(75, 192, 192, 0.2)",
+                borderColor: "rgba(75, 192, 192, 1)",
+                borderWidth: 1, //선굵기
+              },
+            ],
           },
           options: {
-            scales: { //X,Y축 옵션
-              yAxes: [{
-                ticks: {
-                  beginAtZero: true //Y축의 값이 0부터 시작
-                }
-              }]
-            }
-          }
+            scales: {
+              //X,Y축 옵션
+              yAxes: [
+                {
+                  ticks: {
+                    beginAtZero: true, //Y축의 값이 0부터 시작
+                  },
+                },
+              ],
+            },
+          },
         });
       });
     </script>
+  </head>
   <body>
     <div class="content_wrap">
       <div class="row">
@@ -101,29 +109,329 @@
       </div>
       <div class="row">
         <div class="layout col_12">
-         <div class="title_box item_tit">
-           <h3 class="tit01">bar + line chart</h3>
-         </div>
-         <div class="item_exam">
-           <div class="title_box">
-             <h4 class="tit02">결과화면</h4>
-           </div>
-           <div class="chart_box">
-             <canvas id="barChart"></canvas>
-           </div>
-           <div class="title_box">
-             <h4 class="tit02">HTML</h4>
-           </div>
-           <div class="code_box">
-<div class="colorscripter-code" style="color:#f0f0f0;font-family:Consolas, 'Liberation Mono', Menlo, Courier, monospace !important; position:relative !important;overflow:auto"><table class="colorscripter-code-table" style="margin:0;padding:0;border:none;background-color:#272727;border-radius:4px;" cellspacing="0" cellpadding="0"><tr><td style="padding:6px 0;text-align:left"><pre style="margin:0;padding:0;color:#f0f0f0;font-family:Consolas, 'Liberation Mono', Menlo, Courier, monospace !important;line-height:130%"><div style="padding:0 6px; white-space:pre; line-height:130%"><span style="color:#f0f0f0">&lt;</span><span style="color:#ff3399">link</span>&nbsp;<span style="color:#a8ff58">rel</span>=<span style="color:#ffd500">"stylesheet"</span><span style="color:#a8ff58"></span>&nbsp;<span style="color:#a8ff58">href</span>=<span style="color:#ffd500">"../resource/chart/chartjs/Chart.min.css"</span><span style="color:#a8ff58"></span><span style="color:#f0f0f0">&gt;</span></div><div style="padding:0 6px; white-space:pre; line-height:130%"><span style="color:#f0f0f0">&lt;</span><span style="color:#ff3399">script</span>&nbsp;<span style="color:#a8ff58">src</span>=<span style="color:#ffd500">"../resource/chart/chartjs/Chart.min.js"</span><span style="color:#ff3399"></span><span style="color:#f0f0f0">&gt;</span><span style="color:#f0f0f0">&lt;</span><span style="color:#f0f0f0">/</span><span style="color:#ff3399">script</span><span style="color:#f0f0f0">&gt;</span></div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;</div><div style="padding:0 6px; white-space:pre; line-height:130%"><span style="color:#f0f0f0">&lt;</span><span style="color:#ff3399">canvas</span>&nbsp;<span style="color:#a8ff58">id</span>=<span style="color:#ffd500">"barChart"</span><span style="color:#a8ff58"></span><span style="color:#f0f0f0">&gt;</span><span style="color:#f0f0f0">&lt;</span><span style="color:#f0f0f0">/</span><span style="color:#ff3399">canvas</span><span style="color:#f0f0f0">&gt;</span></div></pre><div style="text-align:right;margin-top:-13px;margin-right:5px;font-size:9px;font-style:italic"><a href="http://colorscripter.com/info#e" target="_blank" style="color:#4f4f4ftext-decoration:none">Colored by Color Scripter</a></div></td><td style="vertical-align:bottom;padding:0 2px 4px 0"><a href="http://colorscripter.com/info#e" target="_blank" style="text-decoration:none;color:white"><span style="font-size:9px;word-break:normal;background-color:#4f4f4f;color:white;border-radius:10px;padding:1px">cs</span></a></td></tr></table></div>
-           </div>
-           <div class="title_box">
-             <h4 class="tit02">JS</h4>
-           </div>
-           <div class="code_box">
-<div class="colorscripter-code" style="color:#f0f0f0;font-family:Consolas, 'Liberation Mono', Menlo, Courier, monospace !important; position:relative !important;overflow:auto"><table class="colorscripter-code-table" style="margin:0;padding:0;border:none;background-color:#272727;border-radius:4px;" cellspacing="0" cellpadding="0"><tr><td style="padding:6px 0;text-align:left"><div style="margin:0;padding:0;color:#f0f0f0;font-family:Consolas, 'Liberation Mono', Menlo, Courier, monospace !important;line-height:130%"><div style="padding:0 6px; white-space:pre; line-height:130%"><span style="color:#ff3399">var</span>&nbsp;ctx&nbsp;<span style="color:#0086b3"></span><span style="color:#ff3399">=</span>&nbsp;<span style="color:#4be6fa">document</span>.<span style="color:#4be6fa">getElementById</span>(<span style="color:#ffd500">"barChart"</span>);&nbsp;<span style="color:#999999">//캔버스&nbsp;id값&nbsp;가져오기</span></div><div style="padding:0 6px; white-space:pre; line-height:130%"><span style="color:#999999">//&nbsp;데이터&nbsp;라벨&nbsp;표시&nbsp;---&nbsp;추가&nbsp;옵션</span></div><div style="padding:0 6px; white-space:pre; line-height:130%">Chart.plugins.register({</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;afterDatasetsDraw:&nbsp;<span style="color:#ff3399">function</span>(chart)&nbsp;{</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#ff3399">var</span>&nbsp;ctx&nbsp;<span style="color:#0086b3"></span><span style="color:#ff3399">=</span>&nbsp;chart.ctx;</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;chart.data.datasets.forEach(<span style="color:#ff3399">function</span>(dataset,&nbsp;i)&nbsp;{</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#ff3399">var</span>&nbsp;meta&nbsp;<span style="color:#0086b3"></span><span style="color:#ff3399">=</span>&nbsp;chart.getDatasetMeta(i);</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#ff3399">if</span>&nbsp;(<span style="color:#0086b3"></span><span style="color:#ff3399">!</span>meta.hidden)&nbsp;{</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;meta.data.forEach(<span style="color:#ff3399">function</span>(element,&nbsp;index)&nbsp;{</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#999999">//&nbsp;Draw&nbsp;the&nbsp;text&nbsp;in&nbsp;black,&nbsp;with&nbsp;the&nbsp;specified&nbsp;font</span></div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ctx.fillStyle&nbsp;<span style="color:#0086b3"></span><span style="color:#ff3399">=</span>&nbsp;<span style="color:#ffd500">'rgb(0,&nbsp;0,&nbsp;0)'</span>;</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#ff3399">var</span>&nbsp;fontSize&nbsp;<span style="color:#0086b3"></span><span style="color:#ff3399">=</span>&nbsp;<span style="color:#c10aff">16</span>;</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#ff3399">var</span>&nbsp;fontStyle&nbsp;<span style="color:#0086b3"></span><span style="color:#ff3399">=</span>&nbsp;<span style="color:#ffd500">'normal'</span>;</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#ff3399">var</span>&nbsp;fontFamily&nbsp;<span style="color:#0086b3"></span><span style="color:#ff3399">=</span>&nbsp;<span style="color:#ffd500">'Helvetica&nbsp;Neue'</span>;</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ctx.font&nbsp;<span style="color:#0086b3"></span><span style="color:#ff3399">=</span>&nbsp;Chart.helpers.fontString(fontSize,&nbsp;fontStyle,&nbsp;fontFamily);</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#999999">//&nbsp;Just&nbsp;naively&nbsp;convert&nbsp;to&nbsp;string&nbsp;for&nbsp;now</span></div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#ff3399">var</span>&nbsp;dataString&nbsp;<span style="color:#0086b3"></span><span style="color:#ff3399">=</span>&nbsp;dataset.data[index].toString();</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#999999">//&nbsp;Make&nbsp;sure&nbsp;alignment&nbsp;settings&nbsp;are&nbsp;correct</span></div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ctx.textAlign&nbsp;<span style="color:#0086b3"></span><span style="color:#ff3399">=</span>&nbsp;<span style="color:#ffd500">'center'</span>;</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ctx.textBaseline&nbsp;<span style="color:#0086b3"></span><span style="color:#ff3399">=</span>&nbsp;<span style="color:#ffd500">'middle'</span>;</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#ff3399">var</span>&nbsp;padding&nbsp;<span style="color:#0086b3"></span><span style="color:#ff3399">=</span>&nbsp;<span style="color:#c10aff">5</span>;</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#ff3399">var</span>&nbsp;position&nbsp;<span style="color:#0086b3"></span><span style="color:#ff3399">=</span>&nbsp;element.tooltipPosition();</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ctx.fillText(dataString,&nbsp;position.x,&nbsp;position.y&nbsp;<span style="color:#0086b3"></span><span style="color:#ff3399">-</span>&nbsp;(fontSize&nbsp;<span style="color:#0086b3"></span><span style="color:#ff3399">/</span>&nbsp;<span style="color:#c10aff">2</span>)&nbsp;<span style="color:#0086b3"></span><span style="color:#ff3399">-</span>&nbsp;padding);</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;});</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;});</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;}</div><div style="padding:0 6px; white-space:pre; line-height:130%">});</div><div style="padding:0 6px; white-space:pre; line-height:130%"><span style="color:#999999">//&nbsp;데이터&nbsp;라벨&nbsp;표시&nbsp;---&nbsp;추가&nbsp;옵션&nbsp;End.</span></div><div style="padding:0 6px; white-space:pre; line-height:130%"><span style="color:#ff3399">var</span>&nbsp;myChart&nbsp;<span style="color:#0086b3"></span><span style="color:#ff3399">=</span>&nbsp;<span style="color:#ff3399">new</span>&nbsp;Chart(ctx,&nbsp;{</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;type:&nbsp;<span style="color:#ffd500">'bar'</span>,&nbsp;<span style="color:#999999">//그래프&nbsp;형태&nbsp;지정하기</span></div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;data:&nbsp;{</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;labels:&nbsp;[<span style="color:#ffd500">"1월"</span>,&nbsp;<span style="color:#ffd500">"2월"</span>,&nbsp;<span style="color:#ffd500">"3월"</span>,&nbsp;<span style="color:#ffd500">"4월"</span>,&nbsp;<span style="color:#ffd500">"5월"</span>,&nbsp;<span style="color:#ffd500">"6월"</span>],&nbsp;<span style="color:#999999">//X축&nbsp;제목</span></div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;datasets:&nbsp;[{</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;label:&nbsp;<span style="color:#ffd500">'항목1'</span>,</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;data:&nbsp;[<span style="color:#c10aff">12</span>,&nbsp;<span style="color:#c10aff">19</span>,&nbsp;<span style="color:#c10aff">3</span>,&nbsp;<span style="color:#c10aff">5</span>,&nbsp;<span style="color:#c10aff">2</span>,&nbsp;<span style="color:#c10aff">3</span>],</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;backgroundColor:<span style="color:#ffd500">'rgba(255,&nbsp;99,&nbsp;132,&nbsp;0.2)'</span>,</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;borderColor:<span style="color:#ffd500">'rgba(255,99,132,1)'</span>,</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;borderWidth:&nbsp;<span style="color:#c10aff">1</span>&nbsp;<span style="color:#999999">//선굵기</span></div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;},{</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;label:&nbsp;<span style="color:#ffd500">'항목2'</span>,</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;data:&nbsp;[<span style="color:#c10aff">22</span>,&nbsp;<span style="color:#c10aff">20</span>,&nbsp;<span style="color:#c10aff">26</span>,&nbsp;<span style="color:#c10aff">17</span>,&nbsp;<span style="color:#c10aff">12</span>,&nbsp;<span style="color:#c10aff">13</span>],</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;backgroundColor:<span style="color:#ffd500">'rgba(54,&nbsp;162,&nbsp;235,&nbsp;0.2)'</span>,</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;borderColor:<span style="color:#ffd500">'rgba(54,&nbsp;162,&nbsp;235,&nbsp;1)'</span>,</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;borderWidth:&nbsp;<span style="color:#c10aff">1</span>&nbsp;<span style="color:#999999">//선굵기</span></div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;},{</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;label:&nbsp;<span style="color:#ffd500">'항목3'</span>,</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;data:&nbsp;[<span style="color:#c10aff">12</span>,&nbsp;<span style="color:#c10aff">10</span>,&nbsp;<span style="color:#c10aff">16</span>,&nbsp;<span style="color:#c10aff">27</span>,&nbsp;<span style="color:#c10aff">22</span>,&nbsp;<span style="color:#c10aff">23</span>],</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;type:&nbsp;<span style="color:#ffd500">'line'</span>,</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;fill:&nbsp;<span style="color:#c10aff">false</span>,</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;backgroundColor:<span style="color:#ffd500">'rgba(75,&nbsp;192,&nbsp;192,&nbsp;0.2)'</span>,</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;borderColor:<span style="color:#ffd500">'rgba(75,&nbsp;192,&nbsp;192,&nbsp;1)'</span>,</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;borderWidth:&nbsp;<span style="color:#c10aff">1</span>&nbsp;<span style="color:#999999">//선굵기</span></div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;}]</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;},</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;options:&nbsp;{</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;scales:&nbsp;{&nbsp;<span style="color:#999999">//X,Y축&nbsp;옵션</span></div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;yAxes:&nbsp;[{</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ticks:&nbsp;{</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;beginAtZero:&nbsp;<span style="color:#c10aff">true</span>&nbsp;<span style="color:#999999">//Y축의&nbsp;값이&nbsp;0부터&nbsp;시작</span></div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}]</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;&nbsp;&nbsp;}</div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;&nbsp;}</div><div style="padding:0 6px; white-space:pre; line-height:130%">});</div></div><div style="text-align:right;margin-top:-13px;margin-right:5px;font-size:9px;font-style:italic"><a href="http://colorscripter.com/info#e" target="_blank" style="color:#4f4f4ftext-decoration:none">Colored by Color Scripter</a></div></td><td style="vertical-align:bottom;padding:0 2px 4px 0"><a href="http://colorscripter.com/info#e" target="_blank" style="text-decoration:none;color:white"><span style="font-size:9px;word-break:normal;background-color:#4f4f4f;color:white;border-radius:10px;padding:1px">cs</span></a></td></tr></table></div>
-           </div>
-         </div>
+          <div class="title_box item_tit">
+            <h3 class="tit01">bar + line chart</h3>
+          </div>
+          <div class="item_exam">
+            <div class="title_box">
+              <h4 class="tit02">결과화면</h4>
+            </div>
+            <div class="chart_box">
+              <canvas id="barChart"></canvas>
+            </div>
+            <div class="title_box">
+              <h4 class="tit02">HTML</h4>
+            </div>
+            <div class="code_box">
+              <div
+                class="colorscripter-code"
+                style="
+                  color: #f0f0f0;
+                  font-family: Consolas, 'Liberation Mono', Menlo, Courier, monospace !important;
+                  position: relative !important;
+                  overflow: auto;
+                "
+              >
+                <table
+                  class="colorscripter-code-table"
+                  style="margin: 0; padding: 0; border: none; background-color: #272727; border-radius: 4px"
+                  cellspacing="0"
+                  cellpadding="0"
+                >
+                  <tr>
+                    <td style="padding: 6px 0; text-align: left">
+                      <pre
+                        style="
+                          margin: 0;
+                          padding: 0;
+                          color: #f0f0f0;
+                          font-family: Consolas, 'Liberation Mono', Menlo, Courier, monospace !important;
+                          line-height: 130%;
+                        "
+                      ><div style="padding:0 6px; white-space:pre; line-height:130%"><span style="color:#f0f0f0">&lt;</span><span style="color:#ff3399">link</span>&nbsp;<span style="color:#a8ff58">rel</span>=<span style="color:#ffd500">"stylesheet"</span><span style="color:#a8ff58"></span>&nbsp;<span style="color:#a8ff58">href</span>=<span style="color:#ffd500">"../resource/chart/chartjs/Chart.min.css"</span><span style="color:#a8ff58"></span><span style="color:#f0f0f0">&gt;</span></div><div style="padding:0 6px; white-space:pre; line-height:130%"><span style="color:#f0f0f0">&lt;</span><span style="color:#ff3399">script</span>&nbsp;<span style="color:#a8ff58">src</span>=<span style="color:#ffd500">"../resource/chart/chartjs/Chart.min.js"</span><span style="color:#ff3399"></span><span style="color:#f0f0f0">&gt;</span><span style="color:#f0f0f0">&lt;</span><span style="color:#f0f0f0">/</span><span style="color:#ff3399">script</span><span style="color:#f0f0f0">&gt;</span></div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;</div><div style="padding:0 6px; white-space:pre; line-height:130%"><span style="color:#f0f0f0">&lt;</span><span style="color:#ff3399">canvas</span>&nbsp;<span style="color:#a8ff58">id</span>=<span style="color:#ffd500">"barChart"</span><span style="color:#a8ff58"></span><span style="color:#f0f0f0">&gt;</span><span style="color:#f0f0f0">&lt;</span><span style="color:#f0f0f0">/</span><span style="color:#ff3399">canvas</span><span style="color:#f0f0f0">&gt;</span></div></pre>
+                      <div style="text-align: right; margin-top: -13px; margin-right: 5px; font-size: 9px; font-style: italic">
+                        <a href="http://colorscripter.com/info#e" target="_blank" style="color:#4f4f4ftext-decoration:none">Colored by Color Scripter</a>
+                      </div>
+                    </td>
+                    <td style="vertical-align: bottom; padding: 0 2px 4px 0">
+                      <a href="http://colorscripter.com/info#e" target="_blank" style="text-decoration: none; color: white"
+                        ><span style="font-size: 9px; word-break: normal; background-color: #4f4f4f; color: white; border-radius: 10px; padding: 1px"
+                          >cs</span
+                        ></a
+                      >
+                    </td>
+                  </tr>
+                </table>
+              </div>
+            </div>
+            <div class="title_box">
+              <h4 class="tit02">JS</h4>
+            </div>
+            <div class="code_box">
+              <div
+                class="colorscripter-code"
+                style="
+                  color: #f0f0f0;
+                  font-family: Consolas, 'Liberation Mono', Menlo, Courier, monospace !important;
+                  position: relative !important;
+                  overflow: auto;
+                "
+              >
+                <table
+                  class="colorscripter-code-table"
+                  style="margin: 0; padding: 0; border: none; background-color: #272727; border-radius: 4px"
+                  cellspacing="0"
+                  cellpadding="0"
+                >
+                  <tr>
+                    <td style="padding: 6px 0; text-align: left">
+                      <div
+                        style="
+                          margin: 0;
+                          padding: 0;
+                          color: #f0f0f0;
+                          font-family: Consolas, 'Liberation Mono', Menlo, Courier, monospace !important;
+                          line-height: 130%;
+                        "
+                      >
+                        <div style="padding: 0 6px; white-space: pre; line-height: 130%">
+                          <span style="color: #ff3399">var</span>&nbsp;ctx&nbsp;<span style="color: #0086b3"></span
+                          ><span style="color: #ff3399">=</span>&nbsp;<span style="color: #4be6fa">document</span>.<span style="color: #4be6fa"
+                            >getElementById</span
+                          >(<span style="color: #ffd500">"barChart"</span>);&nbsp;<span style="color: #999999">//캔버스&nbsp;id값&nbsp;가져오기</span>
+                        </div>
+                        <div style="padding: 0 6px; white-space: pre; line-height: 130%">
+                          <span style="color: #999999">//&nbsp;데이터&nbsp;라벨&nbsp;표시&nbsp;---&nbsp;추가&nbsp;옵션</span>
+                        </div>
+                        <div style="padding: 0 6px; white-space: pre; line-height: 130%">Chart.plugins.register({</div>
+                        <div style="padding: 0 6px; white-space: pre; line-height: 130%">
+                          &nbsp;&nbsp;afterDatasetsDraw:&nbsp;<span style="color: #ff3399">function</span>(chart)&nbsp;{
+                        </div>
+                        <div style="padding: 0 6px; white-space: pre; line-height: 130%">
+                          &nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #ff3399">var</span>&nbsp;ctx&nbsp;<span style="color: #0086b3"></span
+                          ><span style="color: #ff3399">=</span>&nbsp;chart.ctx;
+                        </div>
+                        <div style="padding: 0 6px; white-space: pre; line-height: 130%">
+                          &nbsp;&nbsp;&nbsp;&nbsp;chart.data.datasets.forEach(<span style="color: #ff3399">function</span>(dataset,&nbsp;i)&nbsp;{
+                        </div>
+                        <div style="padding: 0 6px; white-space: pre; line-height: 130%">
+                          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #ff3399">var</span>&nbsp;meta&nbsp;<span style="color: #0086b3"></span
+                          ><span style="color: #ff3399">=</span>&nbsp;chart.getDatasetMeta(i);
+                        </div>
+                        <div style="padding: 0 6px; white-space: pre; line-height: 130%">
+                          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #ff3399">if</span>&nbsp;(<span style="color: #0086b3"></span
+                          ><span style="color: #ff3399">!</span>meta.hidden)&nbsp;{
+                        </div>
+                        <div style="padding: 0 6px; white-space: pre; line-height: 130%">
+                          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;meta.data.forEach(<span style="color: #ff3399">function</span
+                          >(element,&nbsp;index)&nbsp;{
+                        </div>
+                        <div style="padding: 0 6px; white-space: pre; line-height: 130%">
+                          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #999999"
+                            >//&nbsp;Draw&nbsp;the&nbsp;text&nbsp;in&nbsp;black,&nbsp;with&nbsp;the&nbsp;specified&nbsp;font</span
+                          >
+                        </div>
+                        <div style="padding: 0 6px; white-space: pre; line-height: 130%">
+                          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ctx.fillStyle&nbsp;<span style="color: #0086b3"></span
+                          ><span style="color: #ff3399">=</span>&nbsp;<span style="color: #ffd500">'rgb(0,&nbsp;0,&nbsp;0)'</span>;
+                        </div>
+                        <div style="padding: 0 6px; white-space: pre; line-height: 130%">&nbsp;</div>
+                        <div style="padding: 0 6px; white-space: pre; line-height: 130%">
+                          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #ff3399">var</span>&nbsp;fontSize&nbsp;<span
+                            style="color: #0086b3"
+                          ></span
+                          ><span style="color: #ff3399">=</span>&nbsp;<span style="color: #c10aff">16</span>;
+                        </div>
+                        <div style="padding: 0 6px; white-space: pre; line-height: 130%">
+                          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #ff3399">var</span>&nbsp;fontStyle&nbsp;<span
+                            style="color: #0086b3"
+                          ></span
+                          ><span style="color: #ff3399">=</span>&nbsp;<span style="color: #ffd500">'normal'</span>;
+                        </div>
+                        <div style="padding: 0 6px; white-space: pre; line-height: 130%">
+                          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #ff3399">var</span>&nbsp;fontFamily&nbsp;<span
+                            style="color: #0086b3"
+                          ></span
+                          ><span style="color: #ff3399">=</span>&nbsp;<span style="color: #ffd500">'Helvetica&nbsp;Neue'</span>;
+                        </div>
+                        <div style="padding: 0 6px; white-space: pre; line-height: 130%">
+                          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ctx.font&nbsp;<span style="color: #0086b3"></span
+                          ><span style="color: #ff3399">=</span>&nbsp;Chart.helpers.fontString(fontSize,&nbsp;fontStyle,&nbsp;fontFamily);
+                        </div>
+                        <div style="padding: 0 6px; white-space: pre; line-height: 130%">&nbsp;</div>
+                        <div style="padding: 0 6px; white-space: pre; line-height: 130%">
+                          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #999999"
+                            >//&nbsp;Just&nbsp;naively&nbsp;convert&nbsp;to&nbsp;string&nbsp;for&nbsp;now</span
+                          >
+                        </div>
+                        <div style="padding: 0 6px; white-space: pre; line-height: 130%">
+                          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #ff3399">var</span>&nbsp;dataString&nbsp;<span
+                            style="color: #0086b3"
+                          ></span
+                          ><span style="color: #ff3399">=</span>&nbsp;dataset.data[index].toString();
+                        </div>
+                        <div style="padding: 0 6px; white-space: pre; line-height: 130%">
+                          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #999999"
+                            >//&nbsp;Make&nbsp;sure&nbsp;alignment&nbsp;settings&nbsp;are&nbsp;correct</span
+                          >
+                        </div>
+                        <div style="padding: 0 6px; white-space: pre; line-height: 130%">
+                          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ctx.textAlign&nbsp;<span style="color: #0086b3"></span
+                          ><span style="color: #ff3399">=</span>&nbsp;<span style="color: #ffd500">'center'</span>;
+                        </div>
+                        <div style="padding: 0 6px; white-space: pre; line-height: 130%">
+                          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ctx.textBaseline&nbsp;<span style="color: #0086b3"></span
+                          ><span style="color: #ff3399">=</span>&nbsp;<span style="color: #ffd500">'middle'</span>;
+                        </div>
+                        <div style="padding: 0 6px; white-space: pre; line-height: 130%">&nbsp;</div>
+                        <div style="padding: 0 6px; white-space: pre; line-height: 130%">
+                          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #ff3399">var</span>&nbsp;padding&nbsp;<span
+                            style="color: #0086b3"
+                          ></span
+                          ><span style="color: #ff3399">=</span>&nbsp;<span style="color: #c10aff">5</span>;
+                        </div>
+                        <div style="padding: 0 6px; white-space: pre; line-height: 130%">
+                          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #ff3399">var</span>&nbsp;position&nbsp;<span
+                            style="color: #0086b3"
+                          ></span
+                          ><span style="color: #ff3399">=</span>&nbsp;element.tooltipPosition();
+                        </div>
+                        <div style="padding: 0 6px; white-space: pre; line-height: 130%">
+                          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ctx.fillText(dataString,&nbsp;position.x,&nbsp;position.y&nbsp;<span
+                            style="color: #0086b3"
+                          ></span
+                          ><span style="color: #ff3399">-</span>&nbsp;(fontSize&nbsp;<span style="color: #0086b3"></span
+                          ><span style="color: #ff3399">/</span>&nbsp;<span style="color: #c10aff">2</span>)&nbsp;<span style="color: #0086b3"></span
+                          ><span style="color: #ff3399">-</span>&nbsp;padding);
+                        </div>
+                        <div style="padding: 0 6px; white-space: pre; line-height: 130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;});</div>
+                        <div style="padding: 0 6px; white-space: pre; line-height: 130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}</div>
+                        <div style="padding: 0 6px; white-space: pre; line-height: 130%">&nbsp;&nbsp;&nbsp;&nbsp;});</div>
+                        <div style="padding: 0 6px; white-space: pre; line-height: 130%">&nbsp;&nbsp;}</div>
+                        <div style="padding: 0 6px; white-space: pre; line-height: 130%">});</div>
+                        <div style="padding: 0 6px; white-space: pre; line-height: 130%">
+                          <span style="color: #999999">//&nbsp;데이터&nbsp;라벨&nbsp;표시&nbsp;---&nbsp;추가&nbsp;옵션&nbsp;End.</span>
+                        </div>
+                        <div style="padding: 0 6px; white-space: pre; line-height: 130%">
+                          <span style="color: #ff3399">var</span>&nbsp;myChart&nbsp;<span style="color: #0086b3"></span
+                          ><span style="color: #ff3399">=</span>&nbsp;<span style="color: #ff3399">new</span>&nbsp;Chart(ctx,&nbsp;{
+                        </div>
+                        <div style="padding: 0 6px; white-space: pre; line-height: 130%">
+                          &nbsp;&nbsp;type:&nbsp;<span style="color: #ffd500">'bar'</span>,&nbsp;<span style="color: #999999"
+                            >//그래프&nbsp;형태&nbsp;지정하기</span
+                          >
+                        </div>
+                        <div style="padding: 0 6px; white-space: pre; line-height: 130%">&nbsp;&nbsp;data:&nbsp;{</div>
+                        <div style="padding: 0 6px; white-space: pre; line-height: 130%">
+                          &nbsp;&nbsp;&nbsp;&nbsp;labels:&nbsp;[<span style="color: #ffd500">"1월"</span>,&nbsp;<span style="color: #ffd500">"2월"</span
+                          >,&nbsp;<span style="color: #ffd500">"3월"</span>,&nbsp;<span style="color: #ffd500">"4월"</span>,&nbsp;<span style="color: #ffd500"
+                            >"5월"</span
+                          >,&nbsp;<span style="color: #ffd500">"6월"</span>],&nbsp;<span style="color: #999999">//X축&nbsp;제목</span>
+                        </div>
+                        <div style="padding: 0 6px; white-space: pre; line-height: 130%">&nbsp;&nbsp;&nbsp;&nbsp;datasets:&nbsp;[{</div>
+                        <div style="padding: 0 6px; white-space: pre; line-height: 130%">
+                          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;label:&nbsp;<span style="color: #ffd500">'항목1'</span>,
+                        </div>
+                        <div style="padding: 0 6px; white-space: pre; line-height: 130%">
+                          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;data:&nbsp;[<span style="color: #c10aff">12</span>,&nbsp;<span style="color: #c10aff">19</span
+                          >,&nbsp;<span style="color: #c10aff">3</span>,&nbsp;<span style="color: #c10aff">5</span>,&nbsp;<span style="color: #c10aff">2</span
+                          >,&nbsp;<span style="color: #c10aff">3</span>],
+                        </div>
+                        <div style="padding: 0 6px; white-space: pre; line-height: 130%">
+                          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;backgroundColor:<span style="color: #ffd500">'rgba(255,&nbsp;99,&nbsp;132,&nbsp;0.2)'</span>,
+                        </div>
+                        <div style="padding: 0 6px; white-space: pre; line-height: 130%">
+                          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;borderColor:<span style="color: #ffd500">'rgba(255,99,132,1)'</span>,
+                        </div>
+                        <div style="padding: 0 6px; white-space: pre; line-height: 130%">
+                          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;borderWidth:&nbsp;<span style="color: #c10aff">1</span>&nbsp;<span style="color: #999999"
+                            >//선굵기</span
+                          >
+                        </div>
+                        <div style="padding: 0 6px; white-space: pre; line-height: 130%">&nbsp;&nbsp;&nbsp;&nbsp;},{</div>
+                        <div style="padding: 0 6px; white-space: pre; line-height: 130%">
+                          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;label:&nbsp;<span style="color: #ffd500">'항목2'</span>,
+                        </div>
+                        <div style="padding: 0 6px; white-space: pre; line-height: 130%">
+                          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;data:&nbsp;[<span style="color: #c10aff">22</span>,&nbsp;<span style="color: #c10aff">20</span
+                          >,&nbsp;<span style="color: #c10aff">26</span>,&nbsp;<span style="color: #c10aff">17</span>,&nbsp;<span style="color: #c10aff"
+                            >12</span
+                          >,&nbsp;<span style="color: #c10aff">13</span>],
+                        </div>
+                        <div style="padding: 0 6px; white-space: pre; line-height: 130%">
+                          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;backgroundColor:<span style="color: #ffd500">'rgba(54,&nbsp;162,&nbsp;235,&nbsp;0.2)'</span>,
+                        </div>
+                        <div style="padding: 0 6px; white-space: pre; line-height: 130%">
+                          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;borderColor:<span style="color: #ffd500">'rgba(54,&nbsp;162,&nbsp;235,&nbsp;1)'</span>,
+                        </div>
+                        <div style="padding: 0 6px; white-space: pre; line-height: 130%">
+                          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;borderWidth:&nbsp;<span style="color: #c10aff">1</span>&nbsp;<span style="color: #999999"
+                            >//선굵기</span
+                          >
+                        </div>
+                        <div style="padding: 0 6px; white-space: pre; line-height: 130%">&nbsp;&nbsp;&nbsp;&nbsp;},{</div>
+                        <div style="padding: 0 6px; white-space: pre; line-height: 130%">
+                          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;label:&nbsp;<span style="color: #ffd500">'항목3'</span>,
+                        </div>
+                        <div style="padding: 0 6px; white-space: pre; line-height: 130%">
+                          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;data:&nbsp;[<span style="color: #c10aff">12</span>,&nbsp;<span style="color: #c10aff">10</span
+                          >,&nbsp;<span style="color: #c10aff">16</span>,&nbsp;<span style="color: #c10aff">27</span>,&nbsp;<span style="color: #c10aff"
+                            >22</span
+                          >,&nbsp;<span style="color: #c10aff">23</span>],
+                        </div>
+                        <div style="padding: 0 6px; white-space: pre; line-height: 130%">
+                          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;type:&nbsp;<span style="color: #ffd500">'line'</span>,
+                        </div>
+                        <div style="padding: 0 6px; white-space: pre; line-height: 130%">
+                          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;fill:&nbsp;<span style="color: #c10aff">false</span>,
+                        </div>
+                        <div style="padding: 0 6px; white-space: pre; line-height: 130%">
+                          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;backgroundColor:<span style="color: #ffd500">'rgba(75,&nbsp;192,&nbsp;192,&nbsp;0.2)'</span>,
+                        </div>
+                        <div style="padding: 0 6px; white-space: pre; line-height: 130%">
+                          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;borderColor:<span style="color: #ffd500">'rgba(75,&nbsp;192,&nbsp;192,&nbsp;1)'</span>,
+                        </div>
+                        <div style="padding: 0 6px; white-space: pre; line-height: 130%">
+                          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;borderWidth:&nbsp;<span style="color: #c10aff">1</span>&nbsp;<span style="color: #999999"
+                            >//선굵기</span
+                          >
+                        </div>
+                        <div style="padding: 0 6px; white-space: pre; line-height: 130%">&nbsp;&nbsp;&nbsp;&nbsp;}]</div>
+                        <div style="padding: 0 6px; white-space: pre; line-height: 130%">&nbsp;&nbsp;},</div>
+                        <div style="padding: 0 6px; white-space: pre; line-height: 130%">&nbsp;&nbsp;options:&nbsp;{</div>
+                        <div style="padding: 0 6px; white-space: pre; line-height: 130%">
+                          &nbsp;&nbsp;&nbsp;&nbsp;scales:&nbsp;{&nbsp;<span style="color: #999999">//X,Y축&nbsp;옵션</span>
+                        </div>
+                        <div style="padding: 0 6px; white-space: pre; line-height: 130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;yAxes:&nbsp;[{</div>
+                        <div style="padding: 0 6px; white-space: pre; line-height: 130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ticks:&nbsp;{</div>
+                        <div style="padding: 0 6px; white-space: pre; line-height: 130%">
+                          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;beginAtZero:&nbsp;<span style="color: #c10aff">true</span>&nbsp;<span
+                            style="color: #999999"
+                            >//Y축의&nbsp;값이&nbsp;0부터&nbsp;시작</span
+                          >
+                        </div>
+                        <div style="padding: 0 6px; white-space: pre; line-height: 130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}</div>
+                        <div style="padding: 0 6px; white-space: pre; line-height: 130%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}]</div>
+                        <div style="padding: 0 6px; white-space: pre; line-height: 130%">&nbsp;&nbsp;&nbsp;&nbsp;}</div>
+                        <div style="padding: 0 6px; white-space: pre; line-height: 130%">&nbsp;&nbsp;}</div>
+                        <div style="padding: 0 6px; white-space: pre; line-height: 130%">});</div>
+                      </div>
+                      <div style="text-align: right; margin-top: -13px; margin-right: 5px; font-size: 9px; font-style: italic">
+                        <a href="http://colorscripter.com/info#e" target="_blank" style="color:#4f4f4ftext-decoration:none">Colored by Color Scripter</a>
+                      </div>
+                    </td>
+                    <td style="vertical-align: bottom; padding: 0 2px 4px 0">
+                      <a href="http://colorscripter.com/info#e" target="_blank" style="text-decoration: none; color: white"
+                        ><span style="font-size: 9px; word-break: normal; background-color: #4f4f4f; color: white; border-radius: 10px; padding: 1px"
+                          >cs</span
+                        ></a
+                      >
+                    </td>
+                  </tr>
+                </table>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>

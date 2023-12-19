@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="ko">
   <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <title>I&VIEW Design System</title>
-    <link rel="stylesheet" href="../resource/textMove/textillate/animate.css">
-    <link rel="stylesheet" href="../css/contents.css">
+    <link rel="stylesheet" href="../resource/textMove/textillate/animate.css" />
+    <link rel="stylesheet" href="../css/contents.css" />
 
     <script src="../resource/jquery.min.js"></script>
     <script src="../js/script.js"></script>
@@ -15,11 +15,12 @@
     <script src="../resource/textMove/textillate/jquery.textillate.js"></script>
     <script src="../resource/textMove/textillate/jquery.lettering.js"></script>
     <script>
-    $(document).ready(function(){
-      $('.text01').shuffleLetters();
-      $('.text02').textillate({ in: { effect: 'bounceInRight' } });
-    });
+      $(document).ready(function () {
+        $(".text01").shuffleLetters();
+        $(".text02").textillate({ in: { effect: "bounceInRight" } });
+      });
     </script>
+  </head>
   <body>
     <div class="content_wrap">
       <div class="row">
@@ -31,7 +32,9 @@
       </div>
       <div class="row">
         <div class="layout col_12">
-          <p class="homepage"><a href="https://tutorialzine.com/2011/09/shuffle-letters-effect-jquery" target="_blank" title="새창">01. shuffleLetters js</a></p>
+          <p class="homepage">
+            <a href="https://tutorialzine.com/2011/09/shuffle-letters-effect-jquery" target="_blank" title="새창">01. shuffleLetters js</a>
+          </p>
           <p class="homepage"><a href="http://textillate.js.org/" target="_blank" title="새창">02. textillate js</a></p>
           <div class="p_menu">
             <ul id="pMenu"></ul>
@@ -40,49 +43,145 @@
       </div>
       <div class="row">
         <div class="layout col_12">
-         <div class="title_box item_tit">
-           <h3 class="tit01">텍스트 움직임</h3>
-         </div>
-         <div class="item_exam">
-           <div class="title_box">
-             <h4 class="tit02">info</h4>
-           </div>
-           <div class="list_box01 mb_0">
-             <ul>
-               <li>해당 플러그인 페이지에서 상세 추가 상세내용 확인할 것</li>
-               <li>아래 샘플 html, JS는 shuffleLetters js</li>
-             </ul>
-           </div>
-           <div class="title_box">
-             <h4 class="tit02">결과화면</h4>
-           </div>
-           <div class="ani_box">
-            <ul class="list">
-              <li>
-                <span class="sort_num">01</span>
-                <p class="text01">트럼프, '대어' 플로리다 우세…경합주 혼전에 '예측불허'(종합) -> shuffleLetters js</p>
-              </li>
-            </ul>
-            <ul class="list">
-              <li class="over_h">
-                <span class="sort_num">02</span>
-                <p class="text02">트럼프, '대어' 플로리다 우세…경합주 혼전에 '예측불허'(종합) -> textillate js</p>
-              </li>
-            </ul>
-           </div>
-           <div class="title_box">
-             <h4 class="tit02">html</h4>
-           </div>
-           <div class="code_box">
-<div class="colorscripter-code" style="color:#f0f0f0;font-family:Consolas, 'Liberation Mono', Menlo, Courier, monospace !important; position:relative !important;overflow:auto"><table class="colorscripter-code-table" style="margin:0;padding:0;border:none;background-color:#272727;border-radius:4px;" cellspacing="0" cellpadding="0"><tr><td style="padding:6px 0;text-align:left"><div style="margin:0;padding:0;color:#f0f0f0;font-family:Consolas, 'Liberation Mono', Menlo, Courier, monospace !important;line-height:130%"><div style="padding:0 6px; white-space:pre; line-height:130%"><span style="color:#f0f0f0">&lt;</span><span style="color:#ff3399">script</span>&nbsp;<span style="color:#a8ff58">src</span>=<span style="color:#ffd500">"../resource/textMove/jquery.shuffleLetters/jquery.shuffleLetters.js"</span><span style="color:#ff3399"></span><span style="color:#f0f0f0">&gt;</span><span style="color:#f0f0f0">&lt;</span><span style="color:#f0f0f0">/</span><span style="color:#ff3399">script</span><span style="color:#f0f0f0">&gt;</span></div><div style="padding:0 6px; white-space:pre; line-height:130%">&nbsp;</div><div style="padding:0 6px; white-space:pre; line-height:130%"><span style="color:#f0f0f0">&lt;</span><span style="color:#ff3399">p</span>&nbsp;<span style="color:#a8ff58">class</span>=<span style="color:#ffd500">"text01"</span><span style="color:#a8ff58"></span><span style="color:#f0f0f0">&gt;</span>트럼프,&nbsp;'대어'&nbsp;플로리다&nbsp;우세…경합주&nbsp;혼전에&nbsp;'예측불허'(종합)&nbsp;-&gt;&nbsp;shuffleLetters&nbsp;js<span style="color:#f0f0f0">&lt;</span><span style="color:#f0f0f0">/</span><span style="color:#ff3399">p</span><span style="color:#f0f0f0">&gt;</span></div></div></td><td style="vertical-align:bottom;padding:0 2px 4px 0"><a href="http://colorscripter.com/info#e" target="_blank" style="text-decoration:none;color:white"><span style="font-size:9px;word-break:normal;background-color:#4f4f4f;color:white;border-radius:10px;padding:1px">cs</span></a></td></tr></table></div>
-           </div>
-           <div class="title_box">
-             <h4 class="tit02">JS</h4>
-           </div>
-           <div class="code_box">
-<div class="colorscripter-code" style="color:#f0f0f0;font-family:Consolas, 'Liberation Mono', Menlo, Courier, monospace !important; position:relative !important;overflow:auto"><table class="colorscripter-code-table" style="margin:0;padding:0;border:none;background-color:#272727;border-radius:4px;" cellspacing="0" cellpadding="0"><tr><td style="padding:6px 0;text-align:left"><div style="margin:0;padding:0;color:#f0f0f0;font-family:Consolas, 'Liberation Mono', Menlo, Courier, monospace !important;line-height:130%"><div style="padding:0 6px; white-space:pre; line-height:130%">$(<span style="color:#ffd500">'.text01'</span>).shuffleLetters();</div></div></td><td style="vertical-align:bottom;padding:0 2px 4px 0"><a href="http://colorscripter.com/info#e" target="_blank" style="text-decoration:none;color:white"><span style="font-size:9px;word-break:normal;background-color:#4f4f4f;color:white;border-radius:10px;padding:1px">cs</span></a></td></tr></table></div>
-           </div>
-         </div>
+          <div class="title_box item_tit">
+            <h3 class="tit01">텍스트 움직임</h3>
+          </div>
+          <div class="item_exam">
+            <div class="title_box">
+              <h4 class="tit02">info</h4>
+            </div>
+            <div class="list_box01 mb_0">
+              <ul>
+                <li>해당 플러그인 페이지에서 상세 추가 상세내용 확인할 것</li>
+                <li>아래 샘플 html, JS는 shuffleLetters js</li>
+              </ul>
+            </div>
+            <div class="title_box">
+              <h4 class="tit02">결과화면</h4>
+            </div>
+            <div class="ani_box">
+              <ul class="list">
+                <li>
+                  <span class="sort_num">01</span>
+                  <p class="text01">트럼프, '대어' 플로리다 우세…경합주 혼전에 '예측불허'(종합) -> shuffleLetters js</p>
+                </li>
+              </ul>
+              <ul class="list">
+                <li class="over_h">
+                  <span class="sort_num">02</span>
+                  <p class="text02">트럼프, '대어' 플로리다 우세…경합주 혼전에 '예측불허'(종합) -> textillate js</p>
+                </li>
+              </ul>
+            </div>
+            <div class="title_box">
+              <h4 class="tit02">html</h4>
+            </div>
+            <div class="code_box">
+              <div
+                class="colorscripter-code"
+                style="
+                  color: #f0f0f0;
+                  font-family: Consolas, 'Liberation Mono', Menlo, Courier, monospace !important;
+                  position: relative !important;
+                  overflow: auto;
+                "
+              >
+                <table
+                  class="colorscripter-code-table"
+                  style="margin: 0; padding: 0; border: none; background-color: #272727; border-radius: 4px"
+                  cellspacing="0"
+                  cellpadding="0"
+                >
+                  <tr>
+                    <td style="padding: 6px 0; text-align: left">
+                      <div
+                        style="
+                          margin: 0;
+                          padding: 0;
+                          color: #f0f0f0;
+                          font-family: Consolas, 'Liberation Mono', Menlo, Courier, monospace !important;
+                          line-height: 130%;
+                        "
+                      >
+                        <div style="padding: 0 6px; white-space: pre; line-height: 130%">
+                          <span style="color: #f0f0f0">&lt;</span><span style="color: #ff3399">script</span>&nbsp;<span style="color: #a8ff58">src</span>=<span
+                            style="color: #ffd500"
+                            >"../resource/textMove/jquery.shuffleLetters/jquery.shuffleLetters.js"</span
+                          ><span style="color: #ff3399"></span><span style="color: #f0f0f0">&gt;</span><span style="color: #f0f0f0">&lt;</span
+                          ><span style="color: #f0f0f0">/</span><span style="color: #ff3399">script</span><span style="color: #f0f0f0">&gt;</span>
+                        </div>
+                        <div style="padding: 0 6px; white-space: pre; line-height: 130%">&nbsp;</div>
+                        <div style="padding: 0 6px; white-space: pre; line-height: 130%">
+                          <span style="color: #f0f0f0">&lt;</span><span style="color: #ff3399">p</span>&nbsp;<span style="color: #a8ff58">class</span>=<span
+                            style="color: #ffd500"
+                            >"text01"</span
+                          ><span style="color: #a8ff58"></span
+                          ><span style="color: #f0f0f0">&gt;</span
+                          >트럼프,&nbsp;'대어'&nbsp;플로리다&nbsp;우세…경합주&nbsp;혼전에&nbsp;'예측불허'(종합)&nbsp;-&gt;&nbsp;shuffleLetters&nbsp;js<span
+                            style="color: #f0f0f0"
+                            >&lt;</span
+                          ><span style="color: #f0f0f0">/</span><span style="color: #ff3399">p</span><span style="color: #f0f0f0">&gt;</span>
+                        </div>
+                      </div>
+                    </td>
+                    <td style="vertical-align: bottom; padding: 0 2px 4px 0">
+                      <a href="http://colorscripter.com/info#e" target="_blank" style="text-decoration: none; color: white"
+                        ><span style="font-size: 9px; word-break: normal; background-color: #4f4f4f; color: white; border-radius: 10px; padding: 1px"
+                          >cs</span
+                        ></a
+                      >
+                    </td>
+                  </tr>
+                </table>
+              </div>
+            </div>
+            <div class="title_box">
+              <h4 class="tit02">JS</h4>
+            </div>
+            <div class="code_box">
+              <div
+                class="colorscripter-code"
+                style="
+                  color: #f0f0f0;
+                  font-family: Consolas, 'Liberation Mono', Menlo, Courier, monospace !important;
+                  position: relative !important;
+                  overflow: auto;
+                "
+              >
+                <table
+                  class="colorscripter-code-table"
+                  style="margin: 0; padding: 0; border: none; background-color: #272727; border-radius: 4px"
+                  cellspacing="0"
+                  cellpadding="0"
+                >
+                  <tr>
+                    <td style="padding: 6px 0; text-align: left">
+                      <div
+                        style="
+                          margin: 0;
+                          padding: 0;
+                          color: #f0f0f0;
+                          font-family: Consolas, 'Liberation Mono', Menlo, Courier, monospace !important;
+                          line-height: 130%;
+                        "
+                      >
+                        <div style="padding: 0 6px; white-space: pre; line-height: 130%">
+                          $(<span style="color: #ffd500">'.text01'</span>).shuffleLetters();
+                        </div>
+                      </div>
+                    </td>
+                    <td style="vertical-align: bottom; padding: 0 2px 4px 0">
+                      <a href="http://colorscripter.com/info#e" target="_blank" style="text-decoration: none; color: white"
+                        ><span style="font-size: 9px; word-break: normal; background-color: #4f4f4f; color: white; border-radius: 10px; padding: 1px"
+                          >cs</span
+                        ></a
+                      >
+                    </td>
+                  </tr>
+                </table>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
