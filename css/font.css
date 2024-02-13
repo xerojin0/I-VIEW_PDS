@@ -509,3 +509,17 @@
     font-weight: 700;
     font-style: normal;
 }
+
+/* LeferiPoint */
+@font-face {
+    font-family: 'LeferiPoint';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2201-2@1.0/LeferiPoint-BlackA.woff') format('woff');
+    font-style:bold;
+    font-weight: 700;
+}
+@font-face {
+    font-family: 'LeferiPoint';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2201-2@1.0/LeferiPoint-WhiteA.woff') format('woff');
+    font-style:light;
+    font-weight: 200;
+}
