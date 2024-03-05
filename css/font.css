@@ -507,7 +507,19 @@
 
 /* tangsbudaejjigae */
 @font-face {
-    font-family: 'TTTtangsbudaejjigaeB';
+    font-family: 'TTTtangsbudaejjigae';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2212@1.0/TTTtangsbudaejjigaeL.woff2') format('woff2');
+    font-weight: 300;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'TTTtangsbudaejjigae';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2212@1.0/TTTtangsbudaejjigaeM.woff2') format('woff2');
+    font-weight: 500;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'TTTtangsbudaejjigae';
     src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2212@1.0/TTTtangsbudaejjigaeB.woff2') format('woff2');
     font-weight: 700;
     font-style: normal;
