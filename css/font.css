@@ -558,3 +558,26 @@
     font-weight: 600;
     font-style: normal;
 }
+
+/* arita_buri */
+@font-face {
+    font-weight: 300;
+    font-family: 'Arita-buriL';
+    font-style: light;
+    src:url(font/Arita-buriL.otf) format("otf");
+    font-display: swap;
+}
+@font-face {
+    font-weight: 500;
+    font-family: 'Arita-buriM';
+    font-style: medium;
+    src:url(font/Arita-buriM.otf) format("otf");
+    font-display: swap;
+}
+@font-face {
+    font-weight: 600;
+    font-family: 'Arita-buriB';
+    font-style: bold;
+    src:url(font/NotoSansKR-Bold.otf) format("otf");
+    font-display: swap;
+}
