@@ -577,6 +577,12 @@
 @font-face {
     font-family: 'Arita-buri';
     font-weight: 600;
+    src:url("font/Arita-buriSB.otf")format("opentype");
+    font-display: swap;
+}
+@font-face {
+    font-family: 'Arita-buri';
+    font-weight: 700;
     font-style: bold;
     src:url("font/Arita-buriB.otf")format("opentype");
     font-display: swap;
