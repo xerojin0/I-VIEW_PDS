@@ -595,3 +595,6 @@
     font-weight: normal;
     font-style: normal;
 }
+
+/* nanumsquare */
+@import url('https://cdn.rawgit.com/moonspam/NanumSquare/master/nanumsquare.css');
