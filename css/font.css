@@ -194,19 +194,19 @@
 /* aggro */
 @font-face {
     font-family: 'SBAggro';
-    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2108@1.1/SBAggroL.woff') format('woff');
+    src:url(../css/font/SBAggroL.ttf) format("truetype");
     font-weight: 400;
     font-style: light;
 }
 @font-face {
     font-family: 'SBAggro';
-    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2108@1.1/SBAggroM.woff') format('woff');
+    src:url(../css/font/SBAggroM.ttf) format("truetype");
     font-weight: 500;
     font-style: medium;
 }
 @font-face {
     font-family: 'SBAggro';
-    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2108@1.1/SBAggroB.woff') format('woff');
+    src:url(../css/font/SBAggroB.ttf) format("truetype");
     font-weight: 600;
     font-style: bold;
 }
