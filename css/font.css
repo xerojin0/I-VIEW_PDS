@@ -341,17 +341,17 @@
     font-family:'Apple SD Gothic Neo'; 
     font-style:normal; 
     font-weight:400; 
-    src:local('Apple SD Gothic Neo Medium'),
-        url(../css/font/AppleSDGothicNeoM.woff2) format('woff2'),
-        url(../css/font/AppleSDGothicNeoM.ttf) format("truetype");
+    src:local('Apple SD Gothic Neo Regular'),
+        url(../css/font/AppleSDGothicNeoR.woff2) format('woff2'),
+        url(../css/font/AppleSDGothicNeoR.ttf) format("truetype");
 } 
 @font-face { 
     font-family:'Apple SD Gothic Neo'; 
     font-style:normal; 
     font-weight:500; 
-    src:local('Apple SD Gothic Neo Regular'),
-        url(../css/font/AppleSDGothicNeoR.woff2) format('woff2'),
-        url(../css/font/AppleSDGothicNeoR.ttf) format("truetype");
+    src:local('Apple SD Gothic Neo Medium'),
+        url(../css/font/AppleSDGothicNeoM.woff2) format('woff2'),
+        url(../css/font/AppleSDGothicNeoM.ttf) format("truetype");
 } 
 @font-face { 
     font-family:'Apple SD Gothic Neo'; 
