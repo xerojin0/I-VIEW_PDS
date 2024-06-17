@@ -15,6 +15,9 @@
 /* Garamond */
 @import url('https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..800;1,400..800&display=swap');
 
+/* Nanumsquare */
+@import url(https://cdn.jsdelivr.net/gh/moonspam/NanumSquare@2.0/nanumsquare.css);
+
 /* ScoreDream */
 @font-face {
     font-family: 'SCoreDream';
