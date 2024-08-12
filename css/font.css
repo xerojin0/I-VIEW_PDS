@@ -21,6 +21,14 @@
 /* Nanumsquare */
 @import url(https://cdn.jsdelivr.net/gh/moonspam/NanumSquare@2.0/nanumsquare.css);
 
+/* jaemin */
+@font-face {
+    font-family: 'Jaemin';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_20-10-21@1.0/Jaemin.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
 /* ScoreDream */
 @font-face {
     font-family: 'SCoreDream';
@@ -614,4 +622,12 @@
     src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2210-2@1.0/Tenada.woff2') format('woff2');
     font-weight: normal;
     font-style: normal;
+}
+
+/* Vitro core */
+@font-face {
+    font-family: 'VitroCore';
+    font-weight: normal;
+    font-style: normal;
+    src:url("font/VITRO-CORE.ttf")format("truetype");
 }
