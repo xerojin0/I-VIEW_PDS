@@ -631,11 +631,17 @@
     font-weight: normal;
     font-style: normal;
 }
-
 /* Vitro core */
 @font-face {
     font-family: 'VitroCore';
     font-weight: normal;
     font-style: normal;
     src:url("font/VITRO-CORE.ttf")format("truetype");
+}
+/* esamanru */
+@font-face {
+    font-family: 'GongGothicMedium';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_20-10@1.0/GongGothicMedium.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
 }
