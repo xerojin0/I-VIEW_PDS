@@ -515,6 +515,14 @@
     font-style: normal;
 }
 
+/* KCCImkwontaek */
+@font-face {
+    font-family: 'KCCImkwontaek';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2202@1.0/KCCImkwontaek.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
 /* Jalnan */
 @font-face {
     font-family: 'yg-jalnan';
